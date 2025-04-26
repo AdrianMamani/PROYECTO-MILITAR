@@ -41,5 +41,6 @@ $contacto = $contactoModel->getContactos();
     <link rel="stylesheet" href="views/assets/template/css/bootstrap.css">
     <link rel="stylesheet" href="views/assets/template/css/fonts.css">
     <link rel="stylesheet" href="views/assets/template/css/style.css">
+    <link rel="stylesheet" href="views/admin/css/sidebar.css">
    
   </head>

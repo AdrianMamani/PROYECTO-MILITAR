@@ -6,6 +6,8 @@
   <title>Document</title>
 <!--ICONS-->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+
+
   <link rel="stylesheet" href="./css/sidebar.css">
 </head>
 <body>

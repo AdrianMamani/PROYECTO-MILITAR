@@ -41,13 +41,23 @@ if ($id) {
 // Controlador y acción para login de admin
 if (isset($_GET['controller']) && $_GET['controller'] === 'admin') {
     if ($_GET['action'] === 'login') {
-        (new AdminController())->login();
+        require_once '../promocion/views/admin/login.php'; // Cargar la vista de login directamente
     } elseif ($_GET['action'] === 'authenticate') {
         (new AdminController())->authenticate();
     } elseif ($_GET['action'] === 'dashboard') {
-        (new AdminController())->dashboard();
+        // Verificar si el usuario está autenticado
+        if (isset($_SESSION['usuario'])) {
+            // Si está autenticado, cargar la vista del dashboard
+            require_once './views/admin/dashboard.php';
+        } else {
+            // Si no está autenticado, redirigir al login
+            header("Location: index.php?controller=admin&action=login");
+            exit();
+        }
     } elseif ($_GET['action'] === 'logout') {
-        (new AdminController())->logout();
+        session_destroy();
+        header("Location: index.php?controller=admin&action=login");
+        exit();
     }
 }
 

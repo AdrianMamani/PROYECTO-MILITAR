@@ -1,10 +1,7 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -20,76 +17,50 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="views/assets/admin/css/sb-admin-2.min.css" rel="stylesheet">
-
+    <link href="/webpromo/promocion/views/admin/css/login.css" rel="stylesheet">
 </head>
 
-<body class="bg-gradient-primary">
-
-<div class="container">
-    <!-- Outer Row -->
-    <div class="row justify-content-center">
-        <div class="col-xl-10 col-lg-12 col-md-9">
-            <div class="card o-hidden border-0 shadow-lg my-5">
-                <div class="card-body p-0">
-                    <!-- División en dos columnas iguales -->
-                    <div class="row">
-                        <!-- Columna para la imagen -->
-                        <div class="col-md-6 d-flex align-items-center justify-content-center">
-                            <img src="views/assets/template/images/logo.png" alt="Logo" class="img-fluid" >
-                        </div>
-                        <!-- Columna para la información -->
-                        <div class="col-md-6">
-                            <div class="p-5">
-                                <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">Bienvenido al Panel Administrador</h1>
-                                </div>
-                                <?php if (isset($error)): ?>
-                                    <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
-                                <?php endif; ?>
-                                <form action="index.php?controller=admin&action=authenticate" method="POST" class="user">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control form-control-user"
-                                               id="exampleInputEmail" aria-describedby="emailHelp"
-                                               placeholder="Usuario" name="usuario" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="password" class="form-control form-control-user"
-                                               id="exampleInputPassword" placeholder="Contraseña" name="contrasena" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="custom-control custom-checkbox small">
-                                            <input type="checkbox" class="custom-control-input" id="customCheck">
-                                        </div>
-                                    </div>
-                                    <button type="submit"class="btn btn-google btn-user btn-block">Iniciar sesión</button>
-                                    <hr>
-                                   
-                                    <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                                        <i class="fab fa-facebook-f fa-fw"></i> Visita nuestro Facebook
-                                    </a>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Fin de la división en dos columnas -->
-                </div>
+<body>
+<div class="container" id="container">
+    <div class="form-container sign-in-container">
+        <!-- Cambié action a tu controlador y acción -->
+        <form action="index.php?controller=login&action=auth" method="POST">
+            <h1>Sign in</h1>
+            <div class="social-container">
+            </div>
+            <span>or use your account</span>
+            <!-- Los inputs tienen los nombres correctos para enviar los datos -->
+            <input type="email" name="email" placeholder="Email" required />
+            <input type="password" name="password" placeholder="Password" required />
+            <a href="#">Forgot your password?</a>
+            <button type="submit">Sign In</button>
+        </form>
+    </div>
+    <div class="overlay-container">
+        <div class="overlay">
+            <div class="overlay-panel overlay-left">
+                <h1>Welcome Back!</h1>
+                <p>To keep connected with us please login with your personal info</p>
+                <button class="ghost" id="signIn">Sign In</button>
+            </div>
+            <div class="overlay-panel overlay-right">
+                <h1>Hello, Friend!</h1>
+                <p>Enter your personal details and start journey with us</p>
+                <ul class="wrapper">
+                    <li class="icon facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </li>
+                    <li class="icon twitter">
+                        <i class="fab fa-twitter"></i>
+                    </li>
+                    <li class="icon instagram">
+                        <i class="fab fa-instagram"></i>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
 </div>
-
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="views/assets/admin/vendor/jquery/jquery.min.js"></script>
-    <script src="views/assets/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="views/assets/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="views/assets/admin/js/sb-admin-2.min.js"></script>
-
 </body>
 
 </html>
