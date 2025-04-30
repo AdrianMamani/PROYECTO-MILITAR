@@ -8,6 +8,7 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     rel="stylesheet"
   />
+  <link rel="stylesheet" href="assets/css/home.css">
   <link
     href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap"
     rel="stylesheet"
@@ -151,6 +152,7 @@
    <p class="text-sm mt-1 mb-8">
     Las 13 áreas en las que nos destacamos con orgullo y compromiso.
    </p>
+
    <!-- Carousel container for small screens -->
    <div class="sm:hidden max-w-5xl mx-auto">
     <div id="carousel" class="overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory flex gap-6">
@@ -222,6 +224,7 @@
     </div>
    </div> 
   </section>
+ 
   <!-- Mensaje Floating Button con tooltip a la izquierda, fijo en pantalla -->
   <div class="fixed bottom-6 right-6 z-50 flex items-center group space-x-3">
     <div class="hidden group-hover:flex bg-gray-500 text-white text-xs rounded px-3 py-1 whitespace-nowrap select-none">
@@ -307,6 +310,87 @@
     </button>
    </nav>
   </div>
+  
+      <!-- Nueva Sección de Emprendimientos -->
+      <section style="padding: 60px 0; text-align: center;">
+  <div class="container_emprendimientos">
+    <h3 class="text-center" style="margin-bottom: 40px;">Emprendimientos</h3>
+    <div class="project-grid">
+      
+      <!-- Cada tarjeta -->
+      <div class="project-card">
+        <img src="assets/img/emprendimientos/67dc3a1079019.jpg" alt="Emprendimiento">
+        <div class="overlay">
+          <h3>Project Name</h3>
+          <div class="buttons">
+            <a href="#" class="btn">🔗</a>
+            <a href="#" class="btn">👁️</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <img src="assets/img/emprendimientos/67dc3a1079019.jpg" alt="Emprendimiento">
+        <div class="overlay">
+          <h3>Project Name</h3>
+          <div class="buttons">
+            <a href="#" class="btn">🔗</a>
+            <a href="#" class="btn">👁️</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <img src="assets/img/emprendimientos/67dc3a1079019.jpg" alt="Emprendimiento">
+        <div class="overlay">
+          <h3>Project Name</h3>
+          <div class="buttons">
+            <a href="#" class="btn">🔗</a>
+            <a href="#" class="btn">👁️</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <img src="assets/img/emprendimientos/67dc3a1079019.jpg" alt="Emprendimiento">
+        <div class="overlay">
+          <h3>Project Name</h3>
+          <div class="buttons">
+            <a href="#" class="btn">🔗</a>
+            <a href="#" class="btn">👁️</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <img src="assets/img/emprendimientos/67dc3a1079019.jpg" alt="Emprendimiento">
+        <div class="overlay">
+          <h3>Project Name</h3>
+          <div class="buttons">
+            <a href="#" class="btn">🔗</a>
+            <a href="#" class="btn">👁️</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <img src="assets/img/emprendimientos/67dc3a1079019.jpg" alt="Emprendimiento">
+        <div class="overlay">
+          <h3>Project Name</h3>
+          <div class="buttons">
+            <a href="#" class="btn">🔗</a>
+            <a href="#" class="btn">👁️</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="text-center mt-4">
+    <a class="button button-xs button-primary button-winona">Ver más</a>
+    </div>
+  </div>
+</section>
 <script src="assets/js/home.js"></script>
 </body>
 <?php include 'layout/footer.php'?>
