@@ -1,0 +1,171 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* ============================
+   Desktop layout: Left yellow square + Right header
+   ============================ */
+@media (min-width: 992px) {
+  .container-fluid > .row {
+    display: flex;
+    align-items: stretch;
+  }
+
+  /* Yellow square for “Klean” */
+  .col-lg-3.bg-secondary.d-none.d-lg-block {
+    flex: none !important;
+    width: auto !important;
+    aspect-ratio: 1/1;
+    background-color: #ffc107 !important;
+  }
+  .col-lg-3.bg-secondary.d-none.d-lg-block .navbar-brand {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+  }
+  .col-lg-3.bg-secondary.d-none.d-lg-block .navbar-brand h1 {
+    color: #000 !important;
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 800;
+  }
+
+  .col-lg-9 {
+    flex: 1 1 auto;
+  }
+}
+
+/* ============================
+   Top bar (black)
+   ============================ */
+.row.bg-dark.d-none.d-lg-flex {
+    background-color: #0b0d20;
+    padding: 10px 0;
+}
+.row.bg-dark.d-none.d-lg-flex .col-lg-7,
+.row.bg-dark.d-none.d-lg-flex .col-lg-5 {
+    display: flex;
+    align-items: center;
+}
+.row.bg-dark.d-none.d-lg-flex .col-lg-7 .d-inline-flex.align-items-center {
+    font-size: 14px;
+}
+.row.bg-dark.d-none.d-lg-flex .col-lg-7 .d-inline-flex.align-items-center i,
+.row.bg-dark.d-none.d-lg-flex .col-lg-7 .d-inline-flex.align-items-center small {
+    color: #ffc107;
+}
+.row.bg-dark.d-none.d-lg-flex .col-lg-7 .border-right {
+    border-color: #ffc107;
+}
+.row.bg-dark.d-none.d-lg-flex .col-lg-5 .d-inline-flex.align-items-center a {
+    color: #ffc107;
+    margin-left: 15px;
+    font-size: 16px;
+}
+
+/* ============================
+   Bottom bar (white navbar)
+   ============================ */
+nav.navbar.navbar-expand-lg.bg-white.navbar-light.p-0 {
+    background-color: #fff;
+    padding: 10px 20px;
+}
+nav.navbar .navbar-brand.d-block.d-lg-none h1 {
+    color: #28a745;
+    font-size: 2rem;
+    margin: 0;
+}
+nav.navbar .collapse.navbar-collapse {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+nav.navbar .navbar-nav {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+}
+nav.navbar .navbar-nav .nav-item {
+    margin: 0 15px;
+}
+nav.navbar .navbar-nav .nav-link {
+    color: #0b0d20;
+    font-weight: 600;
+    text-decoration: none;
+}
+nav.navbar .navbar-nav .nav-link:hover,
+nav.navbar .navbar-nav .nav-item.active .nav-link {
+    color: #28a745;
+}
+
+/* ============================
+   “Get A Quote” button
+   ============================ */
+.btn-primary {
+    background-color: #ffc107;
+    color: #000;
+    padding: 10px 30px;
+    border: none;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+.btn-primary:hover {
+    background-color: #111111;
+}
+
+/* Navbar toggler (mobile) */
+.navbar-toggler {
+    border: none;
+}
+
+/* ============================
+   Responsive adjustments
+   ============================ */
+@media (max-width: 991px) {
+  /* Stack the two cols vertically */
+  .container-fluid > .row {
+    display: block;
+  }
+  /* Reset the yellow square to full width */
+  .col-lg-3.bg-secondary.d-none.d-lg-block {
+    width: 100%;
+    aspect-ratio: auto;
+  }
+  .col-lg-3.bg-secondary.d-none.d-lg-block .navbar-brand {
+    height: auto;
+    padding: 10px 0;
+  }
+
+  /* Show top bar and navbar as block */
+  .row.bg-dark.d-none.d-lg-flex,
+  nav.navbar.navbar-expand-lg.bg-white.navbar-light.p-0 {
+    display: block;
+  }
+  .row.bg-dark.d-none.d-lg-flex .col-lg-7,
+  .row.bg-dark.d-none.d-lg-flex .col-lg-5 {
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  nav.navbar .collapse.navbar-collapse {
+      flex-direction: column;
+  }
+  nav.navbar .navbar-nav {
+      flex-direction: column;
+      text-align: center;
+  }
+  nav.navbar .navbar-nav .nav-link {
+      padding: 10px 0;
+      margin: 0;
+  }
+  .btn-primary {
+      margin: 15px auto;
+  }
+}

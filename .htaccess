@@ -1,0 +1,10 @@
+RewriteEngine On
+RewriteBase /promomilitar/
+
+# Deja pasar archivos estáticos (imágenes, CSS, JS)
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^(views/img/.*)$ - [L]
+
+# Rutas por defecto
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [QSA,L]
