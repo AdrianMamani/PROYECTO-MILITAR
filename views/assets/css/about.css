@@ -1,0 +1,219 @@
+        /* Estilos base para el banner */
+        .banner-container {
+            margin-top: 90px;
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        .banner-image {
+            width: 100%;
+            display: block;
+            object-fit: cover;
+            height: 300px; 
+            object-position: 0 -110px;
+        }
+        
+        .banner-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.664); 
+            display: flex;
+            flex-direction: column;
+            align-items: baseline;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+
+        .banner-text-offset {
+            margin-left: 40px; 
+            align-items: flex-start; 
+            text-align: left; 
+        }
+        
+        .banner-content h1 {
+            text-align: left;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .banner-content p {
+            text-align: left;
+            font-size: 1.5rem;
+            margin: 0;
+        }
+        
+        /* Media Queries para responsive */
+        
+        /* Tablets */
+        @media (max-width: 992px) {
+            .banner-image {
+                height: 250px;
+                object-position: center;
+            }
+            
+            .banner-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .banner-content p {
+                font-size: 1.3rem;
+            }
+            .banner-container{
+                margin-bottom: 30px;
+            }
+        }
+        
+        /* Tablets pequeñas */
+        @media (max-width: 768px) {
+            .banner-image {
+                height: 350px;
+                object-position: center;
+            }
+            
+            .banner-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .banner-content p {
+                font-size: 1.1rem;
+            }
+            .banner-container{
+                margin-bottom: 30px;
+            }
+        }
+        
+        /* Móviles */
+        @media (max-width: 576px) {
+            .banner-image {
+                height: 350px;
+                object-position: center;
+            }
+            
+            .banner-content h1 {
+                font-size: 1.8rem;
+            }
+            
+            .banner-content p {
+                font-size: 1rem;
+            }
+            .banner-container{
+                margin-bottom: 30px;
+            }
+        }
+        
+        /* Móviles muy pequeños */
+        @media (max-width: 400px) {
+            .banner-image {
+                height: 300px;
+                object-position: center;
+            }
+            
+            .banner-content h1 {
+                font-size: 1.5rem;
+            }
+            
+            .banner-content p {
+                font-size: 0.9rem;
+            }
+            .banner-container{
+                margin-bottom: 30px;
+            }
+        }
+
+        /* ============================
+        Mision y Visión
+        ============================ */
+        .mision-section {
+            display: flex;
+            justify-content: center; 
+            align-items: center;
+            background-color: #bfbfbf; 
+            padding: 60px 0;
+            font-family: 'Arial', sans-serif;
+            color: #333;
+        }
+        
+        .titulo-banner {
+            background-color: #f4b400;
+            color: black;
+            font-weight: bold;
+            font-size: 1.8rem;
+            letter-spacing: 5px;
+            width: max-content;
+            margin: 0 auto 30px auto;
+            padding: 10px 40px;
+            text-align: center;
+        }
+        
+        .mision-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .mision-text {
+            flex: 1;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: justify;
+            margin-right: 20px;
+            min-width: 300px;
+        }
+        
+        .mision-image {
+            flex: 1;
+            text-align: center;
+            min-width: 250px;
+        }
+        
+        .mision-image img {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        
+        .slider-indicators {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .dot {
+            height: 16px;
+            width: 16px;
+            margin: 0 5px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        
+        .dot.active {
+            background-color: green;
+        }
+        
+        .dot.gray {
+            background-color: #ccc;
+        }
+        
+        @media (max-width: 768px) {
+            .mision-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        
+            .mision-text {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+        }
+        
