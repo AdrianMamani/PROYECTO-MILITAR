@@ -1,215 +1,479 @@
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Klean Header</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-  />
-  <style>
-    /* Dropdown for desktop */
-    .dropdown-menu {
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Promoción Militar Navbar with Stable Hover Submenus</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #fff;
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 24px;
+    max-width: 100%;
+    border-bottom: 2px solid #D61B1B;
+  }
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .logo-img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+  }
+  .logo-text {
+    line-height: 1.1;
+    color: #000;
+    font-size: 10px;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-family: 'Inter', sans-serif;
+  }
+  .logo-text p {
+    margin: 0;
+  }
+  .logo-text .bold {
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 15px;
+    text-transform: none;
+  }
+  ul.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 28px;
+    margin: 0;
+    padding: 0;
+  }
+  ul.nav-links li {
+    position: relative;
+  }
+  ul.nav-links li a {
+    font-weight: 700;
+    font-size: 13px;
+    color: #000;
+    text-decoration: none;
+    padding: 6px 14px;
+    border-radius: 10px;
+    transition: color 0.3s ease;
+    letter-spacing: 0.03em;
+    display: inline-block;
+  }
+  ul.nav-links li a:hover {
+    color: #008000; /* green text on hover */
+  }
+  ul.nav-links li.active > a {
+    background-color: #e6f0e6; /* light green background */
+    color: #000;
+    font-weight: 800;
+  }
+  ul.nav-links li.active > a:hover {
+    color: #008000; /* green text on hover for active */
+  }
+  /* Submenu styles */
+  ul.submenu {
+    display: none;
+    position: absolute;
+    top: 38px;
+    left: 0;
+    background: #fff;
+    border: 1.5px solid #008000;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    min-width: 180px;
+    z-index: 200;
+    padding: 12px 0;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+  ul.submenu li {
+    padding: 0;
+    margin: 0;
+  }
+  ul.submenu li a {
+    padding: 10px 20px;
+    color: #000;
+    text-decoration: none;
+    display: block;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  ul.submenu li a:hover {
+    background-color: #e6f0e6;
+    color: #008000;
+  }
+  ul.nav-links li:hover > ul.submenu,
+  ul.nav-links li:focus-within > ul.submenu {
+    display: block;
+    opacity: 1;
+    pointer-events: auto;
+  }
+  /* Remove default list styles */
+  ul.nav-links, ul.submenu {
+    list-style: none;
+  }
+  /* Remove bullet points in submenu */
+  ul.submenu li {
+    list-style: none;
+  }
+  button.admin-btn {
+    background-color: #D61B1B;
+    color: #fff;
+    font-weight: 900;
+    font-size: 11px;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 9999px;
+    padding: 8px 20px;
+    cursor: pointer;
+    box-shadow: 0 0 6px rgba(214, 27, 27, 0.7);
+    letter-spacing: 0.05em;
+    transition: background-color 0.3s ease;
+  }
+  button.admin-btn:hover {
+    background-color: #a31515;
+  }
+  /* Hamburger menu button */
+  .menu-button {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    position: relative;
+    width: 40px;
+    height: 32px;
+  }
+  .menu-button svg {
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: #000;
+    stroke-width: 3.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: stroke 0.3s ease;
+  }
+  .menu-button:hover svg,
+  .menu-button:focus svg {
+    stroke: #008000;
+  }
+  /* Modal styles */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1000;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  .modal-overlay.active {
+    display: flex;
+  }
+  .modal-content {
+    background-color: #fff;
+    border-radius: 12px 0 0 12px;
+    width: 320px;
+    max-width: 90vw;
+    height: 80vh;
+    padding: 24px 20px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    position: relative;
+    font-family: 'Inter', sans-serif;
+    margin: 16px 0 0 0;
+    overflow-y: auto;
+  }
+  .modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    font-weight: 700;
+    cursor: pointer;
+    color: #D61B1B;
+    line-height: 1;
+  }
+  .modal-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .modal-nav li {
+    position: relative;
+  }
+  .modal-nav li a {
+    font-weight: 700;
+    font-size: 16px;
+    color: #000;
+    text-decoration: none;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 2.5px solid transparent;
+    transition: border-color 0.3s ease, color 0.3s ease;
+    display: block;
+  }
+  .modal-nav li.active > a {
+    background-color: #e6f0e6; /* light green background */
+    font-weight: 800;
+    border-color: transparent;
+  }
+  .modal-nav li a:hover {
+    color: #008000;
+  }
+  /* Modal submenu toggle button */
+  .submenu-toggle {
+    background: none;
+    border: none;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    color: #000;
+    padding: 10px 14px;
+    width: 100%;
+    text-align: left;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .submenu-toggle:hover {
+    color: #008000;
+  }
+  .submenu-toggle:focus {
+    outline: 2px solid #008000;
+    outline-offset: 2px;
+  }
+  .submenu-arrow {
+    border: solid #000;
+    border-width: 0 2.5px 2.5px 0;
+    display: inline-block;
+    padding: 4px;
+    margin-left: 8px;
+    transform: rotate(45deg);
+    transition: transform 0.3s ease;
+  }
+  .submenu-arrow.open {
+    transform: rotate(-135deg);
+  }
+  .modal-submenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    padding-left: 16px;
+    margin-top: 4px;
+    margin-bottom: 12px;
+  }
+  .modal-submenu.open {
+    max-height: 500px; /* enough to show all items */
+  }
+  .modal-submenu li a {
+    font-weight: 600;
+    font-size: 14px;
+    padding: 8px 14px;
+    border-radius: 8px;
+  }
+  .modal-submenu li a:hover {
+    background-color: #e6f0e6;
+    color: #008000;
+  }
+  .modal-admin-btn {
+    width: 100%;
+    background-color: #D61B1B;
+    color: #fff;
+    font-weight: 900;
+    font-size: 14px;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 9999px;
+    padding: 12px 0;
+    cursor: pointer;
+    box-shadow: 0 0 6px rgba(214, 27, 27, 0.7);
+    letter-spacing: 0.05em;
+    transition: background-color 0.3s ease;
+  }
+  .modal-admin-btn:hover {
+    background-color: #a31515;
+  }
+  @media (max-width: 768px) {
+    ul.nav-links {
       display: none;
     }
-    .dropdown.open > .dropdown-menu {
-      display: flex;
-      flex-direction: column;
-    }
-    /* Modal styles */
-    #mobile-modal {
+    button.admin-btn {
       display: none;
-      background-color: rgba(10, 12, 42, 0.95);
-      position: fixed;
-      inset: 0;
-      z-index: 1000;
-      overflow-y: auto;
     }
-    #mobile-modal.open {
-      display: flex;
-      flex-direction: column;
+    .menu-button {
+      display: block;
     }
-  </style>
+  }
+</style>
 </head>
 <body>
-  <header class="w-full relative">
-    <!-- Top black bar with social icons (hidden on small screens) -->
-    <div class="hidden md:flex bg-[#0a0c2a] justify-end items-center h-8 px-4 space-x-4 text-yellow-400 text-sm relative z-10">
-      <a href="#" aria-label="Facebook" class="hover:text-yellow-300"><i class="fab fa-facebook-f"></i></a>
-      <a href="#" aria-label="Twitter" class="hover:text-yellow-300"><i class="fab fa-twitter"></i></a>
-      <a href="#" aria-label="LinkedIn" class="hover:text-yellow-300"><i class="fab fa-linkedin-in"></i></a>
-      <a href="#" aria-label="Instagram" class="hover:text-yellow-300"><i class="fab fa-instagram"></i></a>
-      <a href="#" aria-label="YouTube" class="hover:text-yellow-300"><i class="fab fa-youtube"></i></a>
+<nav>
+  <div class="logo-container">
+    <img class="logo-img" src="https://storage.googleapis.com/a1aa/image/039aab5e-f041-49a8-d02e-7883e6fc4575.jpg" alt="Logo with red star and green text reading CABO" />
+    <div class="logo-text" aria-label="Promoción Cabo Alberto Reyes Gamarra">
+      <p>PROMOCION</p>
+      <p class="bold">CABO ALBERTO</p>
+      <p class="bold">REYES GAMARRA</p>
     </div>
+  </div>
+  <ul class="nav-links" role="menubar" aria-label="Primary navigation">
+    <li class="active" role="none"><a role="menuitem" href="#" aria-current="page">Inicio</a></li>
+    <li role="none"><a role="menuitem" href="#">Sobre Nosotros</a></li>
+    <li role="none"><a role="menuitem" href="#">Blog</a></li>
+    <li role="none" tabindex="0" aria-haspopup="true" aria-expanded="false" aria-controls="submenu-miembros">
+      <a role="menuitem" href="#" id="miembros-link">Miembros ▾</a>
+      <ul class="submenu" id="submenu-miembros" role="menu" aria-label="Submenu Miembros">
+        <li role="none"><a role="menuitem" href="#">Usuarios</a></li>
+        <li role="none"><a role="menuitem" href="#">Memoria</a></li>
+      </ul>
+    </li>
+    <li role="none" tabindex="0" aria-haspopup="true" aria-expanded="false" aria-controls="submenu-comunidad">
+      <a role="menuitem" href="#" id="comunidad-link">Comunidad ▾</a>
+      <ul class="submenu" id="submenu-comunidad" role="menu" aria-label="Submenu Comunidad">
+        <li role="none"><a role="menuitem" href="#">Emprendimientos</a></li>
+        <li role="none"><a role="menuitem" href="#">Noticias</a></li>
+        <li role="none"><a role="menuitem" href="#">Finanzas</a></li>
+      </ul>
+    </li>
+  </ul>
+  <button class="admin-btn" type="button" aria-label="Administrador">
+    ADMINISTRADOR
+  </button>
+  <button class="menu-button" aria-label="Abrir menú" aria-haspopup="true" aria-controls="mobile-menu" aria-expanded="false" id="menu-button">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </button>
+</nav>
 
-    <!-- Desktop header -->
-    <div class="hidden md:flex relative z-20">
-      <div class="bg-green-700 flex items-center justify-center md:w-72 w-full h-20 flex-shrink-0 -mt-8 relative z-30">
-        <h1 class="text-yellow-400 font-extrabold text-4xl font-sans select-none">Klean</h1>
-      </div>
-      <div class="flex-grow relative">
-        <div class="bg-[#0a0c2a] absolute top-0 left-0 right-0 h-10" style="margin-left:18rem; z-index: 20;"></div>
-        <nav class="flex items-center justify-between bg-white px-4 md:px-6 h-20 relative z-30">
-          <ul class="flex items-center gap-6 text-sm font-semibold text-[#0a0c2a]">
-            <li><a href="#" class="text-green-700 font-bold">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Service</a></li>
-            <li><a href="#">Project</a></li>
-            <li class="relative dropdown cursor-pointer" id="pages-dropdown">
-              <button
-                type="button"
-                class="flex items-center gap-1 select-none focus:outline-none"
-                aria-haspopup="true"
-                aria-expanded="false"
-                id="pages-button"
-              >
-                Pages <i class="fas fa-chevron-down text-xs"></i>
-              </button>
-              <ul
-                class="dropdown-menu absolute top-full left-0 mt-1 w-40 bg-white border border-gray-300 rounded-md shadow-lg flex-col z-50"
-                role="menu"
-                aria-labelledby="pages-button"
-              >
-                <li><a href="#" class="block px-4 py-2 text-sm text-[#0a0c2a] hover:bg-yellow-400 hover:text-[#0a0c2a]" role="menuitem">Page 1</a></li>
-                <li><a href="#" class="block px-4 py-2 text-sm text-[#0a0c2a] hover:bg-yellow-400 hover:text-[#0a0c2a]" role="menuitem">Page 2</a></li>
-                <li><a href="#" class="block px-4 py-2 text-sm text-[#0a0c2a] hover:bg-yellow-400 hover:text-[#0a0c2a]" role="menuitem">Page 3</a></li>
-                <li><a href="#" class="block px-4 py-2 text-sm text-[#0a0c2a] hover:bg-yellow-400 hover:text-[#0a0c2a]" role="menuitem">Page 4</a></li>
-                <li><a href="#" class="block px-4 py-2 text-sm text-[#0a0c2a] hover:bg-yellow-400 hover:text-[#0a0c2a]" role="menuitem">Page 5</a></li>
-              </ul>
-            </li>
-            <li><a href="#">Contact</a></li>
-          </ul>
-          <a
-          href="/promomilitar/views/admin/login.php"
-          class="bg-yellow-400 text-[#0a0c2a] font-semibold rounded-full px-5 py-2 text-sm hover:bg-yellow-500 transition block text-center"
-          >
-          Administrador
-        </a>
-
-        </nav>
-        <div class="flex text-xs text-white absolute top-0 right-0 h-10 items-center gap-4 px-4" style="margin-left:18rem; z-index: 25;">
-          <div class="flex items-center gap-2 border-r border-yellow-400 pr-4">
-            <i class="fas fa-envelope"></i>
-            <span>info@example.com</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <i class="fas fa-phone-alt"></i>
-            <span>+012 345 6789</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Mobile header -->
-    <div class="md:hidden relative z-30 bg-green-700 flex items-center h-20 px-4">
-      <button
-        id="mobile-menu-button"
-        aria-label="Open menu"
-        aria-expanded="false"
-        class="text-white text-2xl focus:outline-none mr-4"
-      >
-        <i class="fas fa-bars"></i>
-      </button>
-      <h1 class="text-yellow-400 font-extrabold text-4xl font-sans select-none flex-grow text-center">Klean</h1>
-    </div>
-
-    <!-- Mobile modal menu -->
-    <div id="mobile-modal" class="hidden fixed inset-0 bg-[#0a0c2a] bg-opacity-95 z-50 flex flex-col p-6 text-white">
-      <button
-        id="mobile-modal-close"
-        aria-label="Close menu"
-        class="self-end text-3xl mb-6 focus:outline-none"
-      >
-        <i class="fas fa-times"></i>
-      </button>
-      <nav class="flex flex-col space-y-6 text-lg font-semibold">
-        <a href="#" class="hover:text-yellow-400">Home</a>
-        <a href="#" class="hover:text-yellow-400">About</a>
-        <a href="#" class="hover:text-yellow-400">Service</a>
-        <a href="#" class="hover:text-yellow-400">Project</a>
-        <div>
-          <button
-            id="mobile-pages-toggle"
-            class="flex items-center justify-between w-full font-semibold text-lg hover:text-yellow-400 focus:outline-none"
-            aria-expanded="false"
-          >
-            Pages <i class="fas fa-chevron-down text-sm ml-2"></i>
-          </button>
-          <ul id="mobile-pages-list" class="mt-2 ml-4 space-y-3 hidden flex-col">
-            <li><a href="#" class="hover:text-yellow-400">Page 1</a></li>
-            <li><a href="#" class="hover:text-yellow-400">Page 2</a></li>
-            <li><a href="#" class="hover:text-yellow-400">Page 3</a></li>
-            <li><a href="#" class="hover:text-yellow-400">Page 4</a></li>
-            <li><a href="#" class="hover:text-yellow-400">Page 5</a></li>
-          </ul>
-        </div>
-        <a href="/views/admin/login.php" class="hover:text-yellow-400">Contact</a>
-        <button
-           href="/views/admin/login.php"
-          class="bg-yellow-400 text-[#0a0c2a] font-semibold rounded-full px-6 py-3 text-base hover:bg-yellow-500 transition mt-6 w-full"
-          type="button"
-        >
-          Administrador
+<div class="modal-overlay" id="mobile-menu" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1">
+  <div class="modal-content" style="margin-left:0; margin-right:16px; border-radius: 0 12px 12px 0;">
+    <button class="modal-close" aria-label="Cerrar menú" id="modal-close">&times;</button>
+    <ul class="modal-nav" role="menu" aria-labelledby="modal-title">
+      <li class="active" role="none"><a role="menuitem" href="#" aria-current="page">Inicio</a></li>
+      <li role="none"><a role="menuitem" href="#">Sobre Nosotros</a></li>
+      <li role="none"><a role="menuitem" href="#">Blog</a></li>
+      <li role="none">
+        <button class="submenu-toggle" aria-expanded="false" aria-controls="modal-submenu-miembros" id="toggle-miembros">
+          Miembros <span class="submenu-arrow"></span>
         </button>
-      </nav>
-    </div>
+        <ul class="modal-submenu" id="modal-submenu-miembros" role="menu" aria-label="Submenu Miembros">
+          <li role="none"><a role="menuitem" href="#">Usuarios</a></li>
+          <li role="none"><a role="menuitem" href="#">Memoria</a></li>
+        </ul>
+      </li>
+      <li role="none">
+        <button class="submenu-toggle" aria-expanded="false" aria-controls="modal-submenu-comunidad" id="toggle-comunidad">
+          Comunidad <span class="submenu-arrow"></span>
+        </button>
+        <ul class="modal-submenu" id="modal-submenu-comunidad" role="menu" aria-label="Submenu Comunidad">
+          <li role="none"><a role="menuitem" href="#">Emprendimientos</a></li>
+          <li role="none"><a role="menuitem" href="#">Noticias</a></li>
+          <li role="none"><a role="menuitem" href="#">Finanzas</a></li>
+        </ul>
+      </li>
+    </ul>
+    <button class="modal-admin-btn" type="button">ADMINISTRADOR</button>
+  </div>
+</div>
 
-    <script>
-      // Desktop Pages dropdown toggle
-      const dropdown = document.getElementById('pages-dropdown');
-      const button = document.getElementById('pages-button');
+<script>
+  const menuButton = document.getElementById('menu-button');
+  const modal = document.getElementById('mobile-menu');
+  const modalClose = document.getElementById('modal-close');
 
-      button.addEventListener('click', (e) => {
-        e.preventDefault();
-        dropdown.classList.toggle('open');
-        const expanded = button.getAttribute('aria-expanded') === 'true';
-        button.setAttribute('aria-expanded', String(!expanded));
-      });
+  function openModal() {
+    modal.classList.add('active');
+    menuButton.setAttribute('aria-expanded', 'true');
+    modal.focus();
+  }
 
-      document.addEventListener('click', (e) => {
-        if (!dropdown.contains(e.target)) {
-          dropdown.classList.remove('open');
-          button.setAttribute('aria-expanded', 'false');
-        }
-      });
+  function closeModal() {
+    modal.classList.remove('active');
+    menuButton.setAttribute('aria-expanded', 'false');
+    menuButton.focus();
+  }
 
-      // Mobile modal toggle
-      const mobileMenuButton = document.getElementById('mobile-menu-button');
-      const mobileModal = document.getElementById('mobile-modal');
-      const mobileModalClose = document.getElementById('mobile-modal-close');
+  menuButton.addEventListener('click', () => {
+    if (modal.classList.contains('active')) {
+      closeModal();
+    } else {
+      openModal();
+    }
+  });
 
-      mobileMenuButton.addEventListener('click', () => {
-        mobileModal.classList.add('open');
-        mobileModal.classList.remove('hidden');
-        mobileMenuButton.setAttribute('aria-expanded', 'true');
-        document.body.style.overflow = 'hidden'; // prevent background scroll
-      });
+  modalClose.addEventListener('click', closeModal);
 
-      mobileModalClose.addEventListener('click', () => {
-        mobileModal.classList.remove('open');
-        mobileModal.classList.add('hidden');
-        mobileMenuButton.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = ''; // restore scroll
-      });
+  // Close modal on overlay click
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
 
-      // Mobile Pages submenu toggle
-      const mobilePagesToggle = document.getElementById('mobile-pages-toggle');
-      const mobilePagesList = document.getElementById('mobile-pages-list');
+  // Close modal on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
+      closeModal();
+    }
+  });
 
-      mobilePagesToggle.addEventListener('click', () => {
-        const isHidden = mobilePagesList.classList.contains('hidden');
-        if (isHidden) {
-          mobilePagesList.classList.remove('hidden');
-          mobilePagesToggle.setAttribute('aria-expanded', 'true');
-        } else {
-          mobilePagesList.classList.add('hidden');
-          mobilePagesToggle.setAttribute('aria-expanded', 'false');
-        }
-      });
-    </script>
-  </header>
+  // Accessibility: update aria-expanded on hover/focus for desktop submenus
+  const miembrosLi = document.querySelector('ul.nav-links li[aria-controls="submenu-miembros"]');
+  const comunidadLi = document.querySelector('ul.nav-links li[aria-controls="submenu-comunidad"]');
+
+  function setAriaExpanded(element, value) {
+    const link = element.querySelector('a[aria-haspopup="true"]');
+    if (link) {
+      link.setAttribute('aria-expanded', value);
+    }
+  }
+
+  // Add event listeners to manage aria-expanded and prevent flicker
+  [miembrosLi, comunidadLi].forEach((li) => {
+    let timeoutId;
+    li.addEventListener('mouseenter', () => {
+      clearTimeout(timeoutId);
+      setAriaExpanded(li, 'true');
+    });
+    li.addEventListener('mouseleave', () => {
+      timeoutId = setTimeout(() => {
+        setAriaExpanded(li, 'false');
+      }, 200);
+    });
+    li.addEventListener('focusin', () => {
+      clearTimeout(timeoutId);
+      setAriaExpanded(li, 'true');
+    });
+    li.addEventListener('focusout', () => {
+      timeoutId = setTimeout(() => {
+        setAriaExpanded(li, 'false');
+      }, 200);
+    });
+  });
+</script>
 </body>
 </html>
-
-

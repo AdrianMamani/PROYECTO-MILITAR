@@ -60,10 +60,5 @@ class CarruselController {
         header('Location: index.php?action=carrusel');
         exit();
     }
-
-    public function mostrarPublico() {
-        $carruselItems = $this->modelo->obtenerTodos();
-        require_once './views/web/carrusel/mostrar.php';
-    }
 }
 ?>
