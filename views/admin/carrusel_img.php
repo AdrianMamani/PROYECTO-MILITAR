@@ -297,7 +297,7 @@ $(document).ready(function() {
     // Manejar el botón de ver imagen
     $('.view-image-button').on('click', function() {
         var imagen = $(this).data('imagen');
-        $('#view-image').attr('src',  '/promomilitar/' + imagen); // Asegurar la ruta correcta
+        $('#view-image').attr('src',  '/PROYECTO-MILITAR/' + imagen); // Asegurar la ruta correcta
     });
     
     // Inicializar DataTable si es necesario

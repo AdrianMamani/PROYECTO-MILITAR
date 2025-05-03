@@ -344,7 +344,7 @@
         var imagen = button.data('imagen');  // Obtiene el valor de 'data-imagen'
         var modal = $(this);
         // IMPORTANTE: Aquí debes colocar la carpeta donde realmente está la imagen
-        modal.find('#full-image').attr('src', '/promomilitar/' + imagen);
+        modal.find('#full-image').attr('src', '/PROYECTO-MILITAR/' + imagen);
     });
     $('#example1').DataTable({
         "responsive": true,

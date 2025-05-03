@@ -12,9 +12,11 @@ require_once './controllers/EspecialidadController.php';
 require_once './controllers/EspecialidadImgController.php';
 require_once './controllers/EmprendimientoController.php';
 require_once './controllers/EmprendimientoImgController.php';
+require_once './controllers/HomeController.php';
+
 
 // Definir la acción por defecto
-$action = isset($_GET['action']) ? $_GET['action'] : 'carrusel/index';
+$action = isset($_GET['action']) ? $_GET['action'] : 'home/index';
 $partes = explode('/', $action);
 $accionPrincipal = $partes[0];
 $accionSecundaria = $partes[1] ?? 'index';
@@ -34,6 +36,8 @@ $especialidad = new EspecialidadController();
 $especialidadImg = new ImagenEspecialidadController();
 $emprendimiento = new EmprendimientoController();
 $emprendimientoImg = new EmprendimientoGaleriaController();
+$homeController = new HomeController();
+
 
 // Contexto admin si está logueado
 $isAdmin = isset($_SESSION['usuario']);
@@ -211,6 +215,17 @@ switch ($accionPrincipal) {
                 break;
             default:
                 $emprendimientoImg->index();
+                break;
+        }
+        
+        break;
+    case 'home':
+        switch ($accionSecundaria) {
+            case 'index':
+                $homeController->index();
+                break;
+            default:
+                $homeController->index();
                 break;
         }
         break;

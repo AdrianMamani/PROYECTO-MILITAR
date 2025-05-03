@@ -474,6 +474,14 @@
       }, 200);
     });
   });
+
+  const adminButtons = document.querySelectorAll('.admin-btn, .modal-admin-btn');
+  adminButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      window.location.href = 'index.php?action=auth/loginForm';
+    });
+  });
+
 </script>
 </body>
 </html>

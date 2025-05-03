@@ -18,7 +18,7 @@ class AuthController {
             if ($usuario) {
                 session_start();
                 $_SESSION['usuario'] = $usuario;
-                header('Location: index.php'); // Redirige al panel principal
+                header('Location: index.php?action=carrusel/index'); // Redirige al panel principal
                 exit;
             } else {
                 $error = "Correo o contraseña incorrectos";

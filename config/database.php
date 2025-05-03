@@ -1,9 +1,9 @@
 <?php
 class Database {
-    private static $host = 'localhost';
+    private static $host = 'localhost:3306';
     private static $db_name = 'sistema_promocion';
     private static $username = 'root';
-    private static $password = '';
+    private static $password = '1234';
     private static $conn;
 
     public static function connect() {

@@ -321,7 +321,7 @@
             var button = $(event.relatedTarget); // Botón que abrió el modal
             var imagen = button.data('imagen');  // Obtiene el valor de 'data-imagen'
             var modal = $(this);
-            modal.find('#full-image').attr('src', '/promomilitar/' + imagen);
+            modal.find('#full-image').attr('src', '/PROYECTO-MILITAR/' + imagen);
         });
 
         // Inicializar DataTable
