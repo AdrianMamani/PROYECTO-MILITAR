@@ -1,3 +1,7 @@
+       
+        /* ============================
+        Banner-About
+        ============================ */
         /* Estilos base para el banner */
         .banner-container {
             margin-top: 90px;
@@ -216,4 +220,102 @@
                 margin-bottom: 20px;
             }
         }
-        
+
+        /* ============================
+        Nuestro Blog Section
+        ============================ */
+        .blog-section {
+            padding: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            text-align: center;
+          }
+          
+          .blog-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+          }
+          
+          .blog-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+          }
+          
+          .blog-card {
+            border: 1px solid #ddd;
+            overflow: hidden;
+            text-align: left;
+          }
+          
+          .blog-card img {
+            width: 100%;
+            height: auto;
+          }
+          
+          .blog-card h2 {
+            font-size: 1rem;
+            padding: 1rem;
+            font-weight: 600;
+          }
+          
+          .blog-card p {
+            padding: 0 1rem;
+            color: #333;
+          }
+          
+          .btn-green,
+          .btn-yellow {
+            margin: 1rem;
+            padding: 0.25rem 1.5rem;
+            border: none;
+            border-radius: 9999px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+          }
+          
+          .btn-green {
+            background-color: #00b22d;
+          }
+          
+          .btn-yellow {
+            background-color: #ffc800;
+          }
+
+          .btn-container {
+            margin-top: 2rem;
+            text-align: center;
+          }
+          
+          .btn-see-more {
+            background-color: #ffc800;
+            color: black;
+            padding: 0.45rem 4rem;
+            border: none;
+            border-radius: 9999px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+          }
+          
+          .btn-see-more:hover {
+            background-color: #005fa3;
+          }
+          
+          
+          /* Media Queries */
+          @media (min-width: 640px) {
+            .blog-grid {
+              grid-template-columns: repeat(2, 1fr);
+            }
+          }
+          
+          @media (min-width: 1024px) {
+            .blog-grid {
+              grid-template-columns: repeat(3, 1fr);
+            }
+          }
+          

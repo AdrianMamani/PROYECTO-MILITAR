@@ -51,7 +51,7 @@
      aria-label="Primary Navigation"
    >
     <a class="hover:underline" href="#">Inicio</a>
-    <a class="hover:underline" href="#">Sobre Nosotros</a>
+    <a class="hover:underline" href="about.php">Sobre Nosotros</a>
     <a class="hover:underline" href="#">Blog</a>
     <a class="hover:underline" href="#">Miembros</a>
     <a class="hover:underline" href="#">Comunidad</a>
@@ -151,7 +151,137 @@
     </div>
   </div>
 </section>
-  
+    <!-- Miembros Section -->
+<section>
+  <div class="max-w-7xl mx-auto px-4 py-8 text-center">
+   <h1 class="font-extrabold text-3xl mb-6">
+    Miembros
+   </h1>
+   <!-- <p class="text-sm mt-1 mb-8">
+    Las 13 áreas en las que nos destacamos con orgullo y compromiso.
+   </p> -->
+
+   <!-- Carousel container for small screens -->
+   <div class="sm:hidden max-w-5xl mx-auto">
+    <div id="carousel" class="overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory flex gap-6">
+     <div class="relative group cursor-pointer rounded-md overflow-hidden border-4 border-transparent transition-colors duration-300 hover:border-red-600 snap-start flex-shrink-0 w-full">
+      <img alt="Hombre con chaleco reflectante y casco naranja midiendo terreno en obra de cartografía con maquinaria amarilla al fondo" class="w-full object-cover transition-transform duration-300 group-hover:scale-105" height="200" src="https://storage.googleapis.com/a1aa/image/5b07167c-72e3-4473-d71b-21fdcc2743c2.jpg" width="320"/>
+      <div class="bg-green-900 text-white font-extrabold text-lg py-3 group-hover:bg-red-600 transition-colors duration-300">
+      JUAN ALBERTO
+      </div>
+      <div class="bg-green-900 text-white font-extrabold text-bg py-3 group-hover:bg-red-600 transition-colors duration-300">
+      Auxiliar de Cartografía
+      </div>
+      <button aria-label="Ver detalles" class="absolute top-3 right-3 hidden group-hover:flex items-center justify-center w-10 h-10 bg-red-600 text-white rounded-full shadow-lg transition-opacity duration-300" type="button">
+       <i class="fas fa-eye"></i>
+      </button>
+     </div>
+     <div class="relative group cursor-pointer rounded-md overflow-hidden border-4 border-transparent transition-colors duration-300 hover:border-red-600 snap-start flex-shrink-0 w-full">
+      <img alt="Soldado con uniforme antiguo y casco sosteniendo un fusil en un entorno con árboles y fondo desenfocado" class="w-full object-cover transition-transform duration-300 group-hover:scale-105" height="200" src="https://storage.googleapis.com/a1aa/image/5c914e35-a818-4ee7-f251-27f38c769f64.jpg" width="320"/>
+      <div class="bg-green-900 text-white font-extrabold text-lg py-3 group-hover:bg-red-600 transition-colors duration-300">
+      JUAN ALBERTO
+      </div>
+      <div class="bg-green-900 text-white font-extrabold text-bg py-3 group-hover:bg-red-600 transition-colors duration-300">
+      Auxiliar de Cartografía
+      </div>
+      <button aria-label="Ver detalles" class="absolute top-3 right-3 hidden group-hover:flex items-center justify-center w-10 h-10 bg-red-600 text-white rounded-full shadow-lg transition-opacity duration-300" type="button">
+       <i class="fas fa-eye"></i>
+      </button>
+     </div>
+     <div class="relative group cursor-pointer rounded-md overflow-hidden border-4 border-transparent transition-colors duration-300 hover:border-red-600 snap-start flex-shrink-0 w-full">
+      <img alt="Soldado con uniforme antiguo y casco sosteniendo un fusil en un entorno con árboles y fondo desenfocado" class="w-full object-cover transition-transform duration-300 group-hover:scale-105" height="200" src="https://storage.googleapis.com/a1aa/image/5c914e35-a818-4ee7-f251-27f38c769f64.jpg" width="320"/>
+      <div class="bg-green-900 text-white font-extrabold text-lg py-3 group-hover:bg-red-600 transition-colors duration-300">
+      JUAN ALBERTO
+      </div>
+      <div class="bg-green-900 text-white font-extrabold text-bg py-3 group-hover:bg-red-600 transition-colors duration-300">
+      Auxiliar de Cartografía
+      </div>
+      <button aria-label="Ver detalles" class="absolute top-3 right-3 hidden group-hover:flex items-center justify-center w-10 h-10 bg-red-600 text-white rounded-full shadow-lg transition-opacity duration-300" type="button">
+       <i class="fas fa-eye"></i>
+      </button>
+     </div>
+    </div>
+    <div class="flex justify-center gap-4 mt-4">
+     <button aria-label="Anterior" class="bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-full w-10 h-10 flex items-center justify-center shadow" id="prevBtn" type="button">
+      <i class="fas fa-chevron-left"></i>
+     </button>
+     <button aria-label="Siguiente" class="bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-full w-10 h-10 flex items-center justify-center shadow" id="nextBtn" type="button">
+      <i class="fas fa-chevron-right"></i>
+     </button>
+    </div>
+   </div>
+   <!-- Grid for tablets and larger -->
+   <div class="hidden sm:grid grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+    <div class="relative group cursor-pointer rounded-md overflow-hidden border-4 border-transparent transition-colors duration-300 hover:border-green-600">
+     <img alt="Hombre con chaleco reflectante y casco naranja midiendo terreno en obra de cartografía con maquinaria amarilla al fondo" class="w-full object-cover transition-transform duration-300 group-hover:scale-105" height="200" src="https://storage.googleapis.com/a1aa/image/5b07167c-72e3-4473-d71b-21fdcc2743c2.jpg" width="320"/>
+     <div class="bg-green-900 text-white font-extrabold text-lg py-3 group-hover:bg-green-600 transition-colors duration-300">
+     JUAN ALBERTO
+     </div>
+     <div class="bg-green-900 text-white font-extrabold text-bg py-3 group-hover:bg-green-600 transition-colors duration-300">
+     Auxiliar de Cartografía
+      </div>
+     <button aria-label="Ver detalles" class="absolute top-3 right-3 hidden group-hover:flex items-center justify-center w-10 h-10 bg-red-600 text-white rounded-full shadow-lg transition-opacity duration-300" type="button">
+      <i class="fas fa-eye"></i>
+     </button>
+    </div>
+    <div class="relative group cursor-pointer rounded-md overflow-hidden border-4 border-transparent transition-colors duration-300 hover:border-green-600">
+     <img alt="Soldado con uniforme antiguo y casco sosteniendo un fusil en un entorno con árboles y fondo desenfocado" class="w-full object-cover transition-transform duration-300 group-hover:scale-105" height="200" src="https://storage.googleapis.com/a1aa/image/5c914e35-a818-4ee7-f251-27f38c769f64.jpg" width="320"/>
+     <div class="bg-green-900 text-white font-extrabold text-lg py-3 group-hover:bg-green-600 transition-colors duration-300">
+     JUAN ALBERTO
+     </div>
+     <div class="bg-green-900 text-white font-extrabold text-bg py-3 group-hover:bg-green-600 transition-colors duration-300">
+     Auxiliar de Cartografía
+      </div>
+     <button aria-label="Ver detalles" class="absolute top-3 right-3 hidden group-hover:flex items-center justify-center w-10 h-10 bg-red-600 text-white rounded-full shadow-lg transition-opacity duration-300" type="button">
+      <i class="fas fa-eye"></i>
+     </button>
+    </div>
+    <div class="relative group cursor-pointer rounded-md overflow-hidden border-4 border-transparent transition-colors duration-300 hover:border-green-600">
+     <img alt="Soldado con uniforme antiguo y casco sosteniendo un fusil en un entorno con árboles y fondo desenfocado" class="w-full object-cover transition-transform duration-300 group-hover:scale-105" height="200" src="https://storage.googleapis.com/a1aa/image/5c914e35-a818-4ee7-f251-27f38c769f64.jpg" width="320"/>
+     <div class="bg-green-900 text-white font-extrabold text-lg py-3 group-hover:bg-green-600 transition-colors duration-300">
+     JUAN ALBERTO
+     </div>
+     <div class="bg-green-900 text-white font-extrabold text-bg py-3 group-hover:bg-green-600 transition-colors duration-300">
+     Auxiliar de Cartografía
+      </div>
+     <button aria-label="Ver detalles" class="absolute top-3 right-3 hidden group-hover:flex items-center justify-center w-10 h-10 bg-red-600 text-white rounded-full shadow-lg transition-opacity duration-300" type="button">
+      <i class="fas fa-eye"></i>
+     </button>
+    </div>
+   </div> 
+  </section>
+      <!-- Nuestro Blog Section -->
+<section class="blog-section">
+  <h1 class="blog-title">Nuestro blog</h1>
+  <div class="blog-grid">
+    <!-- Repetir esta tarjeta según cantidad -->
+    <div class="blog-card">
+      <img src="https://storage.googleapis.com/a1aa/image/5c914e35-a818-4ee7-f251-27f38c769f64.jpg" alt="Imagen blog">
+      <h2>Asesor del Comando General del Ejército (CGE) - Año 2023</h2>
+      <p>Pezúa Chávez Juan</p>
+      <button class="btn-green">Leer más</button>
+    </div>
+
+    <!-- Puedes copiar y pegar esta tarjeta para más elementos -->
+    <div class="blog-card">
+      <img src="https://storage.googleapis.com/a1aa/image/5c914e35-a818-4ee7-f251-27f38c769f64.jpg" alt="Imagen blog">
+      <h2>Asesor del Comando General del Ejército (CGE) - Año 2023</h2>
+      <p>Pezúa Chávez Juan</p>
+      <button class="btn-green">Leer más</button>
+    </div>
+
+    <div class="blog-card">
+      <img src="https://storage.googleapis.com/a1aa/image/5c914e35-a818-4ee7-f251-27f38c769f64.jpg" alt="Imagen blog">
+      <h2>Asesor del Comando General del Ejército (CGE) - Año 2023</h2>
+      <p>Pezúa Chávez Juan</p>
+      <button class="btn-green">Leer más</button>
+    </div>
+  </div>
+  <div class="btn-container">
+    <button class="btn-see-more">Leer más</button>
+  </div>
+</section>
+
   <!-- Mensaje Floating Button con tooltip a la izquierda, fijo en pantalla -->
   <div class="fixed bottom-6 right-6 z-50 flex items-center group space-x-3">
     <div class="hidden group-hover:flex bg-gray-500 text-white text-xs rounded px-3 py-1 whitespace-nowrap select-none">
@@ -225,7 +355,7 @@
    </div>
    <nav class="flex flex-col px-4 py-6 space-y-4 font-extrabold text-[16px]">
     <a class="hover:underline" href="#">Inicio</a>
-    <a class="hover:underline" href="#">Sobre Nosotros</a>
+    <a class="hover:underline" href="about.php">Sobre Nosotros</a>
     <a class="hover:underline" href="#">Blog</a>
     <a class="hover:underline" href="#">Miembros</a>
     <a class="hover:underline" href="#">Comunidad</a>

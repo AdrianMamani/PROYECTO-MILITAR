@@ -51,7 +51,7 @@
      aria-label="Primary Navigation"
    >
     <a class="hover:underline" href="#">Inicio</a>
-    <a class="hover:underline" href="#">Sobre Nosotros</a>
+    <a class="hover:underline" href="web/about.php">Sobre Nosotros</a>
     <a class="hover:underline" href="#">Blog</a>
     <a class="hover:underline" href="#">Miembros</a>
     <a class="hover:underline" href="#">Comunidad</a>
@@ -298,7 +298,7 @@
    </div>
    <nav class="flex flex-col px-4 py-6 space-y-4 font-extrabold text-[16px]">
     <a class="hover:underline" href="#">Inicio</a>
-    <a class="hover:underline" href="#">Sobre Nosotros</a>
+    <a class="hover:underline" href="web/about.php">Sobre Nosotros</a>
     <a class="hover:underline" href="#">Blog</a>
     <a class="hover:underline" href="#">Miembros</a>
     <a class="hover:underline" href="#">Comunidad</a>
