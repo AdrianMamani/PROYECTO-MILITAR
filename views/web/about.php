@@ -254,7 +254,6 @@
 <section class="blog-section">
   <h1 class="blog-title">Nuestro blog</h1>
   <div class="blog-grid">
-    <!-- Repetir esta tarjeta según cantidad -->
     <div class="blog-card">
       <img src="https://storage.googleapis.com/a1aa/image/5c914e35-a818-4ee7-f251-27f38c769f64.jpg" alt="Imagen blog">
       <h2>Asesor del Comando General del Ejército (CGE) - Año 2023</h2>
@@ -262,7 +261,6 @@
       <button class="btn-green">Leer más</button>
     </div>
 
-    <!-- Puedes copiar y pegar esta tarjeta para más elementos -->
     <div class="blog-card">
       <img src="https://storage.googleapis.com/a1aa/image/5c914e35-a818-4ee7-f251-27f38c769f64.jpg" alt="Imagen blog">
       <h2>Asesor del Comando General del Ejército (CGE) - Año 2023</h2>
