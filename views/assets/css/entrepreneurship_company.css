@@ -1,0 +1,348 @@
+/* ============================
+        Banner-About
+        ============================ */
+        /* Estilos base para el banner */
+        .banner-container {
+            margin-top: 90px;
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        .banner-image {
+            width: 100%;
+            display: block;
+            object-fit: cover;
+            height: 300px; 
+            object-position: 0 -110px;
+        }
+        
+        .banner-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.664); 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+
+        .banner-text-offset {
+            margin-left: 40px; 
+            align-items: flex-start; 
+            text-align: left; 
+        }
+        
+        .banner-content h1 {
+            text-align: left;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .banner-content p {
+            text-align: left;
+            font-size: 1.5rem;
+            margin: 0;
+        }
+        
+        /* Media Queries para responsive */
+        
+        /* Tablets */
+        @media (max-width: 992px) {
+            .banner-image {
+                height: 250px;
+                object-position: center;
+            }
+            
+            .banner-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .banner-content p {
+                font-size: 1.3rem;
+            }
+            .banner-container{
+                margin-bottom: 30px;
+            }
+        }
+        
+        /* Tablets pequeñas */
+        @media (max-width: 768px) {
+            .banner-image {
+                height: 350px;
+                object-position: center;
+            }
+            
+            .banner-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .banner-content p {
+                font-size: 1.1rem;
+            }
+            .banner-container{
+                margin-bottom: 30px;
+            }
+        }
+        
+        /* Móviles */
+        @media (max-width: 576px) {
+            .banner-image {
+                height: 350px;
+                object-position: center;
+            }
+            
+            .banner-content h1 {
+                font-size: 1.8rem;
+            }
+            
+            .banner-content p {
+                font-size: 1rem;
+            }
+            .banner-container{
+                margin-bottom: 30px;
+            }
+        }
+        
+        /* Móviles muy pequeños */
+        @media (max-width: 400px) {
+            .banner-image {
+                height: 300px;
+                object-position: center;
+            }
+            
+            .banner-content h1 {
+                font-size: 1.5rem;
+            }
+            
+            .banner-content p {
+                font-size: 0.9rem;
+            }
+            .banner-container{
+                margin-bottom: 30px;
+            }
+        }
+/* ============================
+        Emprendimiento por empresa Section
+        ============================ */
+        .company-section {
+            padding: 2rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+          }
+          
+          .company-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+          }
+          
+          .company-title::after {
+            content: "";
+            display: block;
+            width: 40px;
+            height: 4px;
+            background-color: #cddc39;
+            margin: 6px auto 0;
+            border-radius: 2px;
+          }
+          
+          .company-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+          }
+          
+          .company-image img {
+            width: 250px;
+            max-width: 100%;
+            border-radius: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+          }
+          
+          .company-info {
+            flex: 1;
+            min-width: 280px;
+            max-width: 600px;
+            text-align: left;
+          }
+          
+          .company-subtitle {
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+          }
+          
+          .company-paragraph {
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            color: #333;
+          }
+          
+          .company-link {
+            display: block;
+            color: #0077cc;
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            word-break: break-word;
+          }
+          
+          .company-link:hover {
+            text-decoration: underline;
+          }
+          
+          .company-contact,
+          .company-location {
+            font-size: 0.95rem;
+            color: #222;
+            margin-bottom: 0.5rem;
+          }
+          
+          /* Responsive */
+          @media (max-width: 768px) {
+            .company-container {
+              flex-direction: column;
+              text-align: center;
+            }
+          
+            .company-info {
+              text-align: center;
+            }
+          }
+/* ============================
+        Fotos e imagenes por empresa Section
+        ============================ */
+        .eventos-section {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 2rem;
+            gap: 2rem;
+            justify-content: center;
+          }
+          
+          .eventos-left {
+            flex: 1 1 250px;
+            max-width: 300px;
+          }
+          
+          .eventos-title {
+            font-size: 2rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+          }
+          
+          .eventos-description {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+          }
+          
+          .eventos-filter {
+            width: 100%;
+            padding: 0.5rem;
+            font-size: 1rem;
+          }
+          
+          .eventos-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            flex: 2 1 600px;
+          }
+          
+          .item {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background: #ddd;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+          
+          .item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+          
+          .video-thumb {
+            position: relative;
+            width: 100%;
+            height: 100%;
+          }
+          
+          .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 1rem;
+            border-radius: 50%;
+            font-size: 1.5rem;
+          }
+          
+          /* RESPONSIVE: pantallas menores a 769px */
+          @media (max-width: 768px) {
+            .eventos-section {
+              flex-direction: column;
+              align-items: center;
+              padding: 1.5rem;
+            }
+          
+            .eventos-left {
+              max-width: 100%;
+              text-align: center;
+            }
+          
+            .eventos-title {
+              font-size: 2.2rem;
+              margin-bottom: 0.5rem;
+            }
+          
+            .eventos-description {
+              font-size: 1rem;
+              margin-bottom: 1rem;
+              padding: 0 1rem;
+            }
+          
+            .eventos-filter {
+              max-width: 90%;
+              margin: 0 auto 2rem auto;
+              display: block;
+            }
+          
+            .eventos-gallery {
+              grid-template-columns: 1fr;
+              gap: 1rem;
+              width: 90%;
+              margin: 0 auto;
+            }
+          
+            .item {
+              height: auto;
+              aspect-ratio: 1 / 1;
+            }
+          
+            .item img,
+            .video-thumb img {
+              border-radius: 10px;
+            }
+          }
+          

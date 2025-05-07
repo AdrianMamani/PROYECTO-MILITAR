@@ -2,9 +2,9 @@
  <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1" name="viewport" />
-  <title>Entrepreneurship</title>
+  <title>Entrepreneurship_company</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="../assets/css/entrepreneurship.css">
+  <link rel="stylesheet" href="../assets/css/entrepreneurship_company.css">
   <link
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     rel="stylesheet"
@@ -13,6 +13,7 @@
     href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap"
     rel="stylesheet"
   />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.12.1/font/bootstrap-icons.min.css">
   <style>
     body {
       font-family: "Montserrat", sans-serif;
@@ -56,7 +57,6 @@
     <a class="hover:underline" href="#">Miembros</a>
     <a class="hover:underline" href="#">Comunidad</a>
    </nav>
-
    <!-- Right side: Admin button (desktop) and hamburger (mobile) -->
    <div class="flex items-center space-x-4">
     <button
@@ -82,73 +82,78 @@
         <div class="banner-overlay">
             <div class="banner-content banner-text-offset">
                 <h1>EMPRENDIMIENTOS</h1>
-                <p>Inicio -> Emprendimientos</p>
+                <p>Inicio -> Emprendimientos -> Market Donna</p>
             </div>
         </div>
     </section>
-  <!-- Nuestro Blog Section -->
-<section class="blog-section">
-  <h1 class="blog-title">EMPRENDIMIENTOS</h1>
-  <div class="flex flex-col items-center md:flex-row md:justify-between md:text-left">
-    <div class="mb-4 md:mb-0">
-      <h3 class="text-green-700 font-bold text-sm uppercase tracking-wide mb-1">Latest Blog</h3>
-      <div class="w-10 h-1 bg-green-700 mb-1 mx-auto md:mx-0 relative">
-        <span class="block w-6 h-1 bg-yellow-400 absolute top-0 left-0 translate-x-2"></span>
-      </div>
-      <h1 class="text-3xl md:text-5xl font-extrabold tracking-widest mt-2">EMPRENDIMIENTOS</h1>
-    </div>
+        <!-- Emprendimiento por empresa Section -->
+        <section class="company-section">
+        <h2 class="company-title">Market Donna</h2>
 
-    <p class="max-w-md text-sm md:text-base text-gray-800 leading-relaxed">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe ad cupiditate officia! Delectus commodi eligendi molestiae
-       distinctio inventore quas animi nostrum temporal.
-    </p>
-  </div>
-  <div class="blog-grid">
-    <div class="blog-card">
-      <img src="https://storage.googleapis.com/a1aa/image/5c914e35-a818-4ee7-f251-27f38c769f64.jpg" alt="Imagen blog">
-      <h2>Asesor del Comando General del Ejército (CGE) - Año 2023</h2>
-      <p>Pezúa Chávez Juan</p>
-      <button class="btn-green">Leer más</button>
-    </div>
+        <div class="company-container">
+            <div class="company-image">
+            <img src="../assets/img/emprendimientos/67dc3a1079019.jpg" alt="Market Donna Logo">
+            </div>
+            <div class="company-info">
+            <div class="company-subtitle">"Todo lo que necesitas para el menú de tu familia"</div>
+            <p class="company-paragraph">
+                Bienvenido a la página oficial de Market Donna, tu mercado de confianza donde encontrarás productos frescos y de calidad para preparar los mejores platillos para tu familia. Desde frutas y verduras hasta carnes, abarrotes y productos de limpieza, todo en un solo lugar para tu comodidad.
+            </p>
+            <a href="https://www.facebook.com/marketdonna" class="company-link" target="_blank">
+                https://www.facebook.com/marketdonna
+            </a>
+            <p class="company-contact">Contacto: serviciocliente@corporaciondonna.com</p>
+            <p class="company-location">Ubicación: Chorrillos - Surco - La Molina - Breña</p>
+            </div>
+        </div>
+        </section>
+        <!-- Fotos e imagenes por empresa Section -->
+        <section class="eventos-section">
+        <div class="eventos-left">
+            <h1 class="eventos-title">
+            TODOS<br>NUESTROS<br>EVENTOS
+            </h1>
+            <p class="eventos-description">
+            Aquí se mostrarán todos nuestros eventos sociales realizados.
+            </p>
+            <select id="filter" class="eventos-filter">
+            <option value="all">Filtrar por tipo</option>
+            <option value="foto">Fotos</option>
+            <option value="video">Videos</option>
+            </select>
+        </div>
 
-    <div class="blog-card">
-      <img src="https://storage.googleapis.com/a1aa/image/5c914e35-a818-4ee7-f251-27f38c769f64.jpg" alt="Imagen blog">
-      <h2>Asesor del Comando General del Ejército (CGE) - Año 2023</h2>
-      <p>Pezúa Chávez Juan</p>
-      <button class="btn-green">Leer más</button>
-    </div>
+        <div class="eventos-gallery">
+            <div class="item foto"><img src="../assets/img/emprendimientos/67dc3a1079019.jpg" alt=""></div>
+            <div class="item foto"><img src="https://storage.googleapis.com/a1aa/image/5c914e35-a818-4ee7-f251-27f38c769f64.jpg" alt=""></div>
+            <div class="item foto"><img src="https://storage.googleapis.com/a1aa/image/966ac2e9-1531-4fa1-9e4e-7a86d6a0f4a3.jpg" alt=""></div>
+            <div class="item foto"><img src="https://storage.googleapis.com/a1aa/image/5c914e35-a818-4ee7-f251-27f38c769f64.jpg" alt=""></div>
+            <div class="item foto"><img src="https://storage.googleapis.com/a1aa/image/5c914e35-a818-4ee7-f251-27f38c769f64.jpg" alt=""></div>
+            <div class="item foto"><img src="https://storage.googleapis.com/a1aa/image/5b07167c-72e3-4473-d71b-21fdcc2743c2.jpg" alt=""></div>
+            <!-- <div class="item foto"><img src="https://storage.googleapis.com/a1aa/image/5c914e35-a818-4ee7-f251-27f38c769f64.jpg" alt=""></div>
+            <div class="item foto"><img src="https://storage.googleapis.com/a1aa/image/5c914e35-a818-4ee7-f251-27f38c769f64.jpg" alt=""></div>
+            <div class="item foto"><img src="https://storage.googleapis.com/a1aa/image/5b07167c-72e3-4473-d71b-21fdcc2743c2.jpg" alt=""></div> -->
+            <div class="item video">
+            <div class="video-thumb">
+                <img src="https://storage.googleapis.com/a1aa/image/5b07167c-72e3-4473-d71b-21fdcc2743c2.jpg" alt="">
+                <div class="play-icon"><i class="bi bi-skip-end-circle-fill"></i></div>
+            </div>
+            </div>
+            <div class="item video">
+            <div class="video-thumb">
+                <img src="https://storage.googleapis.com/a1aa/image/966ac2e9-1531-4fa1-9e4e-7a86d6a0f4a3.jpg" alt="">
+                <div class="play-icon"><i class="bi bi-skip-end-circle-fill"></i></div>
+            </div>
+            </div>
+            <div class="item video">
+            <div class="video-thumb">
+                <img src="https://storage.googleapis.com/a1aa/image/5c914e35-a818-4ee7-f251-27f38c769f64.jpg" alt="">
+                <div class="play-icon"><i class="bi bi-skip-end-circle-fill"></i></div>
+            </div>
+            </div>
+        </div>
+        </section>
 
-    <div class="blog-card">
-      <img src="https://storage.googleapis.com/a1aa/image/5c914e35-a818-4ee7-f251-27f38c769f64.jpg" alt="Imagen blog">
-      <h2>Asesor del Comando General del Ejército (CGE) - Año 2023</h2>
-      <p>Pezúa Chávez Juan</p>
-      <button class="btn-green">Leer más</button>
-    </div>
-    <div class="blog-card">
-      <img src="https://storage.googleapis.com/a1aa/image/5c914e35-a818-4ee7-f251-27f38c769f64.jpg" alt="Imagen blog">
-      <h2>Asesor del Comando General del Ejército (CGE) - Año 2023</h2>
-      <p>Pezúa Chávez Juan</p>
-      <button class="btn-green">Leer más</button>
-    </div>
-
-    <div class="blog-card">
-      <img src="https://storage.googleapis.com/a1aa/image/5c914e35-a818-4ee7-f251-27f38c769f64.jpg" alt="Imagen blog">
-      <h2>Asesor del Comando General del Ejército (CGE) - Año 2023</h2>
-      <p>Pezúa Chávez Juan</p>
-      <button class="btn-green">Leer más</button>
-    </div>
-
-    <div class="blog-card">
-      <img src="https://storage.googleapis.com/a1aa/image/5c914e35-a818-4ee7-f251-27f38c769f64.jpg" alt="Imagen blog">
-      <h2>Asesor del Comando General del Ejército (CGE) - Año 2023</h2>
-      <p>Pezúa Chávez Juan</p>
-      <button class="btn-green">Leer más</button>
-    </div>
-  </div>
-  <div class="btn-container">
-    <button class="btn-see-more">Leer más</button>
-  </div>
-</section>
   <!-- Mensaje Floating Button con tooltip a la izquierda, fijo en pantalla -->
   <div class="fixed bottom-6 right-6 z-50 flex items-center group space-x-3">
     <div class="hidden group-hover:flex bg-gray-500 text-white text-xs rounded px-3 py-1 whitespace-nowrap select-none">
@@ -235,6 +240,7 @@
    </nav>
   </div>
   <script src="../assets/js/home.js"></script>
+  <script src="../assets/js/entrepreneurship_company.js"></script>
 </body>
 <?php include '../layout/footer.php'?>
 </html>
