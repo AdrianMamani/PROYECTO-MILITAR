@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admin Carrusel de Imágenes</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <link rel="stylesheet" href="/promomilitar/plugins/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="/promomilitar/dist/css/adminlte.min.css">
-    <link rel="stylesheet" href="/promomilitar/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-    <link rel="stylesheet" href="/promomilitar/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
     <style>
       .img-thumbnail {
         max-height: 200px;
@@ -24,16 +24,16 @@
                 <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="index3.html" class="nav-link">Inicio</a>
+                <a href="index.php?action=carrusel/index" class="nav-link">Inicio</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="#" class="nav-link">Contacto</a>
+                <a href="index.php?action=auth/contacto" class="nav-link">Contacto</a>
             </li>
         </ul>
     </nav>
 
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
-        <a href="#" class="brand-link">
+        <a href="index.php?action=carrusel/index" class="brand-link">
             <span class="brand-text font-weight-light">Panel de Administración</span>
         </a>
 
@@ -50,13 +50,13 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="index.php?action=carrusel" class="nav-link">
+                                <a href="index.php?action=carrusel/index" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Carrusel</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="index.php?action=carruselimg" class="nav-link active">
+                                <a href="index.php?action=carruselimg/index" class="nav-link active">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Carrusel de Imágenes</p>
                                 </a>
@@ -73,13 +73,13 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="index.php?action=especialidad" class="nav-link">
+                                <a href="index.php?action=especialidad/index" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Especialidades</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="index.php?action=especialidadimg" class="nav-link">
+                                <a href="index.php?action=especialidadimg/index" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Imágenes</p>
                                 </a>
@@ -96,18 +96,24 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="index.php?action=emprendimiento" class="nav-link">
+                                <a href="index.php?action=emprendimiento/index" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Especialidades</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="index.php?action=emprendimientoimg" class="nav-link">
+                                <a href="index.php?action=emprendimientoimg/index" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Imágenes</p>
                                 </a>
                             </li>
                         </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.php?action=auth/logout" class="nav-link">
+                            <i class="nav-icon fas fa-sign-out-alt"></i>
+                            <p>Cerrar Sesión</p>
+                        </a>
                     </li>
                 </ul>
             </nav>
@@ -123,7 +129,7 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                            <li class="breadcrumb-item"><a href="index.php?action=carrusel/index">Inicio</a></li>
                             <li class="breadcrumb-item active">Carrusel</li>
                         </ol>
                     </div>
@@ -231,7 +237,7 @@
                             <input type="file" class="form-control-file" id="edit-imagen" name="imagen" required>
                             <small class="form-text text-muted">Seleccione la nueva imagen para el carrusel.</small>
                             <div id="preview-imagen" style="margin-top: 10px;">
-                                <img id="imagen-actual" src="" alt="Imagen Actual" class="img-thumbnail" style="max-height: 200px; display:none;">
+                                <img id="imagen-actual" src="/placeholder.svg" alt="Imagen Actual" class="img-thumbnail" style="max-height: 200px; display:none;">
                             </div>
                         </div>
                     </div>
@@ -254,7 +260,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <img id="view-image" src="" alt="Imagen del Carrusel" style="width: 100%;">
+                    <img id="view-image" src="/placeholder.svg" alt="Imagen del Carrusel" style="width: 100%;">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -265,21 +271,21 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="/promomilitar/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="/promomilitar/dist/js/adminlte.min.js"></script>
-<script src="/promomilitar/dist/js/demo.js"></script>
-<script src="/promomilitar/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="/promomilitar/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="/promomilitar/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="/promomilitar/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<script src="/promomilitar/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="/promomilitar/plugins/jszip/jszip.min.js"></script>
-<script src="/promomilitar/plugins/pdfmake/pdfmake.min.js"></script>
-<script src="/promomilitar/plugins/pdfmake/vfs_fonts.js"></script>
-<script src="/promomilitar/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-<script src="/promomilitar/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="/promomilitar/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-<script src="/promomilitar/dist/js/adminlte.min.js"></script>
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="dist/js/adminlte.min.js"></script>
+<script src="dist/js/demo.js"></script>
+<script src="datatables/jquery.dataTables.min.js"></script>
+<script src="datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="plugins/jszip/jszip.min.js"></script>
+<script src="plugins/pdfmake/pdfmake.min.js"></script>
+<script src="plugins/pdfmake/vfs_fonts.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="dist/js/adminlte.min.js"></script>
 <script>
 $(document).ready(function() {
     // Manejar el botón de editar
@@ -289,6 +295,7 @@ $(document).ready(function() {
         
         $('#edit-id').val(id);
         $('#imagen-actual').attr('src',  imagen);
+        $('#imagen-actual').show();
         
         // Actualizar el action del formulario con el ID correcto
         $('#editForm').attr('action', 'index.php?action=carruselimg/editar/' + id);
@@ -297,7 +304,7 @@ $(document).ready(function() {
     // Manejar el botón de ver imagen
     $('.view-image-button').on('click', function() {
         var imagen = $(this).data('imagen');
-        $('#view-image').attr('src',  '/promomilitar/' + imagen); // Asegurar la ruta correcta
+        $('#view-image').attr('src',  '/PROYECTO-MILITAR/' + imagen); // Asegurar la ruta correcta
     });
     
     // Inicializar DataTable si es necesario
