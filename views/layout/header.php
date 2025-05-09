@@ -81,7 +81,7 @@
             <li><a href="#">Contact</a></li>
           </ul>
           <a
-          href="/promomilitar/views/admin/login.php"
+          href="views/admin/login.php"
           class="bg-yellow-400 text-[#0a0c2a] font-semibold rounded-full px-5 py-2 text-sm hover:bg-yellow-500 transition block text-center"
           >
           Administrador

@@ -17,7 +17,7 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="/promomilitar/views/assets/css/login.css" rel="stylesheet">
+    <link href="views/assets/css/login.css" rel="stylesheet">
 </head>
 
 <body>

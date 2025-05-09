@@ -1,5 +1,5 @@
 RewriteEngine On
-RewriteBase /promomilitar/
+RewriteBase 
 
 # Deja pasar archivos estáticos (imágenes, CSS, JS)
 RewriteCond %{REQUEST_FILENAME} -f
