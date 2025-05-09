@@ -44,7 +44,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="index.php?action=carrusel" class="nav-link">
+                                <a href="index.php?action=carrusel" class="nav-link active">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Carrusel</p>
                                 </a>
@@ -67,7 +67,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="index.php?action=especialidad" class="nav-link active">
+                                <a href="index.php?action=especialidad" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Especialidades</p>
                                 </a>
@@ -99,6 +99,23 @@
                                 <a href="index.php?action=emprendimientoimg" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Imágenes</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-images"></i>
+                            <p>
+                                Admin Comentarios
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="index.php?action=comentarios" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Comentarios</p>
                                 </a>
                             </li>
                         </ul>

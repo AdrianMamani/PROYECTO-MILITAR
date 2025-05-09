@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin Carrusel</title>
+    <title>Admin comentario</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
@@ -130,12 +130,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Admin Carrusel de Imágenes</h1>
+                        <h1>Admin comentario</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                            <li class="breadcrumb-item active">Carrusel</li>
+                            <li class="breadcrumb-item active">comentario</li>
                         </ol>
                     </div>
                 </div>
@@ -147,44 +147,39 @@
                 <div class="card">
                     <div class="card-header">
                         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal">
-                            <i class="fas fa-plus"></i> Agregar Nueva Imagen
+                            <i class="fas fa-plus"></i> Agregar Nuevo comentario
                         </button>
                     </div>
+                    
                     <div class="card-body">
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Imagen</th>
-                                    <th>Especialidad</th>
+                                    <th>Título</th>
+                                    <th>Descripción</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if (empty($imagenes)): ?>
-                                    <tr><td colspan="4">No hay imágenes en el carrusel</td></tr>
+                                <?php if (empty($comentarioItems)): ?>
+                                    <tr><td colspan="4">No hay items en el comentario</td></tr>
                                 <?php else: ?>
-                                    <?php foreach ($imagenes as $imagen): ?>
+                                    <?php foreach ($comentarioItems as $item): ?>
                                     <tr>
-                                        <td><?= htmlspecialchars($imagen['id']) ?></td>
-                                        <td>
-                                            <button type="button" class="btn btn-primary btn-sm view-image-button"
-                                                    data-toggle="modal" data-target="#viewImageModal"
-                                                    data-imagen="<?= htmlspecialchars($imagen['nombre_imagen']) ?>">
-                                                <i class="fas fa-eye"></i> Ver Imagen
-                                            </button>
-                                        </td>
-                                        <td><?= htmlspecialchars($imagen['nombre_especialidad']); ?></td>
+                                        <td><?= htmlspecialchars($item['id']) ?></td>
+                                        <td><?= htmlspecialchars($item['titulo']) ?></td>
+                                        <td><?= htmlspecialchars($item['descripcion']) ?></td>
                                         <td>
                                             <button type="button" class="btn btn-warning btn-sm edit-button" 
-                                                    data-id="<?= htmlspecialchars($imagen['id']) ?>" 
-                                                    data-imagen="uploads/<?= htmlspecialchars($imagen['nombre_imagen']) ?>"
-                                                    data-especialidad-id="<?= htmlspecialchars($imagen['especialidad_id']) ?>"
+                                                    data-id="<?= $item['id'] ?>" 
+                                                    data-titulo="<?= htmlspecialchars($item['titulo']) ?>" 
+                                                    data-descripcion="<?= htmlspecialchars($item['descripcion']) ?>"
                                                     data-toggle="modal" data-target="#editModal">
                                                 <i class="fas fa-edit"></i> Editar
                                             </button>
-                                            <a href="index.php?action=especialidadimg/delete&id=<?= $imagen['id'] ?>" class="btn btn-danger btn-sm" 
-                                               onclick="return confirm('¿Estás seguro de eliminar esta imagen?')">
+                                            <a href="index.php?action=comentario/eliminar/<?= $item['id'] ?>" class="btn btn-danger btn-sm" 
+                                               onclick="return confirm('¿Estás seguro de eliminar este comentario?')">
                                                 <i class="fas fa-trash"></i> Eliminar
                                             </a>
                                         </td>
@@ -198,31 +193,25 @@
             </div>
         </section>
     </div>
-    <!-- Modal para agregar nueva imagen -->
+
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addModalLabel">Agregar Nueva Imagen</h5>
+                    <h5 class="modal-title" id="addModalLabel">Agregar Nuevo comentario</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="index.php?action=especialidadimg/store" method="POST" enctype="multipart/form-data">
+                <form action="index.php?action=comentario/agregar" method="POST">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="imagen">Imagen</label>
-                            <input type="file" class="form-control-file" id="imagen" name="imagen" required>
-                            <small class="form-text text-muted">Seleccione la imagen que desea agregar al carrusel.</small>
+                            <label for="titulo">Título</label>
+                            <input type="text" class="form-control" id="titulo" name="titulo" required>
                         </div>
                         <div class="form-group">
-                            <label for="especialidad_id">Especialidad</label>
-                            <select class="form-control" id="especialidad_id" name="especialidad_id" required>
-                                <option value="">Seleccione una especialidad</option>
-                                <?php foreach ($especialidades as $especialidad): ?>
-                                    <option value="<?= $especialidad['id']; ?>"><?= $especialidad['nombre']; ?></option>
-                                <?php endforeach; ?>
-                            </select>
+                            <label for="descripcion">Descripción</label>
+                            <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -234,62 +223,36 @@
         </div>
     </div>
 
-    <!-- Modal para editar imagen -->
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editModalLabel">Editar Imagen del Carrusel</h5>
+                    <h5 class="modal-title" id="editModalLabel">Editar comentario</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form id="editForm" method="POST" action="index.php?action=especialidadimg/update" enctype="multipart/form-data">
+                <form id="editForm" method="POST" action="">
                     <input type="hidden" name="id" id="edit-id">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="edit-imagen">Imagen</label>
-                            <input type="file" class="form-control-file" id="edit-imagen" name="imagen">
-                            <small class="form-text text-muted">Seleccione la nueva imagen para el carrusel.</small>
+                            <label for="edit-titulo">Título</label>
+                            <input type="text" class="form-control" id="edit-titulo" name="titulo" required>
                         </div>
                         <div class="form-group">
-                            <label for="edit-especialidad_id">Especialidad</label>
-                            <select class="form-control" id="edit-especialidad_id" name="especialidad_id" required>
-                                <option value="">Seleccione una especialidad</option>
-                                <?php foreach ($especialidades as $especialidad): ?>
-                                    <option value="<?= $especialidad['id']; ?>"><?= $especialidad['nombre']; ?></option>
-                                <?php endforeach; ?>
-                            </select>
+                            <label for="edit-descripcion">Descripción</label>
+                            <textarea class="form-control" id="edit-descripcion" name="descripcion" rows="3" required></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Actualizar</button>
+                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-
-    <!-- Modal para ver imagen -->
-    <div class="modal fade" id="viewImageModal" tabindex="-1" role="dialog" aria-labelledby="viewImageModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="viewImageModalLabel">Vista de la Imagen</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <img id="full-image" src="" class="img-fluid" alt="Imagen Completa">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                </div>
-            </div>
-        </div>
-    </div>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -298,6 +261,7 @@
 <script src="plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 <script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
 <script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
 <script src="plugins/jszip/jszip.min.js"></script>
@@ -306,67 +270,28 @@
 <script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-<script src="dist/js/adminlte.min.js"></script>
 <script>
-     // Manejar la edición de imagen
-     $('#editModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget);
-        var id = button.data('id');
-        var imagen = button.data('imagen');
-        var especialidadId = button.data('especialidad-id'); // Obtener el ID de la especialidad
-
-        var modal = $(this);
-        modal.find('#edit-id').val(id);
-        modal.find('#edit-especialidad_id').val(especialidadId); // Establecer el valor del select
+$(document).ready(function() {
+    // Manejar el botón de editar
+    $('.edit-button').on('click', function() {
+        var id = $(this).data('id');
+        var titulo = $(this).data('titulo');
+        var descripcion = $(this).data('descripcion');
+        
+        $('#edit-id').val(id);
+        $('#edit-titulo').val(titulo);
+        $('#edit-descripcion').val(descripcion);
+        
+        // Actualizar el action del formulario con el ID correcto
+        $('#editForm').attr('action', 'index.php?action=comentario/editar/' + id);
     });
-
-    // Manejar el submit del formulario de edición
-    $('#editForm').submit(function (e) {
-        e.preventDefault();
-
-        var id = $('#edit-id').val();
-        var imagen = $('#edit-imagen')[0].files[0]; 
-        var especialidadId = $('#edit-especialidad_id').val();
-
-        var formData = new FormData();
-        formData.append('id', id);
-        if (imagen) {
-            formData.append('imagen', imagen);
-        }
-        formData.append('especialidad_id', especialidadId);
-
-        $.ajax({
-            url: 'index.php?action=especialidadimg/update',
-            method: 'POST',
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function(response) {
-                alert('Imagen actualizada correctamente');
-                location.reload(); 
-            },
-            error: function() {
-                alert('Hubo un error al actualizar la imagen');
-            }
-        });
-    });
-
-    // Visualizar imagen
-    //$('.view-image-button').on('click', function () {
-     //   var imagen = $(this).data('imagen');
-      //  $('#full-image').attr('src', 'uploads/' + imagen);
-    //});
-    $('#viewImageModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget); // Botón que abrió el modal
-        var imagen = button.data('imagen');  // Obtiene el valor de 'data-imagen'
-        var modal = $(this);
-        // IMPORTANTE: Aquí debes colocar la carpeta donde realmente está la imagen
-        modal.find('#full-image').attr('src', '' + imagen);
-    });
+    
+    // Inicializar DataTable si es necesario
     $('#example1').DataTable({
         "responsive": true,
         "autoWidth": false,
     });
+});
 </script>
 </body>
 </html>

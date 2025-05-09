@@ -29,7 +29,7 @@
         </nav>
 
         <!-- Sidebar -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <a href="#" class="brand-link">
             <span class="brand-text font-weight-light">Panel de Administración</span>
         </a>
@@ -47,7 +47,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="index.php?action=carrusel" class="nav-link">
+                                <a href="index.php?action=carrusel" class="nav-link active">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Carrusel</p>
                                 </a>
@@ -99,9 +99,26 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="index.php?action=emprendimientoimg" class="nav-link active">
+                                <a href="index.php?action=emprendimientoimg" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Imágenes</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-images"></i>
+                            <p>
+                                Admin Comentarios
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="index.php?action=comentarios" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Comentarios</p>
                                 </a>
                             </li>
                         </ul>
