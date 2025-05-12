@@ -9,6 +9,8 @@ require_once 'controllers/EspecialidadController.php';
 require_once 'controllers/EspecialidadImgController.php';
 require_once 'controllers/EmprendimientoController.php';
 require_once 'controllers/EmprendimientoImgController.php';
+require_once 'controllers/ComentarioController.php';
+require_once 'controllers/En_MemoriaController.php';
 
 // Definir la acción por defecto
 $action = isset($_GET['action']) ? $_GET['action'] : 'carrusel';
@@ -20,6 +22,8 @@ $especialidad = new EspecialidadController();
 $especialidadImg = new ImagenEspecialidadController(); // Asegúrate de que esta clase exista
 $emprendimiento = new EmprendimientoController();
 $emprendimientoImg = new EmprendimientoGaleriaController(); // Asegúrate de que esta clase exista
+$comentarios = new ComentarioController(); // Asegúrate de que esta clase exista
+$en_memoria = new En_MemoriaController(); // Asegúrate de que esta clase exista
 
 // Definir si es un administrador
 $isAdmin = true; // Cambiar a false si no es administrador
@@ -27,6 +31,8 @@ $controller->setAdminContext($isAdmin);
 $controllerImg->setAdminContext($isAdmin);
 $emprendimiento->setAdminContext($isAdmin);
 $especialidad->setAdminContext($isAdmin);
+$comentarios->setAdminContext($isAdmin);
+$en_memoria->setAdminContext($isAdmin);
 
 // Dividir la acción para manejar rutas como "carrusel/agregar"
 $partes = explode('/', $action);
@@ -237,6 +243,78 @@ switch ($accionPrincipal) {
                 break;
         }
         break;
+
+    case 'comentarios':
+        switch ($accionSecundaria) {
+            case 'index':
+                $comentarios->index();
+                break;
+            case 'agregar':
+                $comentarios->agregar();
+                break;
+            case 'editar':
+                if ($id) {
+                    $comentarios->editar($id);
+                } else {
+                    echo "ID no proporcionado para editar";
+                }
+                break;
+            case 'eliminar':
+                if ($id) {
+                    $comentarios->eliminar($id);
+                } else {
+                    echo "ID no proporcionado para eliminar";
+                }
+                break;
+            case 'ver':
+                if ($id) {
+                    $comentarios->ver($id);
+                } else {
+                    echo "ID no proporcionado para ver";
+                }
+                break;
+            default:
+                $comentarios->index();
+                break;
+        }
+        break;
+
+    case 'en_memoria':
+        switch ($accionSecundaria) {
+            case 'index':
+                $en_memoria->index();
+                break;
+            case 'agregar':
+                $en_memoria->agregar();
+                break;
+            case 'editar':
+                if ($id) {
+                    $en_memoria->editar($id);
+                } else {
+                    echo "ID no proporcionado para editar";
+                }
+                break;
+            case 'eliminar':
+                if ($id) {
+                    $en_memoria->eliminar($id);
+                } else {
+                    echo "ID no proporcionado para eliminar";
+                }
+                break;
+            case 'ver':
+                if ($id) {
+                    $en_memoria->ver($id);
+                } else {
+                    echo "ID no proporcionado para ver";
+                }
+                break;
+            default:
+                $en_memoria->index();
+                break;
+        }
+        break;
+
+
 
     default:
         $controller->index(); // Acción por defecto si no coincide con ningún controlador

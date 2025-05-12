@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin comentario</title>
+    <title>Admin comentarios</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
@@ -120,6 +120,40 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-images"></i>
+                            <p>
+                                Admin In Memoriam
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="index.php?action=en_memoria" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>In Memoriam</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-images"></i>
+                            <p>
+                                Admin Miembros
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="index.php?action=miembro" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Miembros</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -130,7 +164,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Admin comentario</h1>
+                        <h1>Admin Comentarios</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -147,7 +181,7 @@
                 <div class="card">
                     <div class="card-header">
                         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal">
-                            <i class="fas fa-plus"></i> Agregar Nuevo comentario
+                            <i class="fas fa-plus"></i> Agregar Nuevo Comentario
                         </button>
                     </div>
                     
@@ -157,6 +191,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Título</th>
+                                    <th>Sub-Título</th>
                                     <th>Descripción</th>
                                     <th>Acciones</th>
                                 </tr>
@@ -169,16 +204,18 @@
                                     <tr>
                                         <td><?= htmlspecialchars($item['id']) ?></td>
                                         <td><?= htmlspecialchars($item['titulo']) ?></td>
+                                        <td><?= htmlspecialchars($item['subtitulo']) ?></td>
                                         <td><?= htmlspecialchars($item['descripcion']) ?></td>
                                         <td>
                                             <button type="button" class="btn btn-warning btn-sm edit-button" 
                                                     data-id="<?= $item['id'] ?>" 
                                                     data-titulo="<?= htmlspecialchars($item['titulo']) ?>" 
+                                                    data-subtitulo="<?= htmlspecialchars($item['subtitulo']) ?>" 
                                                     data-descripcion="<?= htmlspecialchars($item['descripcion']) ?>"
                                                     data-toggle="modal" data-target="#editModal">
                                                 <i class="fas fa-edit"></i> Editar
                                             </button>
-                                            <a href="index.php?action=comentario/eliminar/<?= $item['id'] ?>" class="btn btn-danger btn-sm" 
+                                            <a href="index.php?action=comentarios/eliminar/<?= $item['id'] ?>" class="btn btn-danger btn-sm" 
                                                onclick="return confirm('¿Estás seguro de eliminar este comentario?')">
                                                 <i class="fas fa-trash"></i> Eliminar
                                             </a>
@@ -203,15 +240,19 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="index.php?action=comentario/agregar" method="POST">
+                <form action="index.php?action=comentarios/agregar" method="POST">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="titulo">Título</label>
                             <input type="text" class="form-control" id="titulo" name="titulo" required>
                         </div>
                         <div class="form-group">
+                            <label for="subtitulo">Sub-titulo</label>
+                            <textarea class="form-control" id="subtitulo" name="subtitulo" rows="3" required></textarea>
+                        </div>
+                                                <div class="form-group">
                             <label for="descripcion">Descripción</label>
-                            <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
+                            <textarea class="form-control" id="descripcion" name="descripcion" rows="5" required></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -240,8 +281,12 @@
                             <input type="text" class="form-control" id="edit-titulo" name="titulo" required>
                         </div>
                         <div class="form-group">
+                            <label for="edit-subtitulo">Sub-Título</label>
+                            <textarea class="form-control" id="edit-subtitulo" name="subtitulo" rows="3" required></textarea>
+                        </div>
+                        <div class="form-group">
                             <label for="edit-descripcion">Descripción</label>
-                            <textarea class="form-control" id="edit-descripcion" name="descripcion" rows="3" required></textarea>
+                            <textarea class="form-control" id="edit-descripcion" name="descripcion" rows="5" required></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -276,14 +321,16 @@ $(document).ready(function() {
     $('.edit-button').on('click', function() {
         var id = $(this).data('id');
         var titulo = $(this).data('titulo');
+        var subtitulo = $(this).data('subtitulo');
         var descripcion = $(this).data('descripcion');
         
         $('#edit-id').val(id);
         $('#edit-titulo').val(titulo);
+        $('#edit-subtitulo').val(subtitulo);
         $('#edit-descripcion').val(descripcion);
         
         // Actualizar el action del formulario con el ID correcto
-        $('#editForm').attr('action', 'index.php?action=comentario/editar/' + id);
+        $('#editForm').attr('action', 'index.php?action=comentarios/editar/' + id);
     });
     
     // Inicializar DataTable si es necesario

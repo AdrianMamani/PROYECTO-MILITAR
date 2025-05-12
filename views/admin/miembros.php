@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin Emprendimientos</title>
+    <title>Admin Miembros</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
@@ -168,12 +168,12 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Admin Emprendimientos</h1>
+                            <h1>Admin Miembros</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                                <li class="breadcrumb-item active">Emprendimientos</li>
+                                <li class="breadcrumb-item active">Miembros</li>
                             </ol>
                         </div>
                     </div>
@@ -186,7 +186,7 @@
                     <div class="card">
                         <div class="card-header">
                             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal">
-                                <i class="fas fa-plus"></i> Agregar Nuevo Emprendimiento
+                                <i class="fas fa-plus"></i> Agregar Nuevo Miembros
                             </button>
                         </div>
                         <div class="card-body">
@@ -194,17 +194,18 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Emprendimiento</th>
-                                        <th>Tipo</th>
-                                        <th>Archivo</th>
+                                        <th>Nombre</th>
+                                        <th>Descripcion</th>
+                                        <th>Especialidad</th>
+                                        <th>Imagen</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php if (empty($galeria)): ?>
-                                        <tr><td colspan="5">No hay archivos en la galería</td></tr>
+                                    <?php if (empty($miembros)): ?>
+                                        <tr><td colspan="5">No hay archivos en miembros</td></tr>
                                     <?php else: ?>
-                                        <?php foreach ($galeria as $item): ?>
+                                        <?php foreach ($miembros as $item): ?>
                                             <tr>
                                                 <td><?= htmlspecialchars($item['id']) ?></td>
                                                 <td><?= htmlspecialchars($item['nombre_emprendimiento']) ?></td>
