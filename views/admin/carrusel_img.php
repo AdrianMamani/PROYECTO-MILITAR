@@ -116,8 +116,15 @@
                         </a>
                     </li>
                 </ul>
+
             </nav>
+            <a href="index.php?action=finanzas/index" class="nav-link">
+        <i class="nav-icon fas fa-dollar-sign"></i>
+        <p>Registro de Aportaciones</p>
+    </a>
+</li>
         </div>
+
     </aside>
 
     <div class="content-wrapper">

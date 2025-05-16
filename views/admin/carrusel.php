@@ -77,6 +77,9 @@
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Imágenes</p>
                                 </a>
+                                <a href="index.php?action=finanzas/index" class="btn btn-primary" style="position: fixed; top: 10px; right: 10px; z-index: 9999;">
+    Ir a Finanzas (Prueba)
+</a>
                             </li>
                         </ul>
                     </li>
@@ -109,9 +112,18 @@
                             <p>Cerrar Sesión</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+    <a href="index.php?action=finanzas/index" class="nav-link active">
+        <i class="nav-icon fas fa-dollar-sign"></i>
+        <p>Registro de Aportaciones</p>
+    </a>
+</li>
+                    
                 </ul>
             </nav>
+            
         </div>
+        
     </aside>
 
 

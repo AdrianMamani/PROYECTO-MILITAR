@@ -12,7 +12,7 @@ require_once './controllers/EspecialidadController.php';
 require_once './controllers/EspecialidadImgController.php';
 require_once './controllers/EmprendimientoController.php';
 require_once './controllers/EmprendimientoImgController.php';
-
+require_once './controllers/FinanzasController.php'; // Añadir esta línea
 // Incluir el router y middleware
 require_once './router.php';
 require_once './middleware/AuthMiddleware.php';

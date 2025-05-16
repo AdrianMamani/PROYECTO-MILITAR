@@ -74,14 +74,25 @@ class Router {
                 $methodName = $route['methodName'];
                 
                 // Depuración
-                echo "<!-- Ejecutando: $controllerClass->$methodName() -->\n";
+                echo "<!-- Instanciando controlador: $controllerClass -->\n";
                 
-                $controllerInstance = new $controllerClass();
-                if ($id) {
-                    $controllerInstance->$methodName($id);
-                } else {
-                    $controllerInstance->$methodName();
+                try {
+                    // Instanciar el controlador
+                    $controllerInstance = new $controllerClass();
+                    
+                    // Llamar al método con o sin ID
+                    echo "<!-- Llamando al método: $methodName -->\n";
+                    if ($id) {
+                        $controllerInstance->$methodName($id);
+                    } else {
+                        $controllerInstance->$methodName();
+                    }
+                    echo "<!-- Método ejecutado correctamente -->\n";
+                } catch (Exception $e) {
+                    echo "<!-- Error al ejecutar el controlador: " . $e->getMessage() . " -->\n";
+                    echo "<div class='alert alert-danger'>Error: " . $e->getMessage() . "</div>";
                 }
+                
                 return;
             }
         }
@@ -100,6 +111,7 @@ class Router {
             $controllerClass = $this->notFoundCallback['controllerClass'];
             $methodName = $this->notFoundCallback['methodName'];
             
+            // Instanciar el controlador
             $controllerInstance = new $controllerClass();
             $controllerInstance->$methodName();
         } else {

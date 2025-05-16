@@ -44,10 +44,19 @@ $router->add('emprendimiento', 'ver', 'EmprendimientoController', 'ver')->middle
 
 // Rutas de imágenes de emprendimiento
 $router->add('emprendimientoimg', 'index', 'EmprendimientoGaleriaController', 'index')->middleware('AuthMiddleware');
-$router->add('emprendimientoimg', 'agregar', 'EmprendimientoGaleriaController', 'create')->middleware('AuthMiddleware');
+$router->add('emprendimientoimg', 'agregar',  'EmprendimientoGaleriaController', 'create')->middleware('AuthMiddleware');
 $router->add('emprendimientoimg', 'editar', 'EmprendimientoGaleriaController', 'edit')->middleware('AuthMiddleware');
 $router->add('emprendimientoimg', 'eliminar', 'EmprendimientoGaleriaController', 'delete')->middleware('AuthMiddleware');
 $router->add('emprendimientoimg', 'ver', 'EmprendimientoGaleriaController', 'view')->middleware('AuthMiddleware');
+$router->add('finanzas', 'index', 'FinanzasController', 'index')->middleware('AuthMiddleware');
 
+// Rutas de finanzas
+$router->add('finanzas', 'index', 'FinanzasController', 'index')->middleware('AuthMiddleware');
+$router->add('finanzas', 'agregar', 'FinanzasController', 'agregar')->middleware('AuthMiddleware');
+$router->add('finanzas', 'store', 'FinanzasController', 'store')->middleware('AuthMiddleware');
+$router->add('finanzas', 'editar', 'FinanzasController', 'editar')->middleware('AuthMiddleware');
+$router->add('finanzas', 'update', 'FinanzasController', 'update')->middleware('AuthMiddleware');
+$router->add('finanzas', 'eliminar', 'FinanzasController', 'eliminar')->middleware('AuthMiddleware');
+$router->add('finanzas', 'ver', 'FinanzasController', 'ver')->middleware('AuthMiddleware');
 // Ruta por defecto
 $router->notFound('CarruselController', 'index');
