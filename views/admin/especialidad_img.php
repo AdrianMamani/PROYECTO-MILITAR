@@ -151,11 +151,12 @@
                                     <tr>
                                         <td><?= htmlspecialchars($imagen['id']) ?></td>
                                         <td>
-                                            <button type="button" class="btn btn-primary btn-sm view-image-button"
+                                            <img src="/PROYECTO-MILITAR/<?= htmlspecialchars($imagen['nombre_imagen']) ?>" 
+                                                    alt="Imagen del Carrusel" 
+                                                    class="img-thumbnail view-image-button"
                                                     data-toggle="modal" data-target="#viewImageModal"
-                                                    data-imagen="<?= htmlspecialchars($imagen['nombre_imagen']) ?>">
-                                                <i class="fas fa-eye"></i> Ver Imagen
-                                            </button>
+                                                    data-imagen="<?= htmlspecialchars($imagen['nombre_imagen']) ?>"
+                                                    style="max-width: 120px; cursor: pointer;">
                                         </td>
                                         <td><?= htmlspecialchars($imagen['nombre_especialidad']); ?></td>
                                         <td>
@@ -277,7 +278,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="dist/js/adminlte.min.js"></script>
-<script src="dist/js/demo.js"></script>
 <script src="plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
@@ -344,7 +344,7 @@
         var imagen = button.data('imagen');  // Obtiene el valor de 'data-imagen'
         var modal = $(this);
         // IMPORTANTE: Aquí debes colocar la carpeta donde realmente está la imagen
-        modal.find('#full-image').attr('src', '/promomilitar/' + imagen);
+        modal.find('#full-image').attr('src', '/PROYECTO-MILITAR/' + imagen);
     });
     $('#example1').DataTable({
         "responsive": true,

@@ -1,9 +1,9 @@
 <?php
 require_once __DIR__ . '../../config/database.php';
 
-class CarruselImg {
+class NosotroslImg {
     private $db;
-    private $nombreTabla = 'carrusel_img';
+    private $nombreTabla = 'nosotros_galeria';
     private $uploadDir = 'uploads/'; // Directorio para guardar las imágenes
 
     public function __construct() {
@@ -26,7 +26,7 @@ class CarruselImg {
         return $imagenes;
     }
 
-    public function obtenerCarruselImgPorId($id) {
+    public function obtenerNosotrosImgPorId($id) {
         $query = "SELECT * FROM " . $this->nombreTabla . " WHERE id = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(1, $id, PDO::PARAM_INT);
@@ -36,10 +36,10 @@ class CarruselImg {
         return $resultado ? $resultado : null;
     }
 
-    public function agregarCarruselImg($imagen) {
+    public function agregarNosotrosImg($imagen) {
         $nombreArchivo = $this->subirImagen($imagen); // Llama a la función para subir la imagen
         if ($nombreArchivo) {
-            $query = "INSERT INTO " . $this->nombreTabla . " (img) VALUES (?)";
+            $query = "INSERT INTO " . $this->nombreTabla . " (nombre_imagen) VALUES (?)";
             $stmt = $this->db->prepare($query);
             $stmt->bindParam(1, $nombreArchivo);
             $stmt->execute();
@@ -48,12 +48,12 @@ class CarruselImg {
         return false; // Devuelve false si no se pudo subir la imagen
     }
 
-    public function actualizarCarruselImg($id, $imagen) {
+    public function actualizarNosotrosImg($id, $imagen) {
         // Primero, obtener el nombre del archivo de imagen anterior
-        $imagenAnterior = $this->obtenerCarruselImgPorId($id)['img'];
+        $imagenAnterior = $this->obtenerNosotrosImgPorId($id)['nombre_imagen'];
         $nombreArchivo = $this->subirImagen($imagen, $imagenAnterior); // Sube la nueva imagen y elimina la anterior
         if ($nombreArchivo) {
-            $query = "UPDATE " . $this->nombreTabla . " SET img = ? WHERE id = ?";
+            $query = "UPDATE " . $this->nombreTabla . " SET nombre_imagen = ? WHERE id = ?";
             $stmt = $this->db->prepare($query);
             $stmt->bindParam(1, $nombreArchivo);
             $stmt->bindParam(2, $id, PDO::PARAM_INT);
@@ -63,9 +63,9 @@ class CarruselImg {
         return false;
     }
 
-    public function eliminarCarruselImg($id) {
+    public function eliminarNosotrosImg($id) {
         // Primero, obtener el nombre del archivo de imagen
-        $imagenABorrar = $this->obtenerCarruselImgPorId($id)['img'];
+        $imagenABorrar = $this->obtenerNosotrosImgPorId($id)['nombre_imagen'];
         if ($imagenABorrar) {
             $this->eliminarArchivo($imagenABorrar); // Elimina el archivo del sistema de archivos
         }

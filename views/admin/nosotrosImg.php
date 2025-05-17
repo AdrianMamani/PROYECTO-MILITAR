@@ -158,12 +158,12 @@
                                     <tr>
                                         <td><?= htmlspecialchars($imagen['id']) ?></td>
                                         <td>
-    <img src="/PROYECTO-MILITAR/uploads/<?= htmlspecialchars($imagen['img']) ?>" 
+    <img src="/PROYECTO-MILITAR/uploads/<?= htmlspecialchars($imagen['nombre_imagen']) ?>" 
          alt="Imagen del Carrusel" 
          class="img-thumbnail view-image-button"
          data-toggle="modal" 
          data-target="#viewImageModal"
-         data-imagen="<?= htmlspecialchars($imagen['img']) ?>"
+         data-imagen="<?= htmlspecialchars($imagen['nombre_imagen']) ?>"
          style="max-width: 120px; cursor: pointer;">
 </td>
 
@@ -171,11 +171,11 @@
                                         <td>
                                             <button type="button" class="btn btn-warning btn-sm edit-button" 
                                                     data-id="<?= $imagen['id'] ?>" 
-                                                    data-imagen="../../uploads/<?= htmlspecialchars($imagen['img']) ?>"
+                                                    data-imagen="../../uploads/<?= htmlspecialchars($imagen['nombre_imagen']) ?>"
                                                     data-toggle="modal" data-target="#editModal">
                                                 <i class="fas fa-edit"></i> Editar
                                             </button>
-                                            <a href="index.php?action=carruselimg/eliminar/<?= $imagen['id'] ?>" class="btn btn-danger btn-sm" 
+                                            <a href="index.php?action=nosotrosimg/eliminar/<?= $imagen['id'] ?>" class="btn btn-danger btn-sm" 
                                                onclick="return confirm('¿Estás seguro de eliminar esta imagen?')">
                                                 <i class="fas fa-trash"></i> Eliminar
                                             </a>
@@ -200,12 +200,12 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="index.php?action=carruselimg/agregar" method="POST" enctype="multipart/form-data">
+                <form action="index.php?action=nosotrosimg/agregar" method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="imagen">Imagen</label>
-                            <input type="file" class="form-control-file" id="imagen" name="imagen" required>
-                            <small class="form-text text-muted">Seleccione la imagen que desea agregar al carrusel.</small>
+                            <label for="nombre_imagen">Imagen</label>
+                            <input type="file" class="form-control-file" id="nombre_imagen" name="nombre_imagen" required>
+                            <small class="form-text text-muted">Seleccione la imagen</small>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -221,7 +221,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editModalLabel">Editar Imagen del Carrusel</h5>
+                    <h5 class="modal-title" id="editModalLabel">Editar Imagen</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -232,7 +232,7 @@
                         <div class="form-group">
                             <label for="edit-imagen">Imagen</label>
                             <input type="file" class="form-control-file" id="edit-imagen" name="imagen" required>
-                            <small class="form-text text-muted">Seleccione la nueva imagen para el carrusel.</small>
+                            <small class="form-text text-muted">Seleccione la nueva imagen</small>
                             <div id="preview-imagen" style="margin-top: 10px;">
                                 <img id="imagen-actual" src="" alt="Imagen Actual" class="img-thumbnail" style="max-height: 200px; display:none;">
                             </div>
@@ -247,7 +247,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="viewImageModal" tabindex="-1" role="dialog" aria-labelledby="viewImageModalLabel" aria-hidden="true">
+    <div class="modal fade" id="viewImageModal" tabindex="-1" role="dialog" aria-labelledby="viewImageModal" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">

@@ -12,6 +12,10 @@ require_once './controllers/EspecialidadController.php';
 require_once './controllers/EspecialidadImgController.php';
 require_once './controllers/EmprendimientoController.php';
 require_once './controllers/EmprendimientoImgController.php';
+require_once './controllers/AportacionController.php';
+require_once './controllers/NosotrosController.php';
+require_once './controllers/NosotrosImg.php';
+require_once './controllers/NosotrosVideos.php';
 
 // Definir la acción por defecto
 $action = isset($_GET['action']) ? $_GET['action'] : 'carrusel/index';
@@ -34,6 +38,10 @@ $especialidad = new EspecialidadController();
 $especialidadImg = new ImagenEspecialidadController();
 $emprendimiento = new EmprendimientoController();
 $emprendimientoImg = new EmprendimientoGaleriaController();
+$aportaciones = new AportacionController();
+$nosotros = new  NosotrosController();
+$nosotrosImg = new  NosotrosImgController();
+$nosotrosVideo = new  NosotrosVideoController();
 
 // Contexto admin si está logueado
 $isAdmin = isset($_SESSION['usuario']);
@@ -41,6 +49,7 @@ $controller->setAdminContext($isAdmin);
 $controllerImg->setAdminContext($isAdmin);
 $especialidad->setAdminContext($isAdmin);
 $emprendimiento->setAdminContext($isAdmin);
+$nosotros->setAdminContext($isAdmin);
 
 // Ruteo principal
 switch ($accionPrincipal) {
@@ -214,8 +223,84 @@ switch ($accionPrincipal) {
                 break;
         }
         break;
+        case 'nosotros':
+            switch ($accionSecundaria) {
+                case 'index':
+                    $nosotros->index();
+                    break;
+                case 'agregar':
+                    $nosotros->agregar();
+                    break;
+                case 'editar':
+                    $id ? $nosotros->editar($id) : print "ID no proporcionado";
+                    break;
+                case 'eliminar':
+                    $id ? $nosotros->eliminar($id) : print "ID no proporcionado";
+                    break;
+                case 'ver':
+                    $id ? $nosotros->ver($id) : print "ID no proporcionado";
+                    break;
+                default:
+                    $nosotros->index();
+                    break;
+            }
+            break;
+        case 'nosotrosimg':
+    switch ($accionSecundaria) {
+            case 'index':
+                $nosotrosImg->index();
+                break;
+            case 'agregar':
+                $nosotrosImg->agregar();
+                break;
+            case 'editar':
+                $id ? $nosotrosImg->editar($id) : print "ID no proporcionado";
+                break;
+            case 'eliminar':
+                $id ? $nosotrosImg->eliminar($id) : print "ID no proporcionado";
+                break;
+            case 'ver':
+                $id ? $nosotrosImg->ver($id) : print "ID no proporcionado";
+                break;
+            default:
+                $nosotrosImg->index();
+                break;
+        }
+        break;
+         case 'nosotrosVideo':
+             $id = isset($_GET['id']) ? intval($_GET['id']) : null; 
+    switch ($accionSecundaria) {
+            case 'index':
+                $nosotrosVideo->index();
+                break;
+            case 'agregar':
+                $nosotrosVideo->agregar();
+                break;
+            case 'editar':
+                $id ? $nosotrosVideo->editar($id) : print "ID no proporcionado";
+                break;
+            case 'eliminar':
+                $id ? $nosotrosVideo->eliminar($id) : print "ID no proporcionado";
+                break;
+            case 'ver':
+                $id ? $nosotrosVideo->index($id) : print "ID no proporcionado";
+                break;
+            default:
+                $nosotrosVideo->index();
+                break;
+        }
+        break;
+        case 'aportaciones':
+            if ($accionSecundaria === 'getAportaciones' && $id) {
+                $aportaciones->getAportaciones($id);
+            } else {
+                $aportaciones->index();
+            }
+            break;
+        default:
+            $emprendimiento->index();
+            break;
 
-    default:
         $controller->index(); // Acción por defecto
         break;
 }

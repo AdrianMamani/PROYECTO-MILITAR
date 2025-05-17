@@ -1,0 +1,599 @@
+/* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+    background-color: #fff;
+}
+
+/* Estilos para el banner */
+    .banner-nosotros {
+        width: 100%;
+    height: 100px;
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+        align-items: center;
+    margin-bottom: 40px;
+    }
+    
+.banner-nosotros h1 {
+    font-size: 2.5rem;
+        text-align: center;
+    }
+
+/* Estilos para la sección de contenido */
+.contenido-nosotros {
+    padding: 0 20px;
+    margin-bottom: 50px;
+}
+
+.contenedor {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.columna-texto {
+    flex: 1;
+    min-width: 300px;
+}
+
+/* Estilo para el título con fondo amarillo */
+.columna-texto h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #333;
+    display: inline-block;
+    background-color: #FFD700; /* Color amarillo */
+    padding: 5px 15px;
+    position: relative;
+    border-radius: 3px;
+}
+
+.columna-texto p {
+    margin-bottom: 15px;
+    text-align: left; /* Cambiado de justify a left */
+}
+
+/* Estilos para la columna de imagen */
+.columna-imagen {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Contenedor cuadrado para la imagen */
+.imagen-contenedor {
+    width: 350px;
+    height: 350px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para la imagen que mantiene proporción */
+.imagen-contenedor img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Mantiene la proporción y cubre el contenedor */
+    object-position: center; /* Centra la imagen */
+}
+
+/* Estilos para la sección de video */
+.seccion-video {
+    padding: 20px;
+    margin-bottom: 10px; /* Reducido de 50px a 20px para acercar la siguiente sección */
+    background-color: #222222;
+}
+
+.contenedor-video {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.contenedor-video h2 {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    color: #070707;
+    display: inline-block;
+    background-color: #FFD700; /* Color amarillo */
+    padding: 5px 25px;
+    border-radius: 25px;
+}
+
+/* Contenedor responsivo para el video - MODIFICADO PARA HACERLO MENOS ALTO */
+.video-responsive {
+    position: relative;
+    padding-bottom: 40%; /* Reducido de 56.25% (proporción 16:9) a 40% para hacerlo menos alto */
+    height: 0;
+    overflow: hidden;
+    max-width: 800px;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+
+.video-responsive iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+}
+
+/* ESTILOS ACTUALIZADOS PARA SECCIÓN DE MISIÓN Y VISIÓN */
+.seccion-mision-vision {
+    padding: 20px 20px 40px; /* Reducido el padding superior de 40px a 20px */
+    background-color: #fff; /* Fondo blanco */
+    margin-bottom: 20px;
+}
+
+.contenedor-mision-vision {
+    max-width: 1200px; /* Aumentado para acomodar el logo */
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 30px; /* Espacio entre elementos */
+}
+
+.columna-mision-vision {
+    flex: 0 1 380px; /* Ancho ajustado */
+    padding: 25px;
+    background-color: #fff; /* Fondo blanco */
+    border-radius: 10px;
+    display: flex;
+    align-items: flex-start;
+}
+
+/* Nuevo estilo para el logo central */
+.logo-central {
+    flex: 0 0 auto;
+    width: 180px;
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 20px;
+    margin-top: 30px; /* Añadido para bajar el logo */
+    align-self: center; /* Asegura que esté centrado verticalmente */
+}
+
+.logo-central img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.icono-cuadrado {
+    width: 80px; /* Más grande */
+    height: 80px; /* Más grande */
+    min-width: 80px; /* Evita que se encoja */
+    background-color: #00811a; /* Color amarillo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    margin-right: 20px; /* Más espacio */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.icono-cuadrado i {
+    font-size: 40px; /* Icono más grande */
+    color: #f6f6f6;
+}
+
+.contenido-mision-vision {
+    flex: 1;
+}
+
+.contenido-mision-vision h3 {
+    font-size: 1.8rem; /* Título más grande */
+    color: #333;
+    margin-bottom: 15px;
+    font-weight: 600; /* Un poco más grueso */
+}
+
+.contenido-mision-vision p {
+    text-align: left; /* Cambiado de justify a left */
+    color: #555;
+    line-height: 1.5; /* Mayor espaciado entre líneas */
+    font-size:14px; /* Texto ligeramente más grande */
+}
+
+/* Media queries para responsividad */
+@media (max-width: 1200px) {
+    .contenedor-mision-vision {
+        gap: 20px;
+    }
+    
+    .columna-mision-vision {
+        flex: 0 1 350px;
+    }
+}
+
+@media (max-width: 992px) {
+    .logo-central {
+        order: -1; /* Coloca el logo arriba en pantallas medianas */
+        margin-bottom: 20px;
+        width: 150px;
+        height: 150px;
+    }
+    
+    .contenedor-mision-vision {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .columna-mision-vision {
+        flex: 0 1 100%;
+        max-width: 500px;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .contenedor {
+        flex-direction: column;
+    }
+    
+    .columna-texto, .columna-imagen {
+        width: 100%;
+    }
+    
+    .banner-nosotros {
+        height: 80px;
+    }
+    
+    .banner-nosotros h1 {
+        font-size: 2rem;
+    }
+    
+    .imagen-contenedor {
+        width: 300px;
+        height: 300px;
+        margin: 0 auto;
+    }
+    
+    .video-responsive {
+        max-width: 100%;
+        padding-bottom: 45%; /* Ligeramente más alto en móviles para mejor visualización */
+    }
+    
+    .icono-cuadrado {
+        width: 70px;
+        height: 70px;
+        min-width: 70px;
+    }
+    
+    .icono-cuadrado i {
+        font-size: 35px;
+    }
+}
+
+@media (max-width: 480px) {
+    .imagen-contenedor {
+        width: 250px;
+        height: 250px;
+    }
+    
+    .columna-mision-vision {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+    }
+    
+    .icono-cuadrado {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+    
+    .contenido-mision-vision h3 {
+        text-align: center;
+    }
+    
+    .contenido-mision-vision p {
+        text-align: center; /* En móviles se mantiene centrado para mejor legibilidad */
+    }
+    
+    .logo-central {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+/* ESTILOS PARA LA SECCIÓN DE USUARIOS ESTILO INSTAGRAM */
+.seccion-usuarios {
+    padding: 20px 20px 40px; /* Reducido el padding superior */
+    background-color: #ffffff;
+    margin-bottom: 50px;
+    margin-top: 10px; /* Valor negativo para acercar a la sección anterior */
+}
+
+.contenedor-usuarios {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.contenedor-usuarios h2 {
+    font-size: 2rem;
+    margin-bottom: 25px; /* Reducido el margen inferior */
+    color: #ffffff;
+    display: inline-block;
+    background-color: #16a83b; /* Color amarillo */
+    padding: 5px 15px;
+    border-radius: 3px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: fit-content;
+}
+
+/* Estilos generales de las tarjetas */
+.tarjeta-usuario {
+    width: 320px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Cabecera de la tarjeta */
+.cabecera-tarjeta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.info-usuario {
+    display: flex;
+    align-items: center;
+}
+
+.avatar-usuario {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.nombre-usuario {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.icono-verificado {
+    color: #3897f0; /* Azul de Instagram */
+    font-size: 1rem;
+}
+
+/* Imagen de la tarjeta */
+.imagen-tarjeta {
+    width: 100%;
+    height: 380px; /* Un poco más alto que el ancho */
+    overflow: hidden;
+}
+
+.imagen-tarjeta img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Acciones de la tarjeta (iconos y likes) */
+.acciones-tarjeta {
+    padding: 12px 15px;
+}
+
+.iconos-accion {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 8px;
+}
+
+.iconos-accion i {
+    font-size: 1.3rem;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.iconos-accion i:hover {
+    color: #3897f0;
+}
+
+.iconos-accion i.fa-heart:hover {
+    color: #ed4956; /* Rojo para el corazón */
+}
+
+.likes-tarjeta {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Carrusel de usuarios */
+.contenedor-carrusel {
+    position: relative;
+    margin-top: 10px; /* Reducido el margen superior */
+}
+
+.carrusel-usuarios {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.carrusel-track {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 10px 5px;
+    -ms-overflow-style: none; /* IE y Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+.carrusel-track::-webkit-scrollbar {
+    display: none; /* Chrome, Safari y Opera */
+}
+
+.tarjeta-carrusel {
+    flex: 0 0 auto;
+}
+
+.boton-carrusel {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #fff;
+    border: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s;
+}
+
+.boton-carrusel:hover {
+    background-color: #f0f0f0;
+}
+
+.boton-prev {
+    left: -20px;
+}
+
+.boton-next {
+    right: -20px;
+}
+
+.boton-carrusel i {
+    color: #333;
+}
+
+/* Media queries para responsividad */
+@media (max-width: 1100px) {
+    .tarjeta-usuario {
+        width: 300px;
+    }
+    
+    .imagen-tarjeta {
+        height: 360px;
+    }
+}
+
+@media (max-width: 992px) {
+    .tarjeta-usuario {
+        width: 280px;
+    }
+    
+    .imagen-tarjeta {
+        height: 340px;
+    }
+}
+
+@media (max-width: 768px) {
+    .tarjeta-usuario {
+        width: 260px;
+    }
+    
+    .imagen-tarjeta {
+        height: 320px;
+    }
+    
+    .boton-prev {
+        left: 5px;
+    }
+    
+    .boton-next {
+        right: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .tarjeta-usuario {
+        width: 240px;
+    }
+    
+    .imagen-tarjeta {
+        height: 300px;
+    }
+    
+    .iconos-accion i {
+        font-size: 1.2rem;
+}
+    
+    .boton-carrusel {
+        width: 35px;
+        height: 35px;
+    }
+}
+
+/* Estilos para el botón Ver Más */
+.contenedor-boton-ver-mas {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.boton-ver-mas {
+    display: inline-block;
+    background-color: #FFD700; /* Color amarillo */
+    color: #333;
+    font-weight: 600;
+    padding: 12px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-size: 1rem;
+}
+
+.boton-ver-mas i {
+    margin-left: 8px;
+    transition: transform 0.3s ease;
+}
+
+.boton-ver-mas:hover {
+    background-color: #333;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.boton-ver-mas:hover i {
+    transform: translateX(5px);
+}
+
+/* Media query para el botón en pantallas pequeñas */
+@media (max-width: 480px) {
+    .boton-ver-mas {
+        padding: 10px 25px;
+        font-size: 0.9rem;
+    }
+}
