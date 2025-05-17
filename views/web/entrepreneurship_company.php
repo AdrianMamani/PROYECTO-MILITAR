@@ -20,62 +20,10 @@
     }
   </style>
  </head>
+ <?php
+include '../layout/header.php';
+?>
  <body class="bg-white m-0 p-0 min-h-screen ">
-  <!-- Header -->
-  <header class="fixed top-0 left-0 right-0 bg-white z-50 shadow-sm flex items-center justify-between px-4 py-3 max-w-full">
-   <!-- Left side: Logo + Text -->
-   <div class="flex items-center space-x-2">
-    <img
-      alt="Logo of Promocion Cabo Alberto Reyes Gamarra with green and red details"
-      class="w-[60px] h-[60px] object-contain"
-      height="60"
-      src="https://storage.googleapis.com/a1aa/image/966ac2e9-1531-4fa1-9e4e-7a86d6a0f4a3.jpg"
-      width="60"
-    />
-    <div class="hidden sm:block text-xs leading-[1.1] font-normal">
-     <p class="uppercase font-bold text-[10px]">PROMOCION</p>
-     <p class="font-extrabold text-[14px] leading-[1] -tracking-[0.02em]">
-      CABO ALBERTO<br />REYES GAMARRA
-     </p>
-    </div>
-    <div class="block sm:hidden text-xs leading-[1.1] font-normal">
-     <p class="uppercase font-bold text-[10px]">PROMOCION</p>
-     <p class="font-extrabold text-[14px] leading-[1] -tracking-[0.02em]">
-      CABO ALBERTO<br />REYES GAMARRA
-     </p>
-    </div>
-   </div>
-
-   <!-- Desktop nav -->
-   <nav
-     class="hidden sm:flex space-x-8 font-extrabold text-[14px] leading-[1]"
-     aria-label="Primary Navigation"
-   >
-    <a class="hover:underline" href="#">Inicio</a>
-    <a class="hover:underline" href="about.php">Sobre Nosotros</a>
-    <a class="hover:underline" href="#">Blog</a>
-    <a class="hover:underline" href="#">Miembros</a>
-    <a class="hover:underline" href="#">Comunidad</a>
-   </nav>
-   <!-- Right side: Admin button (desktop) and hamburger (mobile) -->
-   <div class="flex items-center space-x-4">
-    <button
-      class="hidden sm:inline-block bg-red-600 text-white text-[12px] font-extrabold uppercase rounded-full px-4 py-1 whitespace-nowrap"
-      type="button"
-    >
-     Administrador
-    </button>
-    <button
-      id="menu-button"
-      aria-label="Open menu"
-      class="sm:hidden text-black text-2xl focus:outline-none"
-      type="button"
-    >
-     <i class="fas fa-bars"></i>
-    </button>
-   </div>
-  </header>
-
     <!-- Banner Emprendimientos Section -->
     <section class="banner-container">
         <img src="../assets/img/pruebas/prueba01.jpeg" alt="Banner sobre Emprendimientos" class="banner-image">
@@ -111,13 +59,13 @@
         <section class="eventos-section">
         <div class="eventos-left">
             <h1 class="eventos-title">
-            TODOS<br>NUESTROS<br>EVENTOS
+            <br>Nuestro<br>Emprendimiento
             </h1>
             <p class="eventos-description">
-            Aquí se mostrarán todos nuestros eventos sociales realizados.
+            Aquí se mostrarán fotos y videos de nuestro Emprendimiento.
             </p>
             <select id="filter" class="eventos-filter">
-            <option value="all">Filtrar por tipo</option>
+            <option value="all">Todos</option>
             <option value="foto">Fotos</option>
             <option value="video">Videos</option>
             </select>

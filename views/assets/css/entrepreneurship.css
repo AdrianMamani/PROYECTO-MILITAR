@@ -3,7 +3,6 @@
         ============================ */
         /* Estilos base para el banner */
         .banner-container {
-            margin-top: 90px;
             position: relative;
             width: 100%;
             overflow: hidden;
@@ -212,7 +211,8 @@
           }
           
           .btn-see-more:hover {
-            background-color: #005fa3;
+            background-color: #00701c;
+            color: rgb(255, 255, 255);
           }
           
           

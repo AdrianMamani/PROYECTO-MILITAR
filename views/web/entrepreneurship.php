@@ -19,63 +19,10 @@
     }
   </style>
  </head>
+  <?php
+include '../layout/header.php';
+?>
  <body class="bg-white m-0 p-0 min-h-screen ">
-  <!-- Header -->
-  <header class="fixed top-0 left-0 right-0 bg-white z-50 shadow-sm flex items-center justify-between px-4 py-3 max-w-full">
-   <!-- Left side: Logo + Text -->
-   <div class="flex items-center space-x-2">
-    <img
-      alt="Logo of Promocion Cabo Alberto Reyes Gamarra with green and red details"
-      class="w-[60px] h-[60px] object-contain"
-      height="60"
-      src="https://storage.googleapis.com/a1aa/image/966ac2e9-1531-4fa1-9e4e-7a86d6a0f4a3.jpg"
-      width="60"
-    />
-    <div class="hidden sm:block text-xs leading-[1.1] font-normal">
-     <p class="uppercase font-bold text-[10px]">PROMOCION</p>
-     <p class="font-extrabold text-[14px] leading-[1] -tracking-[0.02em]">
-      CABO ALBERTO<br />REYES GAMARRA
-     </p>
-    </div>
-    <div class="block sm:hidden text-xs leading-[1.1] font-normal">
-     <p class="uppercase font-bold text-[10px]">PROMOCION</p>
-     <p class="font-extrabold text-[14px] leading-[1] -tracking-[0.02em]">
-      CABO ALBERTO<br />REYES GAMARRA
-     </p>
-    </div>
-   </div>
-
-   <!-- Desktop nav -->
-   <nav
-     class="hidden sm:flex space-x-8 font-extrabold text-[14px] leading-[1]"
-     aria-label="Primary Navigation"
-   >
-    <a class="hover:underline" href="#">Inicio</a>
-    <a class="hover:underline" href="about.php">Sobre Nosotros</a>
-    <a class="hover:underline" href="#">Blog</a>
-    <a class="hover:underline" href="#">Miembros</a>
-    <a class="hover:underline" href="#">Comunidad</a>
-   </nav>
-
-   <!-- Right side: Admin button (desktop) and hamburger (mobile) -->
-   <div class="flex items-center space-x-4">
-    <button
-      class="hidden sm:inline-block bg-red-600 text-white text-[12px] font-extrabold uppercase rounded-full px-4 py-1 whitespace-nowrap"
-      type="button"
-    >
-     Administrador
-    </button>
-    <button
-      id="menu-button"
-      aria-label="Open menu"
-      class="sm:hidden text-black text-2xl focus:outline-none"
-      type="button"
-    >
-     <i class="fas fa-bars"></i>
-    </button>
-   </div>
-  </header>
-
     <!-- Banner Emprendimientos Section -->
     <section class="banner-container">
         <img src="../assets/img/pruebas/prueba01.jpeg" alt="Banner sobre Emprendimientos" class="banner-image">
@@ -88,19 +35,18 @@
     </section>
   <!-- Nuestro Blog Section -->
 <section class="blog-section">
-  <h1 class="blog-title">EMPRENDIMIENTOS</h1>
-  <div class="flex flex-col items-center md:flex-row md:justify-between md:text-left">
+  <!-- <h1 class="blog-title">EMPRENDIMIENTOS</h1> -->
+  <div class="flex flex-col items-center md:flex-row md:justify-between md:text-left mb-4 gap-4">
     <div class="mb-4 md:mb-0">
       <h3 class="text-green-700 font-bold text-sm uppercase tracking-wide mb-1">Latest Blog</h3>
-      <div class="w-10 h-1 bg-green-700 mb-1 mx-auto md:mx-0 relative">
-        <span class="block w-6 h-1 bg-yellow-400 absolute top-0 left-0 translate-x-2"></span>
+      <div class="w-14 h-1 bg-green-700 mb-1 mx-auto md:mx-0 relative">
+        <span class="block w-6 h-1 bg-yellow-400 absolute top-0 left-2 translate-x-2"></span>
       </div>
-      <h1 class="text-3xl md:text-5xl font-extrabold tracking-widest mt-2">EMPRENDIMIENTOS</h1>
+      <h1 class="text-3xl md:text-4xl font-bold tracking-widest mt-2">EMPRENDIMIENTOS</h1>
     </div>
 
     <p class="max-w-md text-sm md:text-base text-gray-800 leading-relaxed">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe ad cupiditate officia! Delectus commodi eligendi molestiae
-       distinctio inventore quas animi nostrum temporal.
+      <strong>Iniciativas con Propósito:</strong> Emprendimientos de la Promoción Cabo Alberto Reyes Gamarra, forjando liderazgo y progreso.
     </p>
   </div>
   <div class="blog-grid">
