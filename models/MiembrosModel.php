@@ -37,31 +37,43 @@ public function obtenerTodos() {
         }
     }
 
-        public function agregarMiembros($nombre, $descripcion, $especialidad_id, $nombre_imagen) {
-            $query = "INSERT INTO miembros (nombre, descripcion, especialidad_id, nombre_imagen) 
+        public function agregarMiembros($nombre, $descripcion, $especialidad_id, $imagen) {
+            $query = "INSERT INTO miembros (nombre, descripcion, especialidad_id, imagen) 
                     VALUES (?, ?, ?, ?)";
             $stmt = $this->db->prepare($query);
             $stmt->bindParam(1, $nombre, PDO::PARAM_STR);
             $stmt->bindParam(2, $descripcion, PDO::PARAM_STR);
             $stmt->bindParam(3, $especialidad_id, PDO::PARAM_INT);
-            $stmt->bindParam(4, $nombre_imagen, PDO::PARAM_STR);
+            $stmt->bindParam(4, $imagen, PDO::PARAM_STR);
             $stmt->execute();
             return $stmt->rowCount() > 0;
         }
 
 
-public function actualizarMiembros($id, $nombre, $descripcion, $especialidad_id, $nombre_imagen) {
-    $query = "UPDATE miembros 
-              SET nombre = ?, descripcion = ?, especialidad_id = ?, nombre_imagen = ? 
-              WHERE id = ?";
-    $stmt = $this->db->prepare($query);
-    $stmt->bindParam(1, $nombre, PDO::PARAM_STR);
-    $stmt->bindParam(2, $descripcion, PDO::PARAM_STR);
-    $stmt->bindParam(3, $especialidad_id, PDO::PARAM_INT);
-    $stmt->bindParam(4, $nombre_imagen, PDO::PARAM_STR);
-    $stmt->bindParam(5, $id, PDO::PARAM_INT);
-    $stmt->execute();
-    return $stmt->rowCount() > 0;
+public function actualizarMiembros($id, $nombre, $descripcion, $especialidad_id, $imagen) {
+    try {
+        $query = "UPDATE miembros 
+                 SET nombre = :nombre, 
+                     descripcion = :descripcion, 
+                     especialidad_id = :especialidad_id, 
+                     imagen = :imagen,
+                     fecha_actualizacion = NOW() 
+                 WHERE id = :id";
+        
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':nombre', $nombre, PDO::PARAM_STR);
+        $stmt->bindParam(':descripcion', $descripcion, PDO::PARAM_STR);
+        $stmt->bindParam(':especialidad_id', $especialidad_id, PDO::PARAM_INT);
+        $stmt->bindParam(':imagen', $imagen, PDO::PARAM_STR);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        
+        $stmt->execute();
+        
+        return $stmt->rowCount() > 0;
+    } catch (PDOException $e) {
+        error_log("Error al actualizar miembro: " . $e->getMessage());
+        return false;
+    }
 }
 
 

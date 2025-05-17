@@ -212,18 +212,25 @@
                                 <td><?= nl2br(htmlspecialchars($item['descripcion'])) ?></td>
                                 <td><?= htmlspecialchars($item['nombre_especialidad']) ?></td>
                                 <td>
-                                    <button type="button" class="btn btn-primary btn-sm view-image-button"
-                                            data-toggle="modal" data-target="#viewImageModal"
-                                            data-imagen="<?= !empty($item['nombre_imagen']) ? '/PROYECTO-MILITAR/uploads/'.htmlspecialchars($item['nombre_imagen']) : '/PROYECTO-MILITAR/uploads/sin_usuario.webp' ?>">
-                                        <i class="fas fa-eye"></i> Ver Imagen
-                                    </button>
+                                <img 
+                                    src="<?= !empty($item['imagen']) 
+                                    ? '/PROYECTO-MILITAR/views/assets/img/miembros/' . htmlspecialchars($item['imagen']) 
+                                    : '/PROYECTO-MILITAR/uploads/sin_usuario.webp' ?>" 
+                                    alt="Imagen del Miembro"
+                                    class="img-thumbnail view-image-button"
+                                    data-toggle="modal"
+                                    data-target="#viewImageModal"
+                                    data-imagen="<?= !empty($item['imagen']) 
+                                    ? '/PROYECTO-MILITAR/views/assets/img/miembros/' . htmlspecialchars($item['imagen']) 
+                                    : '/PROYECTO-MILITAR/uploads/sin_usuario.webp' ?>"
+                                    style="max-width: 120px; cursor: pointer;">
                                 </td>
                                 <td>
                                     <button type="button" class="btn btn-warning btn-sm edit-button" 
                                             data-id="<?= htmlspecialchars($item['id']) ?>" 
                                             data-nombre="<?= htmlspecialchars($item['nombre']) ?>"
                                             data-descripcion="<?= htmlspecialchars($item['descripcion']) ?>"
-                                            data-imagen=" htmlspecialchars($item['nombre_imagen']) "
+                                            data-imagen=" htmlspecialchars($item['imagen']) "
                                             data-especialidad-id="<?= htmlspecialchars($item['especialidad_id']) ?>"
                                             data-toggle="modal" data-target="#editModal">
                                         <i class="fas fa-edit"></i> Editar

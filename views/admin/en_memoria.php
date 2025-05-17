@@ -207,11 +207,18 @@
             <td><?= htmlspecialchars($item['subtitulo']) ?></td>
             <td><?= htmlspecialchars($item['descripcion']) ?></td>
             <td>
-                <!-- Botón para ver imagen en modal -->
-                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#viewImageModal" 
-                        data-imagen="<?= !empty($item['imagen']) ? '/PROYECTO-MILITAR/views/assets/img/en_memoria/'.htmlspecialchars($item['imagen']) : '/PROYECTO-MILITAR/uploads/sin_usuraio.webp' ?>">
-                    Ver Imagen
-                </button>
+            <img 
+                src="<?= !empty($item['imagen']) 
+                ? '/PROYECTO-MILITAR/views/assets/img/en_memoria/' . htmlspecialchars($item['imagen']) 
+                : '/PROYECTO-MILITAR/uploads/sin_usuario.webp' ?>" 
+                alt="Imagen del Miembro"
+                class="img-thumbnail view-image-button"
+                data-toggle="modal"
+                data-target="#viewImageModal"
+                data-imagen="<?= !empty($item['imagen']) 
+                ? '/PROYECTO-MILITAR/views/assets/img/en_memoria/' . htmlspecialchars($item['imagen']) 
+                : '/PROYECTO-MILITAR/uploads/sin_usuario.webp' ?>"
+                style="max-width: 120px; cursor: pointer;">
             </td>
             <td>
                 <button type="button" class="btn btn-warning btn-sm edit-button" 
