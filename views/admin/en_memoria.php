@@ -147,7 +147,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="index.php?action=miembro" class="nav-link">
+                                <a href="index.php?action=miembros" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Miembros</p>
                                 </a>
@@ -432,10 +432,15 @@ $(document).ready(function() {
     });
     
     // Inicializar DataTable si es necesario
+    if ($.fn.DataTable.isDataTable('#example1')) {
+        $('#example1').DataTable().destroy();
+    }
+
     $('#example1').DataTable({
         "responsive": true,
         "autoWidth": false,
     });
+
 });
 </script>
 </body>

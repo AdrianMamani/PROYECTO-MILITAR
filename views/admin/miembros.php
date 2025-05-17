@@ -150,7 +150,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="index.php?action=miembro" class="nav-link">
+                                <a href="index.php?action=miembros" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Miembros</p>
                                 </a>
@@ -162,300 +162,303 @@
         </div>
     </aside>
 
-        <!-- Content Wrapper -->
-        <div class="content-wrapper">
-            <section class="content-header">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1>Admin Miembros</h1>
-                        </div>
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                                <li class="breadcrumb-item active">Miembros</li>
-                            </ol>
-                        </div>
-                    </div>
+<!-- Content Wrapper -->
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Administrar Miembros</h1>
                 </div>
-            </section>
-
-            <!-- Main Content -->
-            <section class="content">
-                <div class="container-fluid">
-                    <div class="card">
-                        <div class="card-header">
-                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal">
-                                <i class="fas fa-plus"></i> Agregar Nuevo Miembros
-                            </button>
-                        </div>
-                        <div class="card-body">
-                            <table id="example1" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Nombre</th>
-                                        <th>Descripcion</th>
-                                        <th>Especialidad</th>
-                                        <th>Imagen</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php if (empty($miembros)): ?>
-                                        <tr><td colspan="5">No hay archivos en miembros</td></tr>
-                                    <?php else: ?>
-                                        <?php foreach ($miembros as $item): ?>
-                                            <tr>
-                                                <td><?= htmlspecialchars($item['id']) ?></td>
-                                                <td><?= htmlspecialchars($item['nombre_emprendimiento']) ?></td>
-                                                <td><?= htmlspecialchars($item['tipo_archivo']) ?></td>
-                                                <td>
-                                                    <?php if ($item['tipo_archivo'] === 'imagen'): ?>
-                                                        <button class="btn btn-primary" data-toggle="modal" data-target="#viewImageModal" data-imagen="<?= htmlspecialchars($item['url_archivo']) ?>">Ver Imagen</button>
-                                                        <div class="modal fade" id="viewImageModal" tabindex="-1" role="dialog" aria-labelledby="viewImageModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog modal-lg" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title" id="viewImageModalLabel">Vista de la Imagen</h5>
-                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                            <span aria-hidden="true">&times;</span>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <img id="full-image" src="" class="img-fluid" alt="Imagen Completa">
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    <?php elseif ($item['tipo_archivo'] === 'video'): ?>
-                                                        <button class="btn btn-primary" data-toggle="modal" data-target="#videoModal<?= $item['id'] ?>">Ver Video</button>
-                                                        <div class="modal fade" id="videoModal<?= $item['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="videoModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title" id="videoModalLabel">Ver Video</h5>
-                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                            <span aria-hidden="true">&times;</span>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/<?= htmlspecialchars($item['url_archivo']) ?>" ...></iframe>
-                                                                        </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    <?php endif; ?>
-                                                </td>
-                                                <td>
-                                                    <button type="button" class="btn btn-warning btn-sm edit-button" 
-                                                            data-id="<?= htmlspecialchars($item['id']) ?>"
-                                                            data-emprendimiento="<?= htmlspecialchars($item['nombre_emprendimiento']) ?>"
-                                                            data-tipo="<?= htmlspecialchars($item['tipo_archivo']) ?>"
-                                                            data-archivo="<?= htmlspecialchars($item['url_archivo']) ?>"
-                                                            data-toggle="modal" data-target="#editModal">
-                                                        <i class="fas fa-edit"></i> Editar
-                                                    </button>
-                                                    <a href="index.php?action=emprendimientoimg/delete&id=<?= $item['id'] ?>" class="btn btn-danger btn-sm" 
-                                                       onclick="return confirm('¿Estás seguro de eliminar este archivo de la galería?')">
-                                                        <i class="fas fa-trash"></i> Eliminar
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        <?php endforeach; ?>
-                                    <?php endif; ?>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                        <li class="breadcrumb-item active">Miembros</li>
+                    </ol>
                 </div>
-            </section>
-        </div>
-    </div>
-    <!-- Edit Modal -->
-    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <form id="editForm" method="POST" action="index.php?action=emprendimientoimg/update" enctype="multipart/form-data">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="editModalLabel">Editar Emprendimiento</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-
-          <input type="hidden" name="id" id="edit-id">
-          
-          <div class="form-group">
-            <label>Nombre del Emprendimiento</label>
-            <input type="text" name="nombre_emprendimiento" class="form-control" id="edit-emprendimiento" required readonly>
-          </div>
-
-          <div class="form-group">
-            <label>Tipo de Archivo</label>
-            <select name="tipo_archivo" class="form-control" id="edit-tipo" required>
-              <option value="imagen">Imagen</option>
-              <option value="video">Video</option>
-            </select>
-          </div>
-
-          <!-- Para video: Código de YouTube -->
-          <div class="form-group" id="video-input-group">
-            <label>Escribe el Código de YouTube</label>
-            <div class="input-group">
-              <input type="text" name="url_archivo" class="form-control" id="edit-archivo">
-              <div class="input-group-append">
-                <button type="button" class="btn btn-success" id="verify-video">
-                  <i class="fas fa-check"></i>
-                </button>
-              </div>
             </div>
-          </div>
+        </div>
+    </section>
 
-          <!-- Para imagen: Selección de archivo -->
-          <div class="form-group" id="image-input-group" style="display: none;">
-            <label>Selecciona una Imagen</label>
-            <input type="file" name="imagen_archivo" id="edit-imagen" accept="image/*" class="form-control">
-          </div>
-
-          <!-- Vista previa de video -->
-          <div id="video-preview" class="mt-3" style="display: none;">
-            <label>Vista previa del Video:</label>
-            <div class="embed-responsive embed-responsive-16by9">
-              <iframe id="video-frame" class="embed-responsive-item" src="" allowfullscreen></iframe>
+    <!-- Main Content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal">
+                        <i class="fas fa-plus"></i> Agregar Nuevo Miembro
+                    </button>
+                </div>
+                <div class="card-body">
+                    <table id="miembrosTable" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Descripción</th>
+                                <th>Especialidad</th>
+                                <th>Imagen</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php if (empty($miembroItems)): ?>
+                                <tr><td colspan="6" class="text-center">No hay miembros registrados</td></tr>
+                            <?php else: ?>
+                                <?php foreach ($miembroItems as $item): ?>
+                                <tr>
+                                <td><?= htmlspecialchars($item['id']) ?></td>
+                                <td><?= htmlspecialchars($item['nombre']) ?></td>
+                                <td><?= nl2br(htmlspecialchars($item['descripcion'])) ?></td>
+                                <td><?= htmlspecialchars($item['nombre_especialidad']) ?></td>
+                                <td>
+                                    <button type="button" class="btn btn-primary btn-sm view-image-button"
+                                            data-toggle="modal" data-target="#viewImageModal"
+                                            data-imagen="<?= !empty($item['nombre_imagen']) ? '/PROYECTO-MILITAR/uploads/'.htmlspecialchars($item['nombre_imagen']) : '/PROYECTO-MILITAR/uploads/sin_usuario.webp' ?>">
+                                        <i class="fas fa-eye"></i> Ver Imagen
+                                    </button>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-warning btn-sm edit-button" 
+                                            data-id="<?= htmlspecialchars($item['id']) ?>" 
+                                            data-nombre="<?= htmlspecialchars($item['nombre']) ?>"
+                                            data-descripcion="<?= htmlspecialchars($item['descripcion']) ?>"
+                                            data-imagen=" htmlspecialchars($item['nombre_imagen']) "
+                                            data-especialidad-id="<?= htmlspecialchars($item['especialidad_id']) ?>"
+                                            data-toggle="modal" data-target="#editModal">
+                                        <i class="fas fa-edit"></i> Editar
+                                    </button>
+                                    <a href="index.php?action=miembros/delete&id=<?= $item['id'] ?>" class="btn btn-danger btn-sm" 
+                                    onclick="return confirm('¿Estás seguro de eliminar este miembro?')">
+                                        <i class="fas fa-trash"></i> Eliminar
+                                    </a>
+                                </td>
+                            </tr>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-          </div>
-
-          <!-- Vista previa de imagen -->
-          <div id="image-preview" class="mt-3" style="display: none;">
-            <label>Vista previa de la Imagen:</label><br>
-            <img id="image-frame" src="" alt="Vista previa" class="img-fluid" style="max-height: 300px;">
-          </div>
-
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-          <button type="submit" class="btn btn-primary">Actualizar</button>
-        </div>
-      </div>
-    </form>
-  </div>
+    </section>
 </div>
 
-    <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="dist/js/adminlte.min.js"></script>
-    <script src="plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-    <script src="plugins/jszip/jszip.min.js"></script>
-    <script src="plugins/pdfmake/pdfmake.min.js"></script>
-    <script src="plugins/pdfmake/vfs_fonts.js"></script>
-    <script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-    <script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
-    <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<!-- Modal para agregar nuevo miembro -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addModalLabel">Agregar Nuevo Miembro</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="addForm" action="index.php?action=miembros/store" method="POST" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="nombre">Nombre</label>
+                                <input type="text" class="form-control" id="nombre" name="nombre" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="especialidad_id">Especialidad</label>
+                                <select class="form-control" id="especialidad_id" name="especialidad_id" required>
+                                    <option value="">Seleccione una especialidad</option>
+                                    <?php foreach ($especialidades as $especialidad): ?>
+                                        <option value="<?= $especialidad['id']; ?>"><?= htmlspecialchars($especialidad['nombre']); ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="imagen">Imagen</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="imagen" name="imagen" required>
+                                    <label class="custom-file-label" for="imagen">Seleccionar archivo</label>
+                                </div>
+                                <small class="form-text text-muted">Formatos: JPG, PNG, GIF. Tamaño máximo: 2MB</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="descripcion">Descripción</label>
+                                <textarea class="form-control" id="descripcion" name="descripcion" rows="5" required></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
-    <script>
-        // Mostrar imagen en modal
-        $('#viewImageModal').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget); // Botón que abrió el modal
-            var imagen = button.data('imagen');  // Obtiene el valor de 'data-imagen'
-            var modal = $(this);
-            modal.find('#full-image').attr('src', '' + imagen);
-        });
+<!-- Modal para editar miembro -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Editar Miembro</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="editForm" method="POST" action="index.php?action=miembros/update" enctype="multipart/form-data">
+                <input type="hidden" name="id" id="edit-id">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="edit-nombre">Nombre</label>
+                                <input type="text" class="form-control" id="edit-nombre" name="nombre" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-especialidad_id">Especialidad</label>
+                                <select class="form-control" id="edit-especialidad_id" name="especialidad_id" required>
+                                    <option value="">Seleccione una especialidad</option>
+                                    <?php foreach ($especialidades as $especialidad): ?>
+                                        <option value="<?= $especialidad['id']; ?>"><?= htmlspecialchars($especialidad['nombre']); ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-imagen">Cambiar Imagen (opcional)</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="edit-imagen" name="imagen">
+                                    <label class="custom-file-label" for="edit-imagen">Seleccionar archivo</label>
+                                </div>
+                                <small class="form-text text-muted">Dejar en blanco para mantener la imagen actual</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="edit-descripcion">Descripción</label>
+                                <textarea class="form-control" id="edit-descripcion" name="descripcion" rows="5" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Imagen Actual</label>
+                                <img id="edit-imagen-preview" src="" class="img-fluid img-thumbnail" style="max-height: 150px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
-        // Inicializar DataTable
-        $('#example1').DataTable({
-            "responsive": true,
-            "autoWidth": false,
-        });
-        // Al abrir el modal
-  $('.edit-button').click(function() {
-    const id = $(this).data('id');
-    const emprendimiento = $(this).data('emprendimiento');
-    const tipo = $(this).data('tipo');
-    const archivo = $(this).data('archivo');
+<!-- Modal para ver imagen -->
+<div class="modal fade" id="viewImageModal" tabindex="-1" role="dialog" aria-labelledby="viewImageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewImageModalLabel">Imagen del Miembro</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <img id="full-image" src="" class="img-fluid" alt="Imagen del miembro" style="max-height: 70vh;">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-    $('#edit-id').val(id);
-    $('#edit-emprendimiento').val(emprendimiento);
-    $('#edit-tipo').val(tipo);
-    $('#edit-archivo').val(archivo);
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+<script src="dist/js/adminlte.min.js"></script>
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script>
+$(document).ready(function() {
+    // Inicializar DataTable
+    $('#miembrosTable').DataTable({
+        "responsive": true,
+        "autoWidth": false,
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
+        }
+    });
 
-    $('#video-preview').hide();
-    $('#image-preview').hide();
-    $('#video-frame').attr('src', '');
-    $('#image-frame').attr('src', '');
+    // Inicializar custom file input
+    bsCustomFileInput.init();
 
-    if (tipo === 'video') {
-      $('#video-input-group').show();
-      $('#image-input-group').hide();
-      if (archivo.trim() !== '') {
-        $('#video-preview').show();
-        $('#video-frame').attr('src', 'https://www.youtube.com/embed/' + archivo);
-      }
-    } else if (tipo === 'imagen') {
-      $('#video-input-group').hide();
-      $('#image-input-group').show();
-      if (archivo.trim() !== '') {
-        $('#image-preview').show();
-        $('#image-frame').attr('src', archivo);
-      }
-    }
-  });
+    // Mostrar imagen en modal
+    $('#viewImageModal').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget);
+        var imagen = button.data('imagen');
+        $(this).find('#full-image').attr('src', imagen);
+    });
 
-  // Cuando se cambia el tipo
-  $('#edit-tipo').change(function() {
-    if ($(this).val() === 'video') {
-      $('#video-input-group').show();
-      $('#image-input-group').hide();
-      $('#video-preview').hide();
-      $('#image-preview').hide();
-      $('#image-frame').attr('src', '');
-    } else {
-      $('#video-input-group').hide();
-      $('#image-input-group').show();
-      $('#video-preview').hide();
-      $('#video-frame').attr('src', '');
-    }
-  });
+    // Manejar el botón de editar
+    $(document).on('click', '.edit-button', function() {
+        var id = $(this).data('id');
+        var nombre = $(this).data('nombre');
+        var descripcion = $(this).data('descripcion');
+        var imagen = $(this).data('imagen');
+        var especialidadId = $(this).data('especialidad-id');
+        
+        $('#edit-id').val(id);
+        $('#edit-nombre').val(nombre);
+        $('#edit-descripcion').val(descripcion);
+        $('#edit-especialidad_id').val(especialidadId);
+        $('#edit-imagen-preview').attr('src', imagen);
+        
+        // Resetear el input file
+        $('#edit-imagen').next('.custom-file-label').html('Seleccionar archivo');
+    });
 
-  // Verificar video
-  $('#verify-video').click(function() {
-    const codigo = $('#edit-archivo').val().trim();
-    if (codigo !== '') {
-      $('#video-preview').show();
-      $('#video-frame').attr('src', 'https://www.youtube.com/embed/' + codigo);
-    } else {
-      $('#video-preview').hide();
-      $('#video-frame').attr('src', '');
-    }
-  });
+    // Validación de formularios
+    $('form').on('submit', function(e) {
+        var fileInput = $(this).find('input[type="file"]');
+        if (fileInput.length && fileInput[0].files.length > 0) {
+            var file = fileInput[0].files[0];
+            if (file.size > 2 * 1024 * 1024) { // 2MB
+                alert('El tamaño de la imagen no debe exceder los 2MB');
+                e.preventDefault();
+                return false;
+            }
+            
+            var validExtensions = ['image/jpeg', 'image/png', 'image/gif'];
+            if (!validExtensions.includes(file.type)) {
+                alert('Solo se permiten archivos JPG, PNG o GIF');
+                e.preventDefault();
+                return false;
+            }
+        }
+        return true;
+    });
 
-  // Mostrar imagen cuando seleccionas archivo
-  $('#edit-imagen').change(function(e) {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = function(event) {
-        $('#image-preview').show();
-        $('#image-frame').attr('src', event.target.result);
-      }
-      reader.readAsDataURL(file);
-    } else {
-      $('#image-preview').hide();
-      $('#image-frame').attr('src', '');
-    }
-  });
+    // Previsualizar imagen seleccionada en edición
+    $('#edit-imagen').on('change', function(e) {
+        var file = e.target.files[0];
+        if (file && file.type.match('image.*')) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#edit-imagen-preview').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(file);
+            
+            // Actualizar label del input file
+            $(this).next('.custom-file-label').html(file.name);
+        }
+    });
+});
 </script>
 </body>
 </html>

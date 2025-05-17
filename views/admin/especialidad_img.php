@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin Carrusel</title>
+    <title>Admin Especialidad</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
@@ -147,7 +147,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="index.php?action=miembro" class="nav-link">
+                                <a href="index.php?action=miembros" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Miembros</p>
                                 </a>
@@ -164,12 +164,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Admin Carrusel de Imágenes</h1>
+                        <h1>Admin Especialidad de Imágenes</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                            <li class="breadcrumb-item active">Carrusel</li>
+                            <li class="breadcrumb-item active">Especialidad</li>
                         </ol>
                     </div>
                 </div>
@@ -196,7 +196,7 @@
                             </thead>
                             <tbody>
                                 <?php if (empty($imagenes)): ?>
-                                    <tr><td colspan="4">No hay imágenes en el carrusel</td></tr>
+                                    <tr><td colspan="4">No hay imágenes en Especialidad</td></tr>
                                 <?php else: ?>
                                     <?php foreach ($imagenes as $imagen): ?>
                                     <tr>
