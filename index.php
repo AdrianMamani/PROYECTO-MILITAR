@@ -1,50 +1,84 @@
 <?php
+session_start();
+
 // Incluir el archivo de configuración de la base de datos
-require_once 'config/database.php';
+require_once './config/database.php';
 
 // Incluir los controladores
-require_once 'controllers/CarruselController.php';
-require_once 'controllers/CarruselImgController.php';
-require_once 'controllers/EspecialidadController.php';
-require_once 'controllers/EspecialidadImgController.php';
-require_once 'controllers/EmprendimientoController.php';
-require_once 'controllers/EmprendimientoImgController.php';
-require_once 'controllers/ComentarioController.php';
-require_once 'controllers/En_MemoriaController.php';
-require_once 'controllers/MiembrosController.php';
+require_once './controllers/AuthController.php';
+require_once './controllers/CarruselController.php';
+require_once './controllers/CarruselImgController.php';
+require_once './controllers/EspecialidadController.php';
+require_once './controllers/EspecialidadImgController.php';
+require_once './controllers/EmprendimientoController.php';
+require_once './controllers/EmprendimientoImgController.php';
+require_once './controllers/AportacionController.php';
+require_once './controllers/NosotrosController.php';
+require_once './controllers/NosotrosImg.php';
+require_once './controllers/NosotrosVideos.php';
+require_once './controllers/ComentarioController.php';
+require_once './controllers/En_MemoriaController.php';
+require_once './controllers/MiembrosController.php';
 
 // Definir la acción por defecto
-$action = isset($_GET['action']) ? $_GET['action'] : 'carrusel';
+$action = isset($_GET['action']) ? $_GET['action'] : 'carrusel/index';
+$partes = explode('/', $action);
+$accionPrincipal = $partes[0];
+$accionSecundaria = $partes[1] ?? 'index';
+$id = $partes[2] ?? null;
 
-// Crear instancias de los controladores
+// Proteger rutas (excepto login)
+if (!isset($_SESSION['usuario']) && !in_array($accionPrincipal, ['auth'])) {
+    header('Location: index.php?action=auth/loginForm');
+    exit;
+}
+
+// Instanciar controladores
+$authController = new AuthController();
 $controller = new CarruselController();
 $controllerImg = new CarruselImgController();
 $especialidad = new EspecialidadController();
-$especialidadImg = new ImagenEspecialidadController(); // Asegúrate de que esta clase exista
+$especialidadImg = new ImagenEspecialidadController();
 $emprendimiento = new EmprendimientoController();
-$emprendimientoImg = new EmprendimientoGaleriaController(); // Asegúrate de que esta clase exista
+$emprendimientoImg = new EmprendimientoGaleriaController();
+$aportaciones = new AportacionController();
+$nosotros = new  NosotrosController();
+$nosotrosImg = new  NosotrosImgController();
+$nosotrosVideo = new  NosotrosVideoController();
 $comentarios = new ComentarioController(); // Asegúrate de que esta clase exista
 $en_memoria = new En_MemoriaController(); // Asegúrate de que esta clase exista
 $miembros = new MiembrosController(); // Asegúrate de que esta clase exista
 
-// Definir si es un administrador
-$isAdmin = true; // Cambiar a false si no es administrador
+// Contexto admin si está logueado
+$isAdmin = isset($_SESSION['usuario']);
 $controller->setAdminContext($isAdmin);
 $controllerImg->setAdminContext($isAdmin);
-$emprendimiento->setAdminContext($isAdmin);
 $especialidad->setAdminContext($isAdmin);
+$emprendimiento->setAdminContext($isAdmin);
+$nosotros->setAdminContext($isAdmin);
 $comentarios->setAdminContext($isAdmin);
 $en_memoria->setAdminContext($isAdmin);
 $miembros->setAdminContext($isAdmin);
 
-// Dividir la acción para manejar rutas como "carrusel/agregar"
-$partes = explode('/', $action);
-$accionPrincipal = $partes[0];
-$accionSecundaria = isset($partes[1]) ? $partes[1] : 'index';
-$id = isset($partes[2]) ? $partes[2] : null;
-
-// Manejar las acciones
+// Ruteo principal
 switch ($accionPrincipal) {
+    case 'auth':
+        switch ($accionSecundaria) {
+            case 'loginForm':
+                $authController->loginForm();
+                break;
+            case 'login':
+                $authController->login();
+                break;
+            case 'logout':
+                $authController->logout();
+                break;
+            default:
+                $authController->loginForm();
+                break;
+        }
+        break;
+
     case 'carrusel':
         switch ($accionSecundaria) {
             case 'index':
@@ -54,25 +88,13 @@ switch ($accionPrincipal) {
                 $controller->agregar();
                 break;
             case 'editar':
-                if ($id) {
-                    $controller->editar($id);
-                } else {
-                    echo "ID no proporcionado para editar";
-                }
+                $id ? $controller->editar($id) : print "ID no proporcionado";
                 break;
             case 'eliminar':
-                if ($id) {
-                    $controller->eliminar($id);
-                } else {
-                    echo "ID no proporcionado para eliminar";
-                }
+                $id ? $controller->eliminar($id) : print "ID no proporcionado";
                 break;
             case 'ver':
-                if ($id) {
-                    $controller->ver($id);
-                } else {
-                    echo "ID no proporcionado para ver";
-                }
+                $id ? $controller->ver($id) : print "ID no proporcionado";
                 break;
             default:
                 $controller->index();
@@ -89,25 +111,13 @@ switch ($accionPrincipal) {
                 $controllerImg->agregar();
                 break;
             case 'editar':
-                if ($id) {
-                    $controllerImg->editar($id);
-                } else {
-                    echo "ID no proporcionado para editar";
-                }
+                $id ? $controllerImg->editar($id) : print "ID no proporcionado";
                 break;
             case 'eliminar':
-                if ($id) {
-                    $controllerImg->eliminar($id);
-                } else {
-                    echo "ID no proporcionado para eliminar";
-                }
+                $id ? $controllerImg->eliminar($id) : print "ID no proporcionado";
                 break;
             case 'ver':
-                if ($id) {
-                    $controllerImg->ver($id);
-                } else {
-                    echo "ID no proporcionado para ver";
-                }
+                $id ? $controllerImg->ver($id) : print "ID no proporcionado";
                 break;
             default:
                 $controllerImg->index();
@@ -124,25 +134,13 @@ switch ($accionPrincipal) {
                 $especialidad->agregar();
                 break;
             case 'editar':
-                if ($id) {
-                    $especialidad->editar($id);
-                } else {
-                    echo "ID no proporcionado para editar";
-                }
+                $id ? $especialidad->editar($id) : print "ID no proporcionado";
                 break;
             case 'eliminar':
-                if ($id) {
-                    $especialidad->eliminar($id);
-                } else {
-                    echo "ID no proporcionado para eliminar";
-                }
+                $id ? $especialidad->eliminar($id) : print "ID no proporcionado";
                 break;
             case 'ver':
-                if ($id) {
-                    $especialidad->ver($id);
-                } else {
-                    echo "ID no proporcionado para ver";
-                }
+                $id ? $especialidad->ver($id) : print "ID no proporcionado";
                 break;
             default:
                 $especialidad->index();
@@ -155,24 +153,24 @@ switch ($accionPrincipal) {
             case 'index':
                 $especialidadImg->index();
                 break;
-            case 'create':
             case 'agregar':
+            case 'create':
                 $especialidadImg->create();
                 break;
-            case 'store':
             case 'guardar':
+            case 'store':
                 $especialidadImg->store();
                 break;
-            case 'edit':
             case 'editar':
+            case 'edit':
                 $especialidadImg->edit();
                 break;
-            case 'update':
             case 'actualizar':
+            case 'update':
                 $especialidadImg->update();
                 break;
-            case 'delete':
             case 'eliminar':
+            case 'delete':
                 $especialidadImg->delete();
                 break;
             default:
@@ -190,25 +188,13 @@ switch ($accionPrincipal) {
                 $emprendimiento->agregar();
                 break;
             case 'editar':
-                if ($id) {
-                    $emprendimiento->editar($id);
-                } else {
-                    echo "ID no proporcionado para editar";
-                }
+                $id ? $emprendimiento->editar($id) : print "ID no proporcionado";
                 break;
             case 'eliminar':
-                if ($id) {
-                    $emprendimiento->eliminar($id);
-                } else {
-                    echo "ID no proporcionado para eliminar";
-                }
+                $id ? $emprendimiento->eliminar($id) : print "ID no proporcionado";
                 break;
             case 'ver':
-                if ($id) {
-                    $emprendimiento->ver($id);
-                } else {
-                    echo "ID no proporcionado para ver";
-                }
+                $id ? $emprendimiento->ver($id) : print "ID no proporcionado";
                 break;
             default:
                 $emprendimiento->index();
@@ -221,24 +207,24 @@ switch ($accionPrincipal) {
             case 'index':
                 $emprendimientoImg->index();
                 break;
-            case 'create':
             case 'agregar':
+            case 'create':
                 $emprendimientoImg->create();
                 break;
-            case 'store':
             case 'guardar':
+            case 'store':
                 $emprendimientoImg->store();
                 break;
-            case 'edit':
             case 'editar':
+            case 'edit':
                 $emprendimientoImg->edit();
                 break;
-            case 'update':
             case 'actualizar':
+            case 'update':
                 $emprendimientoImg->update();
                 break;
-            case 'delete':
             case 'eliminar':
+            case 'delete':
                 $emprendimientoImg->delete();
                 break;
             default:
@@ -246,8 +232,81 @@ switch ($accionPrincipal) {
                 break;
         }
         break;
-
-    case 'comentarios':
+        case 'nosotros':
+            switch ($accionSecundaria) {
+                case 'index':
+                    $nosotros->index();
+                    break;
+                case 'agregar':
+                    $nosotros->agregar();
+                    break;
+                case 'editar':
+                    $id ? $nosotros->editar($id) : print "ID no proporcionado";
+                    break;
+                case 'eliminar':
+                    $id ? $nosotros->eliminar($id) : print "ID no proporcionado";
+                    break;
+                case 'ver':
+                    $id ? $nosotros->ver($id) : print "ID no proporcionado";
+                    break;
+                default:
+                    $nosotros->index();
+                    break;
+            }
+            break;
+        case 'nosotrosimg':
+    switch ($accionSecundaria) {
+            case 'index':
+                $nosotrosImg->index();
+                break;
+            case 'agregar':
+                $nosotrosImg->agregar();
+                break;
+            case 'editar':
+                $id ? $nosotrosImg->editar($id) : print "ID no proporcionado";
+                break;
+            case 'eliminar':
+                $id ? $nosotrosImg->eliminar($id) : print "ID no proporcionado";
+                break;
+            case 'ver':
+                $id ? $nosotrosImg->ver($id) : print "ID no proporcionado";
+                break;
+            default:
+                $nosotrosImg->index();
+                break;
+        }
+        break;
+         case 'nosotrosVideo':
+             $id = isset($_GET['id']) ? intval($_GET['id']) : null; 
+    switch ($accionSecundaria) {
+            case 'index':
+                $nosotrosVideo->index();
+                break;
+            case 'agregar':
+                $nosotrosVideo->agregar();
+                break;
+            case 'editar':
+                $id ? $nosotrosVideo->editar($id) : print "ID no proporcionado";
+                break;
+            case 'eliminar':
+                $id ? $nosotrosVideo->eliminar($id) : print "ID no proporcionado";
+                break;
+            case 'ver':
+                $id ? $nosotrosVideo->index($id) : print "ID no proporcionado";
+                break;
+            default:
+                $nosotrosVideo->index();
+                break;
+        }
+        break;
+        case 'aportaciones':
+            if ($accionSecundaria === 'getAportaciones' && $id) {
+                $aportaciones->getAportaciones($id);
+            } else {
+                $aportaciones->index();
+            }
+            break;
+        case 'comentarios':
         switch ($accionSecundaria) {
             case 'index':
                 $comentarios->index();
@@ -352,7 +411,9 @@ switch ($accionPrincipal) {
         break;
 
     default:
-        $controller->index(); // Acción por defecto si no coincide con ningún controlador
+            $emprendimiento->index();
+            break;
+
+        $controller->index(); // Acción por defecto
         break;
 }
-?>

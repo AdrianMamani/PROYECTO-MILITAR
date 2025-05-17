@@ -1,107 +1,132 @@
-<html lang="en">
- <head>
-  <meta charset="utf-8" />
-  <meta content="width=device-width, initial-scale=1" name="viewport" />
-  <title>Cabo Alberto Reyes Gamarra</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-    rel="stylesheet"
-  />
-  <link rel="stylesheet" href="assets/css/home.css">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap"
-    rel="stylesheet"
-  />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.12.1/font/bootstrap-icons.min.css">
-  <style>
-    body {
-      font-family: "Montserrat", sans-serif;
-    }
-  </style>
- </head>
- <body class="bg-white m-0 p-0 min-h-screen ">
-  <!-- Header -->
-  <header class="fixed top-0 left-0 right-0 bg-white z-50 shadow-sm flex items-center justify-between px-4 py-3 max-w-full">
-   <!-- Left side: Logo + Text -->
-   <div class="flex items-center space-x-2">
-    <img
-      alt="Logo of Promocion Cabo Alberto Reyes Gamarra with green and red details"
-      class="w-[60px] h-[60px] object-contain"
-      height="60"
-      src="https://storage.googleapis.com/a1aa/image/966ac2e9-1531-4fa1-9e4e-7a86d6a0f4a3.jpg"
-      width="60"
-    />
-    <div class="hidden sm:block text-xs leading-[1.1] font-normal">
-     <p class="uppercase font-bold text-[10px]">PROMOCION</p>
-     <p class="font-extrabold text-[14px] leading-[1] -tracking-[0.02em]">
-      CABO ALBERTO<br />REYES GAMARRA
+<?php
+// Ruta corregida desde views/home.php
+require_once '../controllers/web/homeController.php';
+require_once '../controllers/web/especialidades.php';
+$carruselController = new CarruselController();
+$itemsCarrusel = $carruselController->verCarrusel();
+$especialidadController = new EspecialidadController();
+$especialidades = $especialidadController->verEspecialidades();
+
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta content="width=device-width, initial-scale=1" name="viewport" />
+<title>Cabo Alberto Reyes Gamarra</title>
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+rel="stylesheet"
+/>
+<link rel="stylesheet" href="assets/css/home.css">
+    <link rel="stylesheet" href="assets/css/nosotros.css">
+
+<link
+href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap"
+rel="stylesheet"
+/>
+</head>
+<body>
+<?php
+include 'layout/header.php';
+?>
+<header class="carrusel-principal">
+<div class="carrusel-slides-container">
+<?php if (!empty($itemsCarrusel) && is_array($itemsCarrusel)): ?>
+<?php foreach ($itemsCarrusel as $index => $item): ?>
+<div class="carrusel-slide <?= $index === 0 ? 'active' : '' ?>">
+<?php if (!empty($item['img'])): ?>
+<?php
+// DEBUG: Descomenta la siguiente línea para ver qué valor tiene $item['img'] en el fuente HTML
+echo "<!-- DEBUG IMG FILENAME: " . htmlspecialchars($item['img']) . " -->";
+// Ruta corregida si 'uploads' está en la raíz junto a este index.php
+?>
+<img src="../uploads/<?= htmlspecialchars($item['img']) ?>" alt="Imagen: <?= htmlspecialchars($item['titulo'] ?? 'Imagen del carrusel') ?>">
+<?php else: ?>
+<img src="https://via.placeholder.com/1920x900.png?text=Imagen+no+disponible" alt="Imagen no disponible">
+<?php endif; ?>
+<div class="slide-contenido">
+<h1 class="lema"><?= htmlspecialchars($item['titulo'] ?? 'Título no disponible') ?></h1>
+<p class="sublema"><?= htmlspecialchars($item['descripcion'] ?? 'Descripción no disponible') ?></p>
+</div>
+</div>
+<?php endforeach; ?>
+<?php else: ?>
+<div class="carrusel-slide active">
+<?php /* Ruta corregida para la imagen de fallback */ ?>
+<img src="uploads/67dd77800ef0a.png" alt="No hay items en carrusel o imagen por defecto no encontrada">
+<div class="slide-contenido">
+<h1 class="lema">Sin contenido</h1>
+<p class="sublema">No hay elementos para mostrar en el carrusel.</p>
+</div>
+</div>
+<?php endif; ?>
+</div>
+
+<!-- Controles del Carrusel -->
+<?php if (!empty($itemsCarrusel) && count($itemsCarrusel) > 1): ?>
+<button class="carrusel-control prev" aria-label="Anterior">&#10094;</button>
+<button class="carrusel-control next" aria-label="Siguiente">&#10095;</button>
+<?php endif; ?>
+<!-- Indicadores de slides (dots) -->
+<?php if (!empty($itemsCarrusel) && count($itemsCarrusel) > 1): ?>
+<div class="carrusel-indicadores">
+<?php foreach ($itemsCarrusel as $index => $item): ?>
+<span class="indicador-dot <?= $index === 0 ? 'active' : '' ?>" data-slide-to="<?= $index ?>"></span>
+<?php endforeach; ?>
+</div>
+<?php endif; ?>
+</header>
+<main>
+<!--Seccion Nosotros-->
+<section class="sobre-nosotros">
+  <div class="contenido">
+    <?php if (!empty($itemsCarrusel) && is_array($itemsCarrusel)): ?>
+      <?php $item = $itemsCarrusel[0]; ?>
+      
+      <!-- Verificar si 'tipo_archivo' existe en el array antes de acceder -->
+      <?php if (isset($item['tipo_archivo']) && $item['tipo_archivo'] === 'video'): ?>
+        <!-- Si es un video, mostramos el reproductor de YouTube -->
+        <div class="video-slider">
+          <iframe width="560" height="315"
+        src="https://www.youtube.com/embed/<?= htmlspecialchars($item['url_archivo']) ?>"
+        frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      <?php else: ?>
+        <!-- Si no es un video, mostramos la imagen -->
+      <?php endif; ?>
+
+      <div class="texto">
+        <h2>Sobre Nosotros</h2>
+        <p><?= htmlspecialchars($itemsCarrusel[0]['nosotros'] ?? 'Descripción no disponible') ?></p>
+        <div class="botones">
+          <a href="#" class="btn-leer-mas">Leer más</a>
+        </div>
+      </div>
+    <?php endif; ?>
+  </div>
+</section>
+ <section>
+   <div class="container">
+    <header>
+     <h1>
+      Especialidades
+     </h1>
+     <p>
+      Las 13 áreas en las que nos destacamos con orgullo y compromiso.
      </p>
-    </div>
-    <div class="block sm:hidden text-xs leading-[1.1] font-normal">
-     <p class="uppercase font-bold text-[10px]">PROMOCION</p>
-     <p class="font-extrabold text-[14px] leading-[1] -tracking-[0.02em]">
-      CABO ALBERTO<br />REYES GAMARRA
-     </p>
-    </div>
-   </div>
+    </header>
+    <div class="grid" id="especialidadesGrid">
+    <?php foreach ($especialidades as $especialidad): ?>
+            <div class="card" tabindex="0">
+                <img alt="Imagen de la especialidad <?= htmlspecialchars($especialidad['nombre']) ?>" height="220" width="400" src="<?= htmlspecialchars($especialidad['imagen']) ?>" />
 
-   <!-- Desktop nav -->
-   <nav
-     class="hidden sm:flex space-x-8 font-extrabold text-[14px] leading-[1]"
-     aria-label="Primary Navigation"
-   >
-    <a class="hover:underline" href="#">Inicio</a>
-    <a class="hover:underline" href="web/about.php">Sobre Nosotros</a>
-    <a class="hover:underline" href="#">Blog</a>
-    <a class="hover:underline" href="#">Miembros</a>
-    <a class="hover:underline" href="#">Comunidad</a>
-   </nav>
-
-   <!-- Right side: Admin button (desktop) and hamburger (mobile) -->
-   <div class="flex items-center space-x-4">
-    <button
-      class="hidden sm:inline-block bg-red-600 text-white text-[12px] font-extrabold uppercase rounded-full px-4 py-1 whitespace-nowrap"
-      type="button"
-    >
-     Administrador
-    </button>
-    <button
-      id="menu-button"
-      aria-label="Open menu"
-      class="sm:hidden text-black text-2xl focus:outline-none"
-      type="button"
-    >
-     <i class="fas fa-bars"></i>
-    </button>
-   </div>
-  </header>
-
-  <!-- Hero Section -->
-  <section class="relative w-full max-w-full mx-auto pt-[0px] sm:pt-[85px]">
-   <img
-     alt="Green camouflage background with green and beige flags hanging on top corners, a logo with a torch and text 'ETE 83-85' in the center top, and a group of men and women standing in a row wearing formal and uniform clothes"
-     class="w-full h-[600px] object-cover"
-     height="600"
-     src="../uploads/67dd77800ef0a.png"
-     width="900"
-   />
-   <div
-     class="absolute inset-0 flex flex-col justify-end items-center text-center px-4 pb-10 bg-black bg-opacity-30"
-     style="margin-top: 0;"
-   >
-    <h1
-      class="text-white font-extrabold text-[32px] sm:text-[32px] md:text-[40px] leading-[1.1] tracking-[0.2em] uppercase max-w-[1200px]"
-    >
-     CABO ALBERTO REYES GAMARRA
-    </h1>
-    <p class="text-white font-extrabold text-[14px] sm:text-[16px] max-w-[600px] mt-2 leading-tight">
-     La promoción
-     <span class="uppercase">CABO ALBERTO REYES GAMARRA</span> representa
-     <br />
-     el compromiso, la lealtad y la entrega al servicio militar.
-    </p>
-   </div>
+                <div class="overlay">
+                    <h2><?= htmlspecialchars($especialidad['nombre']) ?></h2>
+                </div>
+            </div>
+        <?php endforeach; ?>
+     </div>
   </section>
 
   <!-- Sobre Nosotros Section -->
@@ -153,7 +178,6 @@
    <p class="text-sm mt-1 mb-8">
     Las 13 áreas en las que nos destacamos con orgullo y compromiso.
    </p>
-
    <!-- Carousel container for small screens -->
    <div class="sm:hidden max-w-5xl mx-auto">
     <div id="carousel" class="overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory flex gap-6">
@@ -225,7 +249,6 @@
     </div>
    </div> 
   </section>
- 
   <!-- Mensaje Floating Button con tooltip a la izquierda, fijo en pantalla -->
   <div class="fixed bottom-6 right-6 z-50 flex items-center group space-x-3">
     <div class="hidden group-hover:flex bg-gray-500 text-white text-xs rounded px-3 py-1 whitespace-nowrap select-none">
@@ -299,7 +322,7 @@
    </div>
    <nav class="flex flex-col px-4 py-6 space-y-4 font-extrabold text-[16px]">
     <a class="hover:underline" href="#">Inicio</a>
-    <a class="hover:underline" href="web/about.php">Sobre Nosotros</a>
+    <a class="hover:underline" href="#">Sobre Nosotros</a>
     <a class="hover:underline" href="#">Blog</a>
     <a class="hover:underline" href="#">Miembros</a>
     <a class="hover:underline" href="#">Comunidad</a>
@@ -311,91 +334,6 @@
     </button>
    </nav>
   </div>
-  
-      <!-- Nueva Sección de Emprendimientos -->
-      <section style="padding: 60px 0; text-align: center;">
-  <div class="container_emprendimientos">
-    <h3 class="text-center" style="margin-bottom: 40px;">Emprendimientos</h3>
-    <div class="project-grid">
-      
-      <!-- Cada tarjeta -->
-      <div class="project-card">
-        <img src="assets/img/emprendimientos/67dc3a1079019.jpg" alt="Emprendimiento">
-        <div class="overlay">
-          <h3>Project Name</h3>
-          <div class="buttons">
-            <a href="#" class="btn"><i class="bi bi-box-arrow-up-right"></i></a>
-            <a href="#" class="btn"><i class="bi bi-eye-fill"></i></a>
-          </div>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <img src="assets/img/emprendimientos/67dc3a1079019.jpg" alt="Emprendimiento">
-        <div class="overlay">
-          <h3>Project Name</h3>
-          <div class="buttons">
-            <a href="#" class="btn"><i class="bi bi-box-arrow-up-right"></i></a>
-            <a href="#" class="btn"><i class="bi bi-eye-fill"></i></a>
-          </div>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <img src="assets/img/emprendimientos/67dc3a1079019.jpg" alt="Emprendimiento">
-        <div class="overlay">
-          <h3>Project Name</h3>
-          <div class="buttons">
-            <a href="#" class="btn"><i class="bi bi-box-arrow-up-right"></i></a>
-            <a href="#" class="btn"><i class="bi bi-eye-fill"></i></a>
-          </div>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <img src="assets/img/emprendimientos/67dc3a1079019.jpg" alt="Emprendimiento">
-        <div class="overlay">
-          <h3>Project Name</h3>
-          <div class="buttons">
-            <a href="#" class="btn"><i class="bi bi-box-arrow-up-right"></i></a>
-            <a href="#" class="btn"><i class="bi bi-eye-fill"></i></a>
-          </div>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <img src="assets/img/emprendimientos/67dc3a1079019.jpg" alt="Emprendimiento">
-        <div class="overlay">
-          <h3>Project Name</h3>
-          <div class="buttons">
-            <a href="#" class="btn"><i class="bi bi-box-arrow-up-right"></i></a>
-            <a href="#" class="btn"><i class="bi bi-eye-fill"></i></a>
-          </div>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <img src="assets/img/emprendimientos/67dc3a1079019.jpg" alt="Emprendimiento">
-        <div class="overlay">
-          <h3>Project Name</h3>
-          <div class="buttons">
-            <a href="#" class="btn"><i class="bi bi-box-arrow-up-right"></i></a>
-            <a href="#" class="btn"><i class="bi bi-eye-fill"></i></a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="text-center mt-4">
-    <a class="button button-xs button-primary button-winona" href="web/entrepreneurship.php">Ver más</a>
-    </div>
-  </div>
-</section>
 <script src="assets/js/home.js"></script>
 </body>
-<?php include 'layout/footer.php'?>
 </html>
-
-
-

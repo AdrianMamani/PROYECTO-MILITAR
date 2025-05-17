@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
     <style>
       .img-thumbnail {
         max-height: 200px;
@@ -209,17 +213,20 @@
                                     <tr>
                                         <td><?= htmlspecialchars($imagen['id']) ?></td>
                                         <td>
-                                            <button type="button" class="btn btn-primary btn-sm view-image-button"
-                                                    data-toggle="modal" data-target="#viewImageModal"
-                                                    data-imagen="uploads/<?= htmlspecialchars($imagen['img']) ?>">
-                                                <i class="fas fa-eye"></i> Ver Imagen
-                                            </button>
-                                        </td>
+    <img src="/PROYECTO-MILITAR/uploads/<?= htmlspecialchars($imagen['img']) ?>" 
+         alt="Imagen del Carrusel" 
+         class="img-thumbnail view-image-button"
+         data-toggle="modal" 
+         data-target="#viewImageModal"
+         data-imagen="<?= htmlspecialchars($imagen['img']) ?>"
+         style="max-width: 120px; cursor: pointer;">
+</td>
+
                                         <td><?= htmlspecialchars($imagen['fecha_subida']) ?></td>
                                         <td>
                                             <button type="button" class="btn btn-warning btn-sm edit-button" 
                                                     data-id="<?= $imagen['id'] ?>" 
-                                                    data-imagen="uploads/<?= htmlspecialchars($imagen['img']) ?>"
+                                                    data-imagen="../../uploads/<?= htmlspecialchars($imagen['img']) ?>"
                                                     data-toggle="modal" data-target="#editModal">
                                                 <i class="fas fa-edit"></i> Editar
                                             </button>
@@ -318,7 +325,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="dist/js/adminlte.min.js"></script>
-<script src="dist/js/demo.js"></script>
 <script src="plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
@@ -346,10 +352,12 @@ $(document).ready(function() {
     });
     
     // Manejar el botón de ver imagen
-    $('.view-image-button').on('click', function() {
-        var imagen = $(this).data('imagen');
-        $('#view-image').attr('src',  '' + imagen); // Asegurar la ruta correcta
-    });
+    $('#viewImageModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget);
+    var imagen = button.data('imagen');
+    var modal = $(this);
+    modal.find('#view-image').attr('src', '/PROYECTO-MILITAR/uploads/' + imagen);
+});
     
     // Inicializar DataTable si es necesario
     $('#example1').DataTable({

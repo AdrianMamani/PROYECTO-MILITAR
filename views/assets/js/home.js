@@ -1,178 +1,115 @@
-// menu 
-    const menuButton = document.getElementById("menu-button");
-    const modalMenu = document.getElementById("modal-menu");
-    const modalBackdrop = document.getElementById("modal-backdrop");
-    const modalClose = document.getElementById("modal-close");
+// carrusel
 
-    function openMenu() {
-      modalMenu.classList.remove("translate-x-full");
-      modalBackdrop.classList.remove("hidden");
-      modalBackdrop.setAttribute("aria-hidden", "false");
+document.addEventListener('DOMContentLoaded', () => {
+    const carruselPrincipal = document.querySelector('.carrusel-principal');
+    if (!carruselPrincipal) {
+        console.warn('Contenedor del carrusel no encontrado.');
+        return; // Salir si no hay carrusel en la página
     }
-
-    function closeMenu() {
-      modalMenu.classList.add("translate-x-full");
-      modalBackdrop.classList.add("hidden");
-      modalBackdrop.setAttribute("aria-hidden", "true");
+  
+    const slides = carruselPrincipal.querySelectorAll('.carrusel-slide');
+    const btnPrev = carruselPrincipal.querySelector('.carrusel-control.prev');
+    const btnNext = carruselPrincipal.querySelector('.carrusel-control.next');
+    const indicadoresContainer = carruselPrincipal.querySelector('.carrusel-indicadores');
+    const dots = indicadoresContainer ? indicadoresContainer.querySelectorAll('.indicador-dot') : [];
+  
+    let currentSlideIndex = 0;
+    let autoplayInterval = null;
+    const AUTOPLAY_DELAY = 5000; // 5 segundos para cambio automático
+  
+    if (slides.length <= 1) {
+        // Si hay 0 o 1 slide, no necesitamos controles ni autoplay
+        if (btnPrev) btnPrev.style.display = 'none';
+        if (btnNext) btnNext.style.display = 'none';
+        if (indicadoresContainer) indicadoresContainer.style.display = 'none';
+        // Asegurarse que el único slide (si existe) esté activo
+        if (slides.length === 1 && !slides[0].classList.contains('active')) {
+            slides[0].classList.add('active');
+        }
+        return;
     }
-
-    menuButton.addEventListener("click", openMenu);
-    modalClose.addEventListener("click", closeMenu);
-    modalBackdrop.addEventListener("click", closeMenu);
-
-// Close menu on Escape key
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && !modalBackdrop.classList.contains("hidden")) {
-        closeMenu();
-      }
-    });
-
-// boton chat
-    document.addEventListener('DOMContentLoaded', () => {
-      const messageButton = document.getElementById('messageButton');
-      const messageModal = document.getElementById('messageModal');
-      const closeMessageModal = document.getElementById('closeMessageModal');
-      const messageForm = document.getElementById('messageForm');
-      const mobileMenuButton = document.getElementById('mobileMenuButton');
-      const mobileMenuModal = document.getElementById('mobileMenuModal');
-      const closeMobileMenu = document.getElementById('closeMobileMenu');
-
-      messageButton.addEventListener('click', () => {
-        messageModal.classList.remove('hidden');
-        messageModal.setAttribute('aria-hidden', 'false');
-        document.body.classList.add('modal-open');
-      });
-
-      closeMessageModal.addEventListener('click', () => {
-        messageModal.classList.add('hidden');
-        messageModal.setAttribute('aria-hidden', 'true');
-        document.body.classList.remove('modal-open');
-      });
-
-      messageModal.addEventListener('click', (e) => {
-        if (e.target === messageModal) {
-          messageModal.classList.add('hidden');
-          messageModal.setAttribute('aria-hidden', 'true');
-          document.body.classList.remove('modal-open');
+  
+    function mostrarSlide(index) {
+        // Validar índice
+        if (index >= slides.length) {
+            index = 0;
+        } else if (index < 0) {
+            index = slides.length - 1;
         }
-      });
-
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-          if (!messageModal.classList.contains('hidden')) {
-            messageModal.classList.add('hidden');
-            messageModal.setAttribute('aria-hidden', 'true');
-            document.body.classList.remove('modal-open');
-          }
-          if (!mobileMenuModal.classList.contains('hidden')) {
-            mobileMenuModal.classList.add('hidden');
-            mobileMenuModal.setAttribute('aria-hidden', 'true');
-            document.body.classList.remove('modal-open');
-          }
+  
+        // Ocultar todos los slides y desactivar dots
+        slides.forEach(slide => slide.classList.remove('active'));
+        if (dots.length > 0) {
+            dots.forEach(dot => dot.classList.remove('active'));
         }
-      });
-
-      messageForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        alert(
-          'Formulario enviado:\n' +
-            'Nombre: ' +
-            messageForm.nombre.value +
-            '\n' +
-            'Correo: ' +
-            messageForm.correo.value +
-            '\n' +
-            'Comentario: ' +
-            messageForm.comentario.value
-        );
-        messageForm.reset();
-        messageModal.classList.add('hidden');
-        messageModal.setAttribute('aria-hidden', 'true');
-        document.body.classList.remove('modal-open');
-      });
-
-      mobileMenuButton.addEventListener('click', () => {
-        mobileMenuModal.classList.remove('hidden');
-        mobileMenuModal.setAttribute('aria-hidden', 'false');
-        document.body.classList.add('modal-open');
-      });
-
-      closeMobileMenu.addEventListener('click', () => {
-        mobileMenuModal.classList.add('hidden');
-        mobileMenuModal.setAttribute('aria-hidden', 'true');
-        document.body.classList.remove('modal-open');
-      });
-
-      mobileMenuModal.addEventListener('click', (e) => {
-        if (e.target === mobileMenuModal) {
-          mobileMenuModal.classList.add('hidden');
-          mobileMenuModal.setAttribute('aria-hidden', 'true');
-          document.body.classList.remove('modal-open');
+  
+        // Mostrar el slide y dot correctos
+        slides[index].classList.add('active');
+        if (dots.length > 0 && dots[index]) {
+            dots[index].classList.add('active');
         }
-      });
-    });
-// Images deñ carrusel de Sobre Nosotros
-    const images = [
-      "https://storage.googleapis.com/a1aa/image/57042b00-77f3-4313-696f-8ac6ffce892a.jpg",
-      "https://placehold.co/400x280?text=Imagen+2+del+carrusel&font=inter&bg=cccccc&txtclr=333333",
-      "https://placehold.co/400x280?text=Imagen+3+del+carrusel&font=inter&bg=cccccc&txtclr=333333"
-    ];
-
-    const carouselImage = document.getElementById('carouselImage');
-    const dots = document.querySelectorAll('#carouselDots span');
-    let currentIndex = 0;
-
-    function updateCarousel(index) {
-      carouselImage.src = images[index];
-      dots.forEach((dot, i) => {
-        dot.classList.toggle('bg-green-600', i === index);
-        dot.classList.toggle('bg-gray-300', i !== index);
-      });
-      currentIndex = index;
+  
+        currentSlideIndex = index;
     }
-
-    dots.forEach(dot => {
-      dot.addEventListener('click', () => {
-        updateCarousel(parseInt(dot.dataset.index));
-      });
-    });
-
-// Modal video sobre nosotros
-    const openModalBtn = document.getElementById('openModalBtn');
-    const closeModalBtn = document.getElementById('closeModalBtn');
-    const videoModal = document.getElementById('videoModal');
-    const youtubeVideo = document.getElementById('youtubeVideo');
-
-    openModalBtn.addEventListener('click', () => {
-      youtubeVideo.src = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"; //video
-      videoModal.classList.remove('hidden');
-      videoModal.setAttribute('aria-hidden', 'false');
-    });
-
-    closeModalBtn.addEventListener('click', () => {
-      youtubeVideo.src = "";
-      videoModal.classList.add('hidden');
-      videoModal.setAttribute('aria-hidden', 'true');
-    });
-
-// Close modal on outside click
-    videoModal.addEventListener('click', (e) => {
-      if (e.target === videoModal) {
-        youtubeVideo.src = "";
-        videoModal.classList.add('hidden');
-        videoModal.setAttribute('aria-hidden', 'true');
-      }
-    });
-
-//Carrusel de especialidades
-const carousel = document.getElementById('carousel');
-const prevBtn = document.getElementById('prevBtn');
-const nextBtn = document.getElementById('nextBtn');
-
-prevBtn.addEventListener('click', () => {
- carousel.scrollBy({ left: -carousel.offsetWidth, behavior: 'smooth' });
-});
-
-nextBtn.addEventListener('click', () => {
- carousel.scrollBy({ left: carousel.offsetWidth, behavior: 'smooth' });
-});
+  
+    function siguienteSlide() {
+        mostrarSlide(currentSlideIndex + 1);
+    }
+  
+    function anteriorSlide() {
+        mostrarSlide(currentSlideIndex - 1);
+    }
+  
+    // Event Listeners para botones
+    if (btnNext) {
+        btnNext.addEventListener('click', () => {
+            siguienteSlide();
+            resetAutoplay(); // Reiniciar autoplay si se interactúa manualmente
+        });
+    }
+  
+    if (btnPrev) {
+        btnPrev.addEventListener('click', () => {
+            anteriorSlide();
+            resetAutoplay(); // Reiniciar autoplay
+        });
+    }
+  
+    // Event Listeners para indicadores (dots)
+    if (dots.length > 0) {
+        dots.forEach(dot => {
+            dot.addEventListener('click', (e) => {
+                const slideIndex = parseInt(e.target.dataset.slideTo);
+                if (!isNaN(slideIndex)) {
+                    mostrarSlide(slideIndex);
+                    resetAutoplay(); // Reiniciar autoplay
+                }
+            });
+        });
+    }
+  
+    // Autoplay
+    function startAutoplay() {
+        if (autoplayInterval) clearInterval(autoplayInterval); // Limpiar intervalo existente
+        autoplayInterval = setInterval(siguienteSlide, AUTOPLAY_DELAY);
+    }
+  
+    function stopAutoplay() {
+        clearInterval(autoplayInterval);
+        autoplayInterval = null;
+    }
+  
+    function resetAutoplay() {
+        stopAutoplay();
+        startAutoplay();
+    }
+  
+    // Pausar en hover, reanudar al salir
+    carruselPrincipal.addEventListener('mouseenter', stopAutoplay);
+    carruselPrincipal.addEventListener('mouseleave', startAutoplay);
+  
+    // Inicializar el carrusel
+    mostrarSlide(currentSlideIndex); // Asegura que el primer slide se muestre correctamente
+    startAutoplay(); // Iniciar autoplay
+  });
+  

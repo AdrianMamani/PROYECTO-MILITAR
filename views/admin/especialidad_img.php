@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -202,11 +206,12 @@
                                     <tr>
                                         <td><?= htmlspecialchars($imagen['id']) ?></td>
                                         <td>
-                                            <button type="button" class="btn btn-primary btn-sm view-image-button"
+                                            <img src="/PROYECTO-MILITAR/<?= htmlspecialchars($imagen['nombre_imagen']) ?>" 
+                                                    alt="Imagen del Carrusel" 
+                                                    class="img-thumbnail view-image-button"
                                                     data-toggle="modal" data-target="#viewImageModal"
-                                                    data-imagen="<?= htmlspecialchars($imagen['nombre_imagen']) ?>">
-                                                <i class="fas fa-eye"></i> Ver Imagen
-                                            </button>
+                                                    data-imagen="<?= htmlspecialchars($imagen['nombre_imagen']) ?>"
+                                                    style="max-width: 120px; cursor: pointer;">
                                         </td>
                                         <td><?= htmlspecialchars($imagen['nombre_especialidad']); ?></td>
                                         <td>
@@ -325,13 +330,13 @@
         </div>
     </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="dist/js/adminlte.min.js"></script>
-<script src="dist/js/demo.js"></script>
 <script src="plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 <script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
 <script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
 <script src="plugins/jszip/jszip.min.js"></script>
@@ -340,7 +345,6 @@
 <script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-<script src="dist/js/adminlte.min.js"></script>
 <script>
      // Manejar la edición de imagen
      $('#editModal').on('show.bs.modal', function (event) {
@@ -395,7 +399,7 @@
         var imagen = button.data('imagen');  // Obtiene el valor de 'data-imagen'
         var modal = $(this);
         // IMPORTANTE: Aquí debes colocar la carpeta donde realmente está la imagen
-        modal.find('#full-image').attr('src', '' + imagen);
+        modal.find('#full-image').attr('src', '/PROYECTO-MILITAR/' + imagen);
     });
     $('#example1').DataTable({
         "responsive": true,

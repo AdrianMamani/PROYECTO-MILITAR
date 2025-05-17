@@ -107,49 +107,21 @@
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-images"></i>
                             <p>
-                                Admin Comentarios
+                                Sobre Nosotros
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="index.php?action=comentarios" class="nav-link">
+                                <a href="index.php?action=emprendimiento" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Comentarios</p>
+                                    <p>Sobre Nosotros</p>
                                 </a>
                             </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-images"></i>
-                            <p>
-                                Admin In Memoriam
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="index.php?action=en_memoria" class="nav-link">
+                                <a href="index.php?action=emprendimientoimg" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>In Memoriam</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-images"></i>
-                            <p>
-                                Admin Miembros
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="index.php?action=miembros" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Miembros</p>
+                                    <p>Imágenes</p>
                                 </a>
                             </li>
                         </ul>
@@ -179,49 +151,46 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="card">
-                    <div class="card-header">
+                    <!--<div class="card-header">
                         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal">
-                            <i class="fas fa-plus"></i> Agregar Emprendimiento
+                            <i class="fas fa-plus"></i> Agregar Nuevo Carrusel
                         </button>
-                    </div>
+                    </div>-->
                     
                     <div class="card-body">
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Titulo</th>
-                                    <th>Contacto</th>
-                                    <th>Ubicacion</th>
-                                    <th>Descripcion</th>
-                                    <th>Sub-Descripcion</th>
+                                    <th>Título</th>
+                                    <th>Descripción</th>
+                                    <th>Mision</th>
+                                    <th>Vision</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if (empty($carruselItems)): ?>
-                                    <tr><td colspan="6">No hay items en emprendimiento</td></tr>
+                                <?php if (empty($nosotrosItems)): ?>
+                                    <tr><td colspan="4">No hay items en el carrusel</td></tr>
                                 <?php else: ?>
-                                    <?php foreach ($carruselItems as $item): ?>
+                                    <?php foreach ($nosotrosItems as $item): ?>
                                     <tr>
                                         <td><?= htmlspecialchars($item['id']) ?></td>
-                                        <td><?= htmlspecialchars($item['nombre_emprendimiento']) ?></td>
-                                        <td><?= htmlspecialchars($item['contacto']) ?></td>
-                                        <td><?= htmlspecialchars($item['ubicacion']) ?></td>
+                                        <td><?= htmlspecialchars($item['titulo']) ?></td>
                                         <td><?= htmlspecialchars($item['descripcion']) ?></td>
-                                        <td><?= htmlspecialchars($item['subdescripcion']) ?></td>
+                                        <td><?= htmlspecialchars($item['mision']) ?></td>
+                                        <td><?= htmlspecialchars($item['vision']) ?></td>
                                         <td>
                                             <button type="button" class="btn btn-warning btn-sm edit-button" 
                                                     data-id="<?= $item['id'] ?>" 
-                                                    data-titulo="<?= htmlspecialchars($item['nombre_emprendimiento']) ?>" 
-                                                    data-contacto="<?= htmlspecialchars($item['contacto']) ?>" 
-                                                    data-ubicacion="<?= htmlspecialchars($item['ubicacion']) ?>" 
+                                                    data-titulo="<?= htmlspecialchars($item['titulo']) ?>" 
                                                     data-descripcion="<?= htmlspecialchars($item['descripcion']) ?>"
-                                                    data-subdescripcion="<?= htmlspecialchars($item['subdescripcion']) ?>" 
+                                                    data-mision="<?= htmlspecialchars($item['mision']) ?>" 
+                                                    data-vision="<?= htmlspecialchars($item['vision']) ?>" 
                                                     data-toggle="modal" data-target="#editModal">
                                                 <i class="fas fa-edit"></i> Editar
                                             </button>
-                                            <a href="index.php?action=emprendimiento/eliminar/<?= $item['id'] ?>" class="btn btn-danger btn-sm" 
+                                            <a href="index.php?action=nosotros/eliminar/<?= $item['id'] ?>" class="btn btn-danger btn-sm" 
                                                onclick="return confirm('¿Estás seguro de eliminar este carrusel?')">
                                                 <i class="fas fa-trash"></i> Eliminar
                                             </a>
@@ -236,37 +205,25 @@
             </div>
         </section>
     </div>
-
+<!-- modal Agregar Nuevo Carrusel
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addModalLabel">Agregar Emprendimiento</h5>
+                    <h5 class="modal-title" id="addModalLabel">Agregar Nuevo Carrusel</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="index.php?action=emprendimiento/agregar" method="POST">
+                <form action="index.php?action=carrusel/agregar" method="POST">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="nombre_emprendimiento">Nombre</label>
-                            <input type="text" class="form-control" id="nombre_emprendimiento" name="nombre_emprendimiento" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="contacto">Contacto</label>
-                            <input type="text" class="form-control" id="contacto" name="contacto" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="ubicacion">Ubicacion</label>
-                            <input type="text" class="form-control" id="ubicacion" name="ubicacion" required>
+                            <label for="titulo">Título</label>
+                            <input type="text" class="form-control" id="titulo" name="titulo" required>
                         </div>
                         <div class="form-group">
                             <label for="descripcion">Descripción</label>
                             <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="subdescripcion">Sub-Descripción</label>
-                            <textarea class="form-control" id="subdescripcion" name="subdescripcion" rows="5" required></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -276,46 +233,42 @@
                 </form>
             </div>
         </div>
-    </div>
-<!--editar-->
+    </div>-->
+<!-- modal Editar SobreNosotros-->
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editModalLabel">Editar Emprendimiento</h5>
+                    <h5 class="modal-title" id="editModalLabel">Editar Sobre Nosotros</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <form id="editForm" method="POST" action="">
-    <input type="hidden" name="id" id="edit-id">
-    <div class="modal-body">
-        <div class="form-group">
-            <label for="edit-nombre_emprendimiento">Nombre</label>
-            <input type="text" class="form-control" id="edit-nombre_emprendimiento" name="nombre_emprendimiento" required>
-        </div>
-        <div class="form-group">
-            <label for="edit-contacto">Contacto</label>
-            <input type="text" class="form-control" id="edit-contacto" name="contacto" required>
-        </div>
-        <div class="form-group">
-            <label for="edit-ubicacion">Ubicacion</label>
-            <input type="text" class="form-control" id="edit-ubicacion" name="ubicacion" required>
-        </div>
-        <div class="form-group">
-            <label for="edit-descripcion">Descripción</label>
-            <textarea class="form-control" id="edit-descripcion" name="descripcion" rows="3" required></textarea>
-        </div>
-        <div class="form-group">
-            <label for="edit-subdescripcion">Sub-Descripción</label>
-            <textarea class="form-control" id="edit-subdescripcion" name="subdescripcion" rows="5" required></textarea>
-        </div>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-    </div>
-</form>
+                    <input type="hidden" name="id" id="edit-id">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="edit-titulo">Título</label>
+                            <input type="text" class="form-control" id="edit-titulo" name="titulo" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-descripcion">Descripción</label>
+                            <textarea class="form-control" id="edit-descripcion" name="descripcion" rows="3" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-mision">Mision</label>
+                            <input type="text" class="form-control" id="edit-mision" name="mision" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-vision">Vision</label>
+                            <input type="text" class="form-control" id="edit-vision" name="vision" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -324,7 +277,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="dist/js/adminlte.min.js"></script>
-<script src="dist/js/demo.js"></script>
 <script src="plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
@@ -339,16 +291,22 @@
 <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <script>
 $(document).ready(function() {
-        $('.edit-button').on('click', function() {
-        $('#edit-id').val($(this).data('id'));
-        $('#edit-nombre_emprendimiento').val($(this).data('titulo'));
-        $('#edit-contacto').val($(this).data('contacto'));
-        $('#edit-ubicacion').val($(this).data('ubicacion'));
-        $('#edit-descripcion').val($(this).data('descripcion'));
-        $('#edit-subdescripcion').val($(this).data('subdescripcion'));
+    // Manejar el botón de editar
+    $('.edit-button').on('click', function() {
+        var id = $(this).data('id');
+        var titulo = $(this).data('titulo');
+        var descripcion = $(this).data('descripcion');
+        var mision = $(this).data('mision');
+        var vision = $(this).data('vision');
+        
+        $('#edit-id').val(id);
+        $('#edit-titulo').val(titulo);
+        $('#edit-descripcion').val(descripcion);
+        $('#edit-mision').val(titulo);
+        $('#edit-vision').val(descripcion);
         
         // Actualizar el action del formulario con el ID correcto
-        $('#editForm').attr('action', 'index.php?action=emprendimiento/editar/' + id);
+        $('#editForm').attr('action', 'index.php?action=nosotros/editar/' + id);
     });
     
     // Inicializar DataTable si es necesario
