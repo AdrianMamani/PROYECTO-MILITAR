@@ -128,212 +128,248 @@ echo "<!-- DEBUG IMG FILENAME: " . htmlspecialchars($item['img']) . " -->";
         <?php endforeach; ?>
      </div>
   </section>
-
-  <!-- Sobre Nosotros Section -->
-  <section class="max-w-5xl mx-auto pt-[0px] sm:pt-[85px] flex flex-col md:flex-row items-center md:items-start gap-8 pb-16">
-   <div class="flex flex-col items-center">
-    <img alt="Foto de grupo militar en escaleras antiguas, hombres con uniforme militar oscuro posando en escalera de mármol" class="rounded-md w-[400px] h-[280px] object-cover" height="280" id="carouselImage" src="https://storage.googleapis.com/a1aa/image/57042b00-77f3-4313-696f-8ac6ffce892a.jpg" width="400"/>
-    <div class="flex space-x-3 mt-4 cursor-pointer" id="carouselDots">
-     <span class="w-4 h-4 rounded-full bg-green-600" data-index="0"></span>
-     <span class="w-4 h-4 rounded-full bg-gray-300" data-index="1"></span>
-     <span class="w-4 h-4 rounded-full bg-gray-300" data-index="2"></span>
-    </div>
-   </div>
-   <div class="max-w-xl">
-    <h2 class="font-extrabold text-2xl mb-3">
-     Sobre Nosotros
-    </h2>
-    <p class="text-base leading-relaxed mb-6">
-     En 1986, un grupo de jóvenes inició su formación militar con el nombre de Cabo Alberto Reyes Gamarra, destacándose por su disciplina, entrega y espíritu de hermandad. Durante su entrenamiento, enfrentaron desafíos físicos y mentales, fortaleciendo sus habilidades y compromiso con la institución. Su preparación rigurosa los convirtió en soldados ejemplares, listos para cumplir con honor su deber.
-    </p>
-    <div class="flex items-center gap-6">
-     <button class="bg-green-600 text-white font-semibold rounded-full px-6 py-2 hover:bg-green-700 transition" type="button">
-      Leer más
-     </button>
-     <button aria-label="Play video" class="bg-green-600 rounded-full w-12 h-12 flex items-center justify-center hover:bg-green-700 transition" id="openModalBtn" type="button">
-      <i class="fas fa-play text-yellow-400 text-lg ml-[2px]">
-      </i>
-     </button>
-    </div>
-   </div>
-
-   <!-- Modal -->
-   <div aria-hidden="true" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 hidden" id="videoModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="bg-white rounded-lg max-w-3xl w-full mx-4 relative">
-     <button aria-label="Cerrar modal" class="absolute top-3 right-3 text-gray-700 hover:text-gray-900 text-2xl font-bold" id="closeModalBtn" type="button">
-      &times;
-     </button>
-     <div class="aspect-w-16 aspect-h-9">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" class="w-full h-64 md:h-96 rounded-b-lg" frameborder="0" id="youtubeVideo" src="" title="Video YouTube">
-      </iframe>
-     </div>
-    </div>
-   </div>
-  </section>
   <section>
-  <div class="max-w-7xl mx-auto px-4 py-8 text-center">
-   <h1 class="font-extrabold text-3xl">
-    Especialidades
-   </h1>
-   <p class="text-sm mt-1 mb-8">
-    Las 13 áreas en las que nos destacamos con orgullo y compromiso.
-   </p>
-   <!-- Carousel container for small screens -->
-   <div class="sm:hidden max-w-5xl mx-auto">
-    <div id="carousel" class="overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory flex gap-6">
-     <div class="relative group cursor-pointer rounded-md overflow-hidden border-4 border-transparent transition-colors duration-300 hover:border-red-600 snap-start flex-shrink-0 w-full">
-      <img alt="Hombre con chaleco reflectante y casco naranja midiendo terreno en obra de cartografía con maquinaria amarilla al fondo" class="w-full object-cover transition-transform duration-300 group-hover:scale-105" height="200" src="https://storage.googleapis.com/a1aa/image/5b07167c-72e3-4473-d71b-21fdcc2743c2.jpg" width="320"/>
-      <div class="bg-gray-900 text-white font-extrabold text-lg py-3 group-hover:bg-red-600 transition-colors duration-300">
-       Auxiliar de Cartografía
-      </div>
-      <button aria-label="Ver detalles" class="absolute top-3 right-3 hidden group-hover:flex items-center justify-center w-10 h-10 bg-red-600 text-white rounded-full shadow-lg transition-opacity duration-300" type="button">
-       <i class="fas fa-eye"></i>
-      </button>
-     </div>
-     <div class="relative group cursor-pointer rounded-md overflow-hidden border-4 border-transparent transition-colors duration-300 hover:border-red-600 snap-start flex-shrink-0 w-full">
-      <img alt="Soldado con uniforme antiguo y casco sosteniendo un fusil en un entorno con árboles y fondo desenfocado" class="w-full object-cover transition-transform duration-300 group-hover:scale-105" height="200" src="https://storage.googleapis.com/a1aa/image/5c914e35-a818-4ee7-f251-27f38c769f64.jpg" width="320"/>
-      <div class="bg-gray-900 text-white font-extrabold text-lg py-3 group-hover:bg-red-600 transition-colors duration-300">
-       Auxiliar de Cartografía
-      </div>
-      <button aria-label="Ver detalles" class="absolute top-3 right-3 hidden group-hover:flex items-center justify-center w-10 h-10 bg-red-600 text-white rounded-full shadow-lg transition-opacity duration-300" type="button">
-       <i class="fas fa-eye"></i>
-      </button>
-     </div>
-     <div class="relative group cursor-pointer rounded-md overflow-hidden border-4 border-transparent transition-colors duration-300 hover:border-red-600 snap-start flex-shrink-0 w-full">
-      <img alt="Soldado con uniforme antiguo y casco sosteniendo un fusil en un entorno con árboles y fondo desenfocado" class="w-full object-cover transition-transform duration-300 group-hover:scale-105" height="200" src="https://storage.googleapis.com/a1aa/image/5c914e35-a818-4ee7-f251-27f38c769f64.jpg" width="320"/>
-      <div class="bg-gray-900 text-white font-extrabold text-lg py-3 group-hover:bg-red-600 transition-colors duration-300">
-       Auxiliar de Cartografía
-      </div>
-      <button aria-label="Ver detalles" class="absolute top-3 right-3 hidden group-hover:flex items-center justify-center w-10 h-10 bg-red-600 text-white rounded-full shadow-lg transition-opacity duration-300" type="button">
-       <i class="fas fa-eye"></i>
-      </button>
-     </div>
-    </div>
-    <div class="flex justify-center gap-4 mt-4">
-     <button aria-label="Anterior" class="bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-full w-10 h-10 flex items-center justify-center shadow" id="prevBtn" type="button">
-      <i class="fas fa-chevron-left"></i>
-     </button>
-     <button aria-label="Siguiente" class="bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-full w-10 h-10 flex items-center justify-center shadow" id="nextBtn" type="button">
-      <i class="fas fa-chevron-right"></i>
-     </button>
-    </div>
-   </div>
-   <!-- Grid for tablets and larger -->
-   <div class="hidden sm:grid grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-    <div class="relative group cursor-pointer rounded-md overflow-hidden border-4 border-transparent transition-colors duration-300 hover:border-green-600">
-     <img alt="Hombre con chaleco reflectante y casco naranja midiendo terreno en obra de cartografía con maquinaria amarilla al fondo" class="w-full object-cover transition-transform duration-300 group-hover:scale-105" height="200" src="https://storage.googleapis.com/a1aa/image/5b07167c-72e3-4473-d71b-21fdcc2743c2.jpg" width="320"/>
-     <div class="bg-gray-900 text-white font-extrabold text-lg py-3 group-hover:bg-green-600 transition-colors duration-300">
-      Auxiliar de Cartografía
-     </div>
-     <button aria-label="Ver detalles" class="absolute top-3 right-3 hidden group-hover:flex items-center justify-center w-10 h-10 bg-red-600 text-white rounded-full shadow-lg transition-opacity duration-300" type="button">
-      <i class="fas fa-eye"></i>
-     </button>
-    </div>
-    <div class="relative group cursor-pointer rounded-md overflow-hidden border-4 border-transparent transition-colors duration-300 hover:border-red-600">
-     <img alt="Soldado con uniforme antiguo y casco sosteniendo un fusil en un entorno con árboles y fondo desenfocado" class="w-full object-cover transition-transform duration-300 group-hover:scale-105" height="200" src="https://storage.googleapis.com/a1aa/image/5c914e35-a818-4ee7-f251-27f38c769f64.jpg" width="320"/>
-     <div class="bg-gray-900 text-white font-extrabold text-lg py-3 group-hover:bg-red-600 transition-colors duration-300">
-      Auxiliar de Cartografía
-     </div>
-     <button aria-label="Ver detalles" class="absolute top-3 right-3 hidden group-hover:flex items-center justify-center w-10 h-10 bg-red-600 text-white rounded-full shadow-lg transition-opacity duration-300" type="button">
-      <i class="fas fa-eye"></i>
-     </button>
-    </div>
-    <div class="relative group cursor-pointer rounded-md overflow-hidden border-4 border-transparent transition-colors duration-300 hover:border-red-600">
-     <img alt="Soldado con uniforme antiguo y casco sosteniendo un fusil en un entorno con árboles y fondo desenfocado" class="w-full object-cover transition-transform duration-300 group-hover:scale-105" height="200" src="https://storage.googleapis.com/a1aa/image/5c914e35-a818-4ee7-f251-27f38c769f64.jpg" width="320"/>
-     <div class="bg-gray-900 text-white font-extrabold text-lg py-3 group-hover:bg-red-600 transition-colors duration-300">
-      Auxiliar de Cartografía
-     </div>
-     <button aria-label="Ver detalles" class="absolute top-3 right-3 hidden group-hover:flex items-center justify-center w-10 h-10 bg-red-600 text-white rounded-full shadow-lg transition-opacity duration-300" type="button">
-      <i class="fas fa-eye"></i>
-     </button>
-    </div>
-   </div> 
-  </section>
-  <!-- Mensaje Floating Button con tooltip a la izquierda, fijo en pantalla -->
-  <div class="fixed bottom-6 right-6 z-50 flex items-center group space-x-3">
-    <div class="hidden group-hover:flex bg-gray-500 text-white text-xs rounded px-3 py-1 whitespace-nowrap select-none">
-      ¿Quieres dejar un mensaje?
-    </div>
-    <button aria-label="Abrir chat de mensajes" class="bg-green-600 hover:bg-green-700 text-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg relative" id="messageButton" type="button">
-      <i class="fas fa-comment-alt text-2xl"></i>
-    </button>
+  <div class="banner" role="banner" aria-label="Banner con texto principal y subtítulo">
+    <h1>FORJANDO UN LEGADO DE HONOR Y COMPROMISO</h1>
+    <p>Una historia de valentía, compromiso y excelencia</p>
+    
+    <!-- Redes Sociales -->
+    <ul class="social-wrapper">
+      <li class="social-icon facebook">
+        <span class="social-tooltip">Facebook</span>
+        <svg viewBox="0 0 320 512" height="1.2em" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"></path>
+        </svg>
+      </li>
+      <li class="social-icon twitter">
+        <span class="social-tooltip">Twitter</span>
+        <svg height="1.8em" fill="currentColor" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+          <path d="M42,12.429c-1.323,0.586-2.746,0.977-4.247,1.162c1.526-0.906,2.7-2.351,3.251-4.058c-1.428,0.837-3.01,1.452-4.693,1.776C34.967,9.884,33.05,9,30.926,9c-4.08,0-7.387,3.278-7.387,7.32c0,0.572,0.067,1.129,0.193,1.67c-6.138-0.308-11.582-3.226-15.224-7.654c-0.64,1.082-1,2.349-1,3.686c0,2.541,1.301,4.778,3.285,6.096c-1.211-0.037-2.351-0.374-3.349-0.914c0,0.022,0,0.055,0,0.086c0,3.551,2.547,6.508,5.923,7.181c-0.617,0.169-1.269,0.263-1.941,0.263c-0.477,0-0.942-0.054-1.392-0.135c0.94,2.902,3.667,5.023,6.898,5.086c-2.528,1.96-5.712,3.134-9.174,3.134c-0.598,0-1.183-0.034-1.761-0.104C9.268,36.786,13.152,38,17.321,38c13.585,0,21.017-11.156,21.017-20.834c0-0.317-0.01-0.633-0.025-0.945C39.763,15.197,41.013,13.905,42,12.429"></path>
+        </svg>
+      </li>
+      <li class="social-icon instagram">
+        <span class="social-tooltip">Instagram</span>
+        <svg xmlns="http://www.w3.org/2000/svg" height="1.2em" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"></path>
+        </svg>
+      </li>
+    </ul>
   </div>
+</section>
+<!-- Sección de Usuarios estilo Instagram (solo carrusel) -->
+    <section class="seccion-usuarios">
+        <div class="contenedor-usuarios">
+            <h2>Nuestros Miembros</h2>            
+            
+            <!-- Carrusel de usuarios -->
+            <div class="contenedor-carrusel">
+                <div class="carrusel-usuarios">
+                    <button class="boton-carrusel boton-prev"><i class="fas fa-chevron-left"></i></button>
+                    
+                    <div class="carrusel-track">
+                        <!-- Tarjeta Carrusel 1 -->
+                        <div class="tarjeta-usuario tarjeta-carrusel">
+                            <div class="cabecera-tarjeta">
+                                <div class="info-usuario">
+                                    <img src="assets/img/usuarios/avatar1.jpg" alt="Avatar de usuario" class="avatar-usuario">
+                                    <span class="nombre-usuario">usuario_oficial</span>
+                                </div>
+                                <i class="fas fa-check-circle icono-verificado"></i>
+                            </div>
+                            <div class="imagen-tarjeta">
+                                <img src="assets/img/usuarios/post1.jpg" alt="Publicación del usuario">
+                            </div>
+                            <div class="acciones-tarjeta">
+                                <div class="iconos-accion">
+                                    <i class="far fa-heart"></i>
+                                    <i class="far fa-comment"></i>
+                                    <i class="far fa-paper-plane"></i>
+                                </div>
+                                <div class="likes-tarjeta">
+                                    <span>125 Me gusta</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Tarjeta Carrusel 2 -->
+                        <div class="tarjeta-usuario tarjeta-carrusel">
+                            <div class="cabecera-tarjeta">
+                                <div class="info-usuario">
+                                    <img src="assets/img/usuarios/avatar2.jpg" alt="Avatar de usuario" class="avatar-usuario">
+                                    <span class="nombre-usuario">experiencia_militar</span>
+                                </div>
+                                <i class="fas fa-check-circle icono-verificado"></i>
+                            </div>
+                            <div class="imagen-tarjeta">
+                                <img src="assets/img/usuarios/post2.jpg" alt="Publicación del usuario">
+                            </div>
+                            <div class="acciones-tarjeta">
+                                <div class="iconos-accion">
+                                    <i class="far fa-heart"></i>
+                                    <i class="far fa-comment"></i>
+                                    <i class="far fa-paper-plane"></i>
+                                </div>
+                                <div class="likes-tarjeta">
+                                    <span>243 Me gusta</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Tarjeta Carrusel 3 -->
+                        <div class="tarjeta-usuario tarjeta-carrusel">
+                            <div class="cabecera-tarjeta">
+                                <div class="info-usuario">
+                                    <img src="assets/img/usuarios/avatar3.jpg" alt="Avatar de usuario" class="avatar-usuario">
+                                    <span class="nombre-usuario">formacion_elite</span>
+                                </div>
+                                <i class="fas fa-check-circle icono-verificado"></i>
+                            </div>
+                            <div class="imagen-tarjeta">
+                                <img src="assets/img/usuarios/post3.jpg" alt="Publicación del usuario">
+                            </div>
+                            <div class="acciones-tarjeta">
+                                <div class="iconos-accion">
+                                    <i class="far fa-heart"></i>
+                                    <i class="far fa-comment"></i>
+                                    <i class="far fa-paper-plane"></i>
+                                </div>
+                                <div class="likes-tarjeta">
+                                    <span>187 Me gusta</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Tarjeta Carrusel 4 -->
+                        <div class="tarjeta-usuario tarjeta-carrusel">
+                            <div class="cabecera-tarjeta">
+                                <div class="info-usuario">
+                                    <img src="assets/img/usuarios/avatar4.jpg" alt="Avatar de usuario" class="avatar-usuario">
+                                    <span class="nombre-usuario">cadete_2023</span>
+                                </div>
+                                <i class="fas fa-check-circle icono-verificado"></i>
+                            </div>
+                            <div class="imagen-tarjeta">
+                                <img src="assets/img/usuarios/post4.jpg" alt="Publicación del usuario">
+                            </div>
+                            <div class="acciones-tarjeta">
+                                <div class="iconos-accion">
+                                    <i class="far fa-heart"></i>
+                                    <i class="far fa-comment"></i>
+                                    <i class="far fa-paper-plane"></i>
+                                </div>
+                                <div class="likes-tarjeta">
+                                    <span>98 Me gusta</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Tarjeta Carrusel 5 -->
+                        <div class="tarjeta-usuario tarjeta-carrusel">
+                            <div class="cabecera-tarjeta">
+                                <div class="info-usuario">
+                                    <img src="assets/img/usuarios/avatar5.jpg" alt="Avatar de usuario" class="avatar-usuario">
+                                    <span class="nombre-usuario">entrenamiento_avanzado</span>
+                    </div>
+                                <i class="fas fa-check-circle icono-verificado"></i>
+                </div>
+                            <div class="imagen-tarjeta">
+                                <img src="assets/img/usuarios/post5.jpg" alt="Publicación del usuario">
+            </div>
+                            <div class="acciones-tarjeta">
+                                <div class="iconos-accion">
+                                    <i class="far fa-heart"></i>
+                                    <i class="far fa-comment"></i>
+                                    <i class="far fa-paper-plane"></i>
+                                </div>
+                                <div class="likes-tarjeta">
+                                    <span>156 Me gusta</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Tarjeta Carrusel 6 -->
+                        <div class="tarjeta-usuario tarjeta-carrusel">
+                            <div class="cabecera-tarjeta">
+                                <div class="info-usuario">
+                                    <img src="assets/img/usuarios/avatar6.jpg" alt="Avatar de usuario" class="avatar-usuario">
+                                    <span class="nombre-usuario">liderazgo_militar</span>
+                                </div>
+                                <i class="fas fa-check-circle icono-verificado"></i>
+                            </div>
+                            <div class="imagen-tarjeta">
+                                <img src="assets/img/usuarios/post6.jpg" alt="Publicación del usuario">
+                            </div>
+                            <div class="acciones-tarjeta">
+                                <div class="iconos-accion">
+                                    <i class="far fa-heart"></i>
+                                    <i class="far fa-comment"></i>
+                                    <i class="far fa-paper-plane"></i>
+                                </div>
+                                <div class="likes-tarjeta">
+                                    <span>211 Me gusta</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Tarjeta Carrusel 7 -->
+                        <div class="tarjeta-usuario tarjeta-carrusel">
+                            <div class="cabecera-tarjeta">
+                                <div class="info-usuario">
+                                    <img src="assets/img/usuarios/avatar7.jpg" alt="Avatar de usuario" class="avatar-usuario">
+                                    <span class="nombre-usuario">estrategia_tactica</span>
+                                </div>
+                                <i class="fas fa-check-circle icono-verificado"></i>
+                            </div>
+                            <div class="imagen-tarjeta">
+                                <img src="assets/img/usuarios/post7.jpg" alt="Publicación del usuario">
+                            </div>
+                            <div class="acciones-tarjeta">
+                                <div class="iconos-accion">
+                                    <i class="far fa-heart"></i>
+                                    <i class="far fa-comment"></i>
+                                    <i class="far fa-paper-plane"></i>
+                                </div>
+                                <div class="likes-tarjeta">
+                                    <span>178 Me gusta</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="boton-carrusel boton-next"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+            
+            <!-- Botón Ver Más -->
+            <div class="contenedor-boton-ver-mas">
+                <a href="#" class="boton-ver-mas">Ver Más <i class="fas fa-arrow-right"></i></a>
+        </div>
+        </div>
+    </section>
+  <script>
+   // Select all cards
+    const cards = document.querySelectorAll('.card');
 
-  <!-- Modal Chat -->
-  <div aria-hidden="true" class="fixed inset-0 bg-black bg-opacity-50 flex items-end justify-end z-50 hidden" id="messageModal">
-    <div aria-labelledby="modalTitle" aria-modal="true" class="bg-white rounded-t-lg shadow-lg w-80 max-w-full mx-4 p-6 relative flex flex-col" role="dialog">
-      <button aria-label="Cerrar chat de mensajes" class="absolute top-3 right-3 text-gray-600 hover:text-gray-900 text-2xl font-bold" id="closeMessageModal" type="button">
-        ×
-      </button>
-      <h3 class="text-xl font-bold mb-4 text-green-600 flex items-center gap-2" id="modalTitle">
-        <i class="fas fa-comment-alt"></i>
-        Chat Mensajes
-      </h3>
-      <form class="flex flex-col gap-4" id="messageForm">
-        <label class="flex flex-col text-sm font-semibold text-gray-700">
-          Nombre
-          <input class="mt-1 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600" name="nombre" placeholder="Tu nombre" required="" type="text"/>
-        </label>
-        <label class="flex flex-col text-sm font-semibold text-gray-700">
-          Correo
-          <input class="mt-1 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600" name="correo" placeholder="tu@email.com" required="" type="email"/>
-        </label>
-        <label class="flex flex-col text-sm font-semibold text-gray-700">
-          Comentario
-          <textarea class="mt-1 border border-gray-300 rounded-md px-3 py-2 resize-none focus:outline-none focus:ring-2 focus:ring-green-600" name="comentario" placeholder="Escribe tu comentario" required="" rows="3"></textarea>
-        </label>
-        <button class="bg-green-600 hover:bg-green-700 text-white font-semibold rounded-full py-2 mt-2" type="submit">
-          Enviar
-        </button>
-      </form>
-    </div>
-  </div>
+    // Add event listeners for mouse and keyboard accessibility
+    cards.forEach((card) => {
+      card.addEventListener('mouseenter', () => {
+        card.classList.add('active');
+      });
+      card.addEventListener('mouseleave', () => {
+        card.classList.remove('active');
+      });
+      card.addEventListener('focus', () => {
+        card.classList.add('active');
+      });
+      card.addEventListener('blur', () => {
+        card.classList.remove('active');
+      });
+    });
+  </script>
 
-  <!-- Modal backdrop -->
-  <div
-    id="modal-backdrop"
-    class="fixed inset-0 bg-black bg-opacity-50 hidden z-40"
-    aria-hidden="true"
-  ></div>
+</main>
+<script src="assets/js/home.js" defer></script>
+<script src="assets/js/nosotros.js"></script>
 
-  <!-- Modal menu -->
-  <div
-    id="modal-menu"
-    class="fixed top-0 right-0 h-full w-64 bg-white shadow-lg transform translate-x-full transition-transform z-50"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="modal-menu-title"
-  >
-   <div class="flex items-center justify-between px-4 py-3 border-b border-gray-200">
-    <h3
-      id="modal-menu-title"
-      class="font-extrabold text-lg uppercase text-black"
-    >
-     Menú
-    </h3>
-    <button
-      id="modal-close"
-      aria-label="Close menu"
-      class="text-black text-2xl focus:outline-none"
-      type="button"
-    >
-     <i class="fas fa-times"></i>
-    </button>
-   </div>
-   <nav class="flex flex-col px-4 py-6 space-y-4 font-extrabold text-[16px]">
-    <a class="hover:underline" href="#">Inicio</a>
-    <a class="hover:underline" href="#">Sobre Nosotros</a>
-    <a class="hover:underline" href="#">Blog</a>
-    <a class="hover:underline" href="#">Miembros</a>
-    <a class="hover:underline" href="#">Comunidad</a>
-    <button
-      class="mt-6 bg-red-600 text-white text-[14px] font-extrabold uppercase rounded-full px-4 py-2 whitespace-nowrap"
-      type="button"
-    >
-     Administrador
-    </button>
-   </nav>
-  </div>
-<script src="assets/js/home.js"></script>
 </body>
 </html>

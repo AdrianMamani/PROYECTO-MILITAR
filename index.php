@@ -289,10 +289,10 @@ switch ($accionPrincipal) {
                 $id ? $nosotrosVideo->editar($id) : print "ID no proporcionado";
                 break;
             case 'eliminar':
-                $id ? $nosotrosVideo->eliminar($id) : print "ID no proporcionado";
+                $id ? $nosotrosVideo->eliminar() : print "ID no proporcionado";
                 break;
             case 'ver':
-                $id ? $nosotrosVideo->index($id) : print "ID no proporcionado";
+                $id ? $nosotrosVideo->index() : print "ID no proporcionado";
                 break;
             default:
                 $nosotrosVideo->index();
@@ -414,6 +414,6 @@ switch ($accionPrincipal) {
             $emprendimiento->index();
             break;
 
-        $controller->index(); // Acción por defecto
-        break;
+        //$controller->index(); // Acción por defecto
+        //break;
 }
