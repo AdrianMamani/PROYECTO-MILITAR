@@ -322,7 +322,6 @@ body {
 .seccion-usuarios {
     padding: 20px 20px 40px; /* Reducido el padding superior */
     background-color: #ffffff;
-    margin-bottom: 50px;
     margin-top: 10px; /* Valor negativo para acercar a la sección anterior */
 }
 

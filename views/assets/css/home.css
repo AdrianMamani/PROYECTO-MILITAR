@@ -565,11 +565,11 @@ body {
 }
 
 .container_emprendimientos{
-    max-width: 1024px;
+    max-width: 1240px;
     margin: auto;
 }
 
-.overlay {
+.overlay_emprendimiento {
   position: absolute;
   top: -100%; 
   left: 0;
@@ -584,11 +584,11 @@ body {
   transition: top 0.9s ease; 
 }
 
-.project-card:hover .overlay {
+.project-card:hover .overlay_emprendimiento {
   top: 0; /* Se desliza hacia abajo al hacer hover */
 }
 
-.overlay h3 {
+.overlay_emprendimiento h3 {
   font-size: 24px;
   margin-bottom: 15px;
 }
@@ -598,7 +598,7 @@ body {
   gap: 10px;
 }
 
-.btn {
+.btn_emprendimiento {
   background: green;
   color: white;
   padding: 10px 15px;
@@ -608,17 +608,18 @@ body {
   transition: background 0.3s;
 }
 
-.btn:hover {
+.btn_emprendimiento:hover {
   background: darkgreen;
 }
 
 /* ---- GRID GENERAL ---- */
-.project-grid {
+.project-grid_emprendimientos {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
+  gap: 4px;
   justify-items: center;
   width: 100%;
+  padding: 10px 40px;
 }
 .container_emprendimientos h3 {
     font-size: 36px;
@@ -643,6 +644,7 @@ body {
     color: black;
     font-size: 18px;
     padding: 12px 28px;
+    margin-top: 20px;
     border-radius: 30px;
     font-weight: bold;
     text-decoration: none;
@@ -652,9 +654,9 @@ body {
   }
   
   .button-primary:hover {
-    background-color: transparent;
-    color: #FFD700;
-    border: 2px solid #FFD700;
+    background-color: #eeca01;
+    color: #000000;
+    border: 2px solid #eeca01;
   }
   
 
@@ -662,7 +664,7 @@ body {
 
 /* Pantallas medianas: tablets, 2 columnas */
 @media (max-width: 992px) {
-  .project-grid {
+  .project-grid_emprendimientos {
     grid-template-columns: repeat(2, 1fr);
     padding: 20px 40px;
   }
@@ -670,7 +672,7 @@ body {
 
 /* Pantallas pequeñas: celulares, 1 columna */
 @media (max-width: 576px) {
-  .project-grid {
+  .project-grid_emprendimientos {
     grid-template-columns: 1fr;
     padding: 20px 30px;
   }

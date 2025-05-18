@@ -25,6 +25,7 @@ rel="stylesheet"
 href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap"
 rel="stylesheet"
 />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.12.1/font/bootstrap-icons.min.css">
 </head>
 <body>
 <?php
@@ -346,6 +347,86 @@ echo "<!-- DEBUG IMG FILENAME: " . htmlspecialchars($item['img']) . " -->";
         </div>
         </div>
     </section>
+          <!-- Nueva Sección de Emprendimientos -->
+      <section style="padding: 60px 0; text-align: center;">
+  <div class="container_emprendimientos">
+    <h3 class="text-center" style="margin-bottom: 40px;">Emprendimientos</h3>
+    <div class="project-grid_emprendimientos">
+      
+      <!-- Cada tarjeta -->
+      <div class="project-card">
+        <img src="assets/img/emprendimientos/67dc3a1079019.jpg" alt="Emprendimiento">
+        <div class="overlay_emprendimiento">
+          <h3>Project Name</h3>
+          <div class="buttons">
+            <a href="#" class="btn_emprendimiento"><i class="bi bi-box-arrow-up-right"></i></a>
+            <a href="#" class="btn_emprendimiento"><i class="bi bi-eye-fill"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <img src="assets/img/emprendimientos/67dc3a1079019.jpg" alt="Emprendimiento">
+        <div class="overlay_emprendimiento">
+          <h3>Project Name</h3>
+          <div class="buttons">
+            <a href="#" class="btn_emprendimiento"><i class="bi bi-box-arrow-up-right"></i></a>
+            <a href="#" class="btn_emprendimiento"><i class="bi bi-eye-fill"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <img src="assets/img/emprendimientos/67dc3a1079019.jpg" alt="Emprendimiento">
+        <div class="overlay_emprendimiento">
+          <h3>Project Name</h3>
+          <div class="buttons">
+            <a href="#" class="btn_emprendimiento"><i class="bi bi-box-arrow-up-right"></i></a>
+            <a href="#" class="btn_emprendimiento"><i class="bi bi-eye-fill"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <img src="assets/img/emprendimientos/67dc3a1079019.jpg" alt="Emprendimiento">
+        <div class="overlay_emprendimiento">
+          <h3>Project Name</h3>
+          <div class="buttons">
+            <a href="#" class="btn_emprendimiento"><i class="bi bi-box-arrow-up-right"></i></a>
+            <a href="#" class="btn_emprendimiento"><i class="bi bi-eye-fill"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <img src="assets/img/emprendimientos/67dc3a1079019.jpg" alt="Emprendimiento">
+        <div class="overlay_emprendimiento">
+          <h3>Project Name</h3>
+          <div class="buttons">
+            <a href="#" class="btn_emprendimiento"><i class="bi bi-box-arrow-up-right"></i></a>
+            <a href="#" class="btn_emprendimiento"><i class="bi bi-eye-fill"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <img src="assets/img/emprendimientos/67dc3a1079019.jpg" alt="Emprendimiento">
+        <div class="overlay_emprendimiento">
+          <h3>Project Name</h3>
+          <div class="buttons">
+            <a href="#" class="btn_emprendimiento"><i class="bi bi-box-arrow-up-right"></i></a>
+            <a href="#" class="btn_emprendimiento"><i class="bi bi-eye-fill"></i></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="text-center mt-4">
+    <a class="button button-xs button-primary button-winona" href="web/entrepreneurship.php">Ver más</a>
+    </div>
+  </div>
+</section>
   <script>
    // Select all cards
     const cards = document.querySelectorAll('.card');
