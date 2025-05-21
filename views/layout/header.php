@@ -1,10 +1,13 @@
-<html lang="en">
+<!DOCTYPE html>
+<html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Promoción Militar Navbar with Stable Hover Submenus</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+<title>Navbar Superior Institucional</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+  
   * {
     box-sizing: border-box;
   }
@@ -12,6 +15,7 @@
     margin: 0;
     font-family: 'Inter', sans-serif;
     background-color: #fff;
+    overflow-x: hidden;
   }
   nav {
     display: flex;
@@ -19,7 +23,6 @@
     justify-content: space-between;
     padding: 12px 24px;
     max-width: 100%;
-    border-bottom: 2px solid #D61B1B;
   }
   .logo-container {
     display: flex;
@@ -72,23 +75,13 @@
   ul.nav-links li a:hover {
     color: #008000; /* green text on hover */
   }
-  ul.nav-links li.active > a {
-    background-color: #e6f0e6; /* light green background */
-    color: #000;
-    font-weight: 800;
-  }
-  ul.nav-links li.active > a:hover {
-    color: #008000; /* green text on hover for active */
-  }
   /* Submenu styles */
   ul.submenu {
     display: none;
     position: absolute;
-    top: 38px;
+    top: 25px;
     left: 0;
     background: #fff;
-    border: 1.5px solid #008000;
-    border-radius: 12px;
     box-shadow: 0 8px 24px rgba(0,0,0,0.15);
     min-width: 180px;
     z-index: 200;
@@ -116,12 +109,12 @@
     background-color: #e6f0e6;
     color: #008000;
   }
-  ul.nav-links li:hover > ul.submenu,
-  ul.nav-links li:focus-within > ul.submenu {
-    display: block;
-    opacity: 1;
-    pointer-events: auto;
-  }
+
+  ul.nav-links li:hover > ul.submenu {
+  display: block;
+  opacity: 1;
+  pointer-events: auto;
+}
   /* Remove default list styles */
   ul.nav-links, ul.submenu {
     list-style: none;
@@ -173,6 +166,11 @@
     stroke: #008000;
   }
   /* Modal styles */
+  html.modal-open,
+  body.modal-open {
+    overflow: hidden;
+  }
+
   .modal-overlay {
     display: none;
     position: fixed;
@@ -184,20 +182,51 @@
   }
   .modal-overlay.active {
     display: flex;
+    height: 100vh;
   }
   .modal-content {
     background-color: #fff;
     border-radius: 12px 0 0 12px;
     width: 320px;
     max-width: 90vw;
-    height: 80vh;
+    height: 100vh;
     padding: 24px 20px;
     box-shadow: 0 8px 24px rgba(0,0,0,0.2);
     position: relative;
     font-family: 'Inter', sans-serif;
-    margin: 16px 0 0 0;
     overflow-y: auto;
   }
+  .modal-logo-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 24px;
+  text-align: center;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #ccc;
+}
+
+.modal-logo-img {
+  width: 140px; 
+  height: auto;
+  border-radius: 12px; 
+}
+
+.modal-logo-text {
+  margin-top: 12px;
+}
+
+.modal-logo-text p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.modal-logo-text .bold {
+  font-weight: bold;
+  font-size: 18px;
+}
+
   .modal-close {
     position: absolute;
     top: 12px;
@@ -217,34 +246,38 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+    margin-top: -5px;
   }
   .modal-nav li {
     position: relative;
+    border-bottom: 1px solid #ddd;
+    padding: 8px 0;
   }
   .modal-nav li a {
     font-weight: 700;
     font-size: 16px;
     color: #000;
     text-decoration: none;
-    padding: 10px 14px;
+    padding: 0px 14px;
     border-radius: 10px;
     border: 2.5px solid transparent;
     transition: border-color 0.3s ease, color 0.3s ease;
     display: block;
   }
-  .modal-nav li.active > a {
-    background-color: #e6f0e6; /* light green background */
-    font-weight: 800;
-    border-color: transparent;
-  }
+  
   .modal-nav li a:hover {
     color: #008000;
   }
+  /* Quitar bordes en submenús */
+.modal-submenu li {
+  border: none;
+  padding: 8px 0;
+}
   /* Modal submenu toggle button */
   .submenu-toggle {
     background: none;
     border: none;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
     cursor: pointer;
     color: #000;
@@ -314,7 +347,8 @@
   .modal-admin-btn:hover {
     background-color: #a31515;
   }
-  @media (max-width: 768px) {
+
+  @media (max-width: 1080px) {
     ul.nav-links {
       display: none;
     }
@@ -325,9 +359,238 @@
       display: block;
     }
   }
+  /* Estilos para el nuevo navbar superior */
+  .top-navbar {
+    background-color:rgb(2, 88, 6); /* Azul militar */
+    position: relative;
+    color: white;
+    padding: 0px 24px;
+    font-family: 'Inter', sans-serif;
+    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.2), inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+    /* font-size: 14px; */
+    overflow: hidden;
+    z-index: 1;
+  }
+  
+  .top-navbar-container {
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .institution-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-shrink: 0;
+  }
+  
+  .institution-name {
+    font-weight: bold;
+    position: relative;
+    padding-right: 15px;
+  }
+  
+  .institution-name::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 20px;
+    width: 1px;
+    background-color: rgba(255,255,255,0.3);
+  }
+  
+  .contact-info {
+    display: flex;
+    position: relative;
+    align-items: center;
+    gap: 5px;
+  }
+
+    .contact-info::after {
+    content: "";
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 20px;
+    width: 1px;
+    background-color: rgba(255, 255, 255, 0.75);
+  }
+  
+  .contact-info svg {
+    width: 14px;
+    height: 14px;
+    fill: white;
+  }
+  
+  
+  /* Estilos para el horario */
+  .schedule {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .schedule svg {
+    width: 14px;
+    height: 14px;
+  }
+  .social-icons {
+  display: flex;
+  gap: 12px;
+}
+
+.social-icons-wrapper {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  z-index: 1;
+}
+
+.top-navbar::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -30px;
+    height: 100%;
+    width: 460px;
+    background-color: #ffffff;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2), inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+    transform: skewX(317deg);
+    z-index: 0;
+}
+
+
+.social-link i {
+  font-size: 1.5rem;
+  color: #000; 
+  transition: color 0.3s;
+}
+
+.social-link:hover i {
+  color: #007bff; 
+}
+
+  /* Responsive */
+  @media (min-width: 1656px) {
+  .social-icons-wrapper {
+    margin-left: 800px; 
+  }
+  .top-navbar::before {
+    width: 580px; 
+    right: -100px; 
+  } 
+}
+
+/* Para pantallas medianas menores a 1120px */
+@media (max-width: 1120px) {
+  .top-navbar::before {
+    width: 360px;
+    right: -30px;
+  }
+}
+
+  @media (max-width: 780px) {
+    .top-navbar-container {
+      /* flex-direction: column; */
+      gap: 10px;
+    }
+    
+    .institution-info {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 5px;
+    }
+    
+    .institution-name::after {
+      display: none;
+    }
+    
+      .top-navbar::before {
+    width: 380px; 
+    right: -100px; 
+    } 
+  }
+    @media (max-width: 580px) {
+    .top-navbar-container {
+      flex-direction: column; 
+      gap: 10px;
+    }
+    .contact-info::after{
+      display: none;
+    }
+    .institution-info {
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .institution-name::after {
+      display: none;
+    }
+    
+    .top-navbar::before {
+    display: none;
+    } 
+    
+    .social-icons-wrapper{
+      margin: auto;
+      position: relative;
+    }
+    .social-icons-wrapper::before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    right: -240px;
+    bottom: -10px;
+    left: -1000px;
+    background-color: #ffffff; 
+    z-index: -1; 
+    box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.15); 
+    border-radius: 4px;
+  }
+  }
+
 </style>
 </head>
 <body>
+<!-- Nuevo navbar superior -->
+<div class="top-navbar">
+  <div class="top-navbar-container">
+    <div class="institution-info">
+      <!-- <div class="institution-name">
+        PROMOCION CABO ALBERTO REYES GAMARRA
+      </div> -->
+      <div class="contact-info">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+        </svg>
+        <a href="mailto:cabo.alberto@gmail.com">cabo.alberto@gmail.com</a>
+      </div>
+      <div class="schedule">
+        <i class="bi bi-phone"></i><a href="https://wa.me/51943467444" target="_blank">+51 943467444</a>
+      </div>
+    </div>
+          <!-- Redes Sociales -->
+    <div class="social-icons-wrapper">
+      <div class="social-icons">
+        <a href="https://facebook.com" target="_blank" class="social-link"><i class="bi bi-facebook"></i></a>
+        <a href="https://instagram.com" target="_blank" class="social-link"><i class="bi bi-instagram"></i></a>
+        <a href="https://twitter.com" target="_blank" class="social-link"><i class="bi bi-twitter-x"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--  Navbar principal -->
 <nav>
   <div class="logo-container">
     <img class="logo-img" src="https://storage.googleapis.com/a1aa/image/039aab5e-f041-49a8-d02e-7883e6fc4575.jpg" alt="Logo with red star and green text reading CABO" />
@@ -337,44 +600,53 @@
       <p class="bold">REYES GAMARRA</p>
     </div>
   </div>
-  <ul class="nav-links" role="menubar" aria-label="Primary navigation">
-    <li class="active" role="none"><a role="menuitem" href="#" aria-current="page">Inicio</a></li>
-    <li role="none"><a role="menuitem" href="#">Sobre Nosotros</a></li>
-    <li role="none"><a role="menuitem" href="#">Blog</a></li>
-    <li role="none" tabindex="0" aria-haspopup="true" aria-expanded="false" aria-controls="submenu-miembros">
-      <a role="menuitem" href="#" id="miembros-link">Miembros ▾</a>
-      <ul class="submenu" id="submenu-miembros" role="menu" aria-label="Submenu Miembros">
-        <li role="none"><a role="menuitem" href="#">Usuarios</a></li>
-        <li role="none"><a role="menuitem" href="#">Memoria</a></li>
-      </ul>
-    </li>
-    <li role="none" tabindex="0" aria-haspopup="true" aria-expanded="false" aria-controls="submenu-comunidad">
-      <a role="menuitem" href="#" id="comunidad-link">Comunidad ▾</a>
-      <ul class="submenu" id="submenu-comunidad" role="menu" aria-label="Submenu Comunidad">
-        <li role="none"><a role="menuitem" href="#">Emprendimientos</a></li>
-        <li role="none"><a role="menuitem" href="#">Noticias</a></li>
-        <li role="none"><a role="menuitem" href="#">Finanzas</a></li>
-      </ul>
-    </li>
-  </ul>
-  <button class="admin-btn" type="button" aria-label="Administrador">
-    ADMINISTRADOR
-  </button>
-  <button class="menu-button" aria-label="Abrir menú" aria-haspopup="true" aria-controls="mobile-menu" aria-expanded="false" id="menu-button">
-    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      <line x1="3" y1="6" x2="21" y2="6"></line>
-      <line x1="3" y1="12" x2="21" y2="12"></line>
-      <line x1="3" y1="18" x2="21" y2="18"></line>
-    </svg>
-  </button>
+    <ul class="nav-links" role="menubar" aria-label="Primary navigation">
+      <li class="active" role="none"><a role="menuitem" href="/PROYECTO-MILITAR/views/home.php" aria-current="page">Inicio</a></li>
+      <li role="none"><a role="menuitem" href="/PROYECTO-MILITAR/views/nosotros.php">Sobre Nosotros</a></li>
+      <li role="none"><a role="menuitem" href="#">Blog</a></li>
+      <li role="none" tabindex="0" aria-haspopup="true" aria-expanded="false" aria-controls="submenu-miembros">
+        <a role="menuitem" href="#" id="miembros-link">Miembros ▾</a>
+        <ul class="submenu" id="submenu-miembros" role="menu" aria-label="Submenu Miembros">
+          <li role="none"><a role="menuitem" href="#">Usuarios</a></li>
+          <li role="none"><a role="menuitem" href="#">Memoria</a></li>
+        </ul>
+      </li>
+      <li role="none" tabindex="0" aria-haspopup="true" aria-expanded="false" aria-controls="submenu-comunidad">
+        <a role="menuitem" href="#" id="comunidad-link">Comunidad ▾</a>
+        <ul class="submenu" id="submenu-comunidad" role="menu" aria-label="Submenu Comunidad">
+          <li role="none"><a role="menuitem" href="/PROYECTO-MILITAR/views/web/entrepreneurship.php">Emprendimientos</a></li>
+          <li role="none"><a role="menuitem" href="#">Noticias</a></li>
+          <li role="none"><a role="menuitem" href="#">Finanzas</a></li>
+        </ul>
+      </li>
+    </ul>
+      <button class="admin-btn" target="_blank" rel="noopener noreferrer" onclick="location.href='/PROYECTO-MILITAR/index.php?action=auth/loginForm'" type="button" aria-label="Administrador">
+        ADMINISTRADOR
+      </button>
+      <button class="menu-button" aria-label="Abrir menú" aria-haspopup="true" aria-controls="mobile-menu" aria-expanded="false" id="menu-button">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
 </nav>
 
 <div class="modal-overlay" id="mobile-menu" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1">
   <div class="modal-content" style="margin-left:0; margin-right:16px; border-radius: 0 12px 12px 0;">
     <button class="modal-close" aria-label="Cerrar menú" id="modal-close">&times;</button>
+    <!-- Logo insertado -->
+    <div class="modal-logo-wrapper">
+      <img class="modal-logo-img" src="https://storage.googleapis.com/a1aa/image/039aab5e-f041-49a8-d02e-7883e6fc4575.jpg" alt="Logo promocional" />
+      <div class="modal-logo-text">
+        <p class="bold">PROMOCIÓN</p>
+        <p class="bold">CABO ALBERTO</p>
+        <p class="bold">REYES GAMARRA</p>
+      </div>
+    </div>
     <ul class="modal-nav" role="menu" aria-labelledby="modal-title">
-      <li class="active" role="none"><a role="menuitem" href="#" aria-current="page">Inicio</a></li>
-      <li role="none"><a role="menuitem" href="#">Sobre Nosotros</a></li>
+      <li role="none"><a role="menuitem" href="/PROYECTO-MILITAR/views/home.php" aria-current="page">Inicio</a></li>
+      <li role="none"><a role="menuitem" href="/PROYECTO-MILITAR/views/nosotros.php">Sobre Nosotros</a></li>
       <li role="none"><a role="menuitem" href="#">Blog</a></li>
       <li role="none">
         <button class="submenu-toggle" aria-expanded="false" aria-controls="modal-submenu-miembros" id="toggle-miembros">
@@ -390,13 +662,13 @@
           Comunidad <span class="submenu-arrow"></span>
         </button>
         <ul class="modal-submenu" id="modal-submenu-comunidad" role="menu" aria-label="Submenu Comunidad">
-          <li role="none"><a role="menuitem" href="#">Emprendimientos</a></li>
+          <li role="none"><a role="menuitem" href="/PROYECTO-MILITAR/views/web/entrepreneurship.php">Emprendimientos</a></li>
           <li role="none"><a role="menuitem" href="#">Noticias</a></li>
           <li role="none"><a role="menuitem" href="#">Finanzas</a></li>
         </ul>
       </li>
     </ul>
-    <button class="modal-admin-btn" type="button">ADMINISTRADOR</button>
+    <button class="modal-admin-btn" target="_blank" rel="noopener noreferrer" onclick="location.href='/PROYECTO-MILITAR/index.php?action=auth/loginForm'" type="button">ADMINISTRADOR</button>
   </div>
 </div>
 
@@ -474,6 +746,54 @@
       }, 200);
     });
   });
+  // mejorar la accesibilidad en móviles
+  document.querySelectorAll('.top-nav-links > li > a').forEach(link => {
+    if (window.innerWidth <= 768) {
+      link.addEventListener('click', function(e) {
+        if (this.nextElementSibling && this.nextElementSibling.classList.contains('top-submenu')) {
+          e.preventDefault();
+          this.nextElementSibling.style.display = 
+            this.nextElementSibling.style.display === 'block' ? 'none' : 'block';
+        }
+      });
+    }
+  });
+
+  //Bloquea scroll en el body cuando el modal está abierto
+    function openModal() {
+      document.body.classList.add('modal-open');
+      document.documentElement.classList.add('modal-open'); 
+      modal.classList.add('active');
+      menuButton.setAttribute('aria-expanded', 'true');
+      modal.focus();
+    }
+
+    function closeModal() {
+      document.body.classList.remove('modal-open');
+      document.documentElement.classList.remove('modal-open'); 
+      modal.classList.remove('active');
+      menuButton.setAttribute('aria-expanded', 'false');
+      menuButton.focus();
+    }
+
+  // Submenús colapsables para móviles
+    document.querySelectorAll('.submenu-toggle').forEach(toggle => {
+      toggle.addEventListener('click', function () {
+        const submenuId = this.getAttribute('aria-controls');
+        const submenu = document.getElementById(submenuId);
+        const arrow = this.querySelector('.submenu-arrow');
+        const isOpen = submenu.classList.contains('open');
+
+        // Toggle aria-expanded
+        this.setAttribute('aria-expanded', String(!isOpen));
+
+        // Toggle submenu visibility
+        submenu.classList.toggle('open');
+
+        // Rotate arrow
+        arrow.classList.toggle('open');
+      });
+    });
 </script>
 </body>
 </html>

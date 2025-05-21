@@ -453,4 +453,5 @@ echo "<!-- DEBUG IMG FILENAME: " . htmlspecialchars($item['img']) . " -->";
 <script src="assets/js/nosotros.js"></script>
 
 </body>
+<?php include 'layout/footer.php'?>
 </html>

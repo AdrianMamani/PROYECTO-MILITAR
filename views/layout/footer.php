@@ -12,14 +12,14 @@
     href="https://fonts.googleapis.com/css2?family=Inter&display=swap"
     rel="stylesheet"
   />
-  <style>
+  <!-- <style>
     body,
     html {
       height: 100%;
       margin: 0;
       font-family: "Inter", sans-serif;
     }
-  </style>
+  </style> -->
 </head>
 <body class="flex flex-col min-h-screen">
   <main class="flex-grow"></main>
@@ -33,10 +33,10 @@
     >
       <div class="flex flex-col items-center sm:items-start text-center sm:text-left">
         <img
-          alt="Portrait of a smiling person with short hair wearing a casual shirt, outdoor background with soft sunlight"
+          alt="Logo with red star and green text reading CABO"
           class="rounded-full mb-4 w-20 h-20 sm:w-20 sm:h-20"
           height="80"
-          src="https://storage.googleapis.com/a1aa/image/235e8a6b-4619-422d-4445-10a6a69cd621.jpg"
+          src="https://storage.googleapis.com/a1aa/image/039aab5e-f041-49a8-d02e-7883e6fc4575.jpg"
           width="80"
         />
         <p class="text-sm leading-relaxed max-w-[280px]">
@@ -76,31 +76,46 @@
       </div>
 
       <div class="flex flex-col items-center sm:items-start text-center sm:text-left">
-        <h2 class="text-yellow-400 font-semibold text-lg mb-5">Quick Links</h2>
+        <h2 class="text-yellow-400 font-semibold text-lg mb-5">Enlaces</h2>
         <ul class="space-y-3 text-sm max-w-[180px]">
           <li>
-            <a href="#" class="flex items-center gap-2 hover:underline justify-center sm:justify-start"
-              ><i class="fas fa-angle-right text-white"></i> Home</a
+            <a href="/PROYECTO-MILITAR/views/home.php" class="flex items-center gap-2 hover:underline justify-center sm:justify-start"
+              ><i class="fas fa-angle-right text-white"></i> Inicio</a
+            >
+          </li>
+          <li>
+            <a href="/PROYECTO-MILITAR/views/nosotros.php" class="flex items-center gap-2 hover:underline justify-center sm:justify-start"
+              ><i class="fas fa-angle-right text-white"></i> Nosotros</a
             >
           </li>
           <li>
             <a href="#" class="flex items-center gap-2 hover:underline justify-center sm:justify-start"
-              ><i class="fas fa-angle-right text-white"></i> About Us</a
+              ><i class="fas fa-angle-right text-white"></i> Blog</a
             >
           </li>
           <li>
             <a href="#" class="flex items-center gap-2 hover:underline justify-center sm:justify-start"
-              ><i class="fas fa-angle-right text-white"></i> Our Services</a
+              ><i class="fas fa-angle-right text-white"></i> Usuarios</a
             >
           </li>
           <li>
             <a href="#" class="flex items-center gap-2 hover:underline justify-center sm:justify-start"
-              ><i class="fas fa-angle-right text-white"></i> Our Projects</a
+              ><i class="fas fa-angle-right text-white"></i> Memoria</a
+            >
+          </li>
+          <li>
+            <a href="/PROYECTO-MILITAR/views/web/entrepreneurship.php" class="flex items-center gap-2 hover:underline justify-center sm:justify-start"
+              ><i class="fas fa-angle-right text-white"></i> Emprendimientos</a
             >
           </li>
           <li>
             <a href="#" class="flex items-center gap-2 hover:underline justify-center sm:justify-start"
-              ><i class="fas fa-angle-right text-white"></i> Contact Us</a
+              ><i class="fas fa-angle-right text-white"></i> Noticias</a
+            >
+          </li>
+          <li>
+            <a href="#" class="flex items-center gap-2 hover:underline justify-center sm:justify-start"
+              ><i class="fas fa-angle-right text-white"></i> Finanzas</a
             >
           </li>
         </ul>
