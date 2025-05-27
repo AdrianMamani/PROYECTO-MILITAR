@@ -2,7 +2,7 @@
  <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1" name="viewport" />
-  <title>Entrepreneurship</title>
+  <title>Emprendimientos</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="../assets/css/entrepreneurship.css">
   <link

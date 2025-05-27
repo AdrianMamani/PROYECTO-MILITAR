@@ -1,0 +1,471 @@
+ /* ============================
+        Banner-Gallery
+        ============================ */
+        /* Estilos base para el banner */
+        .banner-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        .banner-image {
+            width: 100%;
+            display: block;
+            object-fit: cover;
+            height: 300px; 
+            object-position: 0 -110px;
+        }
+        
+        .banner-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.664); 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+
+        .banner-text-offset {
+            margin-left: 40px; 
+            align-items: flex-start; 
+            text-align: left; 
+        }
+        
+        .banner-content h1 {
+            text-align: left;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .banner-content p {
+            text-align: left;
+            font-size: 1.5rem;
+            margin: 0;
+        }
+        
+        /* Media Queries para responsive */
+        
+        /* Tablets */
+        @media (max-width: 992px) {
+            .banner-image {
+                height: 250px;
+                object-position: center;
+            }
+            
+            .banner-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .banner-content p {
+                font-size: 1.3rem;
+            }
+            .banner-container{
+                margin-bottom: 30px;
+            }
+        }
+        
+        /* Tablets pequeñas */
+        @media (max-width: 768px) {
+            .banner-image {
+                height: 350px;
+                object-position: center;
+            }
+            
+            .banner-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .banner-content p {
+                font-size: 1.1rem;
+            }
+            .banner-container{
+                margin-bottom: 30px;
+            }
+        }
+        
+        /* Móviles */
+        @media (max-width: 576px) {
+            .banner-image {
+                height: 350px;
+                object-position: center;
+            }
+            
+            .banner-content h1 {
+                font-size: 1.8rem;
+            }
+            
+            .banner-content p {
+                font-size: 1rem;
+            }
+            .banner-container{
+                margin-bottom: 30px;
+            }
+        }
+        
+        /* Móviles muy pequeños */
+        @media (max-width: 400px) {
+            .banner-image {
+                height: 300px;
+                object-position: center;
+            }
+            
+            .banner-content h1 {
+                font-size: 1.5rem;
+            }
+            
+            .banner-content p {
+                font-size: 0.9rem;
+            }
+            .banner-container{
+                margin-bottom: 30px;
+            }
+        }
+
+/* Estilos generales para la sección */
+#logros-section {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 1rem;
+}
+
+/* Estilos para el botón */
+.button-container {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+#logrosBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    background-color: #f59e0b;
+    color: #000;
+    font-weight: bold;
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    transition: all 0.3s ease;
+    transform: scale(1);
+    border: none;
+    cursor: pointer;
+}
+
+#logrosBtn:hover {
+    background-color: #fbbf24;
+    transform: scale(1.05);
+}
+
+#logrosBtn i {
+    font-size: 1.5rem;
+    margin-right: 0.75rem;
+}
+
+#logrosBtn span {
+    font-size: 1.25rem;
+}
+
+/* Estilos para la galería */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.gallery-item img,
+.gallery-item video {
+    width: 100%;
+    height: 16rem;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.gallery-item:hover img,
+.gallery-item:hover video {
+    transform: scale(1.1);
+}
+
+.gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.gallery-overlay i {
+    color: white;
+    font-size: 1.5rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay i {
+    opacity: 1;
+}
+
+/* Estilos para el modal */
+#logrosModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 50;
+    display: none;
+    overflow-y: auto;
+    transition: opacity 0.3s ease;
+}
+
+.modal-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 1rem 1rem 5rem;
+    text-align: center;
+}
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: black;
+    opacity: 0.75;
+}
+
+.modal-content-ig {
+    position: relative;
+    display: inline-block;
+    text-align: left;
+    background-color: white;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 20px 25px rgba(0, 0, 0, 0.1);
+    transform: translateY(0);
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 56rem;
+}
+
+.modal-flex {
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width: 768px) {
+    .modal-flex {
+        flex-direction: row;
+    }
+}
+
+.media-section {
+    width: 100%;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (min-width: 768px) {
+    .media-section {
+        width: 66.666667%;
+    }
+}
+
+#modalMediaContainer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.info-section {
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width: 768px) {
+    .info-section {
+        width: 33.333333%;
+    }
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    padding-bottom: 0.75rem;
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.modal-logo {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 9999px;
+    margin-right: 0.75rem;
+}
+
+.verified-container {
+    display: flex;
+    align-items: center;
+}
+
+.verified-container h3 {
+    font-weight: bold;
+}
+
+.verified-container i {
+    color: #3b82f6;
+    margin-left: 0.5rem;
+}
+
+.promotion-year {
+    color: #6b7280;
+    font-size: 0.875rem;
+}
+
+#modalCaption {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #e5e7eb;
+    scrollbar-width: thin;
+    scrollbar-color: #d1d5db #f3f4f6;
+}
+
+#modalCaption::-webkit-scrollbar {
+    width: 6px;
+}
+
+#modalCaption::-webkit-scrollbar-track {
+    background: #f3f4f6;
+}
+
+#modalCaption::-webkit-scrollbar-thumb {
+    background-color: #d1d5db;
+    border-radius: 6px;
+}
+
+.comments-section {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.comment {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 0.75rem;
+}
+
+.comment:last-child {
+    margin-bottom: 0;
+}
+
+.comment-avatar {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 9999px;
+    margin-right: 0.75rem;
+}
+
+.comment-author {
+    font-weight: 600;
+}
+
+.close-button-container {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+}
+
+#closeModal {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 9999px;
+    padding: 0.5rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#closeModal:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+#closeModal i {
+    display: block;
+    width: 1rem;
+    height: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .banner-content h1 {
+        font-size: 2rem;
+    }
+    
+    .banner-content p {
+        font-size: 1rem;
+    }
+    
+    .modal-flex {
+        flex-direction: column;
+    }
+    
+    .media-section, .info-section {
+        width: 100%;
+    }
+}
