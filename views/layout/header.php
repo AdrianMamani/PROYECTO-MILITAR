@@ -479,6 +479,16 @@
   color: #007bff; 
 }
 
+/* Instagram */
+.social-link[href*="instagram.com"]:hover i {
+  color:rgb(214, 2, 41); 
+}
+
+/* Twitter */
+.social-link[href*="twitter.com"]:hover i {
+  color:rgb(112, 112, 112); /* gris medio para Twitter */
+}
+
   /* Responsive */
   @media (min-width: 1656px) {
   .social-icons-wrapper {
