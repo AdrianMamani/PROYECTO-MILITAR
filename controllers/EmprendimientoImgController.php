@@ -2,89 +2,59 @@
 require_once './models/EmprendimientoImg.php';
 require_once './config/database.php'; // Incluye el archivo de la clase Database
 
-class EmprendimientoGaleriaController {
+class ImagenEmprendimientoController {
     private $model;
 
     public function __construct() {
-        $this->model = new EmprendimientoGaleriaModel();
+        $this->model = new ImagenEmprendimientoModel();
     }
 
-    // GET  /index.php?action=emprendimientogaleria/index
+    // GET  /index.php?action=especialidadimg/index
     public function index() {
-        // Obtiene todas las imágenes/videos con el nombre del emprendimiento
-        $galeria       = $this->model->getAll();
-        $emprendimientos = $this->model->getEnprendimiento(); // Obtener los emprendimientos para el select
-        require_once './views/admin/emprendimiento_img.php'; // Vista para mostrar la galería
+        $imagenes       = $this->model->getAll();
+        $emprendimientos = $this->model->getEmprendimiento();
+        require_once './views/admin/emprendimiento_img.php';
     }
 
-    // GET  /index.php?action=emprendimientogaleria/create
+    // GET  /index.php?action=especialidadimg/create
     public function create() {
-        $emprendimientos = $this->model->getEnprendimiento(); // Obtener los emprendimientos para el select
-        require_once './views/admin/emprendimiento_img.php'; // Vista para agregar nuevo archivo
+        $emprendimientos = $this->model->getEmprendimiento();
+        require_once './views/admin/emprendimiento_img.php';
     }
 
-    // POST /index.php?action=emprendimientogaleria/store
+    // POST /index.php?action=especialidadimg/store
     public function store() {
-        if (isset($_POST['id_emprendimiento'], $_POST['tipo_archivo'], $_FILES['archivo'])) {
-            $id_emprendimiento = $_POST['id_emprendimiento'];
-            $tipo_archivo = $_POST['tipo_archivo'];
-            $file = $_FILES['archivo'];
-
-            if ($tipo_archivo === 'imagen') {
-                $this->model->addGaleria($id_emprendimiento, $tipo_archivo, $file);
-            } elseif ($tipo_archivo === 'video') {
-                // Solo el ID del video de YouTube (en el formato MPJ2wMLjYBY)
-                $video_id = basename($file['name']); // Aquí se supone que el nombre del archivo contiene el video ID de YouTube
-                $this->model->addGaleria($id_emprendimiento, $tipo_archivo, $video_id);
-            }
+        if (isset($_POST['emprendimiento_id'], $_FILES['imagen'])) {
+            $this->model->add($_POST['emprendimiento_id'], $_FILES['imagen']);
         }
         header('Location: index.php?action=emprendimientoimg/index');
         exit;
     }
 
-    // GET  /index.php?action=emprendimientogaleria/edit&id=123
+    // GET  /index.php?action=especialidadimg/edit&id=123
     public function edit() {
-        $id = $_GET['id'] ?? null;
-        $galeria = $this->model->getByIdGaleria($id);
-        $emprendimientos = $this->model->getEnprendimiento(); // Obtener los emprendimientos para el select
-        require_once './views/admin/emprendimiento_img.php'; // Vista para editar archivo
+        $id             = $_GET['id'] ?? null;
+        $emprendimientos = $this->model->getEmprendimiento();
+        $imagen         = $this->model->getById($id);
+        require_once './views/admin/emprendimientoimg.php';
     }
 
-    // POST /index.php?action=emprendimientogaleria/update
+    // POST /index.php?action=especialidadimg/update
     public function update() {
-        if (isset($_POST['id'], $_POST['tipo_archivo'])) {
-            $id = $_POST['id'];
-            $tipo_archivo = $_POST['tipo_archivo'];
-    
-            if ($tipo_archivo === 'imagen') {
-                if (isset($_FILES['imagen_archivo']) && $_FILES['imagen_archivo']['error'] === 0) {
-                    $this->model->updateGaleriaGeneral($id, $tipo_archivo, $_FILES['imagen_archivo']);
-                } else {
-                    // Si no se sube una nueva imagen, podrías mantener la existente
-                    // O, si estás actualizando otros campos (como el nombre del emprendimiento,
-                    // que no está en tu modal actual), realizar esa actualización aquí.
-                    // Por ahora, si no hay nueva imagen, no se actualiza la imagen.
-                    // Si necesitas actualizar otros campos, asegúrate de recibirlos y pasarlos al modelo.
-                }
-            } elseif ($tipo_archivo === 'video') {
-                if (isset($_POST['url_archivo']) && !empty($_POST['url_archivo'])) {
-                    $video_url = $_POST['url_archivo'];
-                    $this->model->updateGaleriaGeneral($id, $tipo_archivo, null, $video_url);
-                }
-            }
+        if (isset($_POST['id'], $_FILES['imagen'])) {
+            $this->model->update($_POST['id'], $_FILES['imagen']);
         }
         header('Location: index.php?action=emprendimientoimg/index');
         exit;
     }
 
-    // GET  /index.php?action=emprendimientogaleria/delete&id=123
+    // GET  /index.php?action=especialidadimg/delete&id=123
     public function delete() {
         $id = $_GET['id'] ?? null;
         if ($id) {
-            $this->model->deleteGaleria($id);
+            $this->model->delete($id);
         }
         header('Location: index.php?action=emprendimientoimg/index');
         exit;
     }
 }
-?>

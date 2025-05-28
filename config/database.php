@@ -1,7 +1,9 @@
 <?php
 class Database {
     private static $host = 'localhost';
-    private static $db_name = 'sistema_promocion';
+    private static $db_name = 'promocion';
+
+        // private static $db_name = 'sistema_promocion';
     private static $username = 'root';
     private static $password = '';
     private static $conn;
