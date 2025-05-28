@@ -110,28 +110,6 @@ include '../layout/header.php';
             </div>
         </div>
 
-        <div class="gallery-item" data-type="video" data-src="../assets/img/pruebas/video-prueba.mp4" data-caption="Logro 2 - Descripción breve">
-            <video src="../assets/img/pruebas/video-prueba.mp4" muted preload="metadata"></video>
-            <div class="gallery-overlay">
-                <i class="fas fa-play-circle"></i>
-            </div>
-        </div>
-
-        <div class="gallery-item" data-type="video" data-src="../assets/img/pruebas/video-prueba.mp4" data-caption="Logro 2 - Descripción breve">
-            <video src="../assets/img/pruebas/video-prueba.mp4" muted preload="metadata"></video>
-            <div class="gallery-overlay">
-                <i class="fas fa-play-circle"></i>
-            </div>
-        </div>
-
-
-        <div class="gallery-item" data-type="video" data-src="../assets/img/pruebas/video-prueba.mp4" data-caption="Logro 2 - Descripción breve">
-            <img src="../assets/img/pruebas/video-prueba.mp4" alt="Video galería">
-            <div class="gallery-overlay">
-                <i class="fas fa-play-circle"></i>
-            </div>
-        </div>
-
     </div>
 </section>
 
@@ -147,7 +125,7 @@ include '../layout/header.php';
                 <!-- Sección de imágenes/videos (izquierda) -->
                 <div class="media-section">
                     <div id="modalMediaContainer">
-                        <!-- Aquí se cargará la imagen o video dinámicamente -->
+                        
                     </div>
                 </div>
 
@@ -155,7 +133,7 @@ include '../layout/header.php';
                 <div class="info-section">
                     <!-- Cabecera con logo, nombre y verificado -->
                     <div class="modal-header">
-                        <img src="../assets/img/logo-promocion.jpg" alt="Logo promoción" class="modal-logo">
+                        <img src="https://storage.googleapis.com/a1aa/image/039aab5e-f041-49a8-d02e-7883e6fc4575.jpg" alt="Logo promoción" class="modal-logo">
                         <div>
                             <div class="verified-container">
                                 <h3>CABO ALBERTO REYES GAMARRA</h3>
@@ -173,14 +151,14 @@ include '../layout/header.php';
                     <!-- Comentarios estáticos -->
                     <div class="comments-section">
                         <div class="comment">
-                            <img src="../assets/img/user1.jpg" alt="Usuario" class="comment-avatar">
+                            <img src="https://storage.googleapis.com/a1aa/image/5c914e35-a818-4ee7-f251-27f38c769f64.jpg" alt="Usuario" class="comment-avatar">
                             <div>
                                 <p class="comment-author">Usuario1</p>
                                 <p>¡Felicitaciones por este gran logro!</p>
                             </div>
                         </div>
                         <div class="comment">
-                            <img src="../assets/img/user2.jpg" alt="Usuario" class="comment-avatar">
+                            <img src="https://storage.googleapis.com/a1aa/image/5c914e35-a818-4ee7-f251-27f38c769f64.jpg" alt="Usuario" class="comment-avatar">
                             <div>
                                 <p class="comment-author">Usuario2</p>
                                 <p>Todo el esfuerzo valió la pena. ¡Éxitos!</p>
@@ -285,82 +263,151 @@ include '../layout/header.php';
     </button>
    </nav>
   </div>
-    <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Abrir modal de Nuestros Logros
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const logro = {
+        type: 'image',
+        src: '../assets/img/pruebas/prueba01.jpeg',
+        caption: 'Logro 1 - Descripción breve del primer logro',
+        comments: [
+            {
+                avatar: 'https://storage.googleapis.com/a1aa/image/5c914e35-a818-4ee7-f251-27f38c769f64.jpg',
+                author: 'Usuario1',
+                text: '¡Felicitaciones por este gran logro!'
+            },
+            {
+                avatar: 'https://storage.googleapis.com/a1aa/image/5c914e35-a818-4ee7-f251-27f38c769f64.jpg',
+                author: 'Usuario2',
+                text: 'Todo el esfuerzo valió la pena. ¡Éxitos!'
+            }
+        ]
+    };
+
     const logrosBtn = document.getElementById('logrosBtn');
     const logrosModal = document.getElementById('logrosModal');
-    
-    logrosBtn.addEventListener('click', function() {
+    const modalMediaContainer = document.getElementById('modalMediaContainer');
+    const modalCaption = document.getElementById('modalCaption'); // <== NUEVO
+    const closeModal = document.getElementById('closeModal');
+
+    function mostrarLogro() {
+        modalMediaContainer.innerHTML = '';
+        modalCaption.textContent = ''; // Limpiamos descripción previa
+
+        const mediaContainer = document.createElement('div');
+        mediaContainer.className = 'media-block';
+        mediaContainer.style.textAlign = 'center';
+
+        if (logro.type === 'image') {
+            const img = document.createElement('img');
+            img.src = logro.src;
+            img.alt = 'Logro';
+            img.style.cssText = 'max-width: 100%; max-height: 70vh; object-fit: contain;';
+            mediaContainer.appendChild(img);
+        } else if (logro.type === 'video') {
+            const video = document.createElement('video');
+            video.controls = true;
+            video.style.cssText = 'max-width: 100%; max-height: 70vh;';
+            const source = document.createElement('source');
+            source.src = logro.src;
+            source.type = 'video/mp4';
+            video.appendChild(source);
+            mediaContainer.appendChild(video);
+        }
+
+        // 🔁 Ya no se crea un <p> debajo del bloque
+        // caption.textContent = logro.caption;
+        // caption.style.marginTop = '1rem';
+        // mediaContainer.appendChild(caption);
+
+        modalMediaContainer.appendChild(mediaContainer);
+
+        // Mostramos descripción en otro lugar
+        modalCaption.textContent = logro.caption;
+    }
+
+    // Abrir modal
+    logrosBtn.addEventListener('click', () => {
+        mostrarLogro();
         logrosModal.style.display = 'block';
         document.body.style.overflow = 'hidden';
     });
 
     // Cerrar modal
-    const closeModal = document.getElementById('closeModal');
-    closeModal.addEventListener('click', function() {
+    closeModal.addEventListener('click', () => {
         logrosModal.style.display = 'none';
         document.body.style.overflow = 'auto';
+        document.querySelectorAll('video').forEach(video => video.pause());
     });
 
-    // Cerrar al hacer clic fuera del modal
-    logrosModal.addEventListener('click', function(e) {
+    logrosModal.addEventListener('click', e => {
         if (e.target === logrosModal) {
             logrosModal.style.display = 'none';
             document.body.style.overflow = 'auto';
         }
     });
 
-    // Manejar clics en elementos de la galería
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    const modalMediaContainer = document.getElementById('modalMediaContainer');
-    const modalCaption = document.getElementById('modalCaption');
-    
-    galleryItems.forEach(item => {
-        item.addEventListener('click', function() {
+    const simpleModal = document.createElement('div');
+    simpleModal.id = 'simpleModal';
+    simpleModal.style.cssText = `
+        position: fixed; top: 0; left: 0;
+        width: 100%; height: 100%;
+        background-color: rgba(0,0,0,0.9);
+        z-index: 1000; display: none;
+        justify-content: center; align-items: center;
+    `;
+
+    const simpleModalContent = document.createElement('div');
+    simpleModalContent.style.cssText = 'position: relative; max-width: 90%; max-height: 90%;';
+
+    const closeSimpleModal = document.createElement('button');
+    closeSimpleModal.innerHTML = '<i class="fas fa-times"></i>';
+    closeSimpleModal.style.cssText = `
+        position: absolute; top: -40px; right: 0;
+        background: none; border: none;
+        color: white; font-size: 1.5rem; cursor: pointer;
+    `;
+
+    simpleModalContent.appendChild(closeSimpleModal);
+    simpleModal.appendChild(simpleModalContent);
+    document.body.appendChild(simpleModal);
+
+    closeSimpleModal.addEventListener('click', () => {
+        simpleModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    });
+
+    document.querySelectorAll('.gallery-item').forEach(item => {
+        item.addEventListener('click', function () {
             const type = this.getAttribute('data-type');
             const src = this.getAttribute('data-src');
-            const caption = this.getAttribute('data-caption');
-            
-            // Limpiar contenedor
-            modalMediaContainer.innerHTML = '';
-            
-            // Cargar contenido según el tipo
+
+            simpleModalContent.innerHTML = '';
+            simpleModalContent.appendChild(closeSimpleModal);
+
             if (type === 'image') {
                 const img = document.createElement('img');
                 img.src = src;
-                img.alt = "Imagen logro";
-                img.style.width = '100%';
-                img.style.height = 'auto';
-                img.style.maxHeight = '70vh';
-                img.style.objectFit = 'contain';
-                modalMediaContainer.appendChild(img);
+                img.style.cssText = 'max-width: 100%; max-height: 90vh; object-fit: contain;';
+                simpleModalContent.insertBefore(img, closeSimpleModal);
             } else if (type === 'video') {
                 const video = document.createElement('video');
                 video.controls = true;
-                video.style.width = '100%';
-                video.style.height = 'auto';
-                video.style.maxHeight = '70vh';
-                
+                video.autoplay = true;
+                video.style.cssText = 'max-width: 100%; max-height: 90vh;';
                 const source = document.createElement('source');
                 source.src = src;
                 source.type = 'video/mp4';
-                
                 video.appendChild(source);
-                video.appendChild(document.createTextNode('Tu navegador no soporta el elemento de video.'));
-                modalMediaContainer.appendChild(video);
+                simpleModalContent.insertBefore(video, closeSimpleModal);
             }
-            
-            // Cargar descripción
-            modalCaption.innerHTML = `<p>${caption}</p>`;
-            
-            // Mostrar modal
-            logrosModal.style.display = 'block';
+
+            simpleModal.style.display = 'flex';
             document.body.style.overflow = 'hidden';
         });
     });
 });
-  </script>
+</script>
+
 </body>
 <?php include '../layout/footer.php'?>
 </html>
