@@ -1,4 +1,25 @@
-<html lang="en">
+<?php
+require_once '../../models/EmprendimientoModel.php';
+require_once '../../models/EmprendimientoImg.php'; 
+require_once '../../config/database.php';
+
+$modelo = new Emprendimiento();
+$carruselItems = $modelo->obtenerTodos();
+
+$imgModel = new ImagenEmprendimientoModel();
+$imagenes = $imgModel->getAll();
+
+// Relacionar imágenes con emprendimientos
+$imagenesPorEmprendimiento = [];
+foreach ($imagenes as $img) {
+    $id = $img['emprendimiento_id'];
+    if (!isset($imagenesPorEmprendimiento[$id])) {
+        $imagenesPorEmprendimiento[$id] = '../../uploads/emprendimiento/' . $img['nombre_imagen'];
+    }
+}
+?>
+
+<html lang="es">
  <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1" name="viewport" />
@@ -49,51 +70,28 @@ include '../layout/header.php';
       <strong>Iniciativas con Propósito:</strong> Emprendimientos de la Promoción Cabo Alberto Reyes Gamarra, forjando liderazgo y progreso.
     </p>
   </div>
-  <div class="blog-grid">
-    <div class="blog-card">
-      <img src="https://storage.googleapis.com/a1aa/image/5c914e35-a818-4ee7-f251-27f38c769f64.jpg" alt="Imagen blog">
-      <h2>Asesor del Comando General del Ejército (CGE) - Año 2023</h2>
-      <p>Pezúa Chávez Juan</p>
-      <button class="btn-green">Leer más</button>
-    </div>
-
-    <div class="blog-card">
-      <img src="https://storage.googleapis.com/a1aa/image/5c914e35-a818-4ee7-f251-27f38c769f64.jpg" alt="Imagen blog">
-      <h2>Asesor del Comando General del Ejército (CGE) - Año 2023</h2>
-      <p>Pezúa Chávez Juan</p>
-      <button class="btn-green">Leer más</button>
-    </div>
-
-    <div class="blog-card">
-      <img src="https://storage.googleapis.com/a1aa/image/5c914e35-a818-4ee7-f251-27f38c769f64.jpg" alt="Imagen blog">
-      <h2>Asesor del Comando General del Ejército (CGE) - Año 2023</h2>
-      <p>Pezúa Chávez Juan</p>
-      <button class="btn-green">Leer más</button>
-    </div>
-    <div class="blog-card">
-      <img src="https://storage.googleapis.com/a1aa/image/5c914e35-a818-4ee7-f251-27f38c769f64.jpg" alt="Imagen blog">
-      <h2>Asesor del Comando General del Ejército (CGE) - Año 2023</h2>
-      <p>Pezúa Chávez Juan</p>
-      <button class="btn-green">Leer más</button>
-    </div>
-
-    <div class="blog-card">
-      <img src="https://storage.googleapis.com/a1aa/image/5c914e35-a818-4ee7-f251-27f38c769f64.jpg" alt="Imagen blog">
-      <h2>Asesor del Comando General del Ejército (CGE) - Año 2023</h2>
-      <p>Pezúa Chávez Juan</p>
-      <button class="btn-green">Leer más</button>
-    </div>
-
-    <div class="blog-card">
-      <img src="https://storage.googleapis.com/a1aa/image/5c914e35-a818-4ee7-f251-27f38c769f64.jpg" alt="Imagen blog">
-      <h2>Asesor del Comando General del Ejército (CGE) - Año 2023</h2>
-      <p>Pezúa Chávez Juan</p>
-      <button class="btn-green">Leer más</button>
+    <div class="blog-grid">
+      <?php foreach ($carruselItems as $item): ?>
+        <?php
+          $idEmp = $item['id'];
+          $imagen = isset($imagenesPorEmprendimiento[$idEmp]) 
+                      ? $imagenesPorEmprendimiento[$idEmp] 
+                      : 'https://via.placeholder.com/400x220.png?text=Sin+Imagen'; // Imagen por defecto si no hay
+        ?>
+        <div class="blog-card" tabindex="0">
+          <img src="<?= htmlspecialchars($imagen) ?>" alt="Imagen del emprendimiento <?= htmlspecialchars($item['nombre_emprendimiento']) ?>" width="400" height="220">
+          <h2><?= htmlspecialchars($item['nombre_emprendimiento']) ?></h2>
+          <p><?= htmlspecialchars($item['subdescripcion']) ?></p>
+          <div style="margin-top: 20px;">
+          <a href="/PROYECTO-MILITAR/views/web/entrepreneurship_company.php?id=<?= urlencode($item['id']) ?>" class="btn-green">Leer más</a>
+        </div>
+        </div>
+      <?php endforeach; ?>
     </div>
   </div>
-  <div class="btn-container">
+  <!-- <div class="btn-container">
     <button class="btn-see-more">Leer más</button>
-  </div>
+  </div> -->
 </section>
   <!-- Mensaje Floating Button con tooltip a la izquierda, fijo en pantalla -->
   <div class="fixed bottom-6 right-6 z-50 flex items-center group space-x-3">

@@ -1,3 +1,45 @@
+<?php
+require_once '../../models/EmprendimientoModel.php';
+require_once '../../models/EmprendimientoImg.php';
+require_once '../../config/database.php';
+
+$id = isset($_GET['id']) ? $_GET['id'] : null;
+if (!$id) {
+    header('Location: emprendimientos.php');
+    exit;
+}
+
+$emprendimientoModel = new Emprendimiento();
+$imgModel = new ImagenEmprendimientoModel();
+
+$emprendimiento = $emprendimientoModel->obtenerEmprendimientoPorId($id);
+$imagenes = $imgModel->getAll();
+
+// Filtrar solo imágenes de este emprendimiento
+$imagenesEmprendimiento = array_values(array_filter($imagenes, function($img) use ($id) {
+    return $img['emprendimiento_id'] == $id;
+}));
+
+// Obtener la última imagen (si existe)
+$ultimaImagen = end($imagenesEmprendimiento);
+$imagenPrincipal = $ultimaImagen ? '../../uploads/emprendimiento/' . $ultimaImagen['nombre_imagen'] : '../assets/img/default-empresa.jpg';
+
+// Eliminar la última imagen del array para la galería
+array_pop($imagenesEmprendimiento);
+
+// Obtener y preparar imágenes
+$imagenesEmprendimiento = array_values(array_filter($imagenes, function($img) use ($id) {
+    return $img['emprendimiento_id'] == $id;
+}));
+
+// Última imagen para mostrar arriba
+$ultimaImagen = end($imagenesEmprendimiento);
+$imagenPrincipal = $ultimaImagen ? '../../uploads/emprendimiento/' . $ultimaImagen['nombre_imagen'] : '../assets/img/default-empresa.jpg';
+
+// Galería en orden inverso (sin la última)
+$galeriaImagenes = array_reverse($imagenesEmprendimiento);
+array_shift($galeriaImagenes);
+?>
 <html lang="en">
  <head>
   <meta charset="utf-8" />
@@ -30,28 +72,33 @@ include '../layout/header.php';
         <div class="banner-overlay">
             <div class="banner-content banner-text-offset">
                 <h1>EMPRENDIMIENTOS</h1>
-                <p>Inicio -> Emprendimientos -> Market Donna</p>
+                <p>Inicio → Emprendimientos → <?= htmlspecialchars($emprendimiento['nombre_emprendimiento']) ?></p>
             </div>
         </div>
     </section>
         <!-- Emprendimiento por empresa Section -->
         <section class="company-section">
-        <h2 class="company-title">Market Donna</h2>
+        <h2 class="company-title"><?= htmlspecialchars($emprendimiento['nombre_emprendimiento']) ?></h2>
 
         <div class="company-container">
             <div class="company-image">
-            <img src="../assets/img/emprendimientos/67dc3a1079019.jpg" alt="Market Donna Logo">
+                <img src="<?= $imagenPrincipal ?>" alt="<?= htmlspecialchars($emprendimiento['nombre_emprendimiento']) ?>">
             </div>
             <div class="company-info">
-            <div class="company-subtitle">"Todo lo que necesitas para el menú de tu familia"</div>
-            <p class="company-paragraph">
-                Bienvenido a la página oficial de Market Donna, tu mercado de confianza donde encontrarás productos frescos y de calidad para preparar los mejores platillos para tu familia. Desde frutas y verduras hasta carnes, abarrotes y productos de limpieza, todo en un solo lugar para tu comodidad.
-            </p>
-            <a href="https://www.facebook.com/marketdonna" class="company-link" target="_blank">
-                https://www.facebook.com/marketdonna
-            </a>
-            <p class="company-contact">Contacto: serviciocliente@corporaciondonna.com</p>
-            <p class="company-location">Ubicación: Chorrillos - Surco - La Molina - Breña</p>
+                <?php if (!empty($emprendimiento['subdescripcion'])): ?>
+                <div class="company-subtitle">"<?= htmlspecialchars($emprendimiento['subdescripcion']) ?>"</div>
+                  <?php endif; ?>
+                <p class="company-paragraph">
+                    <?= htmlspecialchars($emprendimiento['descripcion']) ?>
+                </p>
+                
+                <?php if (!empty($emprendimiento['contacto'])): ?>
+                <p class="company-contact">Contacto: <?= htmlspecialchars($emprendimiento['contacto']) ?></p>
+                <?php endif; ?>
+                
+                <?php if (!empty($emprendimiento['ubicacion'])): ?>
+                <p class="company-location">Ubicación: <?= htmlspecialchars($emprendimiento['ubicacion']) ?></p>
+                <?php endif; ?>
             </div>
         </div>
         </section>
@@ -72,15 +119,13 @@ include '../layout/header.php';
         </div>
 
         <div class="eventos-gallery">
-            <div class="item foto"><img src="../assets/img/emprendimientos/67dc3a1079019.jpg" alt=""></div>
-            <div class="item foto"><img src="https://storage.googleapis.com/a1aa/image/5c914e35-a818-4ee7-f251-27f38c769f64.jpg" alt=""></div>
-            <div class="item foto"><img src="https://storage.googleapis.com/a1aa/image/966ac2e9-1531-4fa1-9e4e-7a86d6a0f4a3.jpg" alt=""></div>
-            <div class="item foto"><img src="https://storage.googleapis.com/a1aa/image/5c914e35-a818-4ee7-f251-27f38c769f64.jpg" alt=""></div>
-            <div class="item foto"><img src="https://storage.googleapis.com/a1aa/image/5c914e35-a818-4ee7-f251-27f38c769f64.jpg" alt=""></div>
-            <div class="item foto"><img src="https://storage.googleapis.com/a1aa/image/5b07167c-72e3-4473-d71b-21fdcc2743c2.jpg" alt=""></div>
-            <!-- <div class="item foto"><img src="https://storage.googleapis.com/a1aa/image/5c914e35-a818-4ee7-f251-27f38c769f64.jpg" alt=""></div>
-            <div class="item foto"><img src="https://storage.googleapis.com/a1aa/image/5c914e35-a818-4ee7-f251-27f38c769f64.jpg" alt=""></div>
-            <div class="item foto"><img src="https://storage.googleapis.com/a1aa/image/5b07167c-72e3-4473-d71b-21fdcc2743c2.jpg" alt=""></div> -->
+            <!-- Galería (sin la primera imagen) -->
+            <?php foreach ($galeriaImagenes as $imagen): ?>
+            <div class="item foto">
+                <img src="../../uploads/emprendimiento/<?= htmlspecialchars($imagen['nombre_imagen']) ?>" 
+                    alt="Imagen de <?= htmlspecialchars($emprendimiento['nombre_emprendimiento']) ?>">
+            </div>
+            <?php endforeach; ?>
             <div class="item video">
             <div class="video-thumb">
                 <img src="https://storage.googleapis.com/a1aa/image/5b07167c-72e3-4473-d71b-21fdcc2743c2.jpg" alt="">

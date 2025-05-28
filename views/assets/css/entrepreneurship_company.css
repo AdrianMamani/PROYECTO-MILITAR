@@ -166,10 +166,12 @@
           }
           
           .company-image img {
-            width: 280px;
-            max-width: 100%;
-            border-radius: 1.5rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+          width: 400px;     
+          height: 300px;    
+          object-fit: cover; 
+          max-width: 100%;  
+          border-radius: 0.3rem;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.55);
           }
           
           .company-info {
@@ -211,7 +213,12 @@
           }
           
           /* Responsive */
-          @media (max-width: 768px) {
+          @media (max-width: 1095px) {
+          .company-section {
+            padding: 0;
+            margin-bottom: -15px;
+            margin-top: 30px;
+          }
             .company-container {
               flex-direction: column;
               text-align: center;
@@ -234,7 +241,7 @@
           
           .eventos-left {
           flex: 1 1 250px;
-          max-width: 300px;
+          max-width: 320px;
           background-color: #e6e6e6; 
           padding: 2rem;
           border-radius: 16px;
@@ -324,7 +331,7 @@
             border-radius: 50%;
             font-size: 1.5rem;
           }
-          @media (max-width: 1010px) {
+          @media (max-width: 1095px) {
           .eventos-left {
             max-width: 80%;
             background-color: #ffffff; /* puedes cambiarlo si deseas otro color en móvil */
