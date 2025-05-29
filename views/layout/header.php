@@ -340,7 +340,7 @@
   <ul class="nav-links" role="menubar" aria-label="Primary navigation">
     <li class="active" role="none"><a role="menuitem" href="#" aria-current="page">Inicio</a></li>
     <li role="none"><a role="menuitem" href="#">Sobre Nosotros</a></li>
-    <li role="none"><a role="menuitem" href="#">Blog</a></li>
+    <li role="none"><a role="menuitem" href="index.php?action=eventos">Blog</a></li>
     <li role="none" tabindex="0" aria-haspopup="true" aria-expanded="false" aria-controls="submenu-miembros">
       <a role="menuitem" href="#" id="miembros-link">Miembros ▾</a>
       <ul class="submenu" id="submenu-miembros" role="menu" aria-label="Submenu Miembros">

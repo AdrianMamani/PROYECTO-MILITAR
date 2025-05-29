@@ -16,6 +16,10 @@ require_once './controllers/AportacionController.php';
 require_once './controllers/NosotrosController.php';
 require_once './controllers/NosotrosImg.php';
 require_once './controllers/NosotrosVideos.php';
+require_once './controllers/EventoController.php';
+
+// rutas para la web
+require_once './controllers/web/evento.php';
 
 // Definir la acción por defecto
 $action = isset($_GET['action']) ? $_GET['action'] : 'carrusel/index';
@@ -37,11 +41,16 @@ $controllerImg = new CarruselImgController();
 $especialidad = new EspecialidadController();
 $especialidadImg = new ImagenEspecialidadController();
 $emprendimiento = new EmprendimientoController();
-$emprendimientoImg = new EmprendimientoGaleriaController();
+$emprendimientoImg = new ImagenEmprendimientoController();
 $aportaciones = new AportacionController();
 $nosotros = new  NosotrosController();
 $nosotrosImg = new  NosotrosImgController();
 $nosotrosVideo = new  NosotrosVideoController();
+$evento = new  EventoController();
+
+// instancias para la web
+$eventosPublicos = new EventosPublicosController();
+
 
 // Contexto admin si está logueado
 $isAdmin = isset($_SESSION['usuario']);
@@ -290,16 +299,43 @@ switch ($accionPrincipal) {
                 break;
         }
         break;
-        case 'aportaciones':
-            if ($accionSecundaria === 'getAportaciones' && $id) {
-                $aportaciones->getAportaciones($id);
-            } else {
-                $aportaciones->index();
-            }
+        case 'evento':
+        switch ($accionSecundaria) {
+            case 'index':
+                $evento->index();
+                break;
+            case 'agregar':
+                $evento->agregar();
+                break;
+            case 'actualizar':
+                $evento->actualizar();
+                break;
+            case 'eliminar':
+                $id ? $evento->eliminar($id) : print "ID no proporcionado";
+                break;
+            case 'ver':
+                $id ? $evento->ver($id) : print "ID no proporcionado";
+                break;
+            default:
+                $evento->index();
+                break;
+        }
+        break;
+        
+        // Rutas para la web
+        case 'eventos':  // nuevo caso para el sitio público
+    switch ($accionSecundaria) {
+        case 'index':
+            $eventosPublicos->index();
+            break;
+        case 'ver':
+            $id ? $eventosPublicos->ver($id) : print "ID no proporcionado";
             break;
         default:
-            $emprendimiento->index();
+            $eventosPublicos->index();
             break;
+    }
+    break;
 
         $controller->index(); // Acción por defecto
         break;

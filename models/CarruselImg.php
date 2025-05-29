@@ -4,7 +4,7 @@ require_once __DIR__ . '../../config/database.php';
 class CarruselImg {
     private $db;
     private $nombreTabla = 'carrusel_img';
-    private $uploadDir = 'uploads/'; // Directorio para guardar las imágenes
+    private $uploadDir = 'uploads/carrusel/'; // Directorio para guardar las imágenes
 
     public function __construct() {
         $this->db = Database::connect();

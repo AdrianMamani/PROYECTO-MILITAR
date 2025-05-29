@@ -1,7 +1,7 @@
 <?php
 class ImagenEspecialidadModel {
     private $db;
-    private $uploadDir = 'uploads/';
+    private $uploadDir = 'uploads/especialidades/'; 
 
     public function __construct() {
         $this->db = Database::connect();

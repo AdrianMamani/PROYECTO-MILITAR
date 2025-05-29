@@ -23,24 +23,32 @@ class NosotrosVideoController {
                 echo "❌ Error al agregar el video. Verifica que el código sea correcto.";
             }
         } else {
-            require_once './views/admin/nosotrosVideoAgregar.php';
+            require_once './views/admin/nosotrosVideo.php';
         }
     }
 
-    public function editar($id) {
-        $video = $this->modelo->obtenerPorId($id);
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $codigoVideo = $this->extraerCodigoVideo($_POST['url_video']);
-            if ($this->modelo->actualizar($id, $codigoVideo)) {
-                header('Location: index.php?action=nosotrosVideo');
-                exit();
-            } else {
-                echo "❌ Error al actualizar el video. Verifica que el código sea correcto.";
-            }
-        } else {
-            require_once './views/admin/nosotrosVideoEditar.php';
-        }
+    public function editar($id = null) {
+    // Si no viene por parámetro, intenta obtenerlo por POST
+    if ($id === null && isset($_POST['id'])) {
+        $id = $_POST['id'];
     }
+    if (!$id) {
+        echo "ID no proporcionado";
+        return;
+    }
+    $video = $this->modelo->obtenerPorId($id);
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $codigoVideo = $this->extraerCodigoVideo($_POST['url_video']);
+        if ($this->modelo->actualizar($id, $codigoVideo)) {
+            header('Location: index.php?action=nosotrosVideo');
+            exit();
+        } else {
+            echo "❌ Error al actualizar el video. Verifica que el código sea correcto.";
+        }
+    } else {
+        require_once './views/admin/nosotrosVideo.php';
+    }
+}
 
    public function eliminar() {
     if (isset($_GET['id']) && is_numeric($_GET['id'])) {

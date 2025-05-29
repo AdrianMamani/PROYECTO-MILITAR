@@ -103,6 +103,35 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="nav-item has-treeview">
+                        <a href="" class="nav-link">
+                            <i class="nav-icon fas fa-images"></i>
+                            <p>
+                                Admin Nosotros
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="index.php?action=nosotros" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Nosotros</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="index.php?action=nosotrosimg" class="nav-link active">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Imágenes</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="index.php?action=nosotrosVideo" class="nav-link active">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Videos</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </nav>
         </div>

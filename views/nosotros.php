@@ -215,6 +215,7 @@
                                     <i class="far fa-heart"></i>
                                     <i class="far fa-comment"></i>
                                     <i class="far fa-paper-plane"></i>
+                                    
                                 </div>
                                 <div class="likes-tarjeta">
                                     <span>98 Me gusta</span>

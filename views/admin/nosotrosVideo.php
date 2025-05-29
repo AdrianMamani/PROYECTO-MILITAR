@@ -119,7 +119,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="index.php?action=noosotros" class="nav-link">
+                                <a href="index.php?action=nosotros" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Nosotros</p>
                                 </a>
@@ -218,9 +218,9 @@
                 <td><?= htmlspecialchars($video['fecha_subida']) ?></td>
                 <td>
                     <button type="button" class="btn btn-warning btn-sm edit-button"  
-        data-id="<?= htmlspecialchars($video['id']) ?>"
-        data-archivo="<?= htmlspecialchars($video['url_video']) ?>"
-        data-toggle="modal" data-target="#editVideoModal">
+    data-id="<?= htmlspecialchars($video['id']) ?>"
+    data-archivo="<?= htmlspecialchars($video['url_video']) ?>"
+    data-toggle="modal" data-target="#editVideoModal">
     <i class="fas fa-edit"></i> Editar
 </button>
                     <a href="index.php?action=nosotrosVideo/eliminar&id=<?= htmlspecialchars($video['id']) ?>" 
@@ -360,6 +360,16 @@ $(document).ready(function() {
             $('#video-frame').attr('src', '');
         }
     });
+    $('#editVideoForm').on('submit', function(e) {
+    e.preventDefault();
+    const id = $('#edit-video-id').val();
+    const codigo = $('#edit-video-codigo').val();
+
+    // Enviar el formulario manualmente para incluir el ID en la URL
+    const actionUrl = 'index.php?action=nosotrosVideo/editar&id=' + id;
+    $(this).attr('action', actionUrl);
+    this.submit();
+});
 </script>
 </body>
 </html>

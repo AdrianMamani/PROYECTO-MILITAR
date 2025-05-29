@@ -2,10 +2,15 @@
 // Ruta corregida desde views/home.php
 require_once '../controllers/web/homeController.php';
 require_once '../controllers/web/especialidades.php';
+require_once '../controllers/web/emprendimiento.php';
+
 $carruselController = new CarruselController();
 $itemsCarrusel = $carruselController->verCarrusel();
 $especialidadController = new EspecialidadController();
 $especialidades = $especialidadController->verEspecialidades();
+$emprendimientoController = new EmprendimientoController();
+$emprendimientos = $emprendimientoController->obtenerEmprendimientosConGaleria();
+$emprendimientoDestacado = $emprendimientoController->obtenerEmprendimientoDestacado();
 
 ?>
 <!DOCTYPE html>
@@ -13,6 +18,7 @@ $especialidades = $especialidadController->verEspecialidades();
 <head>
 <meta charset="utf-8" />
 <meta content="width=device-width, initial-scale=1" name="viewport" />
+ <script src="https://cdn.tailwindcss.com"></script>
 <title>Cabo Alberto Reyes Gamarra</title>
 <link
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
@@ -27,6 +33,10 @@ rel="stylesheet"
 />
 </head>
 <body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <img src="./assets/img/logo.jpg" alt="Cargando..."> <!-- Cambia por la ruta de tu logo -->
+    </div>
 <?php
 include 'layout/header.php';
 ?>
@@ -41,7 +51,7 @@ include 'layout/header.php';
 echo "<!-- DEBUG IMG FILENAME: " . htmlspecialchars($item['img']) . " -->";
 // Ruta corregida si 'uploads' está en la raíz junto a este index.php
 ?>
-<img src="../uploads/<?= htmlspecialchars($item['img']) ?>" alt="Imagen: <?= htmlspecialchars($item['titulo'] ?? 'Imagen del carrusel') ?>">
+<img src="../uploads/carrusel/<?= htmlspecialchars($item['img']) ?>" alt="Imagen: <?= htmlspecialchars($item['titulo'] ?? 'Imagen del carrusel') ?>">
 <?php else: ?>
 <img src="https://via.placeholder.com/1920x900.png?text=Imagen+no+disponible" alt="Imagen no disponible">
 <?php endif; ?>
@@ -346,6 +356,48 @@ echo "<!-- DEBUG IMG FILENAME: " . htmlspecialchars($item['img']) . " -->";
         </div>
         </div>
     </section>
+    <!-- Sección de Emprendimientos -->
+    <section class="emprendimientos">
+    <header class="emprendimientos-header">
+        <h1 class="emprendimientos-titulo">Mis Emprendimientos</h1>
+        <p class="emprendimientos-descripcion">Descubre los proyectos y negocios que he creado con pasión y dedicación.</p>
+    </header>
+    <div class="emprendimientos-container">
+        <?php if (!empty($emprendimientos)): ?>
+            <?php foreach ($emprendimientos as $emprendimiento): ?>
+                <article>
+                    <?php 
+                    // Valor por defecto si no hay imagen
+                    $imagenMostrar = '/PROYECTO-MILITAR/uploads/emprendimiento/default.png';
+
+                    // Buscar la primera imagen de la galería si existe
+                    if (!empty($emprendimiento['galeria'])) {
+                        foreach ($emprendimiento['galeria'] as $media) {
+                            if (!empty($media['nombre_imagen'])) {
+                                $imagenMostrar = '/PROYECTO-MILITAR/uploads/emprendimiento/' . $media['nombre_imagen'];
+                                break;
+                            }
+                        }
+                    }
+                    ?>
+                    
+                    <img src="<?= htmlspecialchars($imagenMostrar) ?>" 
+                         alt="<?= htmlspecialchars($emprendimiento['nombre_emprendimiento']) ?>">
+                    
+                    <div class="content">
+                        <h2><?= htmlspecialchars($emprendimiento['nombre_emprendimiento']) ?></h2>
+                        <p><?= htmlspecialchars($emprendimiento['descripcion']) ?></p>
+                        <a href="#">Visitar sitio</a>
+                    </div>
+                </article>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p class="no-emprendimientos">Actualmente no hay emprendimientos para mostrar.</p>
+        <?php endif; ?>
+    </div>
+</section>
+
+
   <script>
    // Select all cards
     const cards = document.querySelectorAll('.card');
@@ -368,8 +420,157 @@ echo "<!-- DEBUG IMG FILENAME: " . htmlspecialchars($item['img']) . " -->";
   </script>
 
 </main>
+<!-- Mensaje Floating Button con tooltip a la izquierda, fijo en pantalla -->
+  <div class="fixed bottom-6 right-6 z-50 flex items-center group space-x-3">
+    <div class="hidden group-hover:flex bg-gray-900 text-white text-xs rounded px-3 py-1 whitespace-nowrap select-none">
+      ¿Quieres dejar un mensaje?
+    </div>
+    <button aria-label="Abrir chat de mensajes" class="bg-green-600 hover:bg-green-700 text-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg relative" id="messageButton" type="button">
+      <i class="fas fa-comment-alt text-2xl"></i>
+    </button>
+  </div>
+
+  <!-- Modal Chat -->
+  <div aria-hidden="true" class="fixed inset-0 bg-black bg-opacity-50 flex items-end justify-end z-50 hidden" id="messageModal">
+    <div aria-labelledby="modalTitle" aria-modal="true" class="bg-white rounded-t-lg shadow-lg w-80 max-w-full mx-4 p-6 relative flex flex-col" role="dialog">
+      <button aria-label="Cerrar chat de mensajes" class="absolute top-3 right-3 text-gray-600 hover:text-gray-900 text-2xl font-bold" id="closeMessageModal" type="button">
+        ×
+      </button>
+      <h3 class="text-xl font-bold mb-4 text-green-600 flex items-center gap-2" id="modalTitle">
+        <i class="fas fa-comment-alt"></i>
+        Chat Mensajes
+      </h3>
+      <form class="flex flex-col gap-4" id="messageForm">
+        <label class="flex flex-col text-sm font-semibold text-gray-700">
+          Nombre
+          <input class="mt-1 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600" name="nombre" placeholder="Tu nombre" required="" type="text"/>
+        </label>
+        <label class="flex flex-col text-sm font-semibold text-gray-700">
+          Correo
+          <input class="mt-1 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600" name="correo" placeholder="tu@email.com" required="" type="email"/>
+        </label>
+        <label class="flex flex-col text-sm font-semibold text-gray-700">
+          Comentario
+          <textarea class="mt-1 border border-gray-300 rounded-md px-3 py-2 resize-none focus:outline-none focus:ring-2 focus:ring-green-600" name="comentario" placeholder="Escribe tu comentario" required="" rows="3"></textarea>
+        </label>
+        <button class="bg-green-600 hover:bg-green-700 text-white font-semibold rounded-full py-2 mt-2" type="submit">
+          Enviar
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const messageButton = document.getElementById('messageButton');
+      const messageModal = document.getElementById('messageModal');
+      const closeMessageModal = document.getElementById('closeMessageModal');
+      const messageForm = document.getElementById('messageForm');
+      const mobileMenuButton = document.getElementById('mobileMenuButton');
+      const mobileMenuModal = document.getElementById('mobileMenuModal');
+      const closeMobileMenu = document.getElementById('closeMobileMenu');
+
+      messageButton.addEventListener('click', () => {
+        messageModal.classList.remove('hidden');
+        messageModal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('modal-open');
+      });
+
+      closeMessageModal.addEventListener('click', () => {
+        messageModal.classList.add('hidden');
+        messageModal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('modal-open');
+      });
+
+      messageModal.addEventListener('click', (e) => {
+        if (e.target === messageModal) {
+          messageModal.classList.add('hidden');
+          messageModal.setAttribute('aria-hidden', 'true');
+          document.body.classList.remove('modal-open');
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          if (!messageModal.classList.contains('hidden')) {
+            messageModal.classList.add('hidden');
+            messageModal.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('modal-open');
+          }
+          if (!mobileMenuModal.classList.contains('hidden')) {
+            mobileMenuModal.classList.add('hidden');
+            mobileMenuModal.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('modal-open');
+          }
+        }
+      });
+
+      messageForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert(
+          'Formulario enviado:\n' +
+            'Nombre: ' +
+            messageForm.nombre.value +
+            '\n' +
+            'Correo: ' +
+            messageForm.correo.value +
+            '\n' +
+            'Comentario: ' +
+            messageForm.comentario.value
+        );
+        messageForm.reset();
+        messageModal.classList.add('hidden');
+        messageModal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('modal-open');
+      });
+
+      mobileMenuButton.addEventListener('click', () => {
+        mobileMenuModal.classList.remove('hidden');
+        mobileMenuModal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('modal-open');
+      });
+
+      closeMobileMenu.addEventListener('click', () => {
+        mobileMenuModal.classList.add('hidden');
+        mobileMenuModal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('modal-open');
+      });
+
+      mobileMenuModal.addEventListener('click', (e) => {
+        if (e.target === mobileMenuModal) {
+          mobileMenuModal.classList.add('hidden');
+          mobileMenuModal.setAttribute('aria-hidden', 'true');
+          document.body.classList.remove('modal-open');
+        }
+      });
+    });
+  </script>
 <script src="assets/js/home.js" defer></script>
 <script src="assets/js/nosotros.js"></script>
+<script>
+    // Script para manejar el preloader
+    document.addEventListener('DOMContentLoaded', function() {
+        const preloader = document.getElementById('preloader');
+        const body = document.body;
+        
+        // Forzar el repintado para asegurar que la animación funcione
+        void preloader.offsetWidth;
+        
+        // Mostrar por exactamente 3 segundos
+        setTimeout(function() {
+            body.classList.add('loaded');
+            
+            // Eliminar el preloader después de la animación
+            setTimeout(function() {
+                preloader.remove();
+                // Mostrar todo el contenido
+                document.querySelectorAll('body > *:not(script)').forEach(el => {
+                    el.style.visibility = 'visible';
+                });
+            }, 500); // Medio segundo para la transición de desvanecimiento
+        }, 3000); // 3 segundos exactos
+    });
+</script>
 
 </body>
 </html>

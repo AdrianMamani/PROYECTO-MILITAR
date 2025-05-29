@@ -158,7 +158,7 @@
                                     <tr>
                                         <td><?= htmlspecialchars($imagen['id']) ?></td>
                                         <td>
-    <img src="/PROYECTO-MILITAR/uploads/<?= htmlspecialchars($imagen['img']) ?>" 
+    <img src="/PROYECTO-MILITAR/uploads/carrusel/<?= htmlspecialchars($imagen['img']) ?>" 
          alt="Imagen del Carrusel" 
          class="img-thumbnail view-image-button"
          data-toggle="modal" 
@@ -171,7 +171,7 @@
                                         <td>
                                             <button type="button" class="btn btn-warning btn-sm edit-button" 
                                                     data-id="<?= $imagen['id'] ?>" 
-                                                    data-imagen="../../uploads/<?= htmlspecialchars($imagen['img']) ?>"
+                                                    data-imagen="../../uploads/carrusel/<?= htmlspecialchars($imagen['img']) ?>"
                                                     data-toggle="modal" data-target="#editModal">
                                                 <i class="fas fa-edit"></i> Editar
                                             </button>
@@ -301,7 +301,7 @@ $(document).ready(function() {
     var button = $(event.relatedTarget);
     var imagen = button.data('imagen');
     var modal = $(this);
-    modal.find('#view-image').attr('src', '/PROYECTO-MILITAR/uploads/' + imagen);
+    modal.find('#view-image').attr('src', '/PROYECTO-MILITAR/uploads/carrusel/' + imagen);
 });
     
     // Inicializar DataTable si es necesario
