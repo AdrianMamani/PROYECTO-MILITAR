@@ -27,7 +27,10 @@ include 'layout/header.php';
       <?php if (!empty($eventos)): ?>
         <?php foreach ($eventos as $evento): ?>
       <article>
-        <img src="/PROYECTO-MILITAR/views/img/01.png" alt="Grupo de personas en evento deportivo al aire libre, con público y cancha visible" />
+        <img 
+  src="/PROYECTO-MILITAR/uploads/evento/<?= htmlspecialchars($evento['imagen']) ?>" 
+  alt="<?= htmlspecialchars($evento['titulo']) ?>" 
+/>
         <div class="meta"><span>FECHA DE EVENTO</span> |  <span><?= htmlspecialchars(date('d/m/Y', strtotime($evento['fecha']))) ?></span> </div>
         <p class="title"><?= htmlspecialchars($evento['titulo']) ?></p>
         <a href="index.php?action=eventos/ver/<?= $evento['id'] ?>" 

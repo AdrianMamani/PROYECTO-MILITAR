@@ -17,6 +17,8 @@ require_once './controllers/NosotrosController.php';
 require_once './controllers/NosotrosImg.php';
 require_once './controllers/NosotrosVideos.php';
 require_once './controllers/EventoController.php';
+require_once './controllers/eventoimg.php';
+require_once './controllers/eventovideo.php';
 
 // rutas para la web
 require_once './controllers/web/evento.php';
@@ -47,6 +49,8 @@ $nosotros = new  NosotrosController();
 $nosotrosImg = new  NosotrosImgController();
 $nosotrosVideo = new  NosotrosVideoController();
 $evento = new  EventoController();
+$eventoImg = new  ImagenEventoController();
+$videoevento = new  VideoEventoController();
 
 // instancias para la web
 $eventosPublicos = new EventosPublicosController();
@@ -318,6 +322,66 @@ switch ($accionPrincipal) {
                 break;
             default:
                 $evento->index();
+                break;
+        }
+        break;
+        case 'eventoimg':
+        switch ($accionSecundaria) {
+            case 'index':
+                $eventoImg->index();
+                break;
+            case 'agregar':
+            case 'create':
+                $eventoImg->create();
+                break;
+            case 'guardar':
+            case 'store':
+                $eventoImg->store();
+                break;
+            case 'editar':
+            case 'edit':
+                $eventoImg->edit();
+                break;
+            case 'actualizar':
+            case 'update':
+                $eventoImg->update();
+                break;
+            case 'eliminar':
+            case 'delete':
+                $eventoImg->delete();
+                break;
+            default:
+                $eventoImg->index();
+                break;
+        }
+        break;
+        case 'videoevento':
+        switch ($accionSecundaria) {
+            case 'index':
+                $videoevento->index();
+                break;
+            case 'agregar':
+            case 'create':
+                $videoevento->create();
+                break;
+            case 'guardar':
+            case 'store':
+                $videoevento->store();
+                break;
+            case 'editar':
+            case 'edit':
+                $videoevento->edit();
+                break;
+            case 'actualizar':
+            case 'update':
+                $videoevento->update();
+                break;
+            case 'eliminar':
+            case 'delete':
+                $videoevento->delete();
+                break;
+            default:
+                $videoevento->index();
                 break;
         }
         break;

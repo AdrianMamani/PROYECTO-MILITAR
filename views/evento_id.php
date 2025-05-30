@@ -372,29 +372,34 @@ foreach ($oraciones as $oracion) {
 <h2>Recuerdos del evento</h2>
 <section aria-label="Galería de recuerdos del evento">
   <div class="contenedor-recuerdos" id="imagenes-visibles">
-    <img src="/PROYECTO-MILITAR/views/img/01.png" alt="Soldados en formación militar con uniforme camuflaje, en un campo abierto" />
-    <img src="/PROYECTO-MILITAR/views/img/02.png" alt="Soldados en formación militar con uniforme camuflaje, en un campo abierto" />
-    <img src="/PROYECTO-MILITAR/views/img/03.png" alt="Soldados en formación militar con uniforme camuflaje, en un campo abierto" />
-  <img src="/PROYECTO-MILITAR/views/img/04.jpeg" alt="Soldados en formación militar con uniforme camuflaje, en un campo abierto" />
-    <img src="/PROYECTO-MILITAR/views/img/05.jpeg" alt="Soldados en formación militar con uniforme camuflaje, en un campo abierto" />
-    <img src="/PROYECTO-MILITAR/views/img/07.png" alt="Soldados en formación militar con uniforme camuflaje, en un campo abierto" />
+    <?php if (!empty($imagenes)): ?>
+      <?php foreach ($imagenes as $img): ?>
+        <img 
+          src="/PROYECTO-MILITAR/uploads/evento/<?= htmlspecialchars($img['nombre_imagen']) ?>" 
+          alt="Imagen del evento <?= htmlspecialchars($evento['titulo']) ?>" 
+        />
+      <?php endforeach; ?>
+    <?php else: ?>
+      <p>No hay imágenes para este evento.</p>
+    <?php endif; ?>
   </div>
-  <!-- <div class="imagenes-ocultas" id="imagenes-ocultas">
-    <img src="https://storage.googleapis.com/a1aa/image/777b411b-3d45-4a7f-69e0-a345ae4db8db.jpg" alt="Soldados en formación militar con uniforme camuflaje, en un campo abierto" />
-  </div> -->
-  <button aria-expanded="false" aria-controls="imagenes-ocultas" class="boton-mostrar-mas" id="boton-toggle" title="Mostrar más imágenes">
-    ▼
-  </button>
 </section>
 
 <section aria-label="Video del evento" class="seccion-video">
-  <iframe class="video-iframe" src="https://www.youtube.com/embed/fwk4oyGsugo" title="Video del evento" allowfullscreen></iframe>
-  <!-- <div class="texto-video">VIDEO DEL EVENTO <i></i></div> -->
+  <?php if (!empty($videos)): ?>
+    <?php foreach ($videos as $video): ?>
+      <iframe 
+        class="video-iframe" 
+        src="https://www.youtube.com/embed/<?= htmlspecialchars($video['codigo_video']) ?>" 
+        title="Video del evento" 
+        allowfullscreen>
+      </iframe>
+      <?php break; // solo mostrar el primero ?>
+    <?php endforeach; ?>
+  <?php else: ?>
+    <p>No hay video disponible para este evento.</p>
+  <?php endif; ?>
 </section>
-
-
-
-
 
 </div>
 
