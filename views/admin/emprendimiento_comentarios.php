@@ -3,22 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin Carrusel de Imágenes</title>
+    <title>Admin Carrusel</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="dist/css/adminlte.min.css">
-    <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-    <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
-    <style>
-      .img-thumbnail {
-        max-height: 200px;
-        object-fit: contain;
-      }
-    </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -54,7 +44,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="index.php?action=carrusel" class="nav-link active">
+                                <a href="index.php?action=carrusel" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Carrusel</p>
                                 </a>
@@ -83,7 +73,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="index.php?action=especialidadimg" class="nav-link">
+                                <a href="index.php?action=especialidadimg" class="nav-link active">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Imágenes</p>
                                 </a>
@@ -180,7 +170,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Admin Carrusel de Imágenes</h1>
+                        <h1>Admin Carrusel de Comentarios</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -192,148 +182,159 @@
             </div>
         </section>
 
-        <section class="content">
-            <div class="container-fluid">
-                <div class="card">
-                    <div class="card-header">
+<section class="content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header">
                         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal">
-                            <i class="fas fa-plus"></i> Agregar Nueva Imagen
+                            <i class="fas fa-plus"></i> Agregar comentario
                         </button>
-                    </div>
-                    
-                    <div class="card-body">
-                        <table id="example1" class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Imagen</th>
-                                    <th>Fecha de Subida</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php if (empty($imagenes)): ?>
-                                    <tr><td colspan="4">No hay imágenes en el carrusel</td></tr>
-                                <?php else: ?>
-                                    <?php foreach ($imagenes as $imagen): ?>
-                                    <tr>
-                                        <td><?= htmlspecialchars($imagen['id']) ?></td>
-                                        <td>
-    <img src="/PROYECTO-MILITAR/uploads/<?= htmlspecialchars($imagen['img']) ?>" 
-         alt="Imagen del Carrusel" 
-         class="img-thumbnail view-image-button"
-         data-toggle="modal" 
-         data-target="#viewImageModal"
-         data-imagen="<?= htmlspecialchars($imagen['img']) ?>"
-         style="max-width: 120px; cursor: pointer;">
-</td>
-
-                                        <td><?= htmlspecialchars($imagen['fecha_subida']) ?></td>
-                                        <td>
-                                            <button type="button" class="btn btn-warning btn-sm edit-button" 
-                                                    data-id="<?= $imagen['id'] ?>" 
-                                                    data-imagen="../../uploads/<?= htmlspecialchars($imagen['img']) ?>"
-                                                    data-toggle="modal" data-target="#editModal">
-                                                <i class="fas fa-edit"></i> Editar
-                                            </button>
-                                            <a href="index.php?action=carruselimg/eliminar/<?= $imagen['id'] ?>" class="btn btn-danger btn-sm" 
-                                               onclick="return confirm('¿Estás seguro de eliminar esta imagen?')">
-                                                <i class="fas fa-trash"></i> Eliminar
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <?php endforeach; ?>
-                                <?php endif; ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
             </div>
-        </section>
-    </div>
-
-    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addModalLabel">Agregar Nueva Imagen</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form action="index.php?action=carruselimg/agregar" method="POST" enctype="multipart/form-data">
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="imagen">Imagen</label>
-                            <input type="file" class="form-control-file" id="imagen" name="imagen" required>
-                            <small class="form-text text-muted">Seleccione la imagen que desea agregar al carrusel.</small>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Guardar</button>
-                    </div>
-                </form>
+            <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Emprendimiento ID</th>
+                            <th>Nombre</th>
+                            <th>Correo</th>
+                            <th>Mensaje</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if (empty($comentarios)): ?>
+                            <tr><td colspan="6">No hay comentarios registrados</td></tr>
+                        <?php else: ?>
+                            <?php foreach ($comentarios as $comentario): ?>
+                            <tr>
+                                <td><?= htmlspecialchars($comentario['id']) ?></td>
+                                <td><?= htmlspecialchars($comentario['comentario_id']) ?></td>
+                                <td><?= htmlspecialchars($comentario['nombre']) ?></td>
+                                <td><?= htmlspecialchars($comentario['correo']) ?></td>
+                                <td><?= htmlspecialchars(substr($comentario['mensaje'], 0, 50)) . (strlen($comentario['mensaje']) > 50 ? '...' : '') ?></td>
+                            <td>
+                                <button type="button" class="btn btn-warning btn-sm edit-button" 
+                                        data-id="<?= htmlspecialchars($comentario['id']) ?>" 
+                                        data-comentario-id="<?= htmlspecialchars($comentario['comentario_id']) ?>"
+                                        data-nombre="<?= htmlspecialchars($comentario['nombre']) ?>"
+                                        data-correo="<?= htmlspecialchars($comentario['correo']) ?>"
+                                        data-mensaje="<?= htmlspecialchars($comentario['mensaje']) ?>"
+                                        data-toggle="modal" data-target="#editModal">
+                                    <i class="fas fa-edit"></i> Editar
+                                </button>
+                                <a href="index.php?action=emprendimiento_comentarios/eliminar/<?= $comentario['id'] ?>" class="btn btn-danger btn-sm" 
+                                onclick="return confirm('¿Estás seguro de eliminar este comentario?')">
+                                    <i class="fas fa-trash"></i> Eliminar
+                                </a>
+                            </td>
+                            </tr>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+</section>
 
-    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editModalLabel">Editar Imagen del Carrusel</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form id="editForm" method="POST" action="" enctype="multipart/form-data">
-                    <input type="hidden" name="id" id="edit-id">
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="edit-imagen">Imagen</label>
-                            <input type="file" class="form-control-file" id="edit-imagen" name="imagen" required>
-                            <small class="form-text text-muted">Seleccione la nueva imagen para el carrusel.</small>
-                            <div id="preview-imagen" style="margin-top: 10px;">
-                                <img id="imagen-actual" src="" alt="Imagen Actual" class="img-thumbnail" style="max-height: 200px; display:none;">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-                    </div>
-                </form>
+<!-- Modal para agregar nuevo comentario -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addModalLabel">Agregar Nuevo Comentario</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="viewImageModal" tabindex="-1" role="dialog" aria-labelledby="viewImageModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="viewImageModalLabel">Vista de Imagen</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
+            <form action="index.php?action=emprendimiento_comentarios/agregar" method="POST">
                 <div class="modal-body">
-                    <img id="view-image" src="" alt="Imagen del Carrusel" style="width: 100%;">
+                    <div class="form-group">
+                        <label for="comentario_id">Emprendimiento</label>
+                        <select class="form-control" id="comentario_id" name="comentario_id" required>
+                            <option value="">Seleccione un emprendimiento</option>
+                            <?php foreach ($emprendimientos as $emprendimiento): ?>
+                                <option value="<?= $emprendimiento['id']; ?>">
+                                    <?= htmlspecialchars($emprendimiento['nombre_emprendimiento']); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="correo">Correo Electrónico</label>
+                        <input type="email" class="form-control" id="correo" name="correo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mensaje">Mensaje</label>
+                        <textarea class="form-control" id="mensaje" name="mensaje" rows="5" required></textarea>
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar Comentario</button>
                 </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Modal para editar comentario -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Editar Comentario</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
+            <form id="editForm" method="POST" action="">
+                <input type="hidden" name="id" id="edit-id">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="edit-comentario_id">Emprendimiento</label>
+                        <select class="form-control" id="edit-comentario_id" name="comentario_id" required>
+                            <option value="">Seleccione un emprendimiento</option>
+                            <?php foreach ($emprendimientos as $emprendimiento): ?>
+                                <option value="<?= $emprendimiento['id']; ?>">
+                                    <?= htmlspecialchars($emprendimiento['nombre_emprendimiento']); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-nombre">Nombre</label>
+                        <input type="text" class="form-control" id="edit-nombre" name="nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-correo">Correo Electrónico</label>
+                        <input type="email" class="form-control" id="edit-correo" name="correo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-mensaje">Mensaje</label>
+                        <textarea class="form-control" id="edit-mensaje" name="mensaje" rows="5" required></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="dist/js/adminlte.min.js"></script>
 <script src="plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 <script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
 <script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
 <script src="plugins/jszip/jszip.min.js"></script>
@@ -342,30 +343,23 @@
 <script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-<script src="dist/js/adminlte.min.js"></script>
 <script>
 $(document).ready(function() {
-    // Manejar el botón de editar
     $('.edit-button').on('click', function() {
-        var id = $(this).data('id');
-        var imagen = $(this).data('imagen');
+        var id = $(this).data('id');  // Obtener el ID primero
         
+        // Llenar los campos del formulario
         $('#edit-id').val(id);
-        $('#imagen-actual').attr('src',  imagen);
-        
-        // Actualizar el action del formulario con el ID correcto
-        $('#editForm').attr('action', 'index.php?action=carruselimg/editar/' + id);
+        $('#edit-comentario_id').val($(this).data('comentario-id'));
+        $('#edit-nombre').val($(this).data('nombre'));
+        $('#edit-correo').val($(this).data('correo'));
+        $('#edit-mensaje').val($(this).data('mensaje'));
+
+        $('#editForm').attr('action', 'index.php?action=emprendimiento_comentarios/editar/' + id);
+
     });
-    
-    // Manejar el botón de ver imagen
-    $('#viewImageModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget);
-    var imagen = button.data('imagen');
-    var modal = $(this);
-    modal.find('#view-image').attr('src', '/PROYECTO-MILITAR/uploads/' + imagen);
-});
-    
-    // Inicializar DataTable si es necesario
+
+    // Inicializar DataTable
     $('#example1').DataTable({
         "responsive": true,
         "autoWidth": false,
