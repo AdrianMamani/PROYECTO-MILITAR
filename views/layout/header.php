@@ -558,7 +558,7 @@
     .social-icons-wrapper::before {
     content: "";
     position: absolute;
-    top: -5px;
+    top: -8px;
     right: -240px;
     bottom: -10px;
     left: -1000px;

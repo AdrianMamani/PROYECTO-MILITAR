@@ -77,7 +77,7 @@
         /* Tablets pequeñas */
         @media (max-width: 768px) {
             .banner-image {
-                height: 350px;
+                height: 300px;
                 object-position: center;
             }
             
@@ -96,7 +96,7 @@
         /* Móviles */
         @media (max-width: 576px) {
             .banner-image {
-                height: 350px;
+                height: 300px;
                 object-position: center;
             }
             
@@ -115,7 +115,7 @@
         /* Móviles muy pequeños */
         @media (max-width: 400px) {
             .banner-image {
-                height: 300px;
+                height: 250px;
                 object-position: center;
             }
             

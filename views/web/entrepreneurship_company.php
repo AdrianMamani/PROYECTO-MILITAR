@@ -1,6 +1,7 @@
 <?php
 require_once '../../models/EmprendimientoModel.php';
 require_once '../../models/EmprendimientoImg.php';
+require_once '../../models/ComentarioEmprendimientoModel.php';
 require_once '../../config/database.php';
 
 $id = isset($_GET['id']) ? $_GET['id'] : null;
@@ -11,6 +12,7 @@ if (!$id) {
 
 $emprendimientoModel = new Emprendimiento();
 $imgModel = new ImagenEmprendimientoModel();
+$comentarioModel = new ComentarioEmprendimiento();
 
 $emprendimiento = $emprendimientoModel->obtenerEmprendimientoPorId($id);
 $imagenes = $imgModel->getAll();
@@ -39,6 +41,22 @@ $imagenPrincipal = $ultimaImagen ? '../../uploads/emprendimiento/' . $ultimaImag
 // Galería en orden inverso (sin la última)
 $galeriaImagenes = array_reverse($imagenesEmprendimiento);
 array_shift($galeriaImagenes);
+
+// Obtener comentarios para este emprendimiento
+$comentarios = $comentarioModel->obtenerPorEmprendimiento($id);
+
+// Agrupar comentarios (si es necesario)
+$comentarios_agrupados = [];
+foreach ($comentarios as $comentario) {
+    $emprendimiento_id = $comentario['comentario_id'];
+    if (!isset($comentarios_agrupados[$emprendimiento_id])) {
+        $comentarios_agrupados[$emprendimiento_id] = [
+            'nombre_emprendimiento' => $emprendimiento['nombre_emprendimiento'], // Usamos el nombre del emprendimiento actual
+            'comentarios' => []
+        ];
+    }
+    $comentarios_agrupados[$emprendimiento_id]['comentarios'][] = $comentario;
+}
 ?>
 <html lang="en">
  <head>
@@ -46,7 +64,6 @@ array_shift($galeriaImagenes);
   <meta content="width=device-width, initial-scale=1" name="viewport" />
   <title>Entrepreneurship_company</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="../assets/css/entrepreneurship_company.css">
   <link
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     rel="stylesheet"
@@ -56,10 +73,20 @@ array_shift($galeriaImagenes);
     rel="stylesheet"
   />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.12.1/font/bootstrap-icons.min.css">
+<!-- Styles / Carousel -->
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" integrity="sha512-yHknP1/AwR+yx26cB1y0cjvQUMvEa2PFzt1c9LlS4pRQ5NOTZFWbhBig+X9G9eYW/8m0/4OXNx8pxJ6z57x0dw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css" integrity="sha512-17EgCFERpgZKcm0j0fEq1YCJuyAWdz9KUtv1EjVuaOz8pDnh/0nZxmU6BBXwaaxqoi9PQXnRWqlcDB027hgv9A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../assets/css/entrepreneurship_company.css">
   <style>
     body {
       font-family: "Montserrat", sans-serif;
     }
+    .slick-slide {
+    height: 300px !important;
+    display: flex !important;
+    justify-content: center;
+    padding: 0 8px;
+}
   </style>
  </head>
  <?php
@@ -102,6 +129,26 @@ include '../layout/header.php';
             </div>
         </div>
         </section>
+        <!-- Comentarios por empresa Section -->
+        <section class="comentarios-section">
+            <h2 class="comentarios-titulo">Lo que opinan nuestros usuarios</h2>
+            <div class="comentarios-carrusel">
+                <?php if (empty($comentarios)): ?>
+                    <div class="comentario-card">
+                        <p class="mensaje">Aún no hay comentarios para este emprendimiento.</p>
+                    </div>
+                <?php else: ?>
+                    <?php foreach ($comentarios as $comentario): ?>
+                    <div class="comentario-card">
+                        <h4><?= htmlspecialchars($comentario['nombre']) ?></h4>
+                        <p class="correo"><?= htmlspecialchars($comentario['correo']) ?></p>
+                        <p class="mensaje"><?= htmlspecialchars($comentario['mensaje']) ?></p>
+                    </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </div>
+        </section>
+
         <!-- Fotos e imagenes por empresa Section -->
         <section class="eventos-section">
         <div class="eventos-left">
@@ -113,7 +160,7 @@ include '../layout/header.php';
             </p>
             <select id="filter" class="eventos-filter">
             <option value="all">Todos</option>
-            <option value="foto">Fotos</option>
+            <option value="image">Fotos</option>
             <option value="video">Videos</option>
             </select>
         </div>
@@ -121,30 +168,37 @@ include '../layout/header.php';
         <div class="eventos-gallery">
             <!-- Galería (sin la primera imagen) -->
             <?php foreach ($galeriaImagenes as $imagen): ?>
-            <div class="item foto">
+            <div class="gallery-item" data-type="image" data-src="../../uploads/emprendimiento/<?= htmlspecialchars($imagen['nombre_imagen']) ?>" data-caption="Logro 1 - Descripción breve">
                 <img src="../../uploads/emprendimiento/<?= htmlspecialchars($imagen['nombre_imagen']) ?>" 
                     alt="Imagen de <?= htmlspecialchars($emprendimiento['nombre_emprendimiento']) ?>">
+            <div class="gallery-overlay">
+                <i class="fas fa-expand"></i>
             </div>
+                  </div>
             <?php endforeach; ?>
-            <div class="item video">
-            <div class="video-thumb">
-                <img src="https://storage.googleapis.com/a1aa/image/5b07167c-72e3-4473-d71b-21fdcc2743c2.jpg" alt="">
-                <div class="play-icon"><i class="bi bi-skip-end-circle-fill"></i></div>
+            
+            <div class="gallery-item" data-type="video" data-src="../assets/img/pruebas/video-prueba.mp4" data-caption="Video 2 - Descripción breve">
+                <video src="../assets/img/pruebas/video-prueba.mp4" muted preload="metadata"></video>
+                <div class="gallery-overlay">
+                    <i class="fas fa-play-circle"></i>
+                </div>
             </div>
+            
+            <div class="gallery-item" data-type="video" data-src="../assets/img/pruebas/video-prueba.mp4" data-caption="Video 2 - Descripción breve">
+                <video src="../assets/img/pruebas/video-prueba.mp4" muted preload="metadata"></video>
+                <div class="gallery-overlay">
+                    <i class="fas fa-play-circle"></i>
+                </div>
             </div>
-            <div class="item video">
-            <div class="video-thumb">
-                <img src="https://storage.googleapis.com/a1aa/image/966ac2e9-1531-4fa1-9e4e-7a86d6a0f4a3.jpg" alt="">
-                <div class="play-icon"><i class="bi bi-skip-end-circle-fill"></i></div>
+            <div class="gallery-item" data-type="video" data-src="../assets/img/pruebas/video-prueba.mp4" data-caption="Video 2 - Descripción breve">
+                <video src="../assets/img/pruebas/video-prueba.mp4" muted preload="metadata"></video>
+                <div class="gallery-overlay">
+                    <i class="fas fa-play-circle"></i>
+                </div>
             </div>
-            </div>
-            <div class="item video">
-            <div class="video-thumb">
-                <img src="https://storage.googleapis.com/a1aa/image/5c914e35-a818-4ee7-f251-27f38c769f64.jpg" alt="">
-                <div class="play-icon"><i class="bi bi-skip-end-circle-fill"></i></div>
-            </div>
-            </div>
+          
         </div>
+        
         </section>
 
   <!-- Mensaje Floating Button con tooltip a la izquierda, fijo en pantalla -->
@@ -232,8 +286,117 @@ include '../layout/header.php';
     </button>
    </nav>
   </div>
+<!-- Scripts / Carousel -->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.5.2/jquery-migrate.min.js" integrity="sha512-BzvgYEoHXuphX+g7B/laemJGYFdrq4fTKEo+B3PurSxstMZtwu28FHkPKXu6dSBCzbUWqz/rMv755nUwhjQypw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js" integrity="sha512-HGOnQO9+SP1V92SrtZfjqxxtLmVzqZpjFFekvzZVWoiASSQgSr4cw9Kqd2+l8Llp4Gm0G8GIFJ4ddwZilcdb8A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+        // =============================================
+    // 1. Modal simple para la galería de imágenes/videos
+    // =============================================
+const galleryModal = document.createElement('div');
+    galleryModal.id = 'galleryModal';
+    
+    const galleryModalContent = document.createElement('div');
+    
+    const closeGalleryBtn = document.createElement('button');
+    closeGalleryBtn.innerHTML = '<i class="fas fa-times"></i>';
+    
+    galleryModalContent.appendChild(closeGalleryBtn);
+    galleryModal.appendChild(galleryModalContent);
+    document.body.appendChild(galleryModal);
+    
+    function showGalleryModal(type, src) {
+        galleryModalContent.innerHTML = '';
+        galleryModalContent.appendChild(closeGalleryBtn);
+        
+        if (type === 'image') {
+            const img = document.createElement('img');
+            img.src = src;
+            galleryModalContent.insertBefore(img, closeGalleryBtn);
+        } else if (type === 'video') {
+            const video = document.createElement('video');
+            video.controls = true;
+            video.autoplay = true;
+            const source = document.createElement('source');
+            source.src = src;
+            source.type = 'video/mp4';
+            video.appendChild(source);
+            galleryModalContent.insertBefore(video, closeGalleryBtn);
+        }
+        
+        galleryModal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function hideGalleryModal() {
+        galleryModal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+    
+    closeGalleryBtn.addEventListener('click', hideGalleryModal);
+    
+    document.querySelectorAll('.gallery-item').forEach(item => {
+        item.addEventListener('click', function() {
+            const type = this.getAttribute('data-type');
+            const src = this.getAttribute('data-src');
+            showGalleryModal(type, src);
+        });
+    });
+
+    //Filtrar la galería por tipo (imágenes/videos)
+    document.getElementById("filter").addEventListener("change", function () {
+      const selected = this.value;
+      const items = document.querySelectorAll(".gallery-item");
+
+      items.forEach(item => {
+        const type = item.dataset.type; 
+
+        if (selected === "all" || type === selected) {
+          item.style.display = "flex";
+        } else {
+          item.style.display = "none";
+        }
+      });
+    });
+    // =============================================
+    $(document).ready(function(){
+    $('.comentarios-carrusel').slick({
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 2000,
+            arrows: true,
+            dots: true,
+            responsive: [
+            {
+            breakpoint: 1450,
+            settings: {
+                slidesToShow: 3,
+                slidesToScroll: 3,
+                infinite: true,
+                dots: true
+            }
+            },
+            {
+            breakpoint: 1100,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2
+            }
+            },
+            {
+            breakpoint: 750,
+            settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+            }
+            }
+        ]
+        });
+        });
+  </script>
   <script src="../assets/js/home.js"></script>
-  <script src="../assets/js/entrepreneurship_company.js"></script>
 </body>
 <?php include '../layout/footer.php'?>
 </html>

@@ -75,7 +75,7 @@
         /* Tablets pequeñas */
         @media (max-width: 768px) {
             .banner-image {
-                height: 350px;
+                height: 300px;
                 object-position: center;
             }
             
@@ -94,7 +94,7 @@
         /* Móviles */
         @media (max-width: 576px) {
             .banner-image {
-                height: 350px;
+                height: 300px;
                 object-position: center;
             }
             
@@ -113,7 +113,7 @@
         /* Móviles muy pequeños */
         @media (max-width: 400px) {
             .banner-image {
-                height: 300px;
+                height: 250px;
                 object-position: center;
             }
             
@@ -163,6 +163,7 @@
             gap: 2rem;
             flex-wrap: wrap;
             margin-top: 1rem;
+            padding: 20px;
           }
           
           .company-image img {
@@ -229,6 +230,272 @@
             }
           }
 /* ============================
+   Comentarios por empresa Section
+   ============================ */
+.comentarios-section {
+  background-color: #f8f8f8;
+  padding: 4rem 1rem;
+  text-align: center;
+}
+
+.comentarios-titulo {
+  font-size: 2rem;
+  margin-bottom: 3rem;
+  font-weight: bold;
+  color: #084b00;
+  position: relative;
+  display: inline-block;
+}
+
+.comentarios-titulo::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background-color: #007000;
+  border-radius: 2px;
+}
+
+.comentario-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 300px;
+  width: 270px !important;
+  max-width: 320px;
+  background-color: rgb(255, 255, 255); /* Transparencia ligera */
+  backdrop-filter: blur(80px); /* Efecto vidrio esmerilado */
+  padding: 18px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  text-align: left;
+  font-family: 'Arial', sans-serif;
+  transition: all 0.4s ease;
+  overflow: hidden;
+    border-top: 3px solid #084b00;
+  border-bottom: 3px solid #084b00;
+}
+
+/* Añadimos un tercer pseudo-elemento */
+.comentario-card::before,
+.comentario-card::after,
+.comentario-card::backdrop {
+  content: '';
+  position: absolute;
+  background: radial-gradient(circle, rgba(6, 75, 0, 0.274) 0%, transparent 70%);
+  filter: blur(80px);
+  /* transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1); */
+  border-radius: 50%;
+  opacity: 0; 
+  z-index: 0;
+}
+
+/* Posicionamos los 3 círculos */
+.comentario-card::before {
+  top: -60%;
+  left: -50%;
+  transform: translateY(20%);
+}
+
+.comentario-card::after {
+  bottom: -30%;
+  right: -30%;
+  transform: translateY(50%);
+}
+
+.comentario-card::backdrop {
+  top: 50%;
+  right: -20%;
+  transform: translateY(-90%);
+}
+
+/* Efecto hover para los 3 círculos */
+.comentario-card:hover::before,
+.comentario-card:hover::after,
+.comentario-card:hover::backdrop {
+  width: 100px;
+  height: 300px;
+  opacity: 1;
+}
+
+/* Aseguramos que el contenido esté por encima */
+.comentario-card h4,
+.comentario-card .correo,
+.comentario-card .mensaje {
+  position: relative;
+  z-index: 1;
+}
+
+.comentario-card h4 {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+}
+
+.comentario-card .correo {
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 0.65rem;
+  position: relative;
+  z-index: 1;
+}
+
+.comentario-card .mensaje {
+  font-size: 14px;
+  color: #444;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* BOX SHADOW SUAVE */
+
+/* .comentario-card:hover {
+  transform: translateY(-0.5px);
+  box-shadow:
+    inset 0 2px 4px rgba(0, 0, 0, 0.15),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.1),
+    0 6px 15px rgba(0, 0, 0, 0.2);
+} */
+
+/* BOX SHADOW MAS FUERTE */
+.comentario-card:hover {
+  transform: translateY(-0.5px);
+  box-shadow:
+    inset 0 3px 6px rgba(0, 0, 0, 0.2),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.15),
+    0 10px 25px rgba(0, 0, 0, 0.25);
+} 
+
+/* Línea verde en la parte inferior */
+.comentario-card::after {
+  content: '';
+  position: absolute;
+  bottom: -80px;
+  left: 60%;
+  width: 100px;
+  height: 100px;
+  background-color: #074b0098;
+  filter: blur(90px);
+  border-radius: 50%;
+  opacity: 0; /* Asegura que sea visible */
+  z-index: 0;
+  /* transition: all 0.3s ease; */
+}
+
+.comentario-card::before {
+  content: '';
+  position: absolute;
+  bottom: 180px;
+  left: -10%;
+  width: 100px;
+  height: 100px;
+  background-color: #0c4600ad;
+  filter: blur(140px);
+  border-radius: 50%;
+  opacity: 0; /* Asegura que sea visible */
+  z-index: 0;
+  /* transition: all 0.3s ease; */
+}
+
+.comentario-card:hover::after {
+  height: 200px;
+}
+
+.comentario-card:hover::before {
+  height: 200px;
+}
+
+/* ↓ Menor a 1450px (3 cards visibles) */
+@media (max-width: 1450px) {
+  .comentario-card {
+    width: 280px !important;
+    height: 300px;
+    margin: 0 8px;
+  }
+}
+
+/* ↓ Menor a 1100px (2 cards visibles) */
+@media (max-width: 1100px) {
+  .comentario-card {
+    width: 280px !important;
+    height: 300px;
+    margin: 0 6px;
+  }
+}
+@media (max-width: 1100px) and (min-width: 881px) {
+  .comentario-card {
+    width: 380px !important;
+    height: 300px;
+    margin: 0 6px;
+  }
+}
+
+/* ↓ Menor a 750px (1 card visible) */
+@media (max-width: 750px) {
+  .comentario-card {
+    width: 260px !important;
+    height: 300px;
+    margin: 0 6px;
+  }
+}
+
+
+/* Estilos para el carrusel */
+.comentarios-carrusel {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 85%;
+}
+
+.slick-slide {
+  display: flex !important;
+  justify-content: center;
+  padding: 0 15px;
+  height: auto !important;
+}
+
+/* Flechas del carrusel */
+
+
+.slick-prev {
+  left: -25px;
+}
+
+.slick-next {
+  right: -25px;
+}
+
+.slick-prev:before, .slick-next:before {
+  color: #084b00;
+  font-size: 20px;
+}
+
+/* Puntos indicadores */
+.slick-dots li button:before {
+  color: #084b00;
+  font-size: 10px;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #084b00;
+}
+
+.slick-dotted.slick-slider {
+    margin-bottom: 0px !important;
+}
+.slick-dots {
+    bottom: -45px !important;
+}
+/* ============================
         Fotos e imagenes por empresa Section
         ============================ */
         .eventos-section {
@@ -292,9 +559,10 @@
           
           .eventos-gallery {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            flex: 2 1 600px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+    flex: 2 1 600px;
+    align-items: stretch;
           }
           
           .item {
@@ -331,7 +599,7 @@
             border-radius: 50%;
             font-size: 1.5rem;
           }
-          @media (max-width: 1095px) {
+          @media (max-width: 1094px) {
           .eventos-left {
             max-width: 80%;
             background-color: #ffffff; /* puedes cambiarlo si deseas otro color en móvil */
@@ -395,4 +663,109 @@
               border-radius: 10px;
             }
           }
-          
+          /* ============================
+        VIDEOS FILTRADOS POR EMPRESA
+        ============================ */
+        
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+            aspect-ratio: 1 / 1;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.gallery-item img,
+.gallery-item video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    display: block;
+}
+
+.gallery-item:hover img,
+.gallery-item:hover video {
+    transform: scale(1.1);
+}
+
+.gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.gallery-overlay i {
+    color: white;
+    font-size: 1.5rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay i {
+    opacity: 1;
+}
+
+/* Estilos del modal de galería original */
+#galleryModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.9);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+#galleryModal div {
+  position: relative;
+  max-width: 90%;
+  max-height: 90%;
+}
+
+#galleryModal button {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+#galleryModal img,
+#galleryModal video {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+}
+
+.fa-times {
+  transition: color 0.3s ease;
+}
+
+.fa-times:hover {
+  color: red;
+}
