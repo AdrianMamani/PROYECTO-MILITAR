@@ -99,7 +99,7 @@ $galeriaPublica = new GaleriaPublicaController();
 $eventosPublicos = new EventosPublicosController();
 $home = new HomeController();
 $nosotrosweb = new NosotrosControllerWeb();
-$comentarios = new ComentariosController();
+$comentarios = new ComentarioController();
 $miembrosWeb = new MiembrosControllerWeb();
 
 // Contexto admin si está logueado
