@@ -32,13 +32,20 @@ class Router {
         return $this;
     }
     
+    // Método para cargar controladores automáticamente
+    private function loadController($controllerClass) {
+        $controllerFile = "./controllers/{$controllerClass}.php";
+        
+        if (file_exists($controllerFile)) {
+            require_once $controllerFile;
+            return true;
+        }
+        
+        return false;
+    }
+    
     public function dispatch() {
         session_start();
-        
-        // Depuración con comentarios HTML
-        echo "<!-- Depuración del Router -->\n";
-        echo "<!-- URI: " . $_SERVER['REQUEST_URI'] . " -->\n";
-        echo "<!-- Parámetro action: " . ($_GET['action'] ?? 'no definido') . " -->\n";
         
         // Obtener la acción del parámetro GET
         $action = isset($_GET['action']) ? $_GET['action'] : 'carrusel/index';
@@ -46,8 +53,6 @@ class Router {
         $controller = $partes[0];
         $method = $partes[1] ?? 'index';
         $id = $partes[2] ?? null;
-        
-        echo "<!-- Controller: $controller, Method: $method, ID: $id -->\n";
         
         // Verificar autenticación (excepto para auth)
         if (!isset($_SESSION['usuario']) && $controller !== 'auth') {
@@ -63,60 +68,74 @@ class Router {
                 
                 // Ejecutar middleware si existe
                 foreach ($route['middleware'] as $middleware) {
-                    $middlewareInstance = new $middleware();
-                    if (!$middlewareInstance->handle()) {
-                        return;
+                    if (class_exists($middleware)) {
+                        $middlewareInstance = new $middleware();
+                        if (!$middlewareInstance->handle()) {
+                            return;
+                        }
                     }
                 }
                 
-                // Instanciar controlador y llamar al método
+                // Cargar e instanciar controlador
                 $controllerClass = $route['controllerClass'];
                 $methodName = $route['methodName'];
                 
-                // Depuración
-                echo "<!-- Instanciando controlador: $controllerClass -->\n";
+                // Cargar el archivo del controlador
+                if (!$this->loadController($controllerClass)) {
+                    echo "<div class='alert alert-danger'>Error: No se pudo cargar el controlador $controllerClass</div>";
+                    return;
+                }
+                
+                // Verificar que la clase existe
+                if (!class_exists($controllerClass)) {
+                    echo "<div class='alert alert-danger'>Error: La clase $controllerClass no existe</div>";
+                    return;
+                }
                 
                 try {
                     // Instanciar el controlador
                     $controllerInstance = new $controllerClass();
                     
+                    // Verificar que el método existe
+                    if (!method_exists($controllerInstance, $methodName)) {
+                        echo "<div class='alert alert-danger'>Error: El método $methodName no existe en $controllerClass</div>";
+                        return;
+                    }
+                    
                     // Llamar al método con o sin ID
-                    echo "<!-- Llamando al método: $methodName -->\n";
                     if ($id) {
                         $controllerInstance->$methodName($id);
                     } else {
                         $controllerInstance->$methodName();
                     }
-                    echo "<!-- Método ejecutado correctamente -->\n";
                 } catch (Exception $e) {
-                    echo "<!-- Error al ejecutar el controlador: " . $e->getMessage() . " -->\n";
-                    echo "<div class='alert alert-danger'>Error: " . $e->getMessage() . "</div>";
+                    echo "<div class='alert alert-danger'>Error al ejecutar el controlador: " . $e->getMessage() . "</div>";
                 }
                 
                 return;
             }
         }
         
-        // Si no se encontró la ruta, mostrar un mensaje de depuración
-        if (!$routeFound) {
-            echo "<!-- Ruta no encontrada: $controller/$method -->\n";
-            echo "<!-- Rutas disponibles: -->\n";
-            foreach ($this->routes as $route) {
-                echo "<!-- " . $route['controller'] . "/" . $route['method'] . " -> " . $route['controllerClass'] . "::" . $route['methodName'] . " -->\n";
-            }
-        }
-        
-        // Ruta no encontrada
+        // Ruta no encontrada - usar callback por defecto
         if ($this->notFoundCallback) {
             $controllerClass = $this->notFoundCallback['controllerClass'];
             $methodName = $this->notFoundCallback['methodName'];
             
-            // Instanciar el controlador
-            $controllerInstance = new $controllerClass();
-            $controllerInstance->$methodName();
+            // Cargar el controlador por defecto
+            if ($this->loadController($controllerClass) && class_exists($controllerClass)) {
+                $controllerInstance = new $controllerClass();
+                if (method_exists($controllerInstance, $methodName)) {
+                    $controllerInstance->$methodName();
+                } else {
+                    echo "404 Not Found - Método no encontrado";
+                }
+            } else {
+                echo "404 Not Found - Controlador por defecto no encontrado";
+            }
         } else {
             header("HTTP/1.0 404 Not Found");
             echo "404 Not Found - Ruta no encontrada: $controller/$method";
         }
     }
 }
+?>

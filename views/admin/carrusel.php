@@ -57,6 +57,24 @@
                             </li>
                         </ul>
                     </li>
+                      <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-newspaper"></i>
+                            <p>
+                                Admin Noticias
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="index.php?action=noticias/index" class="nav-link active">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Noticias</p>
+                                </a>
+                            </li>
+                          
+                        </ul>
+                    </li>
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-images"></i>
@@ -118,7 +136,7 @@
         <p>Registro de Aportaciones</p>
     </a>
 </li>
-                    
+     
                 </ul>
             </nav>
             

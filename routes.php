@@ -1,5 +1,5 @@
 <?php
-// routes.php - Definición completa de rutas
+// routes.php - Con rutas de finanzas públicas agregadas
 
 // Rutas de autenticación
 $router->add('auth', 'loginForm', 'AuthController', 'loginForm');
@@ -48,9 +48,8 @@ $router->add('emprendimientoimg', 'agregar',  'EmprendimientoGaleriaController',
 $router->add('emprendimientoimg', 'editar', 'EmprendimientoGaleriaController', 'edit')->middleware('AuthMiddleware');
 $router->add('emprendimientoimg', 'eliminar', 'EmprendimientoGaleriaController', 'delete')->middleware('AuthMiddleware');
 $router->add('emprendimientoimg', 'ver', 'EmprendimientoGaleriaController', 'view')->middleware('AuthMiddleware');
-$router->add('finanzas', 'index', 'FinanzasController', 'index')->middleware('AuthMiddleware');
 
-// Rutas de finanzas
+// Rutas de finanzas (admin)
 $router->add('finanzas', 'index', 'FinanzasController', 'index')->middleware('AuthMiddleware');
 $router->add('finanzas', 'agregar', 'FinanzasController', 'agregar')->middleware('AuthMiddleware');
 $router->add('finanzas', 'store', 'FinanzasController', 'store')->middleware('AuthMiddleware');
@@ -58,5 +57,39 @@ $router->add('finanzas', 'editar', 'FinanzasController', 'editar')->middleware('
 $router->add('finanzas', 'update', 'FinanzasController', 'update')->middleware('AuthMiddleware');
 $router->add('finanzas', 'eliminar', 'FinanzasController', 'eliminar')->middleware('AuthMiddleware');
 $router->add('finanzas', 'ver', 'FinanzasController', 'ver')->middleware('AuthMiddleware');
+
+// Rutas de noticias principales (admin)
+$router->add('noticias', 'index', 'NoticiasController', 'index')->middleware('AuthMiddleware');
+$router->add('noticias', 'agregar', 'NoticiasController', 'agregar')->middleware('AuthMiddleware');
+$router->add('noticias', 'store', 'NoticiasController', 'store')->middleware('AuthMiddleware');
+$router->add('noticias', 'ver', 'NoticiasController', 'ver')->middleware('AuthMiddleware');
+$router->add('noticias', 'detalle', 'NoticiasController', 'detalle')->middleware('AuthMiddleware');
+$router->add('noticias', 'editar', 'NoticiasController', 'editar')->middleware('AuthMiddleware');
+$router->add('noticias', 'update', 'NoticiasController', 'update')->middleware('AuthMiddleware');
+$router->add('noticias', 'eliminar', 'NoticiasController', 'eliminar')->middleware('AuthMiddleware');
+$router->add('noticias', 'creada', 'NoticiasController', 'creada')->middleware('AuthMiddleware');
+
+// Rutas de imágenes de noticias (admin)
+$router->add('noticiasimg', 'index', 'NoticiasImgController', 'index')->middleware('AuthMiddleware');
+$router->add('noticiasimg', 'store', 'NoticiasImgController', 'store')->middleware('AuthMiddleware');
+$router->add('noticiasimg', 'eliminar', 'NoticiasImgController', 'eliminar')->middleware('AuthMiddleware');
+
+// Rutas de videos de noticias (admin)
+$router->add('noticiasvideos', 'index', 'NoticiasVideosController', 'index')->middleware('AuthMiddleware');
+$router->add('noticiasvideos', 'store', 'NoticiasVideosController', 'store')->middleware('AuthMiddleware');
+$router->add('noticiasvideos', 'eliminar', 'NoticiasVideosController', 'eliminar')->middleware('AuthMiddleware');
+
+// Rutas públicas de noticias (sin middleware de autenticación)
+$router->add('noticias-public', 'index', 'NoticiasPublicController', 'index');
+$router->add('noticias-public', 'detalle', 'NoticiasPublicController', 'detalle');
+$router->add('noticias-public', 'buscar', 'NoticiasPublicController', 'buscar');
+
+// Rutas públicas de finanzas (sin middleware de autenticación)
+$router->add('finanzas-public', 'index', 'FinanzasPublicController', 'index');
+$router->add('finanzas-public', 'detalle', 'FinanzasPublicController', 'detalle');
+$router->add('finanzas-public', 'buscar', 'FinanzasPublicController', 'buscar');
+$router->add('finanzas-public', 'exportar', 'FinanzasPublicController', 'exportar');
+
 // Ruta por defecto
-$router->notFound('CarruselController', 'index');
+$router->notFound('NoticiasPublicController', 'index');
+?>

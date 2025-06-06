@@ -4,7 +4,6 @@ class Finanzas {
     private $nombreTabla = 'seccion_finanzas';
 
     public function __construct() {
-        // Obtiene la conexión a la base de datos desde la clase Database
         $this->db = Database::connect();
     }
 
@@ -34,7 +33,6 @@ class Finanzas {
     }
 
     public function agregar($datos) {
-        // Calcular totales
         $total_pagos = $datos['ene'] + $datos['feb'] + $datos['mar'] + $datos['abr'] + 
                        $datos['may'] + $datos['jun'] + $datos['jul'] + $datos['ago'] + 
                        $datos['sep'] + $datos['oct'] + $datos['nov'] + $datos['dic'];
@@ -80,7 +78,6 @@ class Finanzas {
     }
 
     public function actualizar($id, $datos) {
-        // Calcular totales
         $total_pagos = $datos['ene'] + $datos['feb'] + $datos['mar'] + $datos['abr'] + 
                        $datos['may'] + $datos['jun'] + $datos['jul'] + $datos['ago'] + 
                        $datos['sep'] + $datos['oct'] + $datos['nov'] + $datos['dic'];
@@ -138,6 +135,91 @@ class Finanzas {
         $stmt->bindParam(1, $id, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->rowCount() > 0;
+    }
+
+    // Nuevos métodos para la vista pública
+    public function obtenerTodosPaginado($limit = 20, $offset = 0) {
+        try {
+            $query = "SELECT * FROM " . $this->nombreTabla . " 
+                     ORDER BY numero_orden ASC 
+                     LIMIT :limit OFFSET :offset";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+            $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+            $stmt->execute();
+            
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            throw new Exception("Error al obtener registros paginados: " . $e->getMessage());
+        }
+    }
+
+    public function contarTotalRegistros() {
+        try {
+            $query = "SELECT COUNT(*) as total FROM " . $this->nombreTabla;
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['total'];
+        } catch (PDOException $e) {
+            throw new Exception("Error al contar registros: " . $e->getMessage());
+        }
+    }
+
+    public function buscarRegistros($termino, $limit = 10, $offset = 0) {
+        try {
+            $query = "SELECT * FROM " . $this->nombreTabla . " 
+                     WHERE apellidos_nombres LIKE :termino OR numero_orden LIKE :termino
+                     ORDER BY numero_orden ASC 
+                     LIMIT :limit OFFSET :offset";
+            $stmt = $this->db->prepare($query);
+            $termino_busqueda = '%' . $termino . '%';
+            $stmt->bindParam(':termino', $termino_busqueda);
+            $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+            $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+            $stmt->execute();
+            
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            throw new Exception("Error al buscar registros: " . $e->getMessage());
+        }
+    }
+
+    public function contarRegistrosBusqueda($termino) {
+        try {
+            $query = "SELECT COUNT(*) as total FROM " . $this->nombreTabla . " 
+                     WHERE apellidos_nombres LIKE :termino OR numero_orden LIKE :termino";
+            $stmt = $this->db->prepare($query);
+            $termino_busqueda = '%' . $termino . '%';
+            $stmt->bindParam(':termino', $termino_busqueda);
+            $stmt->execute();
+            
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result['total'];
+        } catch (PDOException $e) {
+            throw new Exception("Error al contar búsqueda: " . $e->getMessage());
+        }
+    }
+
+    public function obtenerEstadisticas() {
+        try {
+            $query = "SELECT 
+                        COUNT(*) as total_registros,
+                        SUM(total_pagos) as total_pagos_general,
+                        SUM(total_deuda) as total_deuda_general,
+                        AVG(total_pagos) as promedio_pagos,
+                        AVG(total_deuda) as promedio_deuda,
+                        MAX(total_pagos) as max_pagos,
+                        MIN(total_pagos) as min_pagos
+                      FROM " . $this->nombreTabla;
+            $stmt = $this->db->prepare($query);
+            $stmt->execute();
+            
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            throw new Exception("Error al obtener estadísticas: " . $e->getMessage());
+        }
     }
 }
 ?>
