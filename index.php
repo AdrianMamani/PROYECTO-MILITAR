@@ -16,34 +16,53 @@ require_once './controllers/AportacionController.php';
 require_once './controllers/NosotrosController.php';
 require_once './controllers/NosotrosImg.php';
 require_once './controllers/NosotrosVideos.php';
-require_once './controllers/ComentarioController.php';
-require_once './controllers/En_MemoriaController.php';
-require_once './controllers/MiembrosController.php';
-require_once './controllers/ComentariosEmprendimientoController.php';
+require_once './controllers/EventoController.php';
+require_once './controllers/eventoimg.php';
+require_once './controllers/eventovideo.php';
 require_once './controllers/galeria.php';
 require_once './controllers/logros_desta.php';
 require_once './controllers/logros_especiales_img.php';
 require_once './controllers/LogroVideoController.php';
-require_once './controllers/EventoController.php';
-require_once './controllers/eventoimg.php';
-require_once './controllers/eventovideo.php';
+require_once './controllers/ComentarioEventoController.php';
+require_once './controllers/UsuariosController.php';
+require_once './controllers/MiembrosImgController.php';
+require_once './controllers/MiembrosVideosController.php';
+require_once './controllers/ComentarioController.php';
+require_once './controllers/En_MemoriaController.php';
+require_once './controllers/MiembrosController.php';
+require_once './controllers/ComentariosEmprendimientoController.php';
 
 // rutas para la web
-require_once './controllers/web/galeria.php';
 require_once './controllers/web/evento.php';
-
-//rutas para la web 
+require_once './controllers/web/galeria.php';
+require_once './controllers/web/home.php';
+require_once './controllers/web/nosotros.php';
+require_once './controllers/web/miembros.php';
+define('BASE_URL', '/PROYECTO-MILITAR/');
 
 
 // Definir la acción por defecto
-$action = isset($_GET['action']) ? $_GET['action'] : 'carrusel/index';
+$action = $_GET['action'] ?? 'carrusel/index';
 $partes = explode('/', $action);
-$accionPrincipal = $partes[0];
-$accionSecundaria = $partes[1] ?? 'index';
-$id = $partes[2] ?? null;
+
+$accionPrincipal = $partes[0] ?? '';
+$accionSecundaria = $partes[1] ?? '';
+$id = $partes[2] ?? ($_GET['id'] ?? null);
+
 
 // Proteger rutas (excepto login)
-if (!isset($_SESSION['usuario']) && !in_array($accionPrincipal, ['auth'])) {
+$rutasPublicas = [
+    'auth',
+    'home',
+    'sobrenosotros',
+    'galeria',
+    'miembro',
+    'miembros',
+    'miembros_fallecidos',
+    'comentarios/agregar'
+];
+
+if (!isset($_SESSION['usuario']) && !in_array($accionPrincipal, $rutasPublicas) && !in_array($accionCompleta, $rutasPublicas)) {
     header('Location: index.php?action=auth/loginForm');
     exit;
 }
@@ -60,21 +79,28 @@ $aportaciones = new AportacionController();
 $nosotros = new  NosotrosController();
 $nosotrosImg = new  NosotrosImgController();
 $nosotrosVideo = new  NosotrosVideoController();
-$comentarios = new ComentarioController(); // Asegúrate de que esta clase exista
-$en_memoria = new En_MemoriaController(); // Asegúrate de que esta clase exista
-$miembros = new MiembrosController(); // Asegúrate de que esta clase exista
-$comentariosEmprendimiento = new ComentariosEmprendimientoController();
+$evento = new  EventoController();
+$eventoImg = new  ImagenEventoController();
+$videoevento = new  VideoEventoController();
 $admingaleria = new GaleriaController();
 $logrodestacado = new LogrosDestacadoController();
 $logroimg = new ImagenLogroController();
 $logrovideo = new LogroVideoController();
-$evento = new  EventoController();
-$eventoImg = new  ImagenEventoController();
-$videoevento = new  VideoEventoController();
+$comentarioevento = new ComentarioEventoController();
+$comentarios = new ComentarioController(); // Asegúrate de que esta clase exista
+$en_memoria = new En_MemoriaController(); // Asegúrate de que esta clase exista
+$miembros = new MiembrosController(); // Asegúrate de que esta clase exista
+$miembrosIMG = new MiembrosImgController();
+$miembrosVideos = new MiembrosVideosController();
+$comentariosEmprendimiento = new ComentariosEmprendimientoController();
 
 // instancias para la web
 $galeriaPublica = new GaleriaPublicaController();
 $eventosPublicos = new EventosPublicosController();
+$home = new HomeController();
+$nosotrosweb = new NosotrosControllerWeb();
+$comentarios = new ComentariosController();
+$miembrosWeb = new MiembrosControllerWeb();
 
 // Contexto admin si está logueado
 $isAdmin = isset($_SESSION['usuario']);
@@ -83,7 +109,7 @@ $controllerImg->setAdminContext($isAdmin);
 $especialidad->setAdminContext($isAdmin);
 $emprendimiento->setAdminContext($isAdmin);
 $nosotros->setAdminContext($isAdmin);
-$comentarios->setAdminContext($isAdmin);
+// $comentarios->setAdminContext($isAdmin);
 $en_memoria->setAdminContext($isAdmin);
 $miembros->setAdminContext($isAdmin);
 $comentariosEmprendimiento->setAdminContext($isAdmin);
@@ -327,144 +353,85 @@ switch ($accionPrincipal) {
                 break;
         }
         break;
-        case 'aportaciones':
-            if ($accionSecundaria === 'getAportaciones' && $id) {
-                $aportaciones->getAportaciones($id);
-            } else {
-                $aportaciones->index();
-            }
-            break;
-        case 'comentarios':
+                case 'evento':
         switch ($accionSecundaria) {
             case 'index':
-                $comentarios->index();
+                $evento->index();
                 break;
             case 'agregar':
-                $comentarios->agregar();
+                $evento->agregar();
                 break;
-            case 'editar':
-                if ($id) {
-                    $comentarios->editar($id);
-                } else {
-                    echo "ID no proporcionado para editar";
-                }
+            case 'actualizar':
+                $evento->actualizar();
                 break;
             case 'eliminar':
-                if ($id) {
-                    $comentarios->eliminar($id);
-                } else {
-                    echo "ID no proporcionado para eliminar";
-                }
+                $id ? $evento->eliminar($id) : print "ID no proporcionado";
                 break;
             case 'ver':
-                if ($id) {
-                    $comentarios->ver($id);
-                } else {
-                    echo "ID no proporcionado para ver";
-                }
+                $id ? $evento->ver($id) : print "ID no proporcionado";
                 break;
             default:
-                $comentarios->index();
+                $evento->index();
                 break;
         }
         break;
-
-    case 'en_memoria':
+        case 'eventoimg':
         switch ($accionSecundaria) {
             case 'index':
-                $en_memoria->index();
+                $eventoImg->index();
                 break;
             case 'agregar':
-                $en_memoria->agregar();
+            case 'create':
+                $eventoImg->create();
+                break;
+            case 'guardar':
+            case 'store':
+                $eventoImg->store();
                 break;
             case 'editar':
-                if ($id) {
-                    $en_memoria->editar($id);
-                } else {
-                    echo "ID no proporcionado para editar";
-                }
+            case 'edit':
+                $eventoImg->edit();
+                break;
+            case 'actualizar':
+            case 'update':
+                $eventoImg->update();
                 break;
             case 'eliminar':
-                if ($id) {
-                    $en_memoria->eliminar($id);
-                } else {
-                    echo "ID no proporcionado para eliminar";
-                }
-                break;
-            case 'ver':
-                if ($id) {
-                    $en_memoria->ver($id);
-                } else {
-                    echo "ID no proporcionado para ver";
-                }
+            case 'delete':
+                $eventoImg->delete();
                 break;
             default:
-                $en_memoria->index();
-                break;
-        }
-                break;
-        case 'miembros':
-        switch ($accionSecundaria) {
-            case 'index':
-                $miembros->index();
-                break;
-            case 'agregar':
-                $miembros->agregar();
-                break;
-            case 'editar':
-                if ($id) {
-                    $miembros->editar($id);
-                } else {
-                    echo "ID no proporcionado para editar";
-                }
-                break;
-            case 'eliminar':
-                if ($id) {
-                    $miembros->eliminar($id);
-                } else {
-                    echo "ID no proporcionado para eliminar";
-                }
-                break;
-            case 'ver':
-                if ($id) {
-                    $miembros->ver($id);
-                } else {
-                    echo "ID no proporcionado para ver";
-                }
-                break;
-            default:
-                $miembros->index();
+                $eventoImg->index();
                 break;
         }
         break;
-
-        case 'emprendimiento_comentarios':
+        case 'videoevento':
         switch ($accionSecundaria) {
             case 'index':
-                $comentariosEmprendimiento->index();
+                $videoevento->index();
                 break;
             case 'agregar':
-                $comentariosEmprendimiento->agregar();
+            case 'create':
+                $videoevento->create();
+                break;
+            case 'guardar':
+            case 'store':
+                $videoevento->store();
                 break;
             case 'editar':
-                $id ? $comentariosEmprendimiento->editar($id) : print "ID no proporcionado";
+            case 'edit':
+                $videoevento->edit();
+                break;
+            case 'actualizar':
+            case 'update':
+                $videoevento->update();
                 break;
             case 'eliminar':
-                $id ? $comentariosEmprendimiento->eliminar($id) : print "ID no proporcionado";
-                break;
-            case 'ver':
-                $id ? $comentariosEmprendimiento->ver($id) : print "ID no proporcionado";
+            case 'delete':
+                $videoevento->delete();
                 break;
             default:
-                $comentariosEmprendimiento->index();
-                break;
-        }
-        break;
-
-        case 'galeria': 
-        switch ($accionSecundaria) {
-            case 'index': // Para mostrar la galería pública
-                $galeriaPublica->mostrarGaleria();
+                $videoevento->index();
                 break;
         }
         break;
@@ -491,7 +458,6 @@ switch ($accionPrincipal) {
                 break;
         }
         break;
-
         case 'logrodestacado':
         switch ($accionSecundaria) {
             case 'index':
@@ -576,107 +542,346 @@ switch ($accionPrincipal) {
                 break;
         }
         break;
-        case 'evento':
+
+    case 'comentarioevento':
         switch ($accionSecundaria) {
             case 'index':
-                $evento->index();
-                break;
-            case 'agregar':
-                $evento->agregar();
-                break;
-            case 'actualizar':
-                $evento->actualizar();
-                break;
-            case 'eliminar':
-                $id ? $evento->eliminar($id) : print "ID no proporcionado";
+                $comentarioevento->index();
                 break;
             case 'ver':
-                $id ? $evento->ver($id) : print "ID no proporcionado";
-                break;
-            default:
-                $evento->index();
-                break;
-        }
-        break;
-        case 'eventoimg':
-        switch ($accionSecundaria) {
-            case 'index':
-                $eventoImg->index();
+                $id ? $comentarioevento->ver($id) : print "ID no proporcionado";
                 break;
             case 'agregar':
-            case 'create':
-                $eventoImg->create();
-                break;
-            case 'guardar':
-            case 'store':
-                $eventoImg->store();
+                $comentarioevento->agregar();
                 break;
             case 'editar':
-            case 'edit':
-                $eventoImg->edit();
+                $id ? $comentarioevento->editar($id) : print "ID no proporcionado";
                 break;
             case 'actualizar':
-            case 'update':
-                $eventoImg->update();
+                $comentarioevento->actualizar();
                 break;
             case 'eliminar':
-            case 'delete':
-                $eventoImg->delete();
+                $id ? $comentarioevento->eliminar($id) : print "ID no proporcionado";
                 break;
             default:
-                $eventoImg->index();
+                $comentarioevento->index();
                 break;
         }
         break;
-        case 'videoevento':
-        switch ($accionSecundaria) {
-            case 'index':
-                $videoevento->index();
-                break;
-            case 'agregar':
-            case 'create':
-                $videoevento->create();
-                break;
-            case 'guardar':
-            case 'store':
-                $videoevento->store();
-                break;
-            case 'editar':
-            case 'edit':
-                $videoevento->edit();
-                break;
-            case 'actualizar':
-            case 'update':
-                $videoevento->update();
-                break;
-            case 'eliminar':
-            case 'delete':
-                $videoevento->delete();
-                break;
-            default:
-                $videoevento->index();
-                break;
-        }
-        break;
-        
-        // Rutas para la web
-        case 'eventos':  // nuevo caso para el sitio público
-    switch ($accionSecundaria) {
-        case 'index':
-            $eventosPublicos->index();
-            break;
-        case 'ver':
-            $id ? $eventosPublicos->ver($id) : print "ID no proporcionado";
-            break;
-        default:
-            $eventosPublicos->index();
-            break;
-    }
-    break;
 
-    default:
-            $emprendimiento->index();
+        case 'usuarios':
+        switch ($accionSecundaria) {
+            case 'index':
+                $miembros->index();
+                break;
+            case 'listar':
+                $miembros->listar();
+                break;
+            case 'agregar':
+                $miembros->agregar();
+                break;
+            case 'editar':
+                $id ? $miembros->editar($id) : print "ID no proporcionado";
+                break;
+            case 'editarE':
+                $id ? $miembros->editarE($id) : print "ID no proporcionado";
+                break;
+            case 'editarF':
+                $id ? $miembros->editarF($id) : print "ID no proporcionado";
+                break;
+            case 'eliminar':
+                $miembros->eliminar();
+                break;
+            case 'eliminarF':
+                $id ? $miembros->eliminarF($id) : print "ID no proporcionado";
+                break;
+            default:
+                $miembros->index();
+                break;
+        }
+        break;
+    case 'miembros':
+        switch ($accionSecundaria) {
+            case 'index':
+                $miembrosWeb->index();
+                break;
+            default:
+                $miembrosWeb->index();
+                break;
+        }
+        break;
+    case 'miembro':
+        if (is_numeric($accionSecundaria)) {
+            $miembrosWeb->indexPersonal($accionSecundaria);
+        } else {
+            switch ($accionSecundaria) {
+                case 'index':
+                    $id ? $miembrosWeb->indexPersonal($id) : print "ID no proporcionado";
+                    break;
+                default:
+                    print "Ruta no válida para miembro.";
+                    break;
+            }
+        }
+        break;
+
+    case 'miembros_fallecidos':
+        switch ($accionSecundaria) {
+            case 'index':
+                $miembrosWeb->indexF();
+                break;
+            default:
+                $miembrosWeb->indexF();
+                break;
+        }
+        break;
+    case 'miembros_imagenes':
+        switch ($accionSecundaria) {
+            case 'index':
+                $miembrosIMG->index();
+                break;
+            case 'listar':
+                $miembrosIMG->listar();
+                break;
+            case 'agregar':
+                $miembrosIMG->agregar();
+                break;
+            case 'editar':
+                $id ? $miembrosIMG->editar($id) : print "ID no proporcionado";
+                break;
+            case 'eliminar':
+                $miembrosIMG->eliminar();
+                break;
+            default:
+                $miembrosIMG->index();
+                break;
+        }
+        break;
+
+    case 'miembros_videos':
+        switch ($accionSecundaria) {
+            case 'index':
+                $miembrosVideos->index();
+                break;
+            case 'listar':
+                $miembrosVideos->listar();
+                break;
+            case 'agregar':
+                $miembrosVideos->agregar();
+                break;
+            case 'editar':
+                $id ? $miembrosVideos->editar($id) : print "ID no proporcionado";
+                break;
+            case 'eliminar':
+                $id ? $miembrosVideos->eliminar($id) : print "ID no proporcionado";
+                break;
+            default:
+                $miembrosVideos->index();
+                break;
+        }
+        break;
+
+        case 'aportaciones':
+            if ($accionSecundaria === 'getAportaciones' && $id) {
+                $aportaciones->getAportaciones($id);
+            } else {
+                $aportaciones->index();
+            }
             break;
+        // case 'comentarios':
+        // switch ($accionSecundaria) {
+        //     case 'index':
+        //         $comentarios->index();
+        //         break;
+        //     case 'agregar':
+        //         $comentarios->agregar();
+        //         break;
+        //     case 'editar':
+        //         if ($id) {
+        //             $comentarios->editar($id);
+        //         } else {
+        //             echo "ID no proporcionado para editar";
+        //         }
+        //         break;
+        //     case 'eliminar':
+        //         if ($id) {
+        //             $comentarios->eliminar($id);
+        //         } else {
+        //             echo "ID no proporcionado para eliminar";
+        //         }
+        //         break;
+        //     case 'ver':
+        //         if ($id) {
+        //             $comentarios->ver($id);
+        //         } else {
+        //             echo "ID no proporcionado para ver";
+        //         }
+        //         break;
+        //     default:
+        //         $comentarios->index();
+        //         break;
+        // }
+        // break;
+
+    case 'en_memoria':
+        switch ($accionSecundaria) {
+            case 'index':
+                $en_memoria->index();
+                break;
+            case 'agregar':
+                $en_memoria->agregar();
+                break;
+            case 'editar':
+                if ($id) {
+                    $en_memoria->editar($id);
+                } else {
+                    echo "ID no proporcionado para editar";
+                }
+                break;
+            case 'eliminar':
+                if ($id) {
+                    $en_memoria->eliminar($id);
+                } else {
+                    echo "ID no proporcionado para eliminar";
+                }
+                break;
+            case 'ver':
+                if ($id) {
+                    $en_memoria->ver($id);
+                } else {
+                    echo "ID no proporcionado para ver";
+                }
+                break;
+            default:
+                $en_memoria->index();
+                break;
+        }
+                break;
+        // case 'miembros':
+        // switch ($accionSecundaria) {
+        //     case 'index':
+        //         $miembros->index();
+        //         break;
+        //     case 'agregar':
+        //         $miembros->agregar();
+        //         break;
+        //     case 'editar':
+        //         if ($id) {
+        //             $miembros->editar($id);
+        //         } else {
+        //             echo "ID no proporcionado para editar";
+        //         }
+        //         break;
+        //     case 'eliminar':
+        //         if ($id) {
+        //             $miembros->eliminar($id);
+        //         } else {
+        //             echo "ID no proporcionado para eliminar";
+        //         }
+        //         break;
+        //     case 'ver':
+        //         if ($id) {
+        //             $miembros->ver($id);
+        //         } else {
+        //             echo "ID no proporcionado para ver";
+        //         }
+        //         break;
+        //     default:
+        //         $miembros->index();
+        //         break;
+        // }
+        // break;
+
+        case 'emprendimiento_comentarios':
+        switch ($accionSecundaria) {
+            case 'index':
+                $comentariosEmprendimiento->index();
+                break;
+            case 'agregar':
+                $comentariosEmprendimiento->agregar();
+                break;
+            case 'editar':
+                $id ? $comentariosEmprendimiento->editar($id) : print "ID no proporcionado";
+                break;
+            case 'eliminar':
+                $id ? $comentariosEmprendimiento->eliminar($id) : print "ID no proporcionado";
+                break;
+            case 'ver':
+                $id ? $comentariosEmprendimiento->ver($id) : print "ID no proporcionado";
+                break;
+            default:
+                $comentariosEmprendimiento->index();
+                break;
+        }
+        break;
+
+// Rutas para la web
+    case 'home':
+        switch ($accionSecundaria) {
+            case 'index':
+                $home->index();
+                break;
+            default:
+                $home->index();
+                break;
+        }
+        break;
+
+    case 'sobrenosotros':
+        switch ($accionSecundaria) {
+            case 'index':
+                $nosotrosweb->index();
+                break;
+            default:
+                $nosotrosweb->index();
+                break;
+        }
+        break;
+    case 'comentarios':
+        switch ($accionSecundaria) {
+            case 'index':
+                $comentarios->index();
+                break;
+            case 'agregar':
+                $comentarios->agregar();
+                break;
+            case 'eliminar':
+                $id ? $comentarios->eliminar($id) : print "ID no proporcionado";
+                break;
+            default:
+                $comentarios->index();
+                break;
+        }
+        break;
+    case 'eventos':  // nuevo caso para el sitio público
+
+        switch ($accionSecundaria) {
+            case 'index':
+                $eventosPublicos->index();
+                break;
+            case 'ver':
+                $id ? $eventosPublicos->ver($id) : print "ID no proporcionado";
+                break;
+            case 'agregarComentario':
+                $eventosPublicos->agregarComentario();
+                break;
+            default:
+                $eventosPublicos->index();
+                break;
+        }
+        break;
+
+    case 'galeria':
+        switch ($accionSecundaria) {
+            case 'index': // Para mostrar la galería pública
+                $galeriaPublica->mostrarGaleria();
+                break;
+        }
+        break;
+
+
+        $controller->index(); // Acción por defecto
+        break;
 
         //$controller->index(); // Acción por defecto
         //break;

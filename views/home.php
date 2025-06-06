@@ -1,11 +1,11 @@
 <?php
 // Ruta corregida desde views/home.php
-require_once '../controllers/web/homeController.php';
-require_once '../controllers/web/especialidades.php';
-$carruselController = new CarruselController();
-$itemsCarrusel = $carruselController->verCarrusel();
-$especialidadController = new EspecialidadController();
-$especialidades = $especialidadController->verEspecialidades();
+// require_once '../controllers/web/homeController.php';
+// require_once '../controllers/web/especialidades.php';
+// $carruselController = new CarruselController();
+// $itemsCarrusel = $carruselController->verCarrusel();
+// $especialidadController = new EspecialidadController();
+// $especialidades = $especialidadController->verEspecialidades();
 
 ?>
 <!DOCTYPE html>
