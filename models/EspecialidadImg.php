@@ -97,4 +97,13 @@ class ImagenEspecialidadModel {
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function obtenerPorEspecialidadId($id)
+    {
+        $query = "SELECT * FROM imagenes_especialidad WHERE especialidad_id = :id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

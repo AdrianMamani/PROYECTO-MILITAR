@@ -25,9 +25,10 @@ require_once './controllers/logros_especiales_img.php';
 require_once './controllers/LogroVideoController.php';
 require_once './controllers/ComentarioEventoController.php';
 require_once './controllers/UsuariosController.php';
-require_once './controllers/UsuariosImgController.php';
-require_once './controllers/UsuariosVideosController.php';
+require_once './controllers/MiembrosImgController.php';
+require_once './controllers/MiembrosVideosController.php';
 require_once './controllers/ComentariosController.php';
+require_once './controllers/MiembrosController.php';
 require_once './controllers/EmprendimientoVideosController.php';
 // rutas para la web
 require_once './controllers/web/evento.php';
@@ -36,6 +37,7 @@ require_once './controllers/web/home.php';
 require_once './controllers/web/nosotros.php';
 require_once './controllers/web/miembros.php';
 require_once './controllers/web/emprendimiento.php';
+require_once './controllers/web/especialidades.php';
 define('BASE_URL', '/PROYECTO-MILITAR/');
 
 
@@ -85,9 +87,9 @@ $logrodestacado = new LogrosDestacadoController();
 $logroimg = new ImagenLogroController();
 $logrovideo = new LogroVideoController();
 $comentarioevento = new ComentarioEventoController();
-$usuarios = new UsuariosController();
-$usuariosIMG = new UsuariosImgController();
-$usuariosVideos = new UsuariosVideosController();
+$miembros = new MiembrosController();
+$miembrosIMG = new MiembrosImgController();
+$miembrosVideos = new MiembrosVideosController();
 $emprendimientoVideos = new VideoEmprendimientoController();
 
 // instancias para la web
@@ -96,7 +98,8 @@ $galeriaPublica = new GaleriaPublicaController();
 $home = new HomeController();
 $nosotrosweb = new NosotrosControllerWeb();
 $comentarios = new ComentariosController();
-$miembrosWeb = new MiembrosController();
+$miembrosWeb = new MiembrosControllerWeb();
+$especialidadWeb = new EspecialidadControllerWeb();
 $emprendimientoWeb = new EmprendimientoControllerWeb();
 
 
@@ -240,7 +243,7 @@ switch ($accionPrincipal) {
                 break;
             case 'editar_redes':
                 $id ? $emprendimiento->editar_redes($id) : print "ID no proporcionado";
-                break;    
+                break;
             case 'eliminar':
                 $id ? $emprendimiento->eliminar($id) : print "ID no proporcionado";
                 break;
@@ -313,7 +316,7 @@ switch ($accionPrincipal) {
                 $emprendimientoVideos->index();
                 break;
         }
-        break;    
+        break;
     case 'nosotros':
         switch ($accionSecundaria) {
             case 'index':
@@ -597,36 +600,6 @@ switch ($accionPrincipal) {
                 break;
         }
         break;
-
-    case 'usuarios':
-        switch ($accionSecundaria) {
-            case 'index':
-                $usuarios->index();
-                break;
-            case 'agregar':
-                $usuarios->agregar();
-                break;
-            case 'editar':
-                $id ? $usuarios->editar($id) : print "ID no proporcionado";
-                break;
-            case 'editarE':
-                $id ? $usuarios->editarE($id) : print "ID no proporcionado";
-                break;
-            case 'editarF':
-                $id ? $usuarios->editarF($id) : print "ID no proporcionado";
-                break;
-            case 'eliminar':
-                $id ? $usuarios->eliminar($id) : print "ID no proporcionado";
-                break;
-            case 'eliminarF':
-                $id ? $usuarios->eliminarF($id) : print "ID no proporcionado";
-                break;
-            default:
-                $usuarios->index();
-                break;
-        }
-        break;
-    
     case 'negocios':
         switch ($accionSecundaria) {
             case 'index':
@@ -636,7 +609,7 @@ switch ($accionPrincipal) {
                 $emprendimientoWeb->index();
                 break;
         }
-        break;    
+        break;
     case 'emprendimientos':
         if (is_numeric($accionSecundaria)) {
             $emprendimientoWeb->indexPersonal($accionSecundaria);
@@ -644,15 +617,67 @@ switch ($accionPrincipal) {
             switch ($accionSecundaria) {
                 case 'index':
                     $id ? $emprendimientoWeb->indexPersonal($id) : print "ID no proporcionado";
-                    break;   
+                    break;
                 default:
                     print "Ruta no válida para miembro.";
                     break;
             }
         }
         break;
-        
-        
+
+
+    case 'usuarios':
+        switch ($accionSecundaria) {
+            case 'index':
+                $miembros->index();
+                break;
+            case 'listar':
+                $miembros->listar();
+                break;
+            case 'agregar':
+                $miembros->agregar();
+                break;
+            case 'editar':
+                $id ? $miembros->editar($id) : print "ID no proporcionado";
+                break;
+            case 'editarE':
+                $id ? $miembros->editarE($id) : print "ID no proporcionado";
+                break;
+            case 'editarF':
+                $id ? $miembros->editarF($id) : print "ID no proporcionado";
+                break;
+            case 'eliminar':
+                $miembros->eliminar();
+                break;
+            case 'eliminarF':
+                $id ? $miembros->eliminarF($id) : print "ID no proporcionado";
+                break;
+            default:
+                $miembros->index();
+                break;
+        }
+        break;
+
+    case 'usuarios_fallecidos':
+        switch ($accionSecundaria) {
+            case 'index':
+                $miembros->indexF();
+                break;
+            case 'listar':
+                $miembros->listarF();
+                break;
+            case 'editar':
+                $id ? $miembros->editarF($id) : print "ID no proporcionado";
+                break;
+            case 'eliminar':
+                $id ? $miembros->eliminarF($id) : print "ID no proporcionado";
+                break;
+            default:
+                $miembros->indexF();
+                break;
+        }
+        break;
+
     case 'miembros':
         switch ($accionSecundaria) {
             case 'index':
@@ -671,9 +696,6 @@ switch ($accionPrincipal) {
                 case 'index':
                     $id ? $miembrosWeb->indexPersonal($id) : print "ID no proporcionado";
                     break;
-            case 'agregarComentario':
-                $miembrosWeb->agregarComentario();
-                break;    
                 default:
                     print "Ruta no válida para miembro.";
                     break;
@@ -691,43 +713,64 @@ switch ($accionPrincipal) {
                 break;
         }
         break;
-    case 'usuarios_imagenes':
+    case 'miembros_imagenes':
         switch ($accionSecundaria) {
             case 'index':
-                $usuariosIMG->index();
+                $miembrosIMG->index();
+                break;
+            case 'listar':
+                $miembrosIMG->listar();
                 break;
             case 'agregar':
-                $usuariosIMG->agregar();
+                $miembrosIMG->agregar();
                 break;
             case 'editar':
-                $id ? $usuariosIMG->editar($id) : print "ID no proporcionado";
+                $id ? $miembrosIMG->editar($id) : print "ID no proporcionado";
                 break;
             case 'eliminar':
-                $id ? $usuariosIMG->eliminar($id) : print "ID no proporcionado";
+                $miembrosIMG->eliminar();
                 break;
             default:
-                $usuariosIMG->index();
+                $miembrosIMG->index();
                 break;
         }
         break;
 
-    case 'usuarios_videos':
+    case 'miembros_videos':
         switch ($accionSecundaria) {
             case 'index':
-                $usuariosVideos->index();
+                $miembrosVideos->index();
+                break;
+            case 'listar':
+                $miembrosVideos->listar();
                 break;
             case 'agregar':
-                $usuariosVideos->agregar();
+                $miembrosVideos->agregar();
                 break;
             case 'editar':
-                $id ? $usuariosVideos->editar($id) : print "ID no proporcionado";
+                $id ? $miembrosVideos->editar($id) : print "ID no proporcionado";
                 break;
             case 'eliminar':
-                $id ? $usuariosVideos->eliminar($id) : print "ID no proporcionado";
+                $id ? $miembrosVideos->eliminar($id) : print "ID no proporcionado";
                 break;
             default:
-                $usuariosVideos->index();
+                $miembrosVideos->index();
                 break;
+        }
+        break;
+
+    case 'especialidad_index':
+        if (is_numeric($accionSecundaria)) {
+            $especialidadWeb->indexPersonal($accionSecundaria);
+        } else {
+            switch ($accionSecundaria) {
+                case 'index':
+                    $id ? $especialidadWeb->indexPersonal($id) : print "ID no proporcionado";
+                    break;
+                default:
+                    print "Ruta no válida para miembro.";
+                    break;
+            }
         }
         break;
 

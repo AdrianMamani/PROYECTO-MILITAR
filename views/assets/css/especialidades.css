@@ -1,0 +1,241 @@
+body {
+    font-family: "Inter", sans-serif;
+    background-color: #f9fafb;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .header-bar {
+    width: 100%;
+    background-color: #28a745;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    user-select: none;
+  }
+  
+  main {
+    flex-grow: 1;
+    max-width: 1400px;
+    margin: 2.5rem auto 3rem;
+    padding: 0 2rem;
+  }
+  
+  .title-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+  
+  h2.title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #111827;
+    margin: 0;
+  }
+  
+  .members-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #e5e7eb;
+    color: #4b5563;
+    border-radius: 9999px;
+    padding: 0.25rem 0.75rem;
+    font-weight: 600;
+    user-select: none;
+    cursor: default;
+    font-size: 1rem;
+  }
+  
+  .members-badge i {
+    font-size: 1.125rem;
+  }
+  
+  .description-logo-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  
+  @media (min-width: 768px) {
+    .description-logo-container {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 2.5rem;
+    }
+  }
+  
+  .description {
+    flex: 1;
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: #374151;
+    min-width: 0;
+  }
+  
+  section {
+    margin-bottom: 3rem;
+  }
+  
+  h3.section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 1rem;
+  }
+  
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  @media (min-width: 640px) {
+    .gallery-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .gallery-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  .gallery-grid img {
+    width: 100%;
+    height: 16rem;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    display: block;
+    position: relative;
+    z-index: 0;
+  }
+  
+  .gallery-grid img:hover {
+    transform: scale(1.1);
+    z-index: 10;
+  }
+  
+  .members-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  @media (min-width: 640px) {
+    .members-list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .members-list {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  .member-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: #f3f4f6;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+  }
+  
+  .member-photo {
+    width: 80px;
+    height: 80px;
+    border-radius: 9999px;
+    object-fit: cover;
+    flex-shrink: 0;
+    display: block;
+  }
+  
+  .member-info {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .member-name {
+    font-weight: 700;
+    font-size: 1.125rem;
+    color: #111827;
+    margin: 0 0 0.25rem 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .member-specialty {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin: 0 0 0.5rem 0;
+  }
+  
+  .member-links {
+    display: flex;
+    gap: 1rem;
+    color: #28a745;
+    font-size: 1.25rem;
+  }
+  
+  .member-links a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  
+  .member-links a:hover {
+    color: #1b7d31;
+  }
+  .image-modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      background-color: rgba(0, 0, 0, 0.85);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    
+    .image-modal.active {
+      display: flex;
+    }
+    
+    .image-modal-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 90%;
+    }
+    
+    .image-modal-content img {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+    
+    .image-modal-close {
+      position: absolute;
+      top: -1.5rem;
+      right: -1.5rem;
+      font-size: 2rem;
+      color: white;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+    }
+    
