@@ -157,7 +157,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="usuarios" class="nav-link">
+                                    <a href="index.php?action=miembros" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Miembros</p>
                                     </a>
@@ -168,6 +168,14 @@
                                     <a href="miembros_imagenes" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Miembros Imagenes</p>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="miembros_videos" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Miembros Videos</p>
                                     </a>
                                 </li>
                             </ul>

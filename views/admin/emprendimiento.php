@@ -47,7 +47,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="index.php?action=carrusel" class="nav-link">
+                                    <a href="index.php?action=carrusel" class="nav-link active">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Carrusel</p>
                                     </a>
@@ -93,7 +93,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="index.php?action=emprendimiento" class="nav-link active">
+                                    <a href="index.php?action=emprendimiento" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Especialidades</p>
                                     </a>
@@ -102,6 +102,79 @@
                                     <a href="index.php?action=emprendimientoimg" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Imágenes</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="index.php?action=emprendimiento_comentarios" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Comentarios</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-images"></i>
+                                <p>
+                                    Admin Comentarios
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="index.php?action=comentarios" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Comentarios</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-images"></i>
+                                <p>
+                                    Admin In Memoriam
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="index.php?action=en_memoria" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>In Memoriam</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-images"></i>
+                                <p>
+                                    Admin Miembros
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="index.php?action=miembros" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Miembros</p>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="miembros_imagenes" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Miembros Imagenes</p>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="miembros_videos" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Miembros Videos</p>
                                     </a>
                                 </li>
                             </ul>
