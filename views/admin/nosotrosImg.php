@@ -158,14 +158,14 @@
                                     <tr>
                                         <td><?= htmlspecialchars($imagen['id']) ?></td>
                                         <td>
-    <img src="/PROYECTO-MILITAR/uploads/<?= htmlspecialchars($imagen['nombre_imagen']) ?>" 
-         alt="Imagen del Carrusel" 
-         class="img-thumbnail view-image-button"
-         data-toggle="modal" 
-         data-target="#viewImageModal"
-         data-imagen="<?= htmlspecialchars($imagen['nombre_imagen']) ?>"
-         style="max-width: 120px; cursor: pointer;">
-</td>
+                                            <img src="/PROYECTO-MILITAR/uploads/<?= htmlspecialchars($imagen['nombre_imagen']) ?>" 
+                                                 alt="Imagen del Carrusel" 
+                                                 class="img-thumbnail view-image-button"
+                                                 data-toggle="modal" 
+                                                 data-target="#viewImageModal"
+                                                 data-imagen="<?= htmlspecialchars($imagen['nombre_imagen']) ?>"
+                                                 style="max-width: 120px; cursor: pointer;">
+                                        </td>
 
                                         <td><?= htmlspecialchars($imagen['fecha_subida']) ?></td>
                                         <td>
@@ -191,6 +191,7 @@
         </section>
     </div>
 
+    <!-- Modal Agregar -->
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -217,6 +218,7 @@
         </div>
     </div>
 
+    <!-- Modal Editar -->
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -231,7 +233,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="edit-imagen">Imagen</label>
-                            <input type="file" class="form-control-file" id="edit-imagen" name="imagen" required>
+                            <input type="file" class="form-control-file" id="edit-imagen" name="nombre_imagen" required>
                             <small class="form-text text-muted">Seleccione la nueva imagen</small>
                             <div id="preview-imagen" style="margin-top: 10px;">
                                 <img id="imagen-actual" src="" alt="Imagen Actual" class="img-thumbnail" style="max-height: 200px; display:none;">
@@ -247,69 +249,77 @@
         </div>
     </div>
 
+    <!-- Modal Ver Imagen -->
     <div class="modal fade" id="viewImageModal" tabindex="-1" role="dialog" aria-labelledby="viewImageModal" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="viewImageModalLabel">Vista de Imagen</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <img id="view-image" src="" alt="Imagen del Carrusel" style="width: 100%;">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <div class="modal-body text-center">
+                    <img id="fullImage" src="" alt="Imagen completa" class="img-fluid" style="max-height: 600px;">
                 </div>
             </div>
         </div>
     </div>
+
+    <footer class="main-footer text-center" style="color: green; display: flex; align-items: center; justify-content: center; gap: 10px;">
+    <img src="/PROYECTO-MILITAR/views/assets/img/logo.jpg" alt="Logo" style="height: 30px;">
+    <strong>PROMOCION CABO ALBERTO REYES GAMARRA &copy; 2025</strong>
+    <img src="/PROYECTO-MILITAR/views/assets/img/logo.jpg" alt="Logo" style="height: 30px;">
+</footer>
+
 </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="plugins/jquery/jquery.min.js"></script>
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="dist/js/adminlte.min.js"></script>
 <script src="plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="plugins/jszip/jszip.min.js"></script>
-<script src="plugins/pdfmake/pdfmake.min.js"></script>
-<script src="plugins/pdfmake/vfs_fonts.js"></script>
-<script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-<script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 <script src="dist/js/adminlte.min.js"></script>
+
 <script>
-$(document).ready(function() {
-    // Manejar el botón de editar
-    $('.edit-button').on('click', function() {
-        var id = $(this).data('id');
-        var imagen = $(this).data('imagen');
-        
-        $('#edit-id').val(id);
-        $('#imagen-actual').attr('src',  imagen);
-        
-        // Actualizar el action del formulario con el ID correcto
-        $('#editForm').attr('action', 'index.php?action=carruselimg/editar/' + id);
-    });
-    
-    // Manejar el botón de ver imagen
-    $('#viewImageModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget);
-    var imagen = button.data('imagen');
-    var modal = $(this);
-    modal.find('#view-image').attr('src', '/PROYECTO-MILITAR/uploads/' + imagen);
-});
-    
-    // Inicializar DataTable si es necesario
-    $('#example1').DataTable({
+$(function () {
+    $("#example1").DataTable({
         "responsive": true,
         "autoWidth": false,
     });
+
+    // Cargar datos en modal editar
+    $('.edit-button').on('click', function() {
+        const id = $(this).data('id');
+        const imagen = $(this).data('imagen');
+
+        $('#edit-id').val(id);
+        $('#imagen-actual').attr('src', imagen).show();
+
+        // Para que el formulario se envíe al controlador con la ruta correcta
+        $('#editForm').attr('action', 'index.php?action=nosotrosimg/editar/' + id);
+    });
+
+    // Preview imagen en editar al seleccionar nuevo archivo
+    $('#edit-imagen').on('change', function() {
+        const [file] = this.files;
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                $('#imagen-actual').attr('src', e.target.result).show();
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // Ver imagen completa en modal al hacer click
+    $('.view-image-button').on('click', function() {
+        const imagen = $(this).data('imagen');
+        $('#fullImage').attr('src', '/PROYECTO-MILITAR/uploads/' + imagen);
+    });
 });
 </script>
+
 </body>
 </html>

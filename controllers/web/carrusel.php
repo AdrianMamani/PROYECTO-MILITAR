@@ -4,14 +4,15 @@ require_once __DIR__ . '/../../models/CarruselImg.php';
 require_once __DIR__ . '/../../models/Nosotros.php';
 require_once __DIR__ . '/../../models/NosotrosVideo.php';
 require_once __DIR__ . '/../../models/EspecialidadModel.php';
-
-class CarruselController
+require_once __DIR__ . '/../../models/MiembrosModel.php';
+class CarruselControllerWeb
 {
     private $modeloNombre;
     private $modeloImagen;
     private $nosotros;
     private $nosotrosGaleria;
     private $especialidad;
+    private $miembrosModel;
 
     public function __construct()
     {
@@ -20,7 +21,7 @@ class CarruselController
         $this->nosotros = new NosotrosAdmin();
         $this->nosotrosGaleria = new NosotrosVideo();
         $this->especialidad = new Especialidad();
-        
+        $this->miembrosModel = new MiembrosModel();
     }
 
     public function verCarrusel()

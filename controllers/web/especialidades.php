@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../../models/EspecialidadModel.php';
 require_once __DIR__ . '/../../models/EspecialidadImg.php';
 
-class EspecialidadController
+class EspecialidadControllerWeb
 {
     private $especialidad;
     private $imagenEspecialidad;

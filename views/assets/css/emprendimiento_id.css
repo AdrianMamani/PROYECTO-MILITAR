@@ -1,0 +1,425 @@
+
+    /* tipo de letra */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+    /* Estilos generales del cuerpo */
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #fff;
+      color:rgb(255, 255, 255); /* Gris oscuro */
+      margin: 0;
+      padding: 0;
+    }
+    /* Estilo de la cabecera */
+    header {
+      width: 100%;
+      background-color: rgb(34, 34, 34); /* Negro */
+      color: #fff; /* Blanco */
+      text-align: center;
+      padding: 2.5rem 0;
+      font-size: 40px;
+      font-family: "Poppins", sans-serif;
+      font-weight: 800;
+    }
+    /* Contenedor principal */
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 2.5rem 1rem;
+      box-sizing: border-box;
+    }
+    /* Contenedor flex para estructura */
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+    /* En pantallas medianas o mayores, estructura en fila */
+    @media (min-width: 768px) {
+      .container {
+        flex-direction: row;
+        gap: 2.5rem;
+      }
+    }
+    /* Contenedor de miniaturas con scroll */
+    .thumbnails-scroll {
+      display: flex;
+      gap: 1.5rem;
+      max-height: 420px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding-right: 0.375rem; /* Separación para scrollbar */
+      box-sizing: content-box;
+    }
+    /* En pantallas medianas o mayores, scroll vertical y columna */
+    @media (min-width: 768px) {
+      .thumbnails-scroll {
+        flex-direction: column;
+        max-height: 520px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding-right: 0.375rem;
+      }
+    }
+    /* Estilos para scrollbar en navegadores Webkit */
+    .thumbnails-scroll::-webkit-scrollbar {
+      width: 8px;
+    }
+    .thumbnails-scroll::-webkit-scrollbar-track {
+      background: transparent;
+      margin: 8px 0; /* Margen vertical para separar scrollbar */
+    }
+    .thumbnails-scroll::-webkit-scrollbar-thumb {
+      background-color:rgb(58, 58, 58); /* Verde */
+      border-radius: 10px;
+      border: 1px solid transparent;
+    }
+    /* Estilos para scrollbar en Firefox */
+    .thumbnails-scroll {
+      scrollbar-width: thin;
+      scrollbar-color:rgb(61, 61, 61) transparent;
+      padding-right: 0.375rem; /* Separación scrollbar */
+    }
+    /* Botones de miniaturas */
+    .thumbnail-btn {
+      width: 80px;
+      height: 80px;
+      padding: 0.5rem;
+      border-radius: 0.75rem;
+      background-color:rgb(227, 228, 227); /* Fondo crema */
+      border: none;
+      cursor: pointer;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease;
+    }
+    /* Imagen dentro de miniaturas */
+    .thumbnail-btn img {
+      border-radius: 0.75rem;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+    /* Miniatura seleccionada con borde verde */
+    .thumbnail-btn.selected {
+      border: 2px solid  #202020; /* Verde */
+      background-color: #fff;
+    }
+    /* Contenedor de imagen principal */
+    .main-image-container {
+      background-color:rgb(255, 255, 255); /* Fondo crema */
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      max-width: 400px;
+      box-sizing: border-box;
+      flex-shrink: 0;
+    }
+    /* En pantallas medianas o mayores, más ancho y padding */
+    @media (min-width: 768px) {
+      .main-image-container {
+        max-width: 500px;
+        padding: 2.5rem;
+      }
+    }
+    /* Imagen principal */
+    .main-image-container img {
+      width: 100%;
+      height: auto;
+      border-radius: 0.75rem;
+      object-fit: contain;
+      display: block;
+    }
+    /* Contenido derecho */
+    .right-content {
+      max-width: 400px;
+      flex: 1;
+    }
+    /* Estrellas de rating */
+    .rating-stars {
+      display: flex;
+      gap: 0.25rem;
+      color: #fbbf24; /* Amarillo */
+      font-size: 0.875rem;
+      margin-bottom: 0.25rem;
+      align-items: center;
+    }
+    /* Texto del rating */
+    .rating-text {
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: #111827; /* Gris oscuro */
+      margin-left: 0.25rem;
+    }
+    /* Título */
+    h1 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #111827;
+      margin-bottom: 0.75rem;
+    }
+    /* Precio en verde */
+    .price {
+      font-size: 15px;
+      font-weight: 600;
+      color:rgb(1, 102, 15); /* Verde */
+      margin-bottom: 1.25rem;
+    }
+    /* Texto descriptivo */
+    .description-text {
+      font-size: 20px;
+      color: #2e2e2e;
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+      max-width: 400px;
+    }
+    /* Etiqueta redes sociales */
+    .social-label {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #111827;
+    }
+    /* Contenedor de iconos sociales */
+    .social-icons {
+      display: flex;
+      gap: 1.5rem;
+    }
+    /* Iconos sociales circulares */
+    .social-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      color: #3b82f6; /* Azul por defecto */
+      background-color: #dbeafe; /* Azul claro */
+      text-decoration: none;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    /* Facebook */
+    .social-icon.facebook {
+      color: #1e40af;
+      background-color: #dbeafe;
+    }
+    .social-icon.facebook:hover {
+      background-color: #1e40af;
+      color: #fff;
+    }
+    /* Instagram */
+    .social-icon.instagram {
+      color: #be185d;
+      background-color: #fce7f3;
+    }
+    .social-icon.instagram:hover {
+      background-color: #be185d;
+      color: #fff;
+    }
+    /* Twitter */
+    .social-icon.twitter {
+      color: #0ea5e9;
+      background-color: #d0f0fd;
+    }
+    .social-icon.twitter:hover {
+      background-color: #0ea5e9;
+      color: #fff;
+    }
+    /* Línea separadora */
+    hr {
+      border: 1px solid #d1d5db;
+      margin-bottom: 2rem;
+    }
+    /* Botón WhatsApp */
+    .whatsapp-btn {
+      background-color: #22c55e;
+      color: #fff;
+      font-weight: 700;
+      padding: 0.75rem 1.5rem;
+      border-radius: 9999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+    .whatsapp-btn:hover,
+    .whatsapp-btn:focus {
+      background-color: #166534;
+      outline: none;
+    }
+    /* Tabs */
+    .tabs {
+      margin-top: 4rem;
+      max-width: 640px;
+    }
+    .tab-buttons {
+      display: flex;
+      gap: 2.5rem;
+      border-bottom: 1px solid #d1d5db;
+      margin-bottom: 1.5rem;
+    }
+    .tab-button {
+      padding-bottom: 0.5rem;
+      font-weight: 600;
+      font-size: 1rem;
+      color:rgb(36, 36, 36); /* Verde */
+      background: none;
+      border: none;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: color 0.3s ease, border-color 0.3s ease;
+    }
+    .tab-button.active {
+      color: #166534; /* Verde oscuro */
+      border-color: #166534;
+      outline: none;
+    }
+    .tab-content {
+      font-size: 0.875rem;
+      color: #4b5563;
+      line-height: 1.5;
+    }
+    .tab-content.hidden {
+      display: none;
+    }
+    /* Botón para subir al inicio */
+    .scroll-top-btn {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      background-color:rgb(81, 97, 243);
+      width: 56px;
+      height: 56px;
+      border-radius: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1.25rem;
+      cursor: pointer;
+      border: none;
+      transition: background-color 0.3s ease;
+      z-index: 100;
+    }
+    .scroll-top-btn:hover,
+    .scroll-top-btn:focus {
+      background-color: rgba(33, 0, 94, 0.97);
+      outline: none;
+    }
+    /* Botón chatbot */
+    #chatbotBtn {
+      position: fixed;
+      bottom: 6rem;
+      right: 1.5rem;
+      background-color: #22c55e;
+      width: 56px;
+      height: 56px;
+      border-radius: 9999px;
+      box-shadow: 0 10px 15px -3px rgba(34, 197, 94, 0.5),
+        0 4px 6px -2px rgba(34, 197, 94, 0.3);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1.5rem;
+      cursor: pointer;
+      border: none;
+      transition: background-color 0.3s ease;
+      z-index: 1000;
+    }
+    #chatbotBtn:hover,
+    #chatbotBtn:focus {
+      background-color: #166534;
+      outline: none;
+    }
+    @media (min-width: 640px) {
+      #chatbotBtn {
+        display: flex;
+      }
+    }
+    /* Modal chatbot */
+    #chatbotModal {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: none;
+      align-items: flex-end;
+      justify-content: flex-end;
+      padding: 1rem;
+      z-index: 1000;
+      box-sizing: border-box;
+    }
+    #chatbotModal.active {
+      display: flex;
+    }
+    .chatbot-content {
+      background-color: #fff;
+      border-radius: 1rem 1rem 0 0;
+      width: 100%;
+      max-width: 320px;
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+      padding: 1rem;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .chatbot-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .chatbot-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: #111827;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .chatbot-title i {
+      color: #22c55e;
+      font-size: 1.5rem;
+    }
+    .chatbot-close-btn {
+      background: none;
+      border: none;
+      color: #6b7280;
+      font-size: 1.25rem;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+    .chatbot-close-btn:hover,
+    .chatbot-close-btn:focus {
+      color: #111827;
+      outline: none;
+    }
+    .chatbot-message {
+      background-color: #dcfce7;
+      border-radius: 0.5rem;
+      padding: 0.75rem 1rem;
+      color: #166534;
+      font-size: 0.875rem;
+    }
+    .chatbot-link {
+      background-color: #dcfce7;
+      border-radius: 0.5rem;
+      padding: 0.75rem 1rem;
+      font-size: 0.875rem;
+    }
+    .chatbot-link a {
+      color: #166534;
+      font-weight: 600;
+      text-decoration: underline;
+      transition: color 0.3s ease;
+    }
+    .chatbot-link a:hover,
+    .chatbot-link a:focus {
+      color: #14532d;
+      outline: none;
+    }
+  

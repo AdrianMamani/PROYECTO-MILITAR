@@ -21,7 +21,7 @@ class ImagenEmprendimientoModel {
         FROM imagenes_emprendimiento ie
         JOIN emprendimiento e 
           ON ie.emprendimiento_id = e.id
-        ORDER BY ie.id DESC";
+        ORDER BY ie.id ASC";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

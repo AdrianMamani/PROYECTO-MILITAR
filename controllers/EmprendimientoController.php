@@ -35,8 +35,13 @@ class EmprendimientoController {
             $ubicacion = $_POST['ubicacion'];
             $descripcion = $_POST['descripcion'];
             $subdescripcion = $_POST['subdescripcion'];
+            $facebook = $_POST['facebook'];
+            $instagram = $_POST['instagram'];
+            $whatsapp = $_POST['whatsapp'];
 
-            $this->modelo->agregarEmprendimiento($nombre_emprendimiento, $contacto, $ubicacion, $descripcion, $subdescripcion);
+            $this->modelo->agregarEmprendimiento(
+    $nombre_emprendimiento, $contacto, $ubicacion, $descripcion, $subdescripcion,
+    $facebook, $instagram, $whatsapp);
             header('Location: index.php?action=emprendimiento');
             exit();
         } else {
@@ -52,14 +57,30 @@ class EmprendimientoController {
             $ubicacion = $_POST['ubicacion'];
             $descripcion = $_POST['descripcion'];
             $subdescripcion = $_POST['subdescripcion'];
+            $facebook = $_POST['facebook'];
+            $instagram = $_POST['instagram'];
+            $whatsapp = $_POST['whatsapp'];
 
-            $this->modelo->actualizarEmprendimiento($id, $nombre_emprendimiento, $contacto, $ubicacion, $descripcion, $subdescripcion);
+$this->modelo->actualizarEmprendimiento(
+    $id, $nombre_emprendimiento, $contacto, $ubicacion, $descripcion, $subdescripcion,
+    $facebook, $instagram, $whatsapp
+);
             header('Location: index.php?action=emprendimiento');
             exit();
         } else {
             require_once './views/admin/emprendimiento.php';
         }
     }
+    public function editar_redes($id) {
+    $facebook = $_POST['facebook'] ?? '';
+    $instagram = $_POST['instagram'] ?? '';
+    $whatsapp = $_POST['whatsapp'] ?? '';
+
+    $modelo = new Emprendimiento();
+    $modelo->actualizarRedesSociales($id, $facebook, $instagram, $whatsapp);
+
+    header('Location: index.php?action=emprendimiento');
+}
 
     public function eliminar($id) {
         $this->modelo->eliminarEmprendimiento($id);

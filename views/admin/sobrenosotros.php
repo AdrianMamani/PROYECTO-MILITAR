@@ -10,6 +10,14 @@
     <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
 </head>
+<style>
+.scrollable-cell {
+    max-height: 200px;
+    overflow-y: auto;
+    display: block;
+    white-space: pre-wrap; /* Para respetar saltos de línea */
+}
+</style>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -175,11 +183,11 @@
                                 <?php else: ?>
                                     <?php foreach ($nosotrosItems as $item): ?>
                                     <tr>
-                                        <td><?= htmlspecialchars($item['id']) ?></td>
-                                        <td><?= htmlspecialchars($item['titulo']) ?></td>
-                                        <td><?= htmlspecialchars($item['descripcion']) ?></td>
-                                        <td><?= htmlspecialchars($item['mision']) ?></td>
-                                        <td><?= htmlspecialchars($item['vision']) ?></td>
+                                        <td><div class="scrollable-cell"><?= htmlspecialchars($item['id']) ?></td>
+                                        <td><div class="scrollable-cell"><?= htmlspecialchars($item['titulo']) ?></td>
+                                        <td><div class="scrollable-cell"><?= htmlspecialchars($item['descripcion']) ?></td>
+                                        <td><div class="scrollable-cell"><?= htmlspecialchars($item['mision']) ?></td>
+                                        <td><div class="scrollable-cell"><?= htmlspecialchars($item['vision']) ?></td>
                                         <td>
                                             <button type="button" class="btn btn-warning btn-sm edit-button" 
                                                     data-id="<?= $item['id'] ?>" 
@@ -253,15 +261,15 @@
                         </div>
                         <div class="form-group">
                             <label for="edit-descripcion">Descripción</label>
-                            <textarea class="form-control" id="edit-descripcion" name="descripcion" rows="3" required></textarea>
+                            <textarea class="form-control" id="edit-descripcion" name="descripcion" rows="5" required></textarea>
                         </div>
                         <div class="form-group">
                             <label for="edit-mision">Mision</label>
-                            <input type="text" class="form-control" id="edit-mision" name="mision" required>
+                            <textarea class="form-control" id="edit-mision" name="mision" rows="3" required></textarea>
                         </div>
                         <div class="form-group">
                             <label for="edit-vision">Vision</label>
-                            <input type="text" class="form-control" id="edit-vision" name="vision" required>
+                            <textarea class="form-control" id="edit-vision" name="vision"  rows= "3" required></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -302,8 +310,8 @@ $(document).ready(function() {
         $('#edit-id').val(id);
         $('#edit-titulo').val(titulo);
         $('#edit-descripcion').val(descripcion);
-        $('#edit-mision').val(titulo);
-        $('#edit-vision').val(descripcion);
+        $('#edit-mision').val(mision);
+        $('#edit-vision').val(vision);
         
         // Actualizar el action del formulario con el ID correcto
         $('#editForm').attr('action', 'index.php?action=nosotros/editar/' + id);
