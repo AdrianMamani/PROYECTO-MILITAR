@@ -16,14 +16,22 @@ class EspecialidadControllerWeb
     }
 
     public function indexPersonal($id)
-    {
-        $especialidadModel = new Especialidad();
-        $especialidades = $especialidadModel->obtenerPorId($id);
-        $imagenes = $this->imagenEspecialidad->obtenerPorEspecialidadId($id);
-        $miembros = $this->miembrosModel->obtenerPorEspecialidad($id);
-        require './views/especialidad.php';
+{
+    $especialidadModel = new Especialidad();
+    $especialidad = $especialidadModel->obtenerPorId($id);
+
+    if (!$especialidad) {
+        http_response_code(404);
+        echo "Especialidad no encontrada";
         exit();
     }
+
+    $imagenes = $this->imagenEspecialidad->obtenerPorEspecialidadId($id);
+    $miembros = $this->miembrosModel->obtenerPorEspecialidad($id); // <-- así
+
+    require './views/especialidad.php';
+    exit();
+}
 
     public function verEspecialidades()
     {

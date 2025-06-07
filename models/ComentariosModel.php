@@ -56,4 +56,12 @@ class ComentariosModel
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         return $stmt->execute();
     }
+
+    public function contarComentarios() {
+    $query = "SELECT COUNT(*) AS total FROM " . $this->nombreTabla;
+    $stmt = $this->db->prepare($query);
+    $stmt->execute();
+    $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $resultado['total'] ?? 0;
+}
 }

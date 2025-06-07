@@ -163,6 +163,9 @@
   </style>
 </head>
 <body>
+  <?php
+    include 'layout/header.php';
+    ?>
   <main>
     <h1>Mis Emprendimientos</h1>
     <p class="description">Descubre los proyectos y negocios que he creado con pasión y dedicación.</p>

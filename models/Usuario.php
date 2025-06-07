@@ -162,4 +162,18 @@ class Usuario
 
         return false;
     }
+    public function contarMiembros() {
+    $query = "SELECT COUNT(*) AS total FROM " . $this->nombreTabla;
+    $stmt = $this->db->prepare($query);
+    $stmt->execute();
+    $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $resultado['total'] ?? 0;
+}
+public function contarMiembrosF() {
+    $query = "SELECT COUNT(*) AS total FROM " . $this->nombreTablaF;
+    $stmt = $this->db->prepare($query);
+    $stmt->execute();
+    $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $resultado['total'] ?? 0;
+}
 }

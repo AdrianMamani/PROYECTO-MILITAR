@@ -101,6 +101,12 @@
                                     <p>Imágenes</p>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="index.php?action=videoemprendimiento" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Videos</p>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                     <li class="nav-item has-treeview">
@@ -119,15 +125,119 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="index.php?action=nosotrosimg" class="nav-link active">
+                                <a href="index.php?action=nosotrosimg" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Imágenes</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="index.php?action=nosotrosVideo" class="nav-link active">
+                                <a href="index.php?action=nosotrosVideo" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Videos</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-treeview">
+                        <a href="" class="nav-link">
+                            <i class="nav-icon fas fa-images"></i>
+                            <p>
+                                Miembros
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="index.php?action=usuarios" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Miembros</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="index.php?action=miembros_imagenes" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Imágenes</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="index.php?action=miembros_videos" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Videos</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-treeview">
+                        <a href="" class="nav-link">
+                            <i class="nav-icon fas fa-images"></i>
+                            <p>
+                                Eventos
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="index.php?action=evento" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Evento</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="index.php?action=eventoimg" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Imágenes</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="index.php?action=videoevento" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Videos</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-treeview">
+                        <a href="" class="nav-link">
+                            <i class="nav-icon fas fa-images"></i>
+                            <p>
+                                Logros
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="index.php?action=logrodestacado" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Destacados</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="index.php?action=logroimg" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Imágenes</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="index.php?action=logrovideo" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Videos</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-treeview">
+                        <a href="" class="nav-link">
+                            <i class="nav-icon fas fa-images"></i>
+                            <p>
+                                Nuestras Fotos
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="index.php?action=admingaleria" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Fotos Destacadas</p>
                                 </a>
                             </li>
                         </ul>

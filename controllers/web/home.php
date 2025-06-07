@@ -28,5 +28,6 @@ class HomeController
 
 
         require './views/home.php';
+        require './views/prueba.php';
     }
 }

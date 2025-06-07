@@ -21,8 +21,8 @@
         <div class="description-logo-container">
             <div>
                 <div class="title-row">
-                    <?php if ($especialidades): ?>
-                        <h2 class="title"><?= htmlspecialchars($especialidades['nombre']) ?></h2>
+                    <?php if ($especialidad): ?>
+                        <h2 class="title"><?= htmlspecialchars($especialidad['nombre']) ?></h2>
                     <?php else: ?>
                         <h2 class="title"></h2>
                     <?php endif; ?>
@@ -32,9 +32,9 @@
                         <span>Miembro<?= count($miembros) !== 1 ? 's' : '' ?></span>
                     </div>
                 </div>
-                <?php if ($especialidades): ?>
+                <?php if ($especialidad): ?>
                     <p class="description">
-                        <?= htmlspecialchars($especialidades['descripcion']) ?>
+                        <?= htmlspecialchars($especialidad['descripcion']) ?>
                     </p>
                 <?php else: ?>
                     <p></p>
@@ -59,30 +59,29 @@
 
 
         <section aria-labelledby="members-title">
-            <h3 id="members-title" class="section-title">Miembros de la Especialidad</h3>
+    <h3 id="members-title" class="section-title">Miembros de la Especialidad</h3>
 
-            <?php if (!empty($miembros)): ?>
-                <ul class="members-list">
-                    <?php foreach ($miembros as $miembro): ?>
-                        <li class="member-card">
-                            <img
-                                src="<?= BASE_URL ?>views/assets/img/miembros/<?= htmlspecialchars($miembro['imagen']) ?>"
-                                alt="Foto de <?= htmlspecialchars($miembro['nombre']) ?>"
-                                class="member-photo"
-                                width="80"
-                                height="80"
-                                loading="lazy" />
-                            <div class="member-info">
-                                <h4 class="member-name"><?= htmlspecialchars($miembro['nombre']) ?></h4>
-                                <p class="member-specialty"><?= htmlspecialchars($miembro['descripcion'] ?? '') ?></p>
-                            </div>
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
-            <?php else: ?>
-                <p>No hay miembros registrados para esta especialidad.</p>
-            <?php endif; ?>
-        </section>
+    <?php if (!empty($miembros)): ?>
+        <ul class="members-list">
+            <?php foreach ($miembros as $miembro): ?>
+                <li class="member-card">
+                    <img
+    src="<?= BASE_URL ?>uploads/usuarios/imagenes/<?= htmlspecialchars($miembro['imagen_usuario']) ?>"
+                        alt="Foto de <?= htmlspecialchars($miembro['nombre']) ?>"
+                        class="member-photo"
+                        width="80"
+                        height="80"
+                        loading="lazy" />
+                    <div class="member-info">
+                        <h4 class="member-name"><?= htmlspecialchars($miembro['nombre']) ?></h4>
+                    </div>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    <?php else: ?>
+        <p>No hay miembros registrados para esta especialidad.</p>
+    <?php endif; ?>
+</section>
     </main>
     <!-- Modal -->
     <div id="imageModal" class="image-modal" aria-hidden="true" role="dialog">

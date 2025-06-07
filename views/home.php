@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
@@ -12,6 +13,7 @@
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap"
         rel="stylesheet" />
 </head>
+
 <body class="loaded">
     <?php
     include 'layout/header.php';
@@ -70,17 +72,19 @@
                 <?php if (!empty($itemsCarrusel) && is_array($itemsCarrusel)): ?>
                     <?php $item = $itemsCarrusel[0]; ?>
 
-                    <!-- Verificar si 'tipo_archivo' existe en el array antes de acceder -->
-                    <?php if (isset($item['tipo_archivo']) && $item['tipo_archivo'] === 'video'): ?>
-                        <!-- Si es un video, mostramos el reproductor de YouTube -->
-                        <div class="video-slider">
-                            <iframe width="560" height="315"
-                                src="https://www.youtube.com/embed/<?= htmlspecialchars($item['url_archivo']) ?>"
-                                frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                    <?php else: ?>
-                        <!-- Si no es un video, mostramos la imagen -->
-                    <?php endif; ?>
+                    <div class="imagen-slider">
+                        <?php if (isset($item['tipo_archivo']) && $item['tipo_archivo'] === 'video'): ?>
+                            <div class="video-responsive">
+                                <iframe
+                                    src="https://www.youtube.com/embed/<?= htmlspecialchars($item['url_archivo']) ?>"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen></iframe>
+                            </div>
+                        <?php else: ?>
+                            <img src="<?= htmlspecialchars($item['url_archivo']) ?>" alt="Imagen nosotros">
+                        <?php endif; ?>
+                    </div>
 
                     <div class="texto">
                         <h2>Sobre Nosotros</h2>
@@ -93,27 +97,23 @@
             </div>
         </section>
         <section>
-            <div class="container">
-                <header>
-                    <h1>
-                        Especialidades
-                    </h1>
-                    <p>
-                        Las 13 áreas en las que nos destacamos con orgullo y compromiso.
-                    </p>
-                </header>
-                <div class="grid" id="especialidadesGrid">
-                    <?php foreach ($especialidades as $especialidad): ?>
-                        <div class="card" tabindex="0">
-                            <img alt="Imagen de la especialidad <?= htmlspecialchars($especialidad['nombre']) ?>" height="220" width="400" src="<?= htmlspecialchars($especialidad['imagen']) ?>" />
-
-                            <div class="overlay">
-                                <h2><?= htmlspecialchars($especialidad['nombre']) ?></h2>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-        </section>
+    <div class="container">
+        <header>
+            <h1>Especialidades</h1>
+            <p>Las 13 áreas en las que nos destacamos con orgullo y compromiso.</p>
+        </header>
+        <div class="grid" id="especialidadesGrid">
+            <?php foreach ($especialidades as $especialidad): ?>
+                <a href="<?= BASE_URL ?>/especialidad_index/<?= $especialidad['id'] ?>" class="card" tabindex="0" style="display: block; text-decoration: none; color: inherit;">
+                    <img alt="Imagen de la especialidad <?= htmlspecialchars($especialidad['nombre']) ?>" height="220" width="400" src="<?= htmlspecialchars($especialidad['imagen']) ?>" />
+                    <div class="overlay">
+                        <h2><?= htmlspecialchars($especialidad['nombre']) ?></h2>
+                    </div>
+                </a>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
         <section>
             <div class="banner" role="banner" aria-label="Banner con texto principal y subtítulo">
                 <h1>FORJANDO UN LEGADO DE HONOR Y COMPROMISO</h1>
@@ -186,10 +186,10 @@
 
         <!-- Sección de Emprendimientos -->
         <section class="emprendimientos">
-            <header class="emprendimientos-header">
+            <div class="emprendimientos-header">
                 <h1 class="emprendimientos-titulo">Mis Emprendimientos</h1>
                 <p class="emprendimientos-descripcion">Descubre los proyectos y negocios que he creado con pasión y dedicación.</p>
-            </header>
+            </div>
             <div class="emprendimientos-container">
                 <?php if (!empty($emprendimientos)): ?>
                     <?php foreach ($emprendimientos as $emprendimiento): ?>

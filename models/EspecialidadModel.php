@@ -67,5 +67,15 @@ class Especialidad {
         $stmt->execute();
         return $stmt->rowCount() > 0; // Verifica si se eliminó correctamente
     }
+
+    public function contarEspecialidades() {
+    $query = "SELECT COUNT(*) AS total FROM " . $this->nombreTabla;
+    $stmt = $this->db->prepare($query);
+    $stmt->execute();
+    $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $resultado['total'] ?? 0;
+}
+
+
 }
 ?>

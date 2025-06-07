@@ -52,4 +52,12 @@ class Logros_descatado {
         $stmt->bindParam(1, $id, PDO::PARAM_INT);
         return $stmt->execute();
     }
+// Contar total de logros destacados
+    public function contarLogros() {
+    $query = "SELECT COUNT(*) AS total FROM " . $this->nombreTabla;
+    $stmt = $this->db->prepare($query);
+    $stmt->execute();
+    $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $resultado['total'] ?? 0;
+}
 }

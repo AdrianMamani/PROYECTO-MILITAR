@@ -312,11 +312,11 @@
     </div>
   </div>
     <nav>
-      <a href="#" aria-label="Inicio">
+      <a href="/PROYECTO-MILITAR/home" aria-label="Inicio">
         <i class="fas fa-home"></i>
         <span>Inicio</span>
       </a>
-      <a href="#" aria-label="Sobre Nosotros">
+      <a href="/PROYECTO-MILITAR/sobrenosotros" aria-label="Sobre Nosotros">
         <i class="fas fa-info-circle"></i>
         <span>Sobre Nosotros</span>
       </a>
@@ -327,10 +327,10 @@
           <i class="fas fa-caret-down caret-icon"></i>
         </button>
         <div id="integrantes-menu" class="dropdown-menu" role="menu" aria-labelledby="integrantes-btn">
-          <a href="#" role="menuitem">Miembros</a>
-          <a href="#" role="menuitem">En memoria</a>
+          <a href="/PROYECTO-MILITAR/miembros" role="menuitem">Miembros</a>
+          <a href="/PROYECTO-MILITAR/miembros_fallecidos" role="menuitem">En memoria</a>
           <a href="#" role="menuitem">Finanzas</a>
-          <a href="#" role="menuitem">Especialidad</a>
+          <a href="/PROYECTO-MILITAR/especialidad" role="menuitem">Especialidad</a>
         </div>
       </div>
       <div class="dropdown">
@@ -340,15 +340,14 @@
           <i class="fas fa-caret-down caret-icon"></i>
         </button>
         <div id="comunidad-menu" class="dropdown-menu" role="menu" aria-labelledby="comunidad-btn">
-          <a href="#" role="menuitem">Emprendimiento</a>
-          <a href="#" role="menuitem">Galería</a>
+          <a href="/PROYECTO-MILITAR/negocios" role="menuitem">Emprendimiento</a>
+          <a href="/PROYECTO-MILITAR/galeria" role="menuitem">Galería</a>
           <a href="#" role="menuitem">Logros</a>
           <a href="#" role="menuitem">Noticias</a>
         </div>
       </div>
-      <button type="button" class="btn-admin" aria-label="Botón Admin">
-        <i class="fas fa-user-shield"></i>
-        Admin
+      <button type="button" class="btn-admin" aria-label="Botón Admin" onclick="location.href='index.php?action=auth/loginForm'">
+        <i class="fas fa-user-shield"></i> Admin
       </button>
     </nav>
     <button class="mobile-menu-button" aria-label="Abrir menú móvil" id="mobile-menu-button">
@@ -357,11 +356,11 @@
   </div>
 
   <div id="mobile-menu" aria-label="Menú móvil">
-    <a href="#" aria-label="Inicio">
+    <a href="/PROYECTO-MILITAR/home" aria-label="Inicio">
       <i class="fas fa-home"></i>
       Inicio
     </a>
-    <a href="#" aria-label="Sobre Nosotros">
+    <a href="/PROYECTO-MILITAR/sobrenosotros" aria-label="Sobre Nosotros">
       <i class="fas fa-info-circle"></i>
       Sobre Nosotros
     </a>
@@ -371,8 +370,8 @@
       <i class="fas fa-caret-down caret-icon" style="margin-left:auto;"></i>
     </button>
     <div id="mobile-integrantes-submenu" style="display:none; padding-left: 2.5rem;">
-      <a href="#">Miembros</a>
-      <a href="#">En memoria</a>
+      <a href="/PROYECTO-MILITAR/miembros">Miembros</a>
+      <a href="/PROYECTO-MILITAR/miembros_fallecidos">En memoria</a>
       <a href="#">Finanzas</a>
       <a href="#">Especialidad</a>
     </div>
@@ -382,14 +381,13 @@
       <i class="fas fa-caret-down caret-icon" style="margin-left:auto;"></i>
     </button>
     <div id="mobile-comunidad-submenu" style="display:none; padding-left: 2.5rem;">
-      <a href="#">Emprendimiento</a>
-      <a href="#">Galería</a>
+      <a href="/PROYECTO-MILITAR/negocios">Emprendimiento</a>
+      <a href="/PROYECTO-MILITAR/galeria">Galería</a>
       <a href="#">Logros</a>
       <a href="#">Noticias</a>
     </div>
-    <button type="button" class="btn-admin" style="width: 100%; margin-top: 1rem;">
-      <i class="fas fa-user-shield"></i>
-      Admin
+    <button type="button" class="btn-admin" aria-label="Botón Admin" onclick="location.href='index.php?action=auth/loginForm'">
+      <i class="fas fa-user-shield"></i> Admin
     </button>
   </div>
 </div>

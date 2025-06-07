@@ -30,6 +30,8 @@ require_once './controllers/MiembrosVideosController.php';
 require_once './controllers/ComentariosController.php';
 require_once './controllers/MiembrosController.php';
 require_once './controllers/EmprendimientoVideosController.php';
+require_once './controllers/dashboard.php';
+
 // rutas para la web
 require_once './controllers/web/evento.php';
 require_once './controllers/web/galeria.php';
@@ -60,9 +62,10 @@ $rutasPublicas = [
     'miembros_fallecidos',
     'comentarios/agregar',
     'negocios'
+    
 ];
 
-if (!isset($_SESSION['usuario']) && !in_array($accionPrincipal, $rutasPublicas) && !in_array($accionCompleta, $rutasPublicas)) {
+if (!isset($_SESSION['usuario']) && !in_array(strtolower($accionPrincipal), $rutasPublicas)) {
     header('Location: index.php?action=auth/loginForm');
     exit;
 }
@@ -87,10 +90,12 @@ $logrodestacado = new LogrosDestacadoController();
 $logroimg = new ImagenLogroController();
 $logrovideo = new LogroVideoController();
 $comentarioevento = new ComentarioEventoController();
-$miembros = new MiembrosController();
+$miembros = new UsuariosController();
 $miembrosIMG = new MiembrosImgController();
 $miembrosVideos = new MiembrosVideosController();
 $emprendimientoVideos = new VideoEmprendimientoController();
+$dashboard = new DashboardController();
+
 
 // instancias para la web
 $eventosPublicos = new EventosPublicosController();
@@ -113,6 +118,15 @@ $nosotros->setAdminContext($isAdmin);
 
 // Ruteo principal
 switch ($accionPrincipal) {
+    case 'dashboard':
+    switch ($accionSecundaria) {
+        case 'index':
+        default:
+            $dashboard->index();
+            break;
+    }
+    break;
+    
     case 'auth':
         switch ($accionSecundaria) {
             case 'loginForm':
@@ -621,8 +635,8 @@ switch ($accionPrincipal) {
                 $id ? $miembros->editarF($id) : print "ID no proporcionado";
                 break;
             case 'eliminar':
-                $miembros->eliminar();
-                break;
+    $id ? $miembros->eliminar($id) : print "ID no proporcionado";
+    break;
             case 'eliminarF':
                 $id ? $miembros->eliminarF($id) : print "ID no proporcionado";
                 break;
@@ -635,10 +649,10 @@ switch ($accionPrincipal) {
     case 'usuarios_fallecidos':
         switch ($accionSecundaria) {
             case 'index':
-                $miembros->indexF();
+                $miembros->index();
                 break;
             case 'listar':
-                $miembros->listarF();
+                $miembros->listar();
                 break;
             case 'editar':
                 $id ? $miembros->editarF($id) : print "ID no proporcionado";
@@ -647,7 +661,7 @@ switch ($accionPrincipal) {
                 $id ? $miembros->eliminarF($id) : print "ID no proporcionado";
                 break;
             default:
-                $miembros->indexF();
+                $miembros->index();
                 break;
         }
         break;

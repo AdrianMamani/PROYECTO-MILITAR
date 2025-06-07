@@ -16,23 +16,25 @@ class MiembrosControllerWeb
 
     public function indexPersonal($id){
     $miembrosModel = new MiembrosModel();
-    $miembro = $miembrosModel->obtenerPorId($id);
-
-    if (!$miembro) {
+    $miembros = $miembrosModel->obtenerPorId($id);
+    if (!$miembros) {
+        // Si no se encuentra vivo, intentamos si está fallecido
         $miembro = $miembrosModel->obtenerPorIdFallecido($id);
     }
 
-    if (!$miembro) {
+    if (!$miembros) {
+        // Si aún no se encuentra, mostrar error o redirigir
         echo "Miembro no encontrado.";
         exit;
     }
+     // singular porque es 1 solo
 
     $imagenesModel = new UsuariosImgModel();
     $imagenes = $imagenesModel->listarPorUsuarioId($id);
     $imagenPortada = !empty($imagenes) ? $imagenes[0] : null;
 
-    $comentarioModel = new ComentarioPersona();
-    $comentarios = $comentarioModel->obtenerPorPersonaId($id);
+    $comentarioModel = new ComentarioPersona(); // puede renombrarse ComentarioPersonaModel
+    $comentarios = $comentarioModel->obtenerPorPersonaId($id); // método que debemos agregar
 
     $videoModel = new UsuarioVideosModel();
     $videos = $videoModel->listarPorUsuarioId($id);

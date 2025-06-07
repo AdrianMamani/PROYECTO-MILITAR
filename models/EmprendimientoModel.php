@@ -87,4 +87,12 @@ class Emprendimiento {
     $stmt = $this->db->prepare($sql);
     return $stmt->execute([$facebook, $instagram, $whatsapp, $id]);
 }
+
+public function contarEmprendimientos() {
+    $query = "SELECT COUNT(*) AS total FROM " . $this->nombreTabla;
+    $stmt = $this->db->prepare($query);
+    $stmt->execute();
+    $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $resultado['total'] ?? 0;
+}
 }

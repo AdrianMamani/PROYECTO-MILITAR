@@ -15,6 +15,9 @@
   <link rel="stylesheet" href="<?= BASE_URL ?>views/assets/css/emprendimiento_id.css"/>
 </head>
 <body>
+  <?php
+    include 'layout/header.php';
+    ?>
   <header>Nuestros emprendimientos</header>
   <main>
     <div class="container">

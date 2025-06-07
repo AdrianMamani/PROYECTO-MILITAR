@@ -10,7 +10,7 @@ class NosotrosControllerWeb
     public function index()
     {
         // Obtener miembros del equipo
-        $miembrosController = new MiembrosController();
+        $miembrosController = new MiembrosControllerWeb();
         $miembros = $miembrosController->obtenerMiembros();
 
         // Obtener items del carrusel
