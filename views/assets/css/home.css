@@ -259,6 +259,7 @@ body {
   gap: 40px;
   max-width: 1200px;
   width: 100%;
+  display: flex;
 }
 
 .imagen-slider {
@@ -363,6 +364,7 @@ body {
   .sobre-nosotros .contenido {
     flex-direction: column;
     gap: 30px;
+    display: block;
   }
 
   .texto h2 {
