@@ -141,13 +141,17 @@ class MiembrosModel
     }
 
     public function obtenerPorId($id)
-    {
-        $stmt = $this->db->prepare("SELECT * FROM {$this->nombreTabla} WHERE id = :id");
-        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
-
+{
+    $query = "SELECT u.*, e.nombre AS especialidad_nombre
+              FROM {$this->nombreTabla} u
+              LEFT JOIN especialidades e ON u.especialidad_id = e.id
+              WHERE u.id = :id";
+              
+    $stmt = $this->db->prepare($query);
+    $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
 
 
 
@@ -168,4 +172,18 @@ class MiembrosModel
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    // para la web de fallecidos
+public function obtenerPorIdFallecido($id)
+{
+    $query = "SELECT u.*, e.nombre AS especialidad_nombre, uf.motivo_fallecimiento, uf.fecha_fallecimiento
+              FROM " . $this->nombreTabla . " u
+              JOIN especialidades e ON u.especialidad_id = e.id
+              JOIN usuarios_fallecidos uf ON u.id = uf.usuario_id
+              WHERE u.id = ? AND u.estado_vivo != 1";
+    
+    $stmt = $this->db->prepare($query);
+    $stmt->execute([$id]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
 }

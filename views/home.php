@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
@@ -13,7 +12,6 @@
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap"
         rel="stylesheet" />
 </head>
-
 <body class="loaded">
     <?php
     include 'layout/header.php';

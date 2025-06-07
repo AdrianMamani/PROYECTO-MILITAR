@@ -20,7 +20,7 @@ class HomeController
         $emprendimientoController = new EmprendimientoControllerWeb();
         $emprendimientos = $emprendimientoController->obtenerEmprendimientosConGaleria();
 
-        $miembrosController = new MiembrosController();
+        $miembrosController = new MiembrosControllerWeb();
         $miembros = $miembrosController->obtenerMiembros();
 
         $comentariosController = new ComentariosController();
