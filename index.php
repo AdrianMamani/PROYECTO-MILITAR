@@ -600,32 +600,6 @@ switch ($accionPrincipal) {
                 break;
         }
         break;
-    case 'negocios':
-        switch ($accionSecundaria) {
-            case 'index':
-                $emprendimientoWeb->index();
-                break;
-            default:
-                $emprendimientoWeb->index();
-                break;
-        }
-        break;
-    case 'emprendimientos':
-        if (is_numeric($accionSecundaria)) {
-            $emprendimientoWeb->indexPersonal($accionSecundaria);
-        } else {
-            switch ($accionSecundaria) {
-                case 'index':
-                    $id ? $emprendimientoWeb->indexPersonal($id) : print "ID no proporcionado";
-                    break;
-                default:
-                    print "Ruta no válida para miembro.";
-                    break;
-            }
-        }
-        break;
-
-
     case 'usuarios':
         switch ($accionSecundaria) {
             case 'index':
@@ -759,21 +733,6 @@ switch ($accionPrincipal) {
         }
         break;
 
-    case 'especialidad_index':
-        if (is_numeric($accionSecundaria)) {
-            $especialidadWeb->indexPersonal($accionSecundaria);
-        } else {
-            switch ($accionSecundaria) {
-                case 'index':
-                    $id ? $especialidadWeb->indexPersonal($id) : print "ID no proporcionado";
-                    break;
-                default:
-                    print "Ruta no válida para miembro.";
-                    break;
-            }
-        }
-        break;
-
     // Rutas para la web
     case 'home':
         switch ($accionSecundaria) {
@@ -835,6 +794,46 @@ switch ($accionPrincipal) {
             case 'index': // Para mostrar la galería pública
                 $galeriaPublica->mostrarGaleria();
                 break;
+        }
+        break;
+   
+    case 'negocios':
+        switch ($accionSecundaria) {
+            case 'index':
+                $emprendimientoWeb->index();
+                break;
+            default:
+                $emprendimientoWeb->index();
+                break;
+        }
+        break;
+    case 'emprendimientos':
+        if (is_numeric($accionSecundaria)) {
+            $emprendimientoWeb->indexPersonal($accionSecundaria);
+        } else {
+            switch ($accionSecundaria) {
+                case 'index':
+                    $id ? $emprendimientoWeb->indexPersonal($id) : print "ID no proporcionado";
+                    break;
+                default:
+                    print "Ruta no válida para miembro.";
+                    break;
+            }
+        }
+        break;
+
+        case 'especialidad_index':
+        if (is_numeric($accionSecundaria)) {
+            $especialidadWeb->indexPersonal($accionSecundaria);
+        } else {
+            switch ($accionSecundaria) {
+                case 'index':
+                    $id ? $especialidadWeb->indexPersonal($id) : print "ID no proporcionado";
+                    break;
+                default:
+                    print "Ruta no válida para miembro.";
+                    break;
+            }
         }
         break;
 
