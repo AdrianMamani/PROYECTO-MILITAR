@@ -45,6 +45,9 @@
       </div>
 
       <button type="submit" class="w-full bg-green-600 hover:bg-green-800 text-white font-extrabold py-3 rounded-2xl shadow-lg transition">Entrar</button>
+      <a href="/PROYECTO-MILITAR/home" class="w-full inline-block text-center mt-4 bg-white border border-green-600 text-green-700 hover:bg-green-50 font-semibold py-3 rounded-2xl transition">
+  <i class="fas fa-arrow-left mr-2"></i>Volver a la Web
+</a>
     </form>
   </main>
 

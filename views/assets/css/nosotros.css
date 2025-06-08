@@ -13,15 +13,15 @@ body {
 
 /* Estilos para el banner */
     .banner-nosotros {
-        width: 100%;
-    height: 100px;
+    width: 100%;
+    height: 180px; /* Altura aumentada */
     background-color: #000;
     color: #fff;
     display: flex;
     justify-content: center;
-        align-items: center;
+    align-items: center;
     margin-bottom: 40px;
-    }
+}
     
 .banner-nosotros h1 {
     font-size: 2.5rem;

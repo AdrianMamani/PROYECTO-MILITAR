@@ -15,6 +15,14 @@ class EspecialidadControllerWeb
         $this->miembrosModel = new MiembrosModel();
     }
 
+    public function index()
+{
+    $especialidades = $this->verEspecialidades();
+
+    require './views/especialidades.php'; // la vista que usas para listar
+    exit();
+}
+
     public function indexPersonal($id)
 {
     $especialidadModel = new Especialidad();

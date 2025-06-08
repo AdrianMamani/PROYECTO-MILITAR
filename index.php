@@ -31,6 +31,12 @@ require_once './controllers/ComentariosController.php';
 require_once './controllers/MiembrosController.php';
 require_once './controllers/EmprendimientoVideosController.php';
 require_once './controllers/dashboard.php';
+require_once './controllers/NoticiasController.php';
+require_once './controllers/NoticiasImgController.php';
+require_once './controllers/NoticiasVideosController.php';
+
+// Agregar el require del controlador de finanzas (cerca de los otros requires)
+require_once './controllers/FinanzasController.php';
 
 // rutas para la web
 require_once './controllers/web/evento.php';
@@ -40,6 +46,12 @@ require_once './controllers/web/nosotros.php';
 require_once './controllers/web/miembros.php';
 require_once './controllers/web/emprendimiento.php';
 require_once './controllers/web/especialidades.php';
+require_once './controllers/web/logro_controller.php';
+require_once './controllers/FinanzasPublicController.php';
+require_once './controllers/NoticiasPublicController.php';
+
+
+
 define('BASE_URL', '/PROYECTO-MILITAR/');
 
 
@@ -61,7 +73,12 @@ $rutasPublicas = [
     'miembros',
     'miembros_fallecidos',
     'comentarios/agregar',
-    'negocios'
+    'negocios',
+    'logros',
+    'especialidad_index',
+    'eventos',
+    'finanzas-public',
+    'noticias-public'
     
 ];
 
@@ -95,6 +112,10 @@ $miembrosIMG = new MiembrosImgController();
 $miembrosVideos = new MiembrosVideosController();
 $emprendimientoVideos = new VideoEmprendimientoController();
 $dashboard = new DashboardController();
+$finanzas = new FinanzasController();
+$noticias = new NoticiasController();
+$noticiasImg = new NoticiasImgController();
+$noticiasVideos = new NoticiasVideosController();
 
 
 // instancias para la web
@@ -106,7 +127,9 @@ $comentarios = new ComentariosController();
 $miembrosWeb = new MiembrosControllerWeb();
 $especialidadWeb = new EspecialidadControllerWeb();
 $emprendimientoWeb = new EmprendimientoControllerWeb();
-
+$logroweb = new LogrosControllerWeb();
+$finanzasPublic = new FinanzasPublicController();
+$noticiasPublic = new NoticiasPublicController();
 
 // Contexto admin si está logueado
 $isAdmin = isset($_SESSION['usuario']);
@@ -837,19 +860,175 @@ switch ($accionPrincipal) {
         break;
 
         case 'especialidad_index':
-        if (is_numeric($accionSecundaria)) {
-            $especialidadWeb->indexPersonal($accionSecundaria);
-        } else {
-            switch ($accionSecundaria) {
-                case 'index':
-                    $id ? $especialidadWeb->indexPersonal($id) : print "ID no proporcionado";
-                    break;
-                default:
-                    print "Ruta no válida para miembro.";
-                    break;
-            }
+    if (is_numeric($accionSecundaria)) {
+        // Mostrar especialidad individual
+        $especialidadWeb->indexPersonal($accionSecundaria);
+    } else {
+        switch ($accionSecundaria) {
+            case 'index':
+                // Mostrar TODAS las especialidades
+                $especialidades = $especialidadWeb->verEspecialidades();
+                require './views/especialidades.php';
+                break;
+            case 'ver':
+                // Otra forma opcional si deseas una URL tipo ?action=especialidad_index/ver&id=1
+                $id ? $especialidadWeb->indexPersonal($id) : print "ID no proporcionado";
+                break;
+            default:
+                print "Ruta no válida para especialidades.";
+                break;
+        }
+    }
+    break;
+
+    case 'logros':
+        switch ($accionSecundaria) {
+            case 'index':
+                $logroweb->index();
+                break;
+            default:
+                $logroweb->index();
+                break;
         }
         break;
+         case 'finanzas-public':
+        switch ($accionSecundaria) {
+            case 'index':
+                $finanzasPublic->index();
+                break;
+            case 'detalle':
+                $finanzasPublic->detalle();
+                break;
+            case 'exportar':
+                $finanzasPublic->exportar();
+                break;
+            default:
+                $finanzasPublic->index();
+                break;
+        }
+        break;
+        case 'finanzas':
+    switch ($accionSecundaria) {
+        case 'index':
+            $finanzas->index();
+            break;
+        case 'agregar':
+            $finanzas->agregar();
+            break;
+        case 'ver':
+            $finanzas->ver();
+            break;
+        case 'editar':
+            $finanzas->editar();
+            break;
+        case 'update':
+            $finanzas->update();
+            break;
+        case 'eliminar':
+            $id ? $finanzas->eliminar($id) : print "ID no proporcionado";
+            break;
+        default:
+            $finanzas->index();
+            break;
+    }
+    break;
+// En la sección de rutas, verificar que esté así:
+
+case 'lista-noticias':
+    switch ($accionSecundaria) {
+        case 'index':
+            $noticias->listar(); // Método para mostrar la lista
+            break;
+        default:
+            $noticias->listar();
+            break;
+    }
+    break;
+
+case 'noticias':
+    switch ($accionSecundaria) {
+        case 'index':
+            $noticias->index(); // Formulario de gestión
+            break;
+        case 'agregar':
+            $noticias->agregar();
+            break;
+        case 'store':
+            $noticias->store();
+            break;
+        case 'creada':
+            $noticias->creada();
+            break;
+        case 'detalle':
+            $noticias->detalle();
+            break;
+        case 'editar':
+            $id ? $noticias->editar($id) : print "ID no proporcionado";
+            break;
+        case 'update':
+            $noticias->update(); 
+            break;
+        case 'eliminar':
+            $id ? $noticias->eliminar($id) : print "ID no proporcionado";
+            break;
+        default:
+            $noticias->index();
+            break;
+    }
+    break;
+
+    case 'noticiasimg':
+        switch ($accionSecundaria) {
+            case 'index':
+                $noticiasImg->index();
+                break;
+            case 'store':
+                $noticiasImg->store();
+                break;
+            case 'eliminar':
+                $id ? $noticiasImg->eliminar($id) : print "ID no proporcionado";
+                break;
+            default:
+                $noticiasImg->index();
+                break;
+        }
+        break;
+
+    case 'noticiasvideos':
+        switch ($accionSecundaria) {
+            case 'index':
+                $noticiasVideos->index();
+                break;
+            case 'store':
+                $noticiasVideos->store();
+                break;
+            case 'eliminar':
+                $id ? $noticiasVideos->eliminar($id) : print "ID no proporcionado";
+                break;
+            default:
+                $noticiasVideos->index();
+                break;
+        }
+        break;
+
+    // Rutas públicas para noticias
+    case 'noticias-public':
+        switch ($accionSecundaria) {
+            case 'index':
+                $noticiasPublic->index();
+                break;
+            case 'detalle':
+                $noticiasPublic->detalle();
+                break;
+            case 'buscar':
+                $noticiasPublic->buscar();
+                break;
+            default:
+                $noticiasPublic->index();
+                break;
+        }
+        break;
+
 
 
 

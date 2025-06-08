@@ -36,7 +36,7 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-images"></i>
+                            <i class="nav-icon fas fa-sliders-h"></i>
                             <p>
                                 Admin Carrusel
                                 <i class="right fas fa-angle-left"></i>
@@ -59,7 +59,7 @@
                     </li>
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-images"></i>
+                            <i class="nav-icon fas fa-briefcase"></i>
                             <p>
                                 Admin Especialidad
                                 <i class="right fas fa-angle-left"></i>
@@ -82,7 +82,7 @@
                     </li>
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-images"></i>
+                            <i class="nav-icon fas fa-lightbulb"></i>
                             <p>
                                 Admin Emprendimiento
                                 <i class="right fas fa-angle-left"></i>
@@ -111,7 +111,7 @@
                     </li>
                     <li class="nav-item has-treeview">
                         <a href="" class="nav-link">
-                            <i class="nav-icon fas fa-images"></i>
+                            <i class="nav-icon fas fa-users"></i>
                             <p>
                                 Admin Nosotros
                                 <i class="right fas fa-angle-left"></i>
@@ -140,7 +140,7 @@
                     </li>
                     <li class="nav-item has-treeview">
                         <a href="" class="nav-link">
-                            <i class="nav-icon fas fa-images"></i>
+                            <i class="nav-icon fas fa-user-friends"></i>
                             <p>
                                 Miembros
                                 <i class="right fas fa-angle-left"></i>
@@ -169,7 +169,7 @@
                     </li>
                     <li class="nav-item has-treeview">
                         <a href="" class="nav-link">
-                            <i class="nav-icon fas fa-images"></i>
+                            <i class="nav-icon fas fa-calendar-alt"></i>
                             <p>
                                 Eventos
                                 <i class="right fas fa-angle-left"></i>
@@ -198,7 +198,7 @@
                     </li>
                     <li class="nav-item has-treeview">
                         <a href="" class="nav-link">
-                            <i class="nav-icon fas fa-images"></i>
+                            <i class="nav-icon fas fa-trophy"></i>
                             <p>
                                 Logros
                                 <i class="right fas fa-angle-left"></i>
@@ -227,7 +227,7 @@
                     </li>
                     <li class="nav-item has-treeview">
                         <a href="" class="nav-link">
-                            <i class="nav-icon fas fa-images"></i>
+                            <i class="nav-icon fas fa-camera-retro"></i>
                             <p>
                                 Nuestras Fotos
                                 <i class="right fas fa-angle-left"></i>
@@ -242,8 +242,30 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="nav-item has-treeview">
+                        <a href="" class="nav-link">
+                            <i class="nav-icon fas fa-comments"></i>
+                            <p>
+                                Comentarios
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="index.php?action=comentarios" class="nav-link" active>
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Comentarios</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </nav>
+            <div class="mt-4 p-3">
+        <a href="index.php?action=auth/loginForm" class="btn btn-danger btn-block">
+            <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+        </a>
+    </div>
         </div>
     </aside>
 

@@ -31,7 +31,7 @@
     }
 
     .fondo-navbar {
-  background-color: #017300;
+  background-color:rgb(255, 255, 255);
   height: 6rem;
   width: 100%;
   position: fixed;
@@ -62,7 +62,7 @@
 
 .logo-text {
   line-height: 1.1;
-  color: #000;
+  color:rgb(0, 0, 0);
   font-size: 10px;
   font-weight: 400;
   text-transform: uppercase;
@@ -71,7 +71,7 @@
 
 .logo-text p {
   margin: 0;
-  color:rgb(255, 255, 255)
+  color:rgb(0, 0, 0)
 }
 
 .logo-text .bold {
@@ -81,6 +81,13 @@
   text-transform: none;
 }
 
+/* Cuando se activa el scroll */
+#nav-container.scrolled .logo-text,
+#nav-container.scrolled .logo-text p,
+#nav-container.scrolled .logo-text .bold {
+  color: white;
+}
+
 
     /* Contenedor principal de la barra */
     .nav-container {
@@ -88,7 +95,7 @@
       top: 0;
       left: 0;
       width: 100%;
-      background: #067103;
+      background:rgb(250, 250, 250);
       border-bottom-left-radius: 2rem;
       border-bottom-right-radius: 2rem;
       z-index: 1000;
@@ -100,7 +107,7 @@
       justify-content: space-between;
     }
     .nav-container.scrolled {
-      background: #08ab03;
+      background:rgb(32, 32, 32);
       
     }
     /* Logo */
@@ -124,7 +131,7 @@
       gap: 1.5rem;
       font-weight: 600;
       font-size: 0.9rem;
-      color: #e0e7ff;
+      color:rgb(35, 35, 36);
       user-select: none;
     }
     nav a,
@@ -142,13 +149,24 @@
     nav a:hover,
     nav button:hover {
       background: rgba(255 255 255 / 0.2);
-      color: #fff;
+      color: rgb(100, 100, 100);
     }
     nav a i,
     nav button i {
       font-size: 1.4rem;
       filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.15));
     }
+
+    #nav-container.scrolled nav {
+  color: white;
+}
+
+#nav-container.scrolled nav a:hover,
+#nav-container.scrolled nav button:hover {
+  color: white;
+  background: rgba(7, 7, 7, 0.07); /* o ajusta si deseas un fondo más visible */
+}
+
     /* Icono de flecha al lado del texto */
     .caret-icon {
       font-size: 0.85rem;
@@ -165,7 +183,7 @@
       top: 100%;
       left: 50%;
       transform: translateX(-50%);
-      margin-top: 0.5rem;
+      /* margin-top: 0.5rem; */
       background: #fff;
       border-radius: 1rem;
       box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
@@ -187,7 +205,7 @@
       display: block;
       padding: 0.75rem 1.5rem;
       border-radius: 0.75rem;
-      color: #334155;
+      color:rgb(0, 0, 0);
       font-weight: 600;
       font-size: 0.95rem;
       transition: background 0.25s ease, color 0.25s ease;
@@ -196,14 +214,24 @@
       background:#097c05;
       color: #fff;
     }
+
+    /* Estado con scroll */
+#nav-container.scrolled .dropdown-menu a {
+  color: black;
+}
+
+#nav-container.scrolled .dropdown-menu a:hover {
+  background: #097c05;
+  color: white;
+}
     /* Botón Admin */
     .btn-admin {
-      background:rgb(255, 255, 255);
-      color: #1e293b;
+      background:rgb(2, 148, 50);
+      color:rgb(232, 233, 235);
       font-weight: 700;
       padding: 0.625rem 1.5rem;
       border-radius: 9999px;
-      box-shadow: 0 4px 12px rgba(251, 191, 36, 0.5);
+      
       transition: background 0.3s ease, box-shadow 0.3s ease;
       display: flex;
       align-items: center;
@@ -221,12 +249,16 @@
       display: none;
       background: none;
       border: none;
-      color: #e0e7ff;
+      color:rgba(24, 24, 24, 0.85);
       font-size: 2rem;
       cursor: pointer;
       filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.3));
       user-select: none;
     }
+    /* Cambiar color con scroll */
+#nav-container.scrolled .mobile-menu-button {
+  color: white;
+}
     /* Menú móvil */
     #mobile-menu {
       display: none;
@@ -237,7 +269,7 @@
       background: white;
       border-top-left-radius: 1.5rem;
       border-top-right-radius: 1.5rem;
-      box-shadow: 0 -8px 24px rgba(59, 130, 246, 0.15);
+      box-shadow: 0 -8px 24px rgba(8, 61, 145, 0.15);
       padding: 1.5rem 1.5rem 2rem;
       z-index: 999;
       max-height: 70vh;
@@ -290,7 +322,7 @@
       color: #1e40af;
     }
     /* Responsive */
-    @media (max-width: 900px) {
+    @media (max-width:1220px) {
       nav {
         display: none;
       }
@@ -301,10 +333,11 @@
   </style>
 </head>
 <body>
+   <!-- Preloader -->
 <div class="fondo-navbar">
 <div class="nav-container" id="nav-container" role="navigation" aria-label="Barra de navegación principal">
 <div class="logo-container">
-    <img class="logo-img" src="https://storage.googleapis.com/a1aa/image/039aab5e-f041-49a8-d02e-7883e6fc4575.jpg" alt="Logo with red star and green text reading CABO" />
+    <img class="logo-img" src="/PROYECTO-MILITAR/views/assets/img/logo.jpg" alt="Logo with red star and green text reading CABO" />
     <div class="logo-text" aria-label="Promoción Cabo Alberto Reyes Gamarra">
       <p>PROMOCIÓN</p>
       <p class="bold">CABO ALBERTO</p>
@@ -320,6 +353,10 @@
         <i class="fas fa-info-circle"></i>
         <span>Sobre Nosotros</span>
       </a>
+      <a href="/PROYECTO-MILITAR/eventos" aria-label="Eventos">
+        <i class="fas fa-calendar-alt"></i>
+        <span>Eventos</span>
+      </a>
       <div class="dropdown">
         <button id="integrantes-btn" aria-haspopup="true" aria-expanded="false" aria-controls="integrantes-menu">
           <i class="fas fa-users"></i>
@@ -329,8 +366,8 @@
         <div id="integrantes-menu" class="dropdown-menu" role="menu" aria-labelledby="integrantes-btn">
           <a href="/PROYECTO-MILITAR/miembros" role="menuitem">Miembros</a>
           <a href="/PROYECTO-MILITAR/miembros_fallecidos" role="menuitem">En memoria</a>
-          <a href="#" role="menuitem">Finanzas</a>
-          <a href="/PROYECTO-MILITAR/especialidad" role="menuitem">Especialidad</a>
+          <a href="/PROYECTO-MILITAR/finanzas-public" role="menuitem">Finanzas</a>
+          <a href="/PROYECTO-MILITAR/especialidad_index" role="menuitem">Especialidad</a>
         </div>
       </div>
       <div class="dropdown">
@@ -342,8 +379,8 @@
         <div id="comunidad-menu" class="dropdown-menu" role="menu" aria-labelledby="comunidad-btn">
           <a href="/PROYECTO-MILITAR/negocios" role="menuitem">Emprendimiento</a>
           <a href="/PROYECTO-MILITAR/galeria" role="menuitem">Galería</a>
-          <a href="#" role="menuitem">Logros</a>
-          <a href="#" role="menuitem">Noticias</a>
+          <a href="/PROYECTO-MILITAR/logros" role="menuitem">Logros</a>
+          <a href="/PROYECTO-MILITAR/noticias-public" role="menuitem">Noticias</a>
         </div>
       </div>
       <button type="button" class="btn-admin" aria-label="Botón Admin" onclick="location.href='index.php?action=auth/loginForm'">
@@ -373,7 +410,7 @@
       <a href="/PROYECTO-MILITAR/miembros">Miembros</a>
       <a href="/PROYECTO-MILITAR/miembros_fallecidos">En memoria</a>
       <a href="#">Finanzas</a>
-      <a href="#">Especialidad</a>
+      <a href="/PROYECTO-MILITAR/especialidad_index">Especialidad</a>
     </div>
     <button aria-expanded="false" aria-controls="mobile-comunidad-submenu" aria-label="Menú Comunidad móvil" id="mobile-comunidad-btn">
       <i class="fas fa-comments"></i>
@@ -383,7 +420,7 @@
     <div id="mobile-comunidad-submenu" style="display:none; padding-left: 2.5rem;">
       <a href="/PROYECTO-MILITAR/negocios">Emprendimiento</a>
       <a href="/PROYECTO-MILITAR/galeria">Galería</a>
-      <a href="#">Logros</a>
+      <a href="/PROYECTO-MILITAR/logros">Logros</a>
       <a href="#">Noticias</a>
     </div>
     <button type="button" class="btn-admin" aria-label="Botón Admin" onclick="location.href='index.php?action=auth/loginForm'">
@@ -393,105 +430,101 @@
 </div>
 
   <script>
-    // Función para alternar menús desplegables en escritorio
-    function toggleDropdown(button, menu) {
-      const isExpanded = button.getAttribute('aria-expanded') === 'true';
-      if (isExpanded) {
-        button.setAttribute('aria-expanded', 'false');
-        menu.classList.remove('show');
-      } else {
-        button.setAttribute('aria-expanded', 'true');
-        menu.classList.add('show');
-      }
+// Función para mostrar el menú desplegable
+  function showDropdown(button, menu) {
+    button.setAttribute('aria-expanded', 'true');
+    menu.classList.add('show');
+  }
+
+  // Función para ocultar el menú desplegable
+  function hideDropdown(button, menu) {
+    button.setAttribute('aria-expanded', 'false');
+    menu.classList.remove('show');
+  }
+
+  // Configurar eventos para menús desplegables escritorio
+  document.addEventListener('DOMContentLoaded', () => {
+    const integrantesBtn = document.getElementById('integrantes-btn');
+    const integrantesMenu = document.getElementById('integrantes-menu');
+    const comunidadBtn = document.getElementById('comunidad-btn');
+    const comunidadMenu = document.getElementById('comunidad-menu');
+
+    // Eventos para el menú Integrantes
+    integrantesBtn.addEventListener('mouseenter', () => {
+      showDropdown(integrantesBtn, integrantesMenu);
+      hideDropdown(comunidadBtn, comunidadMenu);
+    });
+
+    integrantesMenu.addEventListener('mouseleave', () => {
+      hideDropdown(integrantesBtn, integrantesMenu);
+    });
+
+    // Eventos para el menú Comunidad
+    comunidadBtn.addEventListener('mouseenter', () => {
+      showDropdown(comunidadBtn, comunidadMenu);
+      hideDropdown(integrantesBtn, integrantesMenu);
+    });
+
+    comunidadMenu.addEventListener('mouseleave', () => {
+      hideDropdown(comunidadBtn, comunidadMenu);
+    });
+
+    // También podemos agregar eventos para el contenedor padre para mejor usabilidad
+    const dropdowns = document.querySelectorAll('.dropdown');
+    dropdowns.forEach(dropdown => {
+      dropdown.addEventListener('mouseleave', () => {
+        const button = dropdown.querySelector('button');
+        const menu = dropdown.querySelector('.dropdown-menu');
+        hideDropdown(button, menu);
+      });
+    });
+  });
+
+  // Alternar menú móvil
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  mobileMenuButton.addEventListener('click', () => {
+    mobileMenu.classList.toggle('show');
+  });
+
+  // Alternar submenú Integrantes móvil
+  const mobileIntegrantesBtn = document.getElementById('mobile-integrantes-btn');
+  const mobileIntegrantesSubmenu = document.getElementById('mobile-integrantes-submenu');
+  mobileIntegrantesBtn.addEventListener('click', () => {
+    const expanded = mobileIntegrantesBtn.getAttribute('aria-expanded') === 'true';
+    mobileIntegrantesBtn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+    if (expanded) {
+      mobileIntegrantesSubmenu.style.display = 'none';
+    } else {
+      mobileIntegrantesSubmenu.style.display = 'block';
     }
-    // Cerrar todos los menús desplegables en escritorio
-    function closeDropdowns() {
-      document.querySelectorAll('.dropdown button').forEach((btn) => {
-        btn.setAttribute('aria-expanded', 'false');
-      });
-      document.querySelectorAll('.dropdown-menu').forEach((menu) => {
-        menu.classList.remove('show');
-      });
+  });
+
+  // Alternar submenú Comunidad móvil
+  const mobileComunidadBtn = document.getElementById('mobile-comunidad-btn');
+  const mobileComunidadSubmenu = document.getElementById('mobile-comunidad-submenu');
+  mobileComunidadBtn.addEventListener('click', () => {
+    const expanded = mobileComunidadBtn.getAttribute('aria-expanded') === 'true';
+    mobileComunidadBtn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+    if (expanded) {
+      mobileComunidadSubmenu.style.display = 'none';
+    } else {
+      mobileComunidadSubmenu.style.display = 'block';
     }
-    // Configurar eventos para menús desplegables escritorio
-    document.addEventListener('DOMContentLoaded', () => {
-      const integrantesBtn = document.getElementById('integrantes-btn');
-      const integrantesMenu = document.getElementById('integrantes-menu');
-      const comunidadBtn = document.getElementById('comunidad-btn');
-      const comunidadMenu = document.getElementById('comunidad-menu');
+  });
 
-      integrantesBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        toggleDropdown(integrantesBtn, integrantesMenu);
-        comunidadBtn.setAttribute('aria-expanded', 'false');
-        comunidadMenu.classList.remove('show');
-      });
-
-      comunidadBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        toggleDropdown(comunidadBtn, comunidadMenu);
-        integrantesBtn.setAttribute('aria-expanded', 'false');
-        integrantesMenu.classList.remove('show');
-      });
-
-      // Cerrar menús al hacer clic fuera
-      document.addEventListener('click', () => {
-        closeDropdowns();
-      });
-
-      // Cerrar menús con tecla Escape
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-          closeDropdowns();
-        }
-      });
-    });
-
-    // Alternar menú móvil
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
-    mobileMenuButton.addEventListener('click', () => {
-      mobileMenu.classList.toggle('show');
-    });
-
-    // Alternar submenú Integrantes móvil
-    const mobileIntegrantesBtn = document.getElementById('mobile-integrantes-btn');
-    const mobileIntegrantesSubmenu = document.getElementById('mobile-integrantes-submenu');
-    mobileIntegrantesBtn.addEventListener('click', () => {
-      const expanded = mobileIntegrantesBtn.getAttribute('aria-expanded') === 'true';
-      mobileIntegrantesBtn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-      if (expanded) {
-        mobileIntegrantesSubmenu.style.display = 'none';
-      } else {
-        mobileIntegrantesSubmenu.style.display = 'block';
-      }
-    });
-
-    // Alternar submenú Comunidad móvil
-    const mobileComunidadBtn = document.getElementById('mobile-comunidad-btn');
-    const mobileComunidadSubmenu = document.getElementById('mobile-comunidad-submenu');
-    mobileComunidadBtn.addEventListener('click', () => {
-      const expanded = mobileComunidadBtn.getAttribute('aria-expanded') === 'true';
-      mobileComunidadBtn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-      if (expanded) {
-        mobileComunidadSubmenu.style.display = 'none';
-      } else {
-        mobileComunidadSubmenu.style.display = 'block';
-      }
-    });
-
-    // Sombra y fondo del contenedor al hacer scroll
-    const navContainer = document.getElementById('nav-container');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        navContainer.classList.add('scrolled');
-      } else {
-        navContainer.classList.remove('scrolled');
-      }
-    });
+  // Sombra y fondo del contenedor al hacer scroll
+  const navContainer = document.getElementById('nav-container');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      navContainer.classList.add('scrolled');
+    } else {
+      navContainer.classList.remove('scrolled');
+    }
+  });
 
   // Cambiar fondo de la barra al hacer scroll
-    window.addEventListener('scroll', function () {
+  window.addEventListener('scroll', function () {
     const fondo = document.querySelector('.fondo-navbar');
     if (window.scrollY > 50) {
       fondo.classList.add('transparent');

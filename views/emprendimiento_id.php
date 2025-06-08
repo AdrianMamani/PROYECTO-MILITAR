@@ -307,5 +307,8 @@ $whatsappLink = "https://wa.me/$telefono?text=$mensaje";
       }
     });
   </script>
+  <?php
+    include 'layout/footer.php';
+    ?>
 </body>
 </html>

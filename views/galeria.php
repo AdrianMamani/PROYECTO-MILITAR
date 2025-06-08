@@ -2,20 +2,29 @@
 <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1" name="viewport" />
-  <title>Ice Cream Gallery with Heart Icon and Floating Hearts Effect</title>
+  <title>Nuestros recuerdos</title>
+  <link rel="icon" href="/PROYECTO-MILITAR/views/assets/img/logo.jpg" type="image/png">
   <link
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     rel="stylesheet"/>
     <link rel="stylesheet" href="<?= BASE_URL ?>views/assets/css/galeria.css"/>
+    <link rel="stylesheet" href="<?= BASE_URL ?>views/assets/css/efecto.css"/>
 </head>
 <body>
+  <!-- Preloader -->
+    <div id="preloader">
+        <img src="/PROYECTO-MILITAR/views/assets/img/logo.jpg" alt="Cargando..."> <!-- Cambia por la ruta de tu logo -->
+    </div>
+  <?php
+    include 'layout/header.php';
+    ?>
   <!-- Full width header rectangle -->
   <header>La esencia en fotos</header>
 
   <div class="container">
-    <h2>
+    <!--<h2-->
       <span>¡Momentos compartidos, sonrisas contagiadas!</span>
-    </h2>
+    </h2> --
     <div class="gallery" id="gallery">
       <!-- Gallery items with static HTML -->
       <?php foreach ($imagenes as $img): ?>
@@ -190,5 +199,32 @@ commentForm.addEventListener("submit", (e) => {
   commentsList.scrollTop = commentsList.scrollHeight;
 });
   </script>
+  <script>
+    // Script para manejar el preloader
+    document.addEventListener('DOMContentLoaded', function() {
+        const preloader = document.getElementById('preloader');
+        const body = document.body;
+        
+        // Forzar el repintado para asegurar que la animación funcione
+        void preloader.offsetWidth;
+        
+        // Mostrar por exactamente 3 segundos
+        setTimeout(function() {
+            body.classList.add('loaded');
+            
+            // Eliminar el preloader después de la animación
+            setTimeout(function() {
+                preloader.remove();
+                // Mostrar todo el contenido
+                document.querySelectorAll('body > *:not(script)').forEach(el => {
+                    el.style.visibility = 'visible';
+                });
+            }, 500); // Medio segundo para la transición de desvanecimiento
+        }, 3000); // 3 segundos exactos
+    });
+</script>
+<?php
+    include 'layout/footer.php';
+    ?>
 </body>
 </html>

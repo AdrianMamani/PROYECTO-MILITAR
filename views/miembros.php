@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Miembros del equipo</title>
+    <link rel="icon" href="/PROYECTO-MILITAR/views/assets/img/logo.jpg" type="image/png">
     <link rel="stylesheet" href="<?= BASE_URL ?>views/assets/css/miembros.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -28,11 +29,6 @@
                         <img src="<?= BASE_URL ?>uploads/usuarios/imagenes/<?= htmlspecialchars($miembro['imagen_usuario']) ?>" alt="Miembro" class="post-image">
                     </a>
                     <div class="card-footer">
-                        <div class="card-actions">
-                            <i class="far fa-heart"></i>
-                            <i class="far fa-comment"></i>
-                            <i class="far fa-paper-plane"></i>
-                        </div>
                         <div class="button-container"><a class="button-link" href="<?= BASE_URL ?>miembro/<?= $miembro['id'] ?>">Ver Información</a></div>
                     </div>
                 </div>
@@ -42,5 +38,7 @@
     </section>
 
 </body>
-
+<?php
+    include 'layout/footer.php';
+    ?>
 </html>

@@ -2,7 +2,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Historia de la Promoción</title>
+   <title><?= htmlspecialchars($evento['titulo']) ?></title>
+   <link rel="icon" href="/PROYECTO-MILITAR/views/assets/img/logo.jpg" type="image/png">
   <link rel="stylesheet" href="/PROYECTO-MILITAR/views/assets/css/evento_id.css" />
 </head>
 <body>
@@ -217,5 +218,8 @@ document.getElementById('comment-form').addEventListener('submit', async functio
   }
 });
 </script>
+ <?php
+    include 'layout/footer.php';
+    ?>
 </body>
 </html>

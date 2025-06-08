@@ -4,13 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sobre Nosotros</title>
+    <link rel="icon" href="/PROYECTO-MILITAR/views/assets/img/logo.jpg" type="image/png">
     <link rel="stylesheet" href="<?= BASE_URL ?>views/assets/css/nosotros.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>views/assets/css/efecto.css">
     <!-- Añadimos Font Awesome para los iconos -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <?php include 'layout/header.php'; ?>
 </head>
 <body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <img src="/PROYECTO-MILITAR/views/assets/img/logo.jpg" alt="Cargando..."> <!-- Cambia por la ruta de tu logo -->
+    </div>
     <!-- Banner principal -->
     <div class="banner-nosotros">
         <h1>Sobre Nosotros</h1>
@@ -178,4 +184,29 @@ foreach ($imagenesNosotros as $imagen) {
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="<?= BASE_URL ?>views/assets/js/nosotros.js"></script>
 <script src="<?= BASE_URL ?>views/assets/js/miembros.js"></script>
+<script>
+    // Script para manejar el preloader
+    document.addEventListener('DOMContentLoaded', function() {
+        const preloader = document.getElementById('preloader');
+        const body = document.body;
+        
+        // Forzar el repintado para asegurar que la animación funcione
+        void preloader.offsetWidth;
+        
+        // Mostrar por exactamente 3 segundos
+        setTimeout(function() {
+            body.classList.add('loaded');
+            
+            // Eliminar el preloader después de la animación
+            setTimeout(function() {
+                preloader.remove();
+                // Mostrar todo el contenido
+                document.querySelectorAll('body > *:not(script)').forEach(el => {
+                    el.style.visibility = 'visible';
+                });
+            }, 500); // Medio segundo para la transición de desvanecimiento
+        }, 3000); // 3 segundos exactos
+    });
+</script>
+
 </html>

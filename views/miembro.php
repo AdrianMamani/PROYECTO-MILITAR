@@ -3,6 +3,7 @@
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <title><?= htmlspecialchars($miembros['nombre']) ?></title>
+
   <link rel="icon" href="/PROYECTO-MILITAR/views/assets/img/logo.jpg" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
@@ -317,5 +318,8 @@
    }
   </script>
 </div>
+<?php
+    include 'layout/footer.php';
+    ?>
  </body>
 </html>

@@ -2,7 +2,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Blog</title>
+  <title>Nuestros Eventos</title>
+  <link rel="icon" href="/PROYECTO-MILITAR/views/assets/img/logo.jpg" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/PROYECTO-MILITAR/views/assets/css/evento.css" />
 
@@ -79,5 +80,8 @@ include 'layout/header.php';
         }, 3000); // 3 segundos exactos
     });
 </script>
+<?php
+    include 'layout/footer.php';
+    ?>
 </body>
 </html>

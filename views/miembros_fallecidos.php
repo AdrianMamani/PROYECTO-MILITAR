@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Miembros del equipo</title>
+    <title>Miembros fallecidos</title>
+    <link rel="icon" href="/PROYECTO-MILITAR/views/assets/img/logo.jpg" type="image/png">
     <link rel="stylesheet" href="<?= BASE_URL ?>views/assets/css/miembros.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -39,7 +40,9 @@
             <?php endforeach; ?>
         </div>
     </section>
-
 </body>
+<?php
+    include 'layout/footer.php';
+    ?>
 
 </html>

@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <title>Cabo Alberto Reyes Gamarra</title>
+    <link rel="icon" href="/PROYECTO-MILITAR/views/assets/img/logo.jpg" type="image/png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>views/assets/css/home.css">
@@ -104,7 +105,7 @@
         </header>
         <div class="grid" id="especialidadesGrid">
             <?php foreach ($especialidades as $especialidad): ?>
-                <a href="<?= BASE_URL ?>/especialidad_index/<?= $especialidad['id'] ?>" class="card" tabindex="0" style="display: block; text-decoration: none; color: inherit;">
+                <a href="<?= BASE_URL ?>especialidad_index/<?= $especialidad['id'] ?>" class="card" tabindex="0" style="display: block; text-decoration: none; color: inherit;">
                     <img alt="Imagen de la especialidad <?= htmlspecialchars($especialidad['nombre']) ?>" height="220" width="400" src="<?= htmlspecialchars($especialidad['imagen']) ?>" />
                     <div class="overlay">
                         <h2><?= htmlspecialchars($especialidad['nombre']) ?></h2>
@@ -298,6 +299,9 @@
     <script src="<?= BASE_URL ?>views/assets/js/nosotros.js"></script>
     <script src="<?= BASE_URL ?>views/assets/js/miembros.js"></script>
     <script src="<?= BASE_URL ?>views/assets/js/chat.js"></script>
+    <?php
+    include 'layout/footer.php';
+    ?>
 </body>
 
 </html>
