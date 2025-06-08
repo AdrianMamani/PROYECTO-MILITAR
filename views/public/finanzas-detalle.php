@@ -569,14 +569,7 @@
 
                 <!-- Acciones -->
                 <div class="action-buttons">
-                    <button onclick="window.print()" class="btn-military">
-                        <i class="fas fa-print"></i>
-                        Imprimir Registro
-                    </button>
-                    <a href="index.php?action=finanzas-public/exportar" class="btn-military secondary">
-                        <i class="fas fa-download"></i>
-                        Exportar CSV
-                    </a>
+              
                     <a href="index.php?action=finanzas-public/index" class="btn-military gold">
                         <i class="fas fa-list"></i>
                         Ver Todos

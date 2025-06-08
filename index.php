@@ -47,6 +47,16 @@ require_once './controllers/FinanzasController.php';
 // require_once './controllers/web/miembros.php';
 // require_once './controllers/web/emprendimiento.php';
 // require_once './controllers/web/especialidades.php';
+// rutas para la web
+// require_once './controllers/web/evento.php';
+// require_once './controllers/web/galeria.php';
+// require_once './controllers/web/home.php';
+// require_once './controllers/web/nosotros.php';
+// require_once './controllers/web/miembros.php';
+// require_once './controllers/web/emprendimiento.php';
+// require_once './controllers/web/especialidades.php';
+require_once './controllers/FinanzasPublicController.php';
+require_once './controllers/NoticiasPublicController.php';
 
 define('BASE_URL', '/PROYECTO-MILITAR/');
 
@@ -58,7 +68,7 @@ $accionSecundaria = $partes[1] ?? 'index';
 $id = $partes[2] ?? ($_GET['id'] ?? null);
 
 
-// Proteger rutas (excepto login)
+/// Proteger rutas (excepto login)
 $rutasPublicas = [
     'auth',
     'home',
@@ -69,9 +79,10 @@ $rutasPublicas = [
     'miembros',
     'miembros_fallecidos',
     'comentarios/agregar',
-    'negocios'
+    'negocios',
+    'finanzas-public',
+    'noticias-public'
 ];
-
 if (!isset($_SESSION['usuario']) && !in_array($accionPrincipal, $rutasPublicas) && !in_array($accionCompleta, $rutasPublicas)) {
     header('Location: index.php?action=auth/loginForm');
     exit;
@@ -118,6 +129,8 @@ $noticiasVideos = new NoticiasVideosController();
 // $miembrosWeb = new MiembrosControllerWeb();
 // $especialidadWeb = new EspecialidadControllerWeb();
 // $emprendimientoWeb = new EmprendimientoControllerWeb();
+$finanzasPublic = new FinanzasPublicController();
+$noticiasPublic = new NoticiasPublicController();
 
 // Contexto admin si está logueado
 $isAdmin = isset($_SESSION['usuario']);
@@ -242,6 +255,41 @@ switch ($accionPrincipal) {
                 break;
             default:
                 $especialidadImg->index();
+                break;
+        }
+        break;
+// Rutas públicas para finanzas
+    case 'finanzas-public':
+        switch ($accionSecundaria) {
+            case 'index':
+                $finanzasPublic->index();
+                break;
+            case 'detalle':
+                $finanzasPublic->detalle();
+                break;
+            case 'exportar':
+                $finanzasPublic->exportar();
+                break;
+            default:
+                $finanzasPublic->index();
+                break;
+        }
+        break;
+
+    // Rutas públicas para noticias
+    case 'noticias-public':
+        switch ($accionSecundaria) {
+            case 'index':
+                $noticiasPublic->index();
+                break;
+            case 'detalle':
+                $noticiasPublic->detalle();
+                break;
+            case 'buscar':
+                $noticiasPublic->buscar();
+                break;
+            default:
+                $noticiasPublic->index();
                 break;
         }
         break;
