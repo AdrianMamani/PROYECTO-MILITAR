@@ -27,92 +27,127 @@
     </nav>
 
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
-        <a href="index.php?action=carrusel/index" class="brand-link">
-            <span class="brand-text font-weight-light">Panel de Administración</span>
-        </a>
+    <a href="index.php?action=carrusel/index" class="brand-link">
+        <span class="brand-text font-weight-light">Panel de Administración</span>
+    </a>
 
-        <div class="sidebar">
-            <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
-                    <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-images"></i>
-                            <p>
-                                Admin Carrusel
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="index.php?action=carrusel/index" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Carrusel</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="index.php?action=carruselimg/index" class="nav-link active">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Carrusel de Imágenes</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-images"></i>
-                            <p>
-                                Admin Especialidad
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="index.php?action=especialidad/index" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Especialidades</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="index.php?action=especialidadimg/index" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Imágenes</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-images"></i>
-                            <p>
-                                Admin Emprendimiento
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="index.php?action=emprendimiento/index" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Especialidades</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="index.php?action=emprendimientoimg/index" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Imágenes</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="index.php?action=auth/logout" class="nav-link">
-                            <i class="nav-icon fas fa-sign-out-alt"></i>
-                            <p>Cerrar Sesión</p>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </aside>
+    <div class="sidebar">
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
+
+                <!-- Carrusel -->
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-images"></i>
+                        <p>
+                            Admin Carrusel
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="index.php?action=carrusel/index" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Carrusel</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="index.php?action=carruselimg/index" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Carrusel de Imágenes</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Especialidad -->
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-user-graduate"></i>
+                        <p>
+                            Admin Especialidad
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="index.php?action=especialidad/index" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Especialidades</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="index.php?action=especialidadimg/index" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Imágenes</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Emprendimiento -->
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-briefcase"></i>
+                        <p>
+                            Admin Emprendimiento
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="index.php?action=emprendimiento/index" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Especialidades</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="index.php?action=emprendimientoimg/index" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Imágenes</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                  <li class="nav-item has-treeview menu-open">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-newspaper"></i>
+                        <p>
+                            Admin Noticias
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="index.php?action=noticias/index" class="nav-link active">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Noticias</p>
+                            </a>
+                        </li>
+             
+                    </ul>
+                </li>
+                <!-- Finanzas -->
+                <li class="nav-item">
+                    <a href="index.php?action=finanzas/index" class="nav-link">
+                        <i class="nav-icon fas fa-dollar-sign"></i>
+                        <p>Registro de Aportaciones</p>
+                    </a>
+                </li>
+
+                <!-- Logout -->
+                <li class="nav-item">
+                    <a href="index.php?action=auth/logout" class="nav-link">
+                        <i class="nav-icon fas fa-sign-out-alt"></i>
+                        <p>Cerrar Sesión</p>
+                    </a>
+                </li>
+
+            </ul>
+        </nav>
+    </div>
+</aside>
 
     <div class="content-wrapper">
         <section class="content-header">

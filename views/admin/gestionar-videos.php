@@ -20,6 +20,23 @@
     max-width: 400px;
     height: 225px;
 }
+.preview-container {
+    margin-top: 15px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 5px;
+    border: 1px solid #dee2e6;
+}
+.alert-debug {
+    background: #e3f2fd;
+    border: 1px solid #2196f3;
+    color: #1976d2;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+    font-family: monospace;
+    font-size: 12px;
+}
 </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -95,7 +112,11 @@
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1>Gestionar Videos</h1>
-                    <p class="text-muted">Noticia: <?= htmlspecialchars($noticia['titulo']) ?></p>
+                    <?php if ($noticia && isset($noticia['titulo'])): ?>
+                        <p class="text-muted">Noticia: <?= htmlspecialchars($noticia['titulo']) ?></p>
+                    <?php else: ?>
+                        <p class="text-muted">Noticia: No disponible</p>
+                    <?php endif; ?>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -110,6 +131,21 @@
 
     <section class="content">
         <div class="container-fluid">
+            <!-- Mostrar mensajes de error o éxito -->
+            <?php if (isset($_SESSION['mensaje'])): ?>
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <i class="fas fa-check"></i> <?= $_SESSION['mensaje']; unset($_SESSION['mensaje']); ?>
+                </div>
+            <?php endif; ?>
+
+            <?php if (isset($_SESSION['error'])): ?>
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <i class="fas fa-exclamation-triangle"></i> <?= $_SESSION['error']; unset($_SESSION['error']); ?>
+                </div>
+            <?php endif; ?>
+
             <div class="row">
                 <!-- Formulario para agregar video -->
                 <div class="col-md-4">
@@ -121,7 +157,7 @@
                         </div>
                         
                         <form action="index.php?action=noticiasvideos/store" method="POST" enctype="multipart/form-data" id="videoForm">
-                            <input type="hidden" name="noticia_id" value="<?= $noticia['id'] ?>">
+                            <input type="hidden" name="noticia_id" value="<?= $noticia ? htmlspecialchars($noticia['id']) : '' ?>">
                             
                             <div class="card-body">
                                 <div class="form-group">
@@ -142,12 +178,23 @@
                                 
                                 <!-- Campo para YouTube -->
                                 <div class="form-group" id="youtube_field">
-                                    <label for="youtube_url">URL de YouTube <span class="text-danger">*</span></label>
-                                    <input type="url" class="form-control" id="youtube_url" name="youtube_url" 
-                                           placeholder="https://www.youtube.com/watch?v=...">
+                                    <label for="youtube_url">URL de YouTube o ID del Video <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="youtube_url" name="youtube_url" 
+                                           placeholder="Ejemplos: https://www.youtube.com/watch?v=ouH2QfZAN1o o simplemente: ouH2QfZAN1o"
+                                           onchange="previewYouTubeVideo()" onkeyup="previewYouTubeVideo()">
                                     <small class="form-text text-muted">
-                                        Pega la URL completa del video de YouTube
+                                        Puedes usar:
+                                        <br>• URL completa: https://www.youtube.com/watch?v=ouH2QfZAN1o
+                                        <br>• URL corta: https://youtu.be/ouH2QfZAN1o  
+                                        <br>• Solo el ID: ouH2QfZAN1o
                                     </small>
+                                    
+                                    <!-- Vista previa del video -->
+                                    <div id="youtube_preview" class="preview-container" style="display: none;">
+                                        <h6><i class="fab fa-youtube text-danger"></i> Vista Previa:</h6>
+                                        <iframe id="youtube_iframe" width="100%" height="200" frameborder="0" allowfullscreen></iframe>
+                                        <div class="alert-debug" id="debug_info"></div>
+                                    </div>
                                 </div>
                                 
                                 <!-- Campo para video local -->
@@ -162,7 +209,7 @@
                             </div>
                             
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary btn-block">
+                                <button type="submit" class="btn btn-primary btn-block" id="submitBtn">
                                     <i class="fas fa-plus"></i> Agregar Video
                                 </button>
                             </div>
@@ -177,12 +224,14 @@
                             <a href="index.php?action=noticias/index" class="btn btn-secondary btn-block">
                                 <i class="fas fa-arrow-left"></i> Volver a Noticias
                             </a>
-                            <a href="index.php?action=noticias/editar&id=<?= $noticia['id'] ?>" class="btn btn-warning btn-block">
-                                <i class="fas fa-edit"></i> Editar Noticia
-                            </a>
-                            <a href="index.php?action=noticiasimg/index&noticia_id=<?= $noticia['id'] ?>" class="btn btn-success btn-block">
-                                <i class="fas fa-images"></i> Gestionar Imágenes
-                            </a>
+                            <?php if ($noticia && isset($noticia['id'])): ?>
+                                <a href="index.php?action=noticias/editar&id=<?= $noticia['id'] ?>" class="btn btn-warning btn-block">
+                                    <i class="fas fa-edit"></i> Editar Noticia
+                                </a>
+                                <a href="index.php?action=noticiasimg/index&noticia_id=<?= $noticia['id'] ?>" class="btn btn-success btn-block">
+                                    <i class="fas fa-images"></i> Gestionar Imágenes
+                                </a>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -192,7 +241,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">
-                                <i class="fas fa-video"></i> Videos de la Noticia (<?= count($videos) ?>)
+                                <i class="fas fa-video"></i> Videos de la Noticia (<?= is_array($videos) ? count($videos) : 0 ?>)
                             </h3>
                         </div>
                         
@@ -296,41 +345,105 @@ function toggleVideoType() {
         localField.style.display = 'none';
         youtubeUrl.required = true;
         videoLocal.required = false;
-        videoLocal.value = ''; // Limpiar el campo
+        videoLocal.value = '';
     } else {
         youtubeField.style.display = 'none';
         localField.style.display = 'block';
         youtubeUrl.required = false;
         videoLocal.required = true;
-        youtubeUrl.value = ''; // Limpiar el campo
+        youtubeUrl.value = '';
+        document.getElementById('youtube_preview').style.display = 'none';
+    }
+}
+
+function extractYouTubeId(input) {
+    input = input.trim();
+    
+    // Si ya es un ID directo (11 caracteres)
+    if (/^[a-zA-Z0-9_-]{11}$/.test(input)) {
+        return input;
+    }
+    
+    // Patrones para URLs
+    const patterns = [
+        /(?:youtube\.com\/watch\?v=)([a-zA-Z0-9_-]{11})/,
+        /(?:youtu\.be\/)([a-zA-Z0-9_-]{11})/,
+        /(?:youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/,
+        /(?:youtube\.com\/watch\?.*v=)([a-zA-Z0-9_-]{11})/,
+        /(?:m\.youtube\.com\/watch\?v=)([a-zA-Z0-9_-]{11})/
+    ];
+    
+    for (let pattern of patterns) {
+        const match = input.match(pattern);
+        if (match) {
+            return match[1];
+        }
+    }
+    
+    return null;
+}
+
+function previewYouTubeVideo() {
+    const input = document.getElementById('youtube_url').value;
+    const previewDiv = document.getElementById('youtube_preview');
+    const iframe = document.getElementById('youtube_iframe');
+    const debugInfo = document.getElementById('debug_info');
+    
+    if (!input.trim()) {
+        previewDiv.style.display = 'none';
+        return;
+    }
+    
+    const videoId = extractYouTubeId(input);
+    
+    debugInfo.innerHTML = `
+        <strong>Debug Info:</strong><br>
+        Input: ${input}<br>
+        Extracted ID: ${videoId || 'No se pudo extraer'}<br>
+        Pattern Match: ${videoId ? 'Sí' : 'No'}
+    `;
+    
+    if (videoId) {
+        iframe.src = `https://www.youtube.com/embed/${videoId}`;
+        previewDiv.style.display = 'block';
+    } else {
+        previewDiv.style.display = 'none';
     }
 }
 
 function confirmarEliminacion(id, tipo) {
-    $('#btnConfirmarEliminar').attr('href', 'index.php?action=noticiasvideos/eliminar&id=' + id + '&noticia_id=<?= $noticia['id'] ?>');
+    const noticiaId = <?= $noticia && isset($noticia['id']) ? $noticia['id'] : 0 ?>;
+    $('#btnConfirmarEliminar').attr('href', 'index.php?action=noticiasvideos/eliminar&id=' + id + '&noticia_id=' + noticiaId);
     $('#modalEliminar').modal('show');
 }
 
-// Validación mejorada del formulario
+// Validación del formulario
 document.getElementById('videoForm').addEventListener('submit', function(e) {
     const youtubeChecked = document.getElementById('youtube').checked;
-    const youtubeUrl = document.getElementById('youtube_url').value.trim();
+    const youtubeInput = document.getElementById('youtube_url').value.trim();
     const videoLocal = document.getElementById('video_local').files.length;
     
+    console.log('Formulario enviado:', {
+        youtubeChecked: youtubeChecked,
+        youtubeInput: youtubeInput,
+        videoLocal: videoLocal
+    });
+    
     if (youtubeChecked) {
-        if (!youtubeUrl) {
+        if (!youtubeInput) {
             e.preventDefault();
-            alert('Por favor, ingresa una URL de YouTube válida.');
+            alert('Por favor, ingresa una URL de YouTube o un ID de video.');
             return false;
         }
         
-        // Validar formato de URL de YouTube
-        const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com\/(watch\?v=|embed\/)|youtu\.be\/)[\w-]+/;
-        if (!youtubeRegex.test(youtubeUrl)) {
+        const videoId = extractYouTubeId(youtubeInput);
+        if (!videoId) {
             e.preventDefault();
-            alert('La URL de YouTube no tiene un formato válido.');
+            alert('No se pudo extraer el ID del video. Verifica que sea una URL válida de YouTube o un ID de 11 caracteres.');
             return false;
         }
+        
+        console.log('Video ID extraído:', videoId);
     } else {
         if (videoLocal === 0) {
             e.preventDefault();
@@ -338,7 +451,6 @@ document.getElementById('videoForm').addEventListener('submit', function(e) {
             return false;
         }
         
-        // Validar tamaño del archivo
         const file = document.getElementById('video_local').files[0];
         const maxSize = 50 * 1024 * 1024; // 50MB
         
@@ -347,23 +459,13 @@ document.getElementById('videoForm').addEventListener('submit', function(e) {
             alert('El archivo es demasiado grande. El tamaño máximo es 50MB.');
             return false;
         }
-        
-        // Validar tipo de archivo
-        const allowedTypes = ['video/mp4', 'video/avi', 'video/mov', 'video/wmv', 'video/webm'];
-        if (!allowedTypes.includes(file.type)) {
-            e.preventDefault();
-            alert('Tipo de archivo no permitido. Use: MP4, AVI, MOV, WMV, WebM');
-            return false;
-        }
     }
     
     // Mostrar indicador de carga
-    const submitBtn = this.querySelector('button[type="submit"]');
-    const originalText = submitBtn.innerHTML;
+    const submitBtn = document.getElementById('submitBtn');
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando...';
     submitBtn.disabled = true;
     
-    // Si todo está bien, el formulario se enviará
     return true;
 });
 
@@ -374,7 +476,6 @@ document.getElementById('video_local').addEventListener('change', function() {
         const size = (file.size / (1024 * 1024)).toFixed(2);
         const info = `Archivo: ${file.name} (${size} MB)`;
         
-        // Crear o actualizar elemento de información
         let infoElement = document.getElementById('file-info');
         if (!infoElement) {
             infoElement = document.createElement('small');

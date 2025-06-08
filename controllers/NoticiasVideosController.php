@@ -10,27 +10,54 @@ class NoticiasVideosController {
 
     // Vista principal de videos
     public function index() {
+        $noticia = null;
+        $videos = [];
+        
         try {
             // Si viene noticia_id, mostrar videos de esa noticia
             if (isset($_GET['noticia_id'])) {
                 $noticia_id = $_GET['noticia_id'];
                 $noticia = $this->modelo->obtenerNoticiaPorId($noticia_id);
-                $videos = $this->modelo->obtenerVideosNoticia($noticia_id);
                 
                 if (!$noticia) {
                     throw new Exception("Noticia no encontrada.");
                 }
                 
+                $videos = $this->modelo->obtenerVideosNoticia($noticia_id);
+                
                 require_once './views/admin/gestionar-videos.php';
             } else {
                 // Mostrar selector de noticias para videos
                 $noticias = $this->modelo->obtenerTodasLasNoticias();
-                require_once './views/admin/selector_videos.php';
+                require_once './views/admin/gestionar-videos.php';
             }
         } catch (Exception $e) {
             $_SESSION['error'] = "Error: " . $e->getMessage();
-            header('Location: index.php?action=noticias/index');
-            exit;
+            
+            // Si hay error pero tenemos noticia_id, intentar mostrar la vista con datos vacíos
+            if (isset($_GET['noticia_id'])) {
+                $noticia_id = $_GET['noticia_id'];
+                // Intentar obtener la noticia una vez más para mostrar algo
+                try {
+                    $noticia = $this->modelo->obtenerNoticiaPorId($noticia_id);
+                    if (!$noticia) {
+                        // Si no existe la noticia, crear una básica para evitar errores
+                        $noticia = [
+                            'id' => $noticia_id,
+                            'titulo' => 'Noticia no encontrada'
+                        ];
+                    }
+                    $videos = []; // Array vacío para evitar errores
+                    require_once './views/admin/gestionar-videos.php';
+                } catch (Exception $e2) {
+                    // Si todo falla, redirigir
+                    header('Location: index.php?action=noticias/index');
+                    exit;
+                }
+            } else {
+                header('Location: index.php?action=noticias/index');
+                exit;
+            }
         }
     }
 
@@ -54,26 +81,20 @@ class NoticiasVideosController {
                 $url_final = '';
 
                 if ($tipo_video === 'youtube') {
-                    // Procesar URL de YouTube
-                    $youtube_url = trim($_POST['youtube_url'] ?? '');
-                
-                    if (empty($youtube_url)) {
-                        throw new Exception("URL de YouTube requerida.");
+                    // Procesar URL de YouTube o ID directo
+                    $youtube_input = trim($_POST['youtube_url'] ?? '');
+                    
+                    if (empty($youtube_input)) {
+                        throw new Exception("URL de YouTube o ID de video requerido.");
                     }
 
-                    // Validar formato de URL
-                    if (!filter_var($youtube_url, FILTER_VALIDATE_URL)) {
-                        throw new Exception("URL no válida.");
-                    }
-
-                    // Extraer ID del video de YouTube y convertir a embed
-                    $video_id = $this->extraerIdYoutube($youtube_url);
+                    // Extraer ID del video de YouTube
+                    $video_id = $this->extraerIdYoutube($youtube_input);
                     if (!$video_id) {
-                        throw new Exception("No se pudo extraer el ID del video de YouTube. Verifica que la URL sea correcta.");
+                        throw new Exception("No se pudo extraer el ID del video. Verifica que sea una URL válida de YouTube o un ID de 11 caracteres como: ouH2QfZAN1o");
                     }
-                
+                    
                     $url_final = "https://www.youtube.com/embed/" . $video_id;
-                
                 } else if ($tipo_video === 'local') {
                     // Procesar archivo de video local
                     if (!isset($_FILES['video_local'])) {
@@ -218,21 +239,37 @@ class NoticiasVideosController {
     }
 
     // Función auxiliar mejorada para extraer ID de YouTube
-    private function extraerIdYoutube($url) {
+    private function extraerIdYoutube($input) {
+        // Limpiar el input
+        $input = trim($input);
+        
+        // Si ya es un ID directo (11 caracteres alfanuméricos)
+        if (preg_match('/^[a-zA-Z0-9_-]{11}$/', $input)) {
+            return $input;
+        }
+        
         // Patrones para diferentes formatos de URL de YouTube
         $patrones = [
-            '/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/',
-            '/youtube\.com\/watch\?.*v=([a-zA-Z0-9_-]{11})/',
-            '/youtu\.be\/([a-zA-Z0-9_-]{11})/',
-            '/youtube\.com\/embed\/([a-zA-Z0-9_-]{11})/'
+            // URL estándar: https://www.youtube.com/watch?v=VIDEO_ID
+            '/(?:youtube\.com\/watch\?v=)([a-zA-Z0-9_-]{11})/',
+            // URL corta: https://youtu.be/VIDEO_ID
+            '/(?:youtu\.be\/)([a-zA-Z0-9_-]{11})/',
+            // URL embed: https://www.youtube.com/embed/VIDEO_ID
+            '/(?:youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/',
+            // URL con parámetros adicionales
+            '/(?:youtube\.com\/watch\?.*v=)([a-zA-Z0-9_-]{11})/',
+            // URL móvil
+            '/(?:m\.youtube\.com\/watch\?v=)([a-zA-Z0-9_-]{11})/',
+            // Solo el ID en cualquier parte del texto
+            '/([a-zA-Z0-9_-]{11})/'
         ];
-    
+
         foreach ($patrones as $patron) {
-            if (preg_match($patron, $url, $matches)) {
+            if (preg_match($patron, $input, $matches)) {
                 return $matches[1];
             }
         }
-    
+
         return false;
     }
 }

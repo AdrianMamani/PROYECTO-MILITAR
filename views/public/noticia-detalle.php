@@ -68,7 +68,7 @@
             box-shadow: 0 5px 15px rgba(26, 95, 63, 0.3);
         }
 
-        /* Article Header */
+       
         .article-header {
             background: linear-gradient(135deg, var(--military-primary) 0%, var(--military-secondary) 100%);
             color: white;
@@ -140,7 +140,7 @@
             display: inline-block;
         }
 
-        /* Article Content */
+      
         .article-content {
             background: white;
             border-radius: 20px;
@@ -156,7 +156,7 @@
             margin-bottom: 2rem;
         }
 
-        /* Media Sections */
+ 
         .media-section {
             background: white;
             border-radius: 20px;
@@ -186,7 +186,7 @@
             border-radius: 2px;
         }
 
-        /* Image Gallery */
+     
         .image-gallery {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -242,7 +242,7 @@
             font-size: 2.5rem;
         }
 
-        /* Video Section */
+
         .video-container {
             position: relative;
             width: 100%;
@@ -264,7 +264,7 @@
             height: 100%;
         }
 
-        /* Related News */
+      
         .related-news {
             background: white;
             border-radius: 20px;
@@ -317,7 +317,7 @@
             gap: 0.5rem;
         }
 
-        /* Share Buttons */
+      
         .share-section {
             background: white;
             border-radius: 20px;
@@ -469,7 +469,7 @@
             color: var(--military-dark);
         }
 
-        /* Responsive */
+    
         @media (max-width: 768px) {
             .article-title {
                 font-size: 2.2rem;
@@ -509,7 +509,7 @@
             }
         }
 
-        /* Print Styles */
+ 
         @media print {
             .navbar-military,
             .action-buttons,
@@ -529,7 +529,7 @@
             }
         }
 
-        /* Animations */
+   
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -554,7 +554,7 @@
     </style>
 </head>
 <body>
-    <!-- Navigation -->
+ 
     <nav class="navbar navbar-expand-lg navbar-military">
         <div class="container">
             <a class="navbar-brand" href="index.php?action=noticias-public/index">
@@ -566,7 +566,7 @@
         </div>
     </nav>
 
-    <!-- Article Header -->
+
     <header class="article-header">
         <div class="container">
             <div class="row">
@@ -612,12 +612,12 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
-                <!-- Article Content -->
+         
                 <div class="article-content">
                     <?= nl2br(htmlspecialchars($noticia['descripcion'])) ?>
                 </div>
 
-                <!-- Image Gallery -->
+            
                 <?php if (!empty($imagenes)): ?>
                 <div class="media-section">
                     <h3><i class="fas fa-images"></i>Galería de Imágenes</h3>
@@ -640,7 +640,7 @@
                 </div>
                 <?php endif; ?>
 
-                <!-- Videos -->
+           
                 <?php if (!empty($videos)): ?>
                 <div class="media-section">
                     <h3><i class="fas fa-video"></i>Material Audiovisual</h3>
@@ -662,7 +662,7 @@
                 </div>
                 <?php endif; ?>
 
-                <!-- Share Section -->
+         
                 <div class="share-section">
                     <h3>Compartir Comunicado</h3>
                     <div class="share-buttons">
@@ -686,9 +686,9 @@
                 </div>
             </div>
 
-            <!-- Sidebar -->
+          
             <div class="col-lg-4">
-                <!-- Information Panel -->
+           
                 <div class="info-panel">
                     <h3><i class="fas fa-info-circle"></i>Información del Comunicado</h3>
                     <table class="table info-table">
@@ -719,7 +719,7 @@
                     </table>
                 </div>
 
-                <!-- Related News -->
+      
                 <?php if (!empty($noticias_relacionadas)): ?>
                 <div class="related-news">
                     <h3><i class="fas fa-newspaper"></i>Comunicados Relacionados</h3>
@@ -748,12 +748,9 @@
                 </div>
                 <?php endif; ?>
 
-                <!-- Action Buttons -->
+           
                 <div class="action-buttons">
-                    <button onclick="window.print()" class="btn-military">
-                        <i class="fas fa-print"></i>
-                        Imprimir
-                    </button>
+                  
                     <a href="index.php?action=noticias-public/index" class="btn-military secondary">
                         <i class="fas fa-list"></i>
                         Ver Todos
@@ -770,16 +767,16 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lightbox2@2.11.3/dist/js/lightbox.min.js"></script>
     <script>
-        // Configurar Lightbox
+  
         lightbox.option({
             'resizeDuration': 200,
             'wrapAround': true,
             'albumLabel': 'Imagen %1 de %2'
         });
 
-        // Animaciones de entrada
+
         document.addEventListener('DOMContentLoaded', function() {
-            // Animación del header
+      
             const header = document.querySelector('.article-header');
             header.style.opacity = '0';
             header.style.transform = 'translateY(-30px)';
@@ -790,7 +787,7 @@
                 header.style.transform = 'translateY(0)';
             }, 100);
 
-            // Animación de las galerías
+         
             const galleryItems = document.querySelectorAll('.gallery-item');
             galleryItems.forEach((item, index) => {
                 item.style.opacity = '0';
@@ -803,7 +800,7 @@
                 }, 800 + (index * 100));
             });
 
-            // Animación de elementos relacionados
+      
             const relatedItems = document.querySelectorAll('.related-item');
             relatedItems.forEach((item, index) => {
                 item.style.opacity = '0';
@@ -817,7 +814,7 @@
             });
         });
 
-        // Smooth scroll para enlaces internos
+     
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -830,7 +827,7 @@
             });
         });
 
-        // Efecto parallax sutil en el header
+ 
         window.addEventListener('scroll', function() {
             const scrolled = window.pageYOffset;
             const header = document.querySelector('.article-header');
