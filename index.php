@@ -36,6 +36,9 @@ require_once './controllers/NoticiasController.php';
 require_once './controllers/NoticiasImgController.php';
 require_once './controllers/NoticiasVideosController.php';
 
+// Agregar el require del controlador de finanzas (cerca de los otros requires)
+require_once './controllers/FinanzasController.php';
+
 // // rutas para la web
 // require_once './controllers/web/evento.php';
 // require_once './controllers/web/galeria.php';
@@ -53,6 +56,7 @@ $partes = explode('/', $action);
 $accionPrincipal = $partes[0];
 $accionSecundaria = $partes[1] ?? 'index';
 $id = $partes[2] ?? ($_GET['id'] ?? null);
+
 
 // Proteger rutas (excepto login)
 $rutasPublicas = [
@@ -80,6 +84,8 @@ $controllerImg = new CarruselImgController();
 $especialidad = new EspecialidadController();
 $especialidadImg = new ImagenEspecialidadController();
 $emprendimiento = new EmprendimientoController();
+// Agregar la instancia del controlador (cerca de las otras instancias)
+$finanzas = new FinanzasController();
 // $emprendimientoImg = new ImagenEmprendimientoController();
 // $aportaciones = new AportacionController();
 // $nosotros = new  NosotrosController();
@@ -754,6 +760,32 @@ switch ($accionPrincipal) {
 
 
 
+        // Agregar el caso de finanzas en el switch principal
+case 'finanzas':
+    switch ($accionSecundaria) {
+        case 'index':
+            $finanzas->index();
+            break;
+        case 'agregar':
+            $finanzas->agregar();
+            break;
+        case 'ver':
+            $finanzas->ver();
+            break;
+        case 'editar':
+            $finanzas->editar();
+            break;
+        case 'update':
+            $finanzas->update();
+            break;
+        case 'eliminar':
+            $id ? $finanzas->eliminar($id) : print "ID no proporcionado";
+            break;
+        default:
+            $finanzas->index();
+            break;
+    }
+    break;
 // En la sección de rutas, verificar que esté así:
 
 case 'lista-noticias':
@@ -788,7 +820,7 @@ case 'noticias':
             $id ? $noticias->editar($id) : print "ID no proporcionado";
             break;
         case 'update':
-            $noticias->update(); // ESTE MÉTODO DEBE ESTAR AQUÍ
+            $noticias->update(); 
             break;
         case 'eliminar':
             $id ? $noticias->eliminar($id) : print "ID no proporcionado";
