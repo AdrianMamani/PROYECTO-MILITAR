@@ -36,7 +36,7 @@ include 'layout/header.php';
         <p class="title"><?= htmlspecialchars($evento['titulo']) ?></p>
         <a href="index.php?action=eventos/ver/<?= $evento['id'] ?>" 
    aria-label="Leer más sobre <?= htmlspecialchars($evento['titulo']) ?>">
-   <button type="button">Leer más</button>
+   <button type="button" class="btn-verde">Leer más</button>
 </a>
       </article>
       <?php endforeach; ?>

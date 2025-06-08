@@ -3,11 +3,11 @@
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1" name="viewport" />
   <title>Mis Emprendimientos</title>
-  <link rel="icon" href="/PROYECTO-MILITAR/views/assets/img/logo.jpg" type="image/png">
   <link
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     rel="stylesheet"
   />
+  <link rel="stylesheet" href="<?= BASE_URL ?>views/assets/css/efecto.css">
   <style>
     /* Reset and base */
     * {
@@ -18,18 +18,26 @@
       font-family: Arial, sans-serif;
       background-color: #fff;
       color: #4a4a4a;
+
     }
     main {
       max-width: 1120px;
       margin: 0 auto;
-      padding: 32px 16px;
+      padding: 60px 16px 150px 16px;
+      margin-top: -50px !important; 
     }
+    @media (max-width: 599px) {
+    main {
+      padding: 60px 16px 50px 16px; 
+    }
+  }
+
     h1 {
-      font-weight: 800;
-      font-size: 2rem;
+      font-weight: 800 !important;
+      font-size: 2rem !important;
       color: #1f2937;
       text-align: center;
-      margin-bottom: 8px;
+      margin-bottom: 8px !important;
     }
     p.description {
       text-align: center;
@@ -89,6 +97,12 @@
       object-fit: contain;
       border-radius: 8px;
     }
+    
+    @media (max-width: 767px) {
+  .sidebar img {
+    display: none;
+  }
+}
     /* Cards grid */
     .cards {
       flex: 1 1 75%;
@@ -164,6 +178,9 @@
   </style>
 </head>
 <body>
+  <div id="preloader">
+        <img src="/PROYECTO-MILITAR/views/assets/img/logo.jpg" alt="Cargando..."> <!-- Cambia por la ruta de tu logo -->
+    </div>
   <?php
     include 'layout/header.php';
     ?>
@@ -225,9 +242,32 @@
       });
     }
   </script>
-  <?php
+  <script>
+    // Script para manejar el preloader
+    document.addEventListener('DOMContentLoaded', function() {
+        const preloader = document.getElementById('preloader');
+        const body = document.body;
+        
+        // Forzar el repintado para asegurar que la animación funcione
+        void preloader.offsetWidth;
+        
+        // Mostrar por exactamente 3 segundos
+        setTimeout(function() {
+            body.classList.add('loaded');
+            
+            // Eliminar el preloader después de la animación
+            setTimeout(function() {
+                preloader.remove();
+                // Mostrar todo el contenido
+                document.querySelectorAll('body > *:not(script)').forEach(el => {
+                    el.style.visibility = 'visible';
+                });
+            }, 500); // Medio segundo para la transición de desvanecimiento
+        }, 3000); // 3 segundos exactos
+    });
+</script>
+</body>
+    <?php
     include 'layout/footer.php';
     ?>
-</body>
-
 </html>

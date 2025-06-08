@@ -1,201 +1,539 @@
-<!DOCTYPE html>
 <html lang="es">
-
-<head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <title>Cabo Alberto Reyes Gamarra</title>
+ <head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <title>Cabo Alberto Reyes Gamarra</title>
     <link rel="icon" href="/PROYECTO-MILITAR/views/assets/img/logo.jpg" type="image/png">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>views/assets/css/home.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+   rel="stylesheet"
+  />
+  <link
+   href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&amp;display=swap"
+   rel="stylesheet"
+  />
+  <link rel="stylesheet" href="<?= BASE_URL ?>views/assets/css/efecto.css">
+  <style>
+   body {
+    font-family: "Montserrat", sans-serif;
+    transition: opacity 0.5s ease;
+   }
+   .hover-border-animate {
+    border-width: 4px !important;
+    animation: border-move 1.5s linear infinite;
+   }
+   @keyframes border-move {
+    0% {
+     border-color: #22c55e #16a34a #22c55e #16a34a;
+    }
+    25% {
+     border-color: #16a34a #22c55e #16a34a #22c55e;
+    }
+    50% {
+     border-color: #22c55e #16a34a #22c55e #16a34a;
+    }
+    75% {
+     border-color: #16a34a #22c55e #16a34a #22c55e;
+    }
+    100% {
+     border-color: #22c55e #16a34a #22c55e #16a34a;
+    }
+   }
+   body.scrolled {
+    opacity: 0.85;
+   }
+   /* Instagram style member card with hover overlay */
+   .member-card {
+    position: relative;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.1),
+     0 1px 2px rgb(0 0 0 / 0.06);
+    transition: box-shadow 0.3s ease;
+    cursor: pointer;
+   }
+   .member-card:hover {
+    box-shadow: 0 10px 15px rgb(0 0 0 / 0.2),
+     0 4px 6px rgb(0 0 0 / 0.1);
+   }
+   .member-image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+   }
+   .member-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 1rem;
+    text-align: center;
+    transform: translateY(100%);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    border-top-left-radius: 0.75rem;
+    border-top-right-radius: 0.75rem;
+    opacity: 0;
+   }
+   .member-card:hover .member-overlay {
+    transform: translateY(0);
+    opacity: 1;
+   }
+   .member-name {
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: #111827;
+    margin-bottom: 0.25rem;
+   }
+   .member-role {
+    font-size: 0.875rem;
+    color: #6b7280;
+   }
+   /* Show overlay content normally on small screens */
+   @media (max-width: 767px) {
+    .member-overlay {
+     position: static !important;
+     background: transparent !important;
+     padding: 0.5rem 0 0 0 !important;
+     transform: translateY(0) !important;
+     opacity: 1 !important;
+     border-radius: 0 !important;
+     box-shadow: none !important;
+    }
+    .member-card:hover {
+     box-shadow: 0 1px 3px rgb(0 0 0 / 0.1),
+      0 1px 2px rgb(0 0 0 / 0.06) !important;
+    }
+   }
+   /* Emprendimientos card styles */
+   .emprendimiento-card {
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+   }
+   .emprendimiento-card:hover {
+    box-shadow: 0 10px 30px rgb(0 0 0 / 0.2);
+    transform: translateY(-6px);
+   }
+   .emprendimiento-image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    display: block;
+    border-radius: 1rem;
+   }
+   .emprendimiento-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.45);
+    opacity: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s ease;
+    border-radius: 1rem;
+   }
+   .emprendimiento-card:hover .emprendimiento-overlay {
+    opacity: 1;
+   }
+   .emprendimiento-overlay i {
+    color: white;
+    font-size: 2.5rem;
+    filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.7));
+   }
+   .btn-ver-mas {
+    background-color: #16a34a;
+    color: white;
+    font-weight: 600;
+    padding: 0.75rem 2rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+    margin-top: 1.5rem;
+   }
+   .btn-ver-mas:hover {
+    background-color: #15803d;
+   }
+   /* Carousel styles */
+   .carousel-container {
+    position: relative;
+    max-width: 6xl;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+   }
+   .carousel-title {
+    font-weight: 700;
+    font-size: 1.875rem;
+    color: #1f2937;
+    text-align: center;
+    margin-bottom: 2rem;
+   }
+   .carousel-wrapper {
+    overflow: hidden;
+    position: relative;
+   }
+   .carousel-track {
+    display: flex;
+    transition: transform 0.5s ease;
+   }
+   .carousel-item {
+    flex: 0 0 33.3333%;
+    padding: 0 0.75rem;
+    box-sizing: border-box;
+   }
+   .comment-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background-color: #f9f9f9;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+.comment-avatar-inicial {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  color: white;
+  font-weight: bold;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+   .comment-avatar {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    border-radius: 9999px;
+    object-fit: cover;
+   }
+   .comment-content {
+    flex-grow: 1;
+   }
+   .comment-name {
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 0.25rem;
+   }
+   .comment-text {
+    font-size: 0.95rem;
+    color: #4b5563;
+    line-height: 1.4;
+   }
+   .carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(34, 197, 94, 0.8);
+    border: none;
+    color: white;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 9999px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+    z-index: 10;
+   }
+   .carousel-button:hover {
+    background-color: #15803d;
+   }
+   .carousel-button:disabled {
+    background-color: rgba(34, 197, 94, 0.4);
+    cursor: default;
+   }
+   .carousel-button.prev {
+    left: 0.5rem;
+   }
+   .carousel-button.next {
+    right: 0.5rem;
+   }
+   @media (max-width: 767px) {
+    .carousel-item {
+     flex: 0 0 100%;
+     padding: 0 0.5rem;
+    }
+   }
+   /* Scroll to top button */
+   #scrollTopBtn {
+    position: fixed;
+    bottom: 2.5rem;
+    right: 2.5rem;
+    background-color: #16a34a;
+    color: white;
+    border: none;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 9999px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgb(22 163 74 / 0.6);
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 50;
+   }
+   #scrollTopBtn.show {
+    opacity: 1;
+    pointer-events: auto;
+   }
+   #scrollTopBtn:hover {
+    background-color: #15803d;
+   }
+   #chatFormulario {
+  display: none;
+  position: fixed;
+  bottom: 50px;
+  right: 30px;
+  width: 300px;
+  background: white;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  padding: 20px;
+  z-index: 1000;
+}
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap"
-        rel="stylesheet" />
-</head>
+#chatFormulario h3 {
+  margin-top: 0;
+  color: #28a745;
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-<body class="loaded">
-    <?php
+#chatFormulario input,
+#chatFormulario textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+#chatFormulario button.enviar {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#chatFormulario .cerrar {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+#btnAbrirChat {
+  position: fixed;
+  bottom: 120px;
+  right: 30px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  background-color:rgb(48, 48, 48);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 999;
+}
+  </style>
+ </head><?php
     include 'layout/header.php';
     ?>
-    <header class="carrusel-principal">
-        <div class="carrusel-slides-container">
-            <?php if (!empty($itemsCarrusel) && is_array($itemsCarrusel)): ?>
-                <?php foreach ($itemsCarrusel as $index => $item): ?>
-                    <div class="carrusel-slide <?= $index === 0 ? 'active' : '' ?>">
-                        <?php if (!empty($item['img'])): ?>
-                            <?php
-                            // DEBUG: Descomenta la siguiente línea para ver qué valor tiene $item['img'] en el fuente HTML
-                            echo "<!-- DEBUG IMG FILENAME: " . htmlspecialchars($item['img']) . " -->";
-                            // Ruta corregida si 'uploads' está en la raíz junto a este index.php
-                            ?>
-                            <img src="<?= BASE_URL ?>uploads/carrusel/<?= htmlspecialchars($item['img']) ?>" alt="Imagen: <?= htmlspecialchars($item['titulo'] ?? 'Imagen del carrusel') ?>">
-                        <?php else: ?>
-                            <img src="https://via.placeholder.com/1920x900.png?text=Imagen+no+disponible" alt="Imagen no disponible">
-                        <?php endif; ?>
-                        <div class="slide-contenido">
-                            <h1 class="lema"><?= htmlspecialchars($item['titulo'] ?? 'Título no disponible') ?></h1>
-                            <p class="sublema"><?= htmlspecialchars($item['descripcion'] ?? 'Descripción no disponible') ?></p>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <div class="carrusel-slide active">
-                    <?php /* Ruta corregida para la imagen de fallback */ ?>
-                    <img src="uploads/67dd77800ef0a.png" alt="No hay items en carrusel o imagen por defecto no encontrada">
-                    <div class="slide-contenido">
-                        <h1 class="lema">Sin contenido</h1>
-                        <p class="sublema">No hay elementos para mostrar en el carrusel.</p>
+ <body class="bg-gray-100">
+    <div id="preloader">
+        <img src="/PROYECTO-MILITAR/views/assets/img/logo.jpg" alt="Cargando..."> <!-- Cambia por la ruta de tu logo -->
+    </div>
+  <header class="relative w-full max-w-full overflow-hidden h-96 sm:h-[28rem] md:h-[36rem] lg:h-[42rem] xl:h-[48rem]">
+    <div class="carrusel-slides-container w-full h-full relative">
+        <?php if (!empty($itemsCarrusel) && is_array($itemsCarrusel)): ?>
+            <?php foreach ($itemsCarrusel as $index => $item): ?>
+                <div class="carrusel-slide absolute inset-0 transition-opacity duration-700 <?= $index === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0' ?>">
+                    <?php if (!empty($item['img'])): ?>
+                        <?php echo "<!-- DEBUG IMG FILENAME: " . htmlspecialchars($item['img']) . " -->"; ?>
+                        <img
+                            src="<?= BASE_URL ?>uploads/carrusel/<?= htmlspecialchars($item['img']) ?>"
+                            alt="Foto de banner principal"
+                            class="w-full h-full object-cover"
+                            loading="lazy"
+                            width="1920"
+                            height="500"
+                        />
+                    <?php else: ?>
+                        <img
+                            src="https://via.placeholder.com/1920x900.png?text=Imagen+no+disponible"
+                            alt="Imagen no disponible"
+                            class="w-full h-full object-cover"
+                        />
+                    <?php endif; ?>
+
+                    <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-60 text-white px-6 py-4 rounded-md max-w-6xl w-[90%] text-center">
+                        <h1 class="text-xl sm:text-3xl md:text-4xl font-bold leading-tight">
+                            <?= htmlspecialchars($item['titulo'] ?? 'Título no disponible') ?>
+                        </h1>
+                        <p class="mt-2 text-sm sm:text-lg md:text-xl font-normal leading-relaxed hidden xs:block sm:block md:block">
+                            <?= htmlspecialchars($item['descripcion'] ?? 'Descripción no disponible') ?>
+                        </p>
                     </div>
                 </div>
-            <?php endif; ?>
-        </div>
-
-        <!-- Controles del Carrusel -->
-        <?php if (!empty($itemsCarrusel) && count($itemsCarrusel) > 1): ?>
-            <button class="carrusel-control prev" aria-label="Anterior">&#10094;</button>
-            <button class="carrusel-control next" aria-label="Siguiente">&#10095;</button>
-        <?php endif; ?>
-        <!-- Indicadores de slides (dots) -->
-        <?php if (!empty($itemsCarrusel) && count($itemsCarrusel) > 1): ?>
-            <div class="carrusel-indicadores">
-                <?php foreach ($itemsCarrusel as $index => $item): ?>
-                    <span class="indicador-dot <?= $index === 0 ? 'active' : '' ?>" data-slide-to="<?= $index ?>"></span>
-                <?php endforeach; ?>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <!-- Slide por defecto -->
+            <div class="carrusel-slide absolute inset-0 opacity-100 z-10">
+                <img
+                    src="uploads/67dd77800ef0a.png"
+                    alt="No hay items en carrusel"
+                    class="w-full h-full object-cover"
+                />
+                <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-60 text-white px-6 py-4 rounded-md max-w-6xl w-[90%] text-center">
+                    <h1 class="text-xl sm:text-3xl md:text-4xl font-bold leading-tight">Sin contenido</h1>
+                    <p class="mt-2 text-sm sm:text-lg md:text-xl font-normal leading-relaxed">No hay elementos para mostrar en el carrusel.</p>
+                </div>
             </div>
         <?php endif; ?>
-    </header>
-    <main>
-        <!--Seccion Nosotros-->
-        <section class="sobre-nosotros">
-            <div class="contenido">
-                <?php if (!empty($itemsCarrusel) && is_array($itemsCarrusel)): ?>
-                    <?php $item = $itemsCarrusel[0]; ?>
+    </div>
 
-                    <div class="imagen-slider">
-                        <?php if (isset($item['tipo_archivo']) && $item['tipo_archivo'] === 'video'): ?>
-                            <div class="video-responsive">
-                                <iframe
-                                    src="https://www.youtube.com/embed/<?= htmlspecialchars($item['url_archivo']) ?>"
-                                    frameborder="0"
-                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                    allowfullscreen></iframe>
-                            </div>
-                        <?php else: ?>
-                            <img src="<?= htmlspecialchars($item['url_archivo']) ?>" alt="Imagen nosotros">
-                        <?php endif; ?>
-                    </div>
+    <!-- Controles del Carrusel -->
+    <?php if (!empty($itemsCarrusel) && count($itemsCarrusel) > 1): ?>
+        <button class="carrusel-control prev absolute left-4 top-1/2 transform -translate-y-1/2 text-white text-3xl z-20">&#10094;</button>
+        <button class="carrusel-control next absolute right-4 top-1/2 transform -translate-y-1/2 text-white text-3xl z-20">&#10095;</button>
+    <?php endif; ?>
 
-                    <div class="texto">
-                        <h2>Sobre Nosotros</h2>
-                        <p><?= htmlspecialchars($itemsCarrusel[0]['nosotros'] ?? 'Descripción no disponible') ?></p>
-                        <div class="botones">
-                            <a href="#" class="btn-leer-mas">Leer más</a>
-                        </div>
-                    </div>
-                <?php endif; ?>
-            </div>
-        </section>
-        <section>
-    <div class="container">
-        <header>
-            <h1>Especialidades</h1>
-            <p>Las 13 áreas en las que nos destacamos con orgullo y compromiso.</p>
-        </header>
-        <div class="grid" id="especialidadesGrid">
-            <?php foreach ($especialidades as $especialidad): ?>
-                <a href="<?= BASE_URL ?>especialidad_index/<?= $especialidad['id'] ?>" class="card" tabindex="0" style="display: block; text-decoration: none; color: inherit;">
-                    <img alt="Imagen de la especialidad <?= htmlspecialchars($especialidad['nombre']) ?>" height="220" width="400" src="<?= htmlspecialchars($especialidad['imagen']) ?>" />
-                    <div class="overlay">
-                        <h2><?= htmlspecialchars($especialidad['nombre']) ?></h2>
-                    </div>
-                </a>
+    <!-- Indicadores de slides -->
+    <?php if (!empty($itemsCarrusel) && count($itemsCarrusel) > 1): ?>
+        <div class="carrusel-indicadores absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-20">
+            <?php foreach ($itemsCarrusel as $index => $item): ?>
+                <span class="indicador-dot w-3 h-3 rounded-full bg-white bg-opacity-70 <?= $index === 0 ? 'opacity-100' : 'opacity-50' ?>" data-slide-to="<?= $index ?>"></span>
             <?php endforeach; ?>
         </div>
+    <?php endif; ?>
+</header>
+  <section class="max-w-6xl mx-auto px-6 py-8">
+    <?php if (!empty($itemsCarrusel) && is_array($itemsCarrusel)): ?>
+                    <?php $item = $itemsCarrusel[0]; ?>
+   <h2 class="text-3xl font-bold text-gray-800 mb-2 text-center sm:text-left">
+    Sobre nosotros
+   </h2>
+   <div class="flex flex-col md:flex-row md:items-center md:space-x-10">
+    <div class="md:w-1/2 text-gray-700 text-base sm:text-lg leading-relaxed mb-8 md:mb-0">
+         <?php if (!empty($itemsCarrusel)): ?>
+      <?php foreach ($itemsCarrusel as $item): ?>
+          <?php
+          $parrafos = preg_split('/\r\n|\r|\n/', $item['nosotros'], -1, PREG_SPLIT_NO_EMPTY);
+          foreach ($parrafos as $p):
+          ?>
+     <p>
+      <?= htmlspecialchars(trim($p)) ?>
+     </p>
+     <?php endforeach; ?>
+      <?php endforeach; ?>
+  <?php else: ?>
+      <p>No hay información disponible.</p>
+  <?php endif; ?>
     </div>
-</section>
-        <section>
-            <div class="banner" role="banner" aria-label="Banner con texto principal y subtítulo">
-                <h1>FORJANDO UN LEGADO DE HONOR Y COMPROMISO</h1>
-                <p>Una historia de valentía, compromiso y excelencia</p>
+    <?php if (isset($item['tipo_archivo']) && $item['tipo_archivo'] === 'video'): ?>
+    <div class="md:w-1/2 aspect-w-16 aspect-h-9">
+     <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" 
+     aria-label="Video institucional sobre la promoción Cabo Alberto Reyes Gamarra mostrando actividades militares y valores" class="w-full h-64 md:h-80 rounded-md shadow-lg" 
+     src="https://www.youtube.com/embed/<?= htmlspecialchars($item['url_archivo']) ?>" 
+     title="Video institucional promoción Cabo Alberto Reyes Gamarra"></iframe>
+    </div>
+    <?php else: ?>
+        <img src="<?= htmlspecialchars($item['url_archivo']) ?>" alt="Imagen nosotros">
+                        <?php endif; ?>
+   </div>
+   <?php endif; ?>
+  </section>
+  <section class="max-w-6xl mx-auto px-6 py-8">
+   <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Especialidades</h2>
+   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-6">
+    <?php foreach ($especialidades as $especialidad): ?>
+    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col">
+     <img alt="Soldado en entrenamiento de infantería con uniforme militar y equipo táctico en campo abierto" class="w-full h-48 object-cover" 
+     height="400" loading="lazy" src="<?= htmlspecialchars($especialidad['imagen']) ?>" width="600"/>
+     <div class="p-4 flex flex-col flex-grow">
+        
+      <h3 class="text-xl font-semibold text-gray-800 mb-2"><?= htmlspecialchars($especialidad['nombre']) ?></h3>
+      <a class="mt-4 group bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded transition-colors w-full sm:w-auto self-start flex items-center space-x-2" href="<?= BASE_URL ?>especialidad_index/<?= $especialidad['id'] ?>">
+       <span>Ver</span>
+       <i class="fas fa-eye opacity-0 group-hover:opacity-100 transition-opacity"></i>
+      </a>
+     </div>
+    </div>
+    <?php endforeach; ?>
+   </div>
+   <div class="text-center mb-12">
+    <a class="inline-block bg-green-700 hover:bg-green-800 text-white font-semibold py-3 px-8 rounded transition-colors" 
+    href="/PROYECTO-MILITAR/especialidad_index">
+     Ver todo
+    </a>
+   </div>
+   <div class="relative bg-gradient-to-r from-green-600 via-green-700 to-green-800 rounded-lg shadow-lg py-12 px-6 sm:px-12 text-center overflow-hidden max-w-[150rem] mx-auto">
+    <img alt="Decorative abstract green geometric shapes background" class="pointer-events-none select-none absolute top-0 left-1/2 transform -translate-x-1/2 opacity-20 w-full max-w-[1400px]" height="300" 
+    loading="lazy" src="https://media.istockphoto.com/id/1152192940/es/foto/m%C3%A1rmol-azul-claro-fondo-negro-ne%C3%B3n-menta-perla-verde-onda-patr%C3%B3n-abstracto-gradiente-ebru.jpg?s=612x612&w=0&k=20&c=L-loZ85Ax4V0bFYe8IlyVoKlUAJYdipqyDLsnOd9kuM=" width="1200"/>
+    <h3 class="relative text-white text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-wide drop-shadow-lg">
+     FORJANDO UN LEGADO DE HONOR Y COMPROMISO
+    </h3>
+   </div>
+  </section>
+  <section class="max-w-6xl mx-auto px-6 py-12">
+  <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Miembros</h2>
 
-                <!-- Redes Sociales -->
-                <ul class="social-wrapper">
-                    <li class="social-icon facebook">
-                        <span class="social-tooltip">Facebook</span>
-                        <svg viewBox="0 0 320 512" height="1.2em" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"></path>
-                        </svg>
-                    </li>
-                    <li class="social-icon twitter">
-                        <span class="social-tooltip">Twitter</span>
-                        <svg height="1.8em" fill="currentColor" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M42,12.429c-1.323,0.586-2.746,0.977-4.247,1.162c1.526-0.906,2.7-2.351,3.251-4.058c-1.428,0.837-3.01,1.452-4.693,1.776C34.967,9.884,33.05,9,30.926,9c-4.08,0-7.387,3.278-7.387,7.32c0,0.572,0.067,1.129,0.193,1.67c-6.138-0.308-11.582-3.226-15.224-7.654c-0.64,1.082-1,2.349-1,3.686c0,2.541,1.301,4.778,3.285,6.096c-1.211-0.037-2.351-0.374-3.349-0.914c0,0.022,0,0.055,0,0.086c0,3.551,2.547,6.508,5.923,7.181c-0.617,0.169-1.269,0.263-1.941,0.263c-0.477,0-0.942-0.054-1.392-0.135c0.94,2.902,3.667,5.023,6.898,5.086c-2.528,1.96-5.712,3.134-9.174,3.134c-0.598,0-1.183-0.034-1.761-0.104C9.268,36.786,13.152,38,17.321,38c13.585,0,21.017-11.156,21.017-20.834c0-0.317-0.01-0.633-0.025-0.945C39.763,15.197,41.013,13.905,42,12.429"></path>
-                        </svg>
-                    </li>
-                    <li class="social-icon instagram">
-                        <span class="social-tooltip">Instagram</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" height="1.2em" fill="currentColor" viewBox="0 0 16 16">
-                            <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"></path>
-                        </svg>
-                    </li>
-                </ul>
-            </div>
-        </section>
-        <!-- Sección de Usuarios estilo Instagram (solo carrusel) -->
-
-        <div class="container-usuario">
-            <div class="titulo-con-fondo">
-                <h2 class="team-title">Nuestros Miembros</h2>
-            </div>
-            <div class="swiper mySwiper">
-                <div class="swiper-wrapper">
-                    <?php foreach ($miembros as $miembro): ?>
-                        <div class="swiper-slide">
-                            <div class="card-usuario">
-                                <div class="card-header">
-                                    <div class="profile-info">
-                                        <span class="username"><?= htmlspecialchars($miembro['nombre']) ?></span>
-                                        <i class="fas fa-check-circle icono-verificado"></i>
-                                    </div>
-                                </div>
-                                <a href="miembro.php?id=<?= $miembro['id'] ?>">
-                                    <img src="<?= BASE_URL ?>uploads/usuarios/imagenes/<?= htmlspecialchars($miembro['imagen_usuario']) ?>" alt="Miembro">
-                                </a>
-                                <div class="card-footer">
-                                    <div class="card-actions">
-                                        <i class="far fa-heart"></i>
-                                        <i class="far fa-comment"></i>
-                                        <i class="far fa-paper-plane"></i>
-                                    </div>
-                                    <div class="button-container"><a class="button-link" href="<?= BASE_URL ?>miembro/<?= $miembro['id'] ?>">Ver Información</a></div>
-                                </div>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-pagination"></div>
-            </div>
-            <div class="ver-mas-container">
-                <a href="index.php?action=miembros" class="btn-ver-mas">Ver Más <i class="fas fa-arrow-right"></i></a>
-            </div>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+    <?php foreach ($miembros as $miembro): ?>
+      <a href="<?= BASE_URL ?>miembro/<?= $miembro['id'] ?>" class="group block member-card transition transform hover:scale-105">
+        <img
+          alt="Retrato de <?= htmlspecialchars($miembro['nombre']) ?>"
+          class="member-image w-full h-auto"
+          height="400"
+          loading="lazy"
+          src="<?= BASE_URL ?>uploads/usuarios/imagenes/<?= htmlspecialchars($miembro['imagen_usuario']) ?>"
+          width="400"
+        />
+        <div class="member-overlay opacity-0 md:opacity-100 md:translate-y-0 translate-y-full group-hover:opacity-100 group-hover:translate-y-0 transition duration-300 ease-in-out">
+          <h3 class="member-name"><?= htmlspecialchars($miembro['nombre']) ?></h3>
         </div>
+      </a>
+    <?php endforeach; ?>
+  </div>
 
-        <!-- Sección de Emprendimientos -->
-        <section class="emprendimientos">
-            <div class="emprendimientos-header">
-                <h1 class="emprendimientos-titulo">Mis Emprendimientos</h1>
-                <p class="emprendimientos-descripcion">Descubre los proyectos y negocios que he creado con pasión y dedicación.</p>
-            </div>
-            <div class="emprendimientos-container">
-                <?php if (!empty($emprendimientos)): ?>
+  <!-- Botón Ver Más -->
+  <div class="flex justify-center mt-12">
+    <a href="<?= BASE_URL ?>miembros" class="bg-gray-900 hover:bg-gray-800 text-white font-semibold rounded-full px-10 py-3 shadow-lg transition-colors duration-300">
+      Ver Más <i class="fas fa-arrow-right ml-2"></i>
+    </a>
+  </div>
+</section>
+  <section class="max-w-6xl mx-auto px-6 py-12">
+   <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Emprendimientos</h2>
+   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+    <?php if (!empty($emprendimientos)): ?>
                     <?php foreach ($emprendimientos as $emprendimiento): ?>
-                        <article>
-                            <?php
+    <article class="emprendimiento-card group relative">
+        <?php
                             // Valor por defecto si no hay imagen
                             $imagenMostrar = '/PROYECTO-MILITAR/uploads/emprendimiento/default.png';
 
@@ -209,28 +547,28 @@
                                 }
                             }
                             ?>
-
-                            <img src="<?= htmlspecialchars($imagenMostrar) ?>"
-                                alt="<?= htmlspecialchars($emprendimiento['nombre_emprendimiento']) ?>">
-
-                            <div class="content">
-                                <h2><?= htmlspecialchars($emprendimiento['nombre_emprendimiento']) ?></h2>
-                                <p><?= htmlspecialchars($emprendimiento['descripcion']) ?></p>
-                                <a href="<?= BASE_URL ?>emprendimientos/<?= $emprendimiento['id'] ?>">Visitar sitio</a>
-                            </div>
-                        </article>
-                    <?php endforeach; ?>
+     <img alt="Imagen representativa de emprendimiento tecnológico con diseño futurista y minimalista" class="emprendimiento-image" 
+     height="338" loading="lazy" src="<?= htmlspecialchars($imagenMostrar) ?>" width="600"/>
+     <div class="emprendimiento-overlay opacity-0 group-hover:opacity-100 transition-opacity">
+      <div class="emprendimiento-overlay opacity-0 group-hover:opacity-100 transition-opacity">
+  <a href="<?= BASE_URL ?>emprendimientos/<?= $emprendimiento['id'] ?>" class="text-white text-xl">
+    <i class="fas fa-eye"></i>
+  </a>
+</div>
+     </div>
+    </article>
+    <?php endforeach; ?>
                 <?php else: ?>
                     <p class="no-emprendimientos">Actualmente no hay emprendimientos para mostrar.</p>
                 <?php endif; ?>
-            </div>
-            <div class="ver-mas-container">
-                <a href="index.php?action=negocios" class="btn-ver-mas">Ver Más <i class="fas fa-arrow-right"></i></a>
-            </div>
-        </section>
-        <button id="btnAbrirChat">Abrir Chat</button>
-
-
+   </div>
+   <div class="text-center">
+    <a href="<?= BASE_URL ?>negocios" class="btn-ver-mas" type="button">
+     Ver más Emprendimientos
+    </a>
+   </div>
+  </section>
+  <button id="btnAbrirChat">Abrir Chat</button>
         <form id="chatFormulario" method="POST" action="index.php?action=comentarios/agregar">
             <h3>
                 <span>💬 Chat Mensajes</span>
@@ -241,67 +579,202 @@
             <textarea name="comentario" rows="4" placeholder="Escribe tu comentario" required></textarea>
             <button type="submit" class="enviar">Enviar</button>
         </form>
+  <section class="carousel-container max-w-6xl mx-auto px-6 py-12">
+   <h2 class="carousel-title">Comentarios</h2>
+   <div class="carousel-wrapper relative">
+    <button aria-label="Anterior" class="carousel-button prev" id="prevBtn" type="button">
+     <i class="fas fa-chevron-left"></i>
+    </button>
+    <?php
+function obtenerColorPorNombre($nombre) {
+    $colores = [
+        '#f44336', // rojo
+        '#e91e63', // rosa
+        '#9c27b0', // púrpura
+        '#3f51b5', // azul
+        '#03a9f4', // celeste
+        '#009688', // verde azulado
+        '#4caf50', // verde
+        '#ff9800', // naranja
+        '#795548', // marrón
+        '#607d8b'  // gris azulado
+    ];
+    $index = ord(strtoupper(mb_substr($nombre, 0, 1, 'UTF-8'))) % count($colores);
+    return $colores[$index];
+}
+?>
 
-        <div class="comentarios-container">
-            <h2 class="titulo-comentarios">Comentarios</h2>
-
-            <div class="swiper comentarios-swiper">
-                <div class="swiper-wrapper">
-                    <?php foreach ($comentarios as $comentario): ?>
-                        <div class="swiper-slide comentario-card">
-                            <div class="usuario-header">
-                                <div class="avatar">
-                                    <?= strtoupper(mb_substr($comentario['nombre'], 0, 1, 'UTF-8')) ?>
-                                </div>
-                                <div class="info">
-                                    <h3 class="nombre"><?= htmlspecialchars($comentario['nombre']) ?></h3>
-                                    <p class="correo"><?= htmlspecialchars($comentario['correo']) ?></p>
-                                </div>
-                            </div>
-                            <p class="mensaje"><?= htmlspecialchars($comentario['comentario']) ?></p>
-                        </div>
-                    <?php endforeach; ?>
+<div class="carousel-track" id="carouselTrack">
+    <?php foreach ($comentarios as $comentario): ?>
+        <div class="carousel-item">
+            <div class="comment-card">
+                <div class="comment-avatar-inicial"
+                     style="background-color: <?= obtenerColorPorNombre($comentario['nombre']) ?>;">
+                    <?= strtoupper(mb_substr($comentario['nombre'], 0, 1, 'UTF-8')) ?>
                 </div>
-
-                <!-- Controles -->
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-pagination"></div>
+                <div class="comment-content">
+                    <h3 class="comment-name"><?= htmlspecialchars($comentario['nombre']) ?></h3>
+                    <p class="comment-text"><?= htmlspecialchars($comentario['comentario']) ?></p>
+                </div>
             </div>
         </div>
+    <?php endforeach; ?>
+</div>
+    <button aria-label="Siguiente" class="carousel-button next" id="nextBtn" type="button">
+     <i class="fas fa-chevron-right"></i>
+    </button>
+   </div>
+  </section>
+  <button aria-label="Subir arriba" id="scrollTopBtn" title="Ir arriba" type="button">
+   <i class="fas fa-chevron-up"></i>
+  </button>
+  <script>
+   (() => {
+    const track = document.getElementById("carouselTrack");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const items = track.children;
+    const totalItems = items.length;
+    let visibleItems = 3;
+    let currentIndex = 0;
 
+    function updateVisibleItems() {
+     if (window.innerWidth < 768) {
+      visibleItems = 1;
+     } else {
+      visibleItems = 3;
+     }
+    }
 
+    function updateCarousel() {
+     const translateX = -(currentIndex * (100 / visibleItems));
+     track.style.transform = `translateX(${translateX}%)`;
+     prevBtn.disabled = currentIndex === 0;
+     nextBtn.disabled = currentIndex >= totalItems - visibleItems;
+    }
 
-        <script>
-            // Select all cards
-            const cards = document.querySelectorAll('.card');
+    prevBtn.addEventListener("click", () => {
+     if (currentIndex > 0) {
+      currentIndex--;
+      updateCarousel();
+     }
+    });
 
-            // Add event listeners for mouse and keyboard accessibility
-            cards.forEach((card) => {
-                card.addEventListener('mouseenter', () => {
-                    card.classList.add('active');
+    nextBtn.addEventListener("click", () => {
+     if (currentIndex < totalItems - visibleItems) {
+      currentIndex++;
+      updateCarousel();
+     }
+    });
+
+    // Auto slide every 3 seconds
+    setInterval(() => {
+     if (currentIndex < totalItems - visibleItems) {
+      currentIndex++;
+     } else {
+      currentIndex = 0;
+     }
+     updateCarousel();
+    }, 10000);
+
+    // Update visible items on resize
+    window.addEventListener("resize", () => {
+     const oldVisible = visibleItems;
+     updateVisibleItems();
+     if (oldVisible !== visibleItems) {
+      if (currentIndex > totalItems - visibleItems) {
+       currentIndex = Math.max(0, totalItems - visibleItems);
+      }
+      updateCarousel();
+     }
+    });
+
+    // Initialize
+    updateVisibleItems();
+    updateCarousel();
+   })();
+
+   // Scroll to top button
+   const scrollTopBtn = document.getElementById("scrollTopBtn");
+   window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
+     scrollTopBtn.classList.add("show");
+    } else {
+     scrollTopBtn.classList.remove("show");
+    }
+   });
+   scrollTopBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+   });
+  </script>
+  <script>
+    const slides = document.querySelectorAll('.carrusel-slide');
+    const dots = document.querySelectorAll('.indicador-dot');
+    const nextBtn = document.querySelector('.carrusel-control.next');
+    const prevBtn = document.querySelector('.carrusel-control.prev');
+    let currentIndex = 0;
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.toggle('opacity-100', i === index);
+            slide.classList.toggle('z-10', i === index);
+            slide.classList.toggle('opacity-0', i !== index);
+            slide.classList.toggle('z-0', i !== index);
+        });
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('opacity-100', i === index);
+            dot.classList.toggle('opacity-50', i !== index);
+        });
+        currentIndex = index;
+    }
+
+    nextBtn?.addEventListener('click', () => {
+        let nextIndex = (currentIndex + 1) % slides.length;
+        showSlide(nextIndex);
+    });
+
+    prevBtn?.addEventListener('click', () => {
+        let prevIndex = (currentIndex - 1 + slides.length) % slides.length;
+        showSlide(prevIndex);
+    });
+
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => showSlide(index));
+    });
+
+    // Opcional: carrusel automático
+    setInterval(() => {
+        let nextIndex = (currentIndex + 1) % slides.length;
+        showSlide(nextIndex);
+    }, 5000);
+</script>
+<script>
+    // Script para manejar el preloader
+    document.addEventListener('DOMContentLoaded', function() {
+        const preloader = document.getElementById('preloader');
+        const body = document.body;
+        
+        // Forzar el repintado para asegurar que la animación funcione
+        void preloader.offsetWidth;
+        
+        // Mostrar por exactamente 3 segundos
+        setTimeout(function() {
+            body.classList.add('loaded');
+            
+            // Eliminar el preloader después de la animación
+            setTimeout(function() {
+                preloader.remove();
+                // Mostrar todo el contenido
+                document.querySelectorAll('body > *:not(script)').forEach(el => {
+                    el.style.visibility = 'visible';
                 });
-                card.addEventListener('mouseleave', () => {
-                    card.classList.remove('active');
-                });
-                card.addEventListener('focus', () => {
-                    card.classList.add('active');
-                });
-                card.addEventListener('blur', () => {
-                    card.classList.remove('active');
-                });
-            });
-        </script>
-
-    </main>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="<?= BASE_URL ?>views/assets/js/home.js" defer></script>
-    <script src="<?= BASE_URL ?>views/assets/js/nosotros.js"></script>
-    <script src="<?= BASE_URL ?>views/assets/js/miembros.js"></script>
-    <script src="<?= BASE_URL ?>views/assets/js/chat.js"></script>
-    <?php
+            }, 500); // Medio segundo para la transición de desvanecimiento
+        }, 3000); // 3 segundos exactos
+    });
+</script>
+<script src="<?= BASE_URL ?>views/assets/js/chat.js"></script>
+<?php
     include 'layout/footer.php';
     ?>
-</body>
-
+ </body>
 </html>

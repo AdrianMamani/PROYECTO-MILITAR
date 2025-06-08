@@ -241,8 +241,8 @@
       white-space: nowrap;
     }
     .btn-admin:hover {
-      background: #f59e0b;
-      box-shadow: 0 6px 20px rgba(245, 158, 11, 0.7);
+      background:rgb(247, 247, 247);
+      box-shadow: 0 6px 20px rgba(231, 231, 231, 0.7);
     }
     /* Botón menú móvil */
     .mobile-menu-button {
@@ -423,6 +423,7 @@
       <a href="/PROYECTO-MILITAR/logros">Logros</a>
       <a href="#">Noticias</a>
     </div>
+    <br>
     <button type="button" class="btn-admin" aria-label="Botón Admin" onclick="location.href='index.php?action=auth/loginForm'">
       <i class="fas fa-user-shield"></i> Admin
     </button>

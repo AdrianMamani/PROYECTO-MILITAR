@@ -1,4 +1,4 @@
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1" name="viewport" />
@@ -55,11 +55,11 @@
     </div>
   </div>
 
-  <!-- Messages Button -->
+  <!-- Messages Button 
   <button id="messagesBtn" aria-label="Open messages" title="Mensajes">
     <div class="logo"></div>
     <span>Mensajes</span>
-  </button>
+  </button>-->
 
   <!-- Messages Modal -->
   <div id="messagesModal" role="dialog" aria-modal="true" aria-labelledby="messagesTitle" aria-hidden="true">

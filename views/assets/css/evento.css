@@ -245,3 +245,19 @@
     .form-actions button:hover {
       background-color:rgb(4, 131, 0);
     }
+
+.btn-verde {
+  background-color: #164d19;       
+  color: rgb(255, 255, 255);
+  font-weight: bold;               
+  border: none;
+  padding: 10px 20px;              
+  border-radius: 25px;             
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-verde:hover {
+  background-color: #209227;       
+}

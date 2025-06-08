@@ -265,6 +265,31 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-newspaper"></i>
+                        <p>
+                            Admin Noticias
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="index.php?action=noticias/index" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Noticias</p>
+                            </a>
+                        </li>
+             
+                    </ul>
+                </li>
+                <!-- Finanzas -->
+                <li class="nav-item">
+                    <a href="index.php?action=finanzas/index" class="nav-link">
+                        <i class="nav-icon fas fa-dollar-sign"></i>
+                        <p>Registro de Aportaciones</p>
+                    </a>
+                </li>
                 </ul>
             </nav>
             <div class="mt-4 p-3">

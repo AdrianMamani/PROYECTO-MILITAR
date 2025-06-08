@@ -9,6 +9,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="<?= BASE_URL ?>views/assets/css/efecto.css">
   <style>
    body {
       font-family: "Montserrat", sans-serif;
@@ -28,6 +29,9 @@
     include 'layout/header.php';
     ?>
  <body class="bg-gray-100 text-gray-900">
+  <div id="preloader">
+        <img src="/PROYECTO-MILITAR/views/assets/img/logo.jpg" alt="Cargando..."> <!-- Cambia por la ruta de tu logo -->
+    </div>
   <section class="max-w-6xl mx-auto px-6 py-20 sm:py-24 flex flex-col items-center" id="logros">
    <h2 class="text-4xl font-extrabold text-center text-gray-900 mb-16 tracking-tight">
     Logros de Nuestra Promoción
@@ -141,6 +145,30 @@
      }
    });
   </script>
+  <script>
+    // Script para manejar el preloader
+    document.addEventListener('DOMContentLoaded', function() {
+        const preloader = document.getElementById('preloader');
+        const body = document.body;
+        
+        // Forzar el repintado para asegurar que la animación funcione
+        void preloader.offsetWidth;
+        
+        // Mostrar por exactamente 3 segundos
+        setTimeout(function() {
+            body.classList.add('loaded');
+            
+            // Eliminar el preloader después de la animación
+            setTimeout(function() {
+                preloader.remove();
+                // Mostrar todo el contenido
+                document.querySelectorAll('body > *:not(script)').forEach(el => {
+                    el.style.visibility = 'visible';
+                });
+            }, 500); // Medio segundo para la transición de desvanecimiento
+        }, 3000); // 3 segundos exactos
+    });
+</script>
   <?php
     include 'layout/footer.php';
     ?>
