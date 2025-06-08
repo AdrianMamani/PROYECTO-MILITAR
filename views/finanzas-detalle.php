@@ -299,6 +299,7 @@
             flex-wrap: wrap;
             justify-content: center;
             margin-top: 2rem;
+            margin-bottom: 2.5rem;
         }
 
         .btn-military {

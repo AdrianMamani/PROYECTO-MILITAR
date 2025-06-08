@@ -214,6 +214,7 @@
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             border: 1px solid var(--border-color);
+            margin-bottom: 50px;
         }
 
         .table-header {
@@ -409,6 +410,10 @@
             margin-bottom: 1rem;
             opacity: 0.5;
             color: var(--military-accent);
+        }
+
+        .align-items-center{
+            margin-bottom: 25px !important;
         }
     </style>
 </head>

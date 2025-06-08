@@ -37,7 +37,7 @@ body {
   display: flex;
   flex-direction: column;
   transition: transform 0.3s ease;
-  margin: 10px;
+  margin: 10px 20px 50px 20px;
 }
 
 .card:hover {
@@ -112,6 +112,7 @@ body {
 
 .link-miembro {
   text-decoration: none;
+  margin: auto;
 }
 
 .card-header {
