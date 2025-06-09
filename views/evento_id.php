@@ -440,13 +440,26 @@ foreach ($oraciones as $oracion) {
 
     // Renderizar comentarios estilo WhatsApp horizontal con burbujas
     function renderComments() {
+      if (!Array.isArray(initialComments) || initialComments.length === 0) return;
+
       chatList.innerHTML = '';
       for (let i = 0; i < visibleCount; i++) {
-        const idx = (currentStartIndex + i) % initialComments.length;
+        const idxRaw = (currentStartIndex + i);
+        const idx = isNaN(idxRaw) ? 0 : idxRaw % initialComments.length;
+
         const c = initialComments[idx];
-        const dateObj = new Date(c.date);
-        const dateString = dateObj.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' });
-        const timeString = dateObj.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+        if (!c) continue;
+
+        const dateObj = new Date(c.date || '2000-01-01T00:00');
+        const dateString = dateObj.toLocaleDateString('es-ES', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        });
+        const timeString = dateObj.toLocaleTimeString('es-ES', {
+          hour: '2-digit',
+          minute: '2-digit',
+        });
 
         const messageDiv = document.createElement('article');
         messageDiv.className = 'chat-message';
@@ -480,6 +493,7 @@ foreach ($oraciones as $oracion) {
         chatList.appendChild(messageDiv);
       }
     }
+
 
     // Funciones para cambiar comentarios
     function showPrev() {
