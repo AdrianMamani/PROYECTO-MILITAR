@@ -32,6 +32,7 @@
       flex-direction: column;
       align-items: center;
       text-align: center;
+      padding: 20px;
     }
     .fb-card:hover {
       box-shadow: 0 8px 20px rgb(0 0 0 / 0.25);
