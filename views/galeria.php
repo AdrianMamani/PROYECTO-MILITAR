@@ -24,7 +24,7 @@
   <div class="container">
     <!--<h2-->
       <span>¡Momentos compartidos, sonrisas contagiadas!</span>
-    </h2> --
+    </h2> 
     <div class="gallery" id="gallery">
       <!-- Gallery items with static HTML -->
       <?php foreach ($imagenes as $img): ?>
