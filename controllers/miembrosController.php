@@ -96,7 +96,7 @@ class MiembrosController
             $nombre = trim($_POST['nombre'] ?? '');
             $descripcion = trim($_POST['descripcion'] ?? '');
             $especialidad_id = intval($_POST['especialidad_id'] ?? 0);
-            $imagen_actual = $miembro['imagen'] ?? '';
+            $imagen_actual = $miembro['imagen_usuario'] ?? '';
             $imagen = $imagen_actual;
 
             if (empty($nombre) || empty($descripcion) || $especialidad_id <= 0) {
@@ -111,7 +111,6 @@ class MiembrosController
 
                 if (in_array($_FILES['imagen']['type'], $tipoPermitido)) {
                     if (move_uploaded_file($_FILES['imagen']['tmp_name'], $rutaDestino)) {
-                        // Eliminar anterior si es diferente
                         if (!empty($imagen_actual) && $imagen_actual !== $nombreArchivo) {
                             $rutaAnterior = __DIR__ . '/../views/assets/img/miembros/' . $imagen_actual;
                             if (file_exists($rutaAnterior)) unlink($rutaAnterior);

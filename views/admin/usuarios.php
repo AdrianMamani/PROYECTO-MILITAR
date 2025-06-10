@@ -593,8 +593,11 @@
         <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+        <script src="plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+
         <script>
             $(document).ready(function() {
+                bsCustomFileInput.init();
 
                 $('#miembrosTable').DataTable({
                     ajax: {
