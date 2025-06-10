@@ -5,7 +5,7 @@ class MiembrosModel
 {
     private $db;
     private $nombreTabla = 'usuarios';
-
+    private $nombreTablaF = 'usuarios_fallecidos';
     public function __construct()
     {
         $this->db = Database::connect();

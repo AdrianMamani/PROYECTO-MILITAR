@@ -670,25 +670,25 @@ switch ($accionPrincipal) {
         }
         break;
 
-    case 'usuarios_fallecidos':
-        switch ($accionSecundaria) {
-            case 'index':
-                $miembros->index();
-                break;
-            case 'listar':
-                $miembros->listar();
-                break;
-            case 'editar':
-                $id ? $miembros->editarF($id) : print "ID no proporcionado";
-                break;
-            case 'eliminar':
-                $id ? $miembros->eliminarF($id) : print "ID no proporcionado";
-                break;
-            default:
-                $miembros->index();
-                break;
-        }
-        break;
+        case 'usuarios_fallecidos':
+            switch ($accionSecundaria) {
+                case 'index':
+                    $miembros->indexF();
+                    break;
+                case 'listar':
+                    $miembros->listarF();
+                    break;
+                case 'editar':
+                    $id ? $miembros->editarF($id) : print "ID no proporcionado";
+                    break;
+                case 'eliminar':
+                    $id ? $miembros->eliminarF($id) : print "ID no proporcionado";
+                    break;
+                default:
+                    $miembros->indexF();
+                    break;
+            }
+            break;
 
     case 'miembros':
         switch ($accionSecundaria) {

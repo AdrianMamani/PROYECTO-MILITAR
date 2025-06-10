@@ -21,7 +21,7 @@ class MiembrosController
     {
         $miembroItems = $this->modelo->obtenerTodos();
         $especialidades = $this->modelo->obtenerTodas();
-        require_once './views/admin/miembros.php';
+        require_once './views/admin/usuarios.php';
     }
 
     public function indexF()

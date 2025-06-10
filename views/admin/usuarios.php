@@ -317,9 +317,9 @@
             <section class="content">
                 <div class="container-fluid">
                     <div class="card">
-                        <div class="card-header">
-                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#agregarModal">
-                                <i class="fas fa-plus"></i> Agregar Usuario
+                    <div class="card-header">
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal">
+                                <i class="fas fa-plus"></i> Agregar Nuevo Miembro
                             </button>
                         </div>
 
@@ -356,18 +356,17 @@
 
                             <div class="tab-pane fade" id="fallecidos" role="tabpanel" aria-labelledby="fallecidos-tab">
                                 <div class="card-body">
-                                    <table class="table table-bordered table-striped">
+                                    <table class="table table-bordered table-striped" id="miembrosFTable">
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
                                                 <th>Miembro</th>
-                                                <th>Motivio Fallecimiento</th>
-                                                <th>Fecha de Fallecimiento</th>
+                                                <th>Motivo</th>
+                                                <th>Fecha</th>
                                                 <th>Acciones</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-
                                         </tbody>
                                     </table>
                                 </div>
@@ -544,6 +543,38 @@
             </div>
         </div>
 
+
+        <div class="modal fade" id="editModal3" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editModalLabel">Editar</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form id="editForm3" method="POST">
+                        <input type="hidden" name="id" id="edit-id3">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="edit-motivo">Motivo</label>
+                                <input type="text" class="form-control" id="motivo" name="motivo" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-fecha">Fecha</label>
+                                <input type="date" class="form-control" id="fecha" name="fecha" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="dist/js/adminlte.min.js"></script>
@@ -564,7 +595,7 @@
 
         <script>
             $(document).ready(function() {
-                // Inicializar DataTable
+
                 $('#miembrosTable').DataTable({
                     ajax: {
                         url: 'index.php?action=usuarios/listar',
@@ -592,23 +623,23 @@
                             data: null,
                             render: function(data, type, row) {
                                 return `
-                        <button class="btn btn-warning btn-sm edit-button"
-                        data-id="${row.id}"
-                        data-nombre="${row.nombre}"
-                        data-descripcion="${row.descripcion}"
-                        data-especialidad-id="${row.especialidad_id}"
-                        data-imagen="/PROYECTO-MILITAR/views/assets/img/miembros/${row.imagen_usuario}"
-                        data-toggle="modal"
-                        data-target="#editModal">
-                        <i class="fas fa-edit"></i> Editar
-                        </button>
+                                <button class="btn btn-warning btn-sm edit-button"
+                                data-id="${row.id}"
+                                data-nombre="${row.nombre}"
+                                data-descripcion="${row.descripcion}"
+                                data-especialidad-id="${row.especialidad_id}"
+                                data-imagen="/PROYECTO-MILITAR/views/assets/img/miembros/${row.imagen_usuario}"
+                                data-toggle="modal"
+                                data-target="#editModal">
+                                <i class="fas fa-edit"></i> Editar
+                                </button>
 
-                        <button class="btn btn-danger btn-sm delete-button"
-                        data-id="${row.id}"
-                        <i class="fas fa-trash"></i> Eliminar
-                        </button>
+                                <button class="btn btn-danger btn-sm delete-button"
+                                data-id="${row.id}"
+                                <i class="fas fa-trash"></i> Eliminar
+                                </button>
 
-                        <button class="btn btn-warning btn-sm edit-button1"
+                                <button class="btn btn-warning btn-sm edit-button1"
                                 data-id="${row.id}"
                                 data-toggle="modal"
                                 data-target="#editModalE">
@@ -622,31 +653,26 @@
                     ]
                 });
 
-
-                // Inicializar custom file input
-                bsCustomFileInput.init();
-
-                // Mostrar imagen en modal
                 $('#viewImageModal').on('show.bs.modal', function(event) {
                     var button = $(event.relatedTarget);
                     var imagen = button.data('imagen');
                     $(this).find('#full-image').attr('src', imagen);
                 });
 
-                // Manejar el botón de editar
+
                 $(document).on('click', '.edit-button', function() {
                     var id = $(this).data('id');
                     var nombre = $(this).data('nombre');
                     var descripcion = $(this).data('descripcion');
                     var imagen = $(this).data('imagen');
                     var especialidadId = $(this).data('especialidad-id');
+                    console.log(id)
                     $('#edit-id').val(id);
                     $('#edit-nombre').val(nombre);
                     $('#edit-descripcion').val(descripcion);
                     $('#edit-especialidad_id').val(especialidadId);
                     $('#edit-imagen-preview').attr('src', imagen);
 
-                    // Resetear el input file
                     $('#edit-imagen').next('.custom-file-label').html('Seleccionar archivo');
                     $('#editForm').attr('action', 'index.php?action=usuarios/editar/' + id);
                 });
@@ -783,7 +809,108 @@
                     $('#editForm')[0].reset();
                     $('#edit-imagen-preview').attr('src', '/PROYECTO-MILITAR/uploads/sin_usuario.webp');
                 });
+                let miembrosFTableInitialized = false;
 
+
+                $('a[data-toggle="tab"][href="#fallecidos"]').on('shown.bs.tab', function(e) {
+                    if (!miembrosFTableInitialized) {
+                        $('#miembrosFTable').DataTable({
+                            ajax: {
+                                url: 'index.php?action=usuarios_fallecidos/listar',
+                                dataSrc: ''
+                            },
+                            columns: [{
+                                    data: 'id'
+                                },
+                                {
+                                    data: 'nombre_usuario'
+                                },
+                                {
+                                    data: 'motivo_fallecimiento'
+                                },
+                                {
+                                    data: 'fecha_fallecimiento'
+                                },
+                                {
+                                    data: null,
+                                    render: function(data, type, row) {
+                                        return `
+                            <button class="btn btn-warning btn-sm edit-button3"
+                                data-id="${row.id}"
+                                data-motivo="${row.motivo_fallecimiento}"
+                                data-fecha="${row.fecha_fallecimiento}"
+                                data-toggle="modal"
+                                data-target="#editModal3">
+                                <i class="fas fa-edit"></i> Editar
+                            </button>
+                            <button class="btn btn-danger btn-sm delete-button3"
+                                data-id="${row.id}">
+                                <i class="fas fa-trash"></i> Eliminar
+                            </button>`;
+                                    }
+                                }
+                            ]
+                        });
+                        miembrosFTableInitialized = true;
+                    }
+                });
+
+                $(document).on('click', '.edit-button3', function() {
+                        var id = $(this).data('id');
+                        var motivo = $(this).data('motivo');
+                        var fecha = $(this).data('fecha');
+                        $('#edit-id3').val(id);
+                        $('#motivo').val(motivo);
+                        $('#fecha').val(fecha);
+                    });
+
+                    $('#editForm3').on('submit', function(e) {
+                        e.preventDefault();
+                        const form = this;
+                        const formData = new FormData(form);
+
+                        const id = $('#edit-id3').val();
+                        $.ajax({
+                            url: 'index.php?action=usuarios_fallecidos/editar&id=' + id,
+                            type: 'POST',
+                            data: formData,
+                            contentType: false,
+                            processData: false,
+                            success: function(res) {
+                                const respuesta = JSON.parse(res);
+                                if (respuesta.success) {
+                                    $('#editModal3').modal('hide');
+                                    alert(respuesta.mensaje);
+                                    $('#miembrosFTable').DataTable().ajax.reload(null, false);
+                                } else {
+                                    alert(respuesta.mensaje);
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                alert('Error en la actualización');
+                                console.error(error);
+                            }
+                        });
+                    });
+
+                    $(document).on('click', '.delete-button3', function() {
+                        const id = $(this).data('id');
+                        console.log(id)
+
+                        if (!confirm('¿Estás seguro de eliminar este miembro?')) return;
+
+                        $.ajax({
+                            url: 'index.php?action=usuarios_fallecidos/eliminar&id=' + id,
+                            type: 'POST',
+                            success: function(respuesta) {
+                                $('#miembrosFTable').DataTable().ajax.reload(null, false);
+                            },
+                            error: function(xhr, status, error) {
+                                alert('Error al eliminar');
+                                console.error(error);
+                            }
+                        });
+                    });
 
 
 
