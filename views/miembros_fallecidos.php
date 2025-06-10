@@ -30,7 +30,7 @@
                         </div>
                     </div>
                     <a class="link-miembro" href="miembro.php?id=<?= $miembro['id'] ?>">
-                        <img src="<?= BASE_URL ?>uploads/usuarios/imagenes/<?= htmlspecialchars($miembro['imagen_usuario']) ?>" alt="Miembro" class="post-image">
+                        <img src="<?= BASE_URL ?>uploads/usuarios/<?= htmlspecialchars($miembro['imagen_usuario']) ?>" alt="Miembro" class="post-image">
                     </a>
                     <div class="card-footer">
                         <div class="card-actions">
