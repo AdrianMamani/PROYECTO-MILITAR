@@ -25,6 +25,7 @@ require_once './controllers/logros_especiales_img.php';
 require_once './controllers/LogroVideoController.php';
 require_once './controllers/ComentarioEventoController.php';
 require_once './controllers/UsuariosController.php';
+require_once './controllers/MiembrosController.php';
 require_once './controllers/MiembrosImgController.php';
 require_once './controllers/MiembrosVideosController.php';
 require_once './controllers/ComentariosController.php';
@@ -79,7 +80,7 @@ $rutasPublicas = [
     'eventos',
     'finanzas-public',
     'noticias-public'
-    
+
 ];
 
 if (!isset($_SESSION['usuario']) && !in_array(strtolower($accionPrincipal), $rutasPublicas)) {
@@ -107,7 +108,7 @@ $logrodestacado = new LogrosDestacadoController();
 $logroimg = new ImagenLogroController();
 $logrovideo = new LogroVideoController();
 $comentarioevento = new ComentarioEventoController();
-$miembros = new UsuariosController();
+$miembros = new MiembrosController();
 $miembrosIMG = new MiembrosImgController();
 $miembrosVideos = new MiembrosVideosController();
 $emprendimientoVideos = new VideoEmprendimientoController();
@@ -142,14 +143,14 @@ $nosotros->setAdminContext($isAdmin);
 // Ruteo principal
 switch ($accionPrincipal) {
     case 'dashboard':
-    switch ($accionSecundaria) {
-        case 'index':
-        default:
-            $dashboard->index();
-            break;
-    }
-    break;
-    
+        switch ($accionSecundaria) {
+            case 'index':
+            default:
+                $dashboard->index();
+                break;
+        }
+        break;
+
     case 'auth':
         switch ($accionSecundaria) {
             case 'loginForm':
@@ -658,8 +659,8 @@ switch ($accionPrincipal) {
                 $id ? $miembros->editarF($id) : print "ID no proporcionado";
                 break;
             case 'eliminar':
-    $id ? $miembros->eliminar($id) : print "ID no proporcionado";
-    break;
+                $miembros->eliminar();
+                break;
             case 'eliminarF':
                 $id ? $miembros->eliminarF($id) : print "ID no proporcionado";
                 break;
@@ -833,7 +834,7 @@ switch ($accionPrincipal) {
                 break;
         }
         break;
-   
+
     case 'negocios':
         switch ($accionSecundaria) {
             case 'index':
@@ -859,27 +860,27 @@ switch ($accionPrincipal) {
         }
         break;
 
-        case 'especialidad_index':
-    if (is_numeric($accionSecundaria)) {
-        // Mostrar especialidad individual
-        $especialidadWeb->indexPersonal($accionSecundaria);
-    } else {
-        switch ($accionSecundaria) {
-            case 'index':
-                // Mostrar TODAS las especialidades
-                $especialidades = $especialidadWeb->verEspecialidades();
-                require './views/especialidades.php';
-                break;
-            case 'ver':
-                // Otra forma opcional si deseas una URL tipo ?action=especialidad_index/ver&id=1
-                $id ? $especialidadWeb->indexPersonal($id) : print "ID no proporcionado";
-                break;
-            default:
-                print "Ruta no válida para especialidades.";
-                break;
+    case 'especialidad_index':
+        if (is_numeric($accionSecundaria)) {
+            // Mostrar especialidad individual
+            $especialidadWeb->indexPersonal($accionSecundaria);
+        } else {
+            switch ($accionSecundaria) {
+                case 'index':
+                    // Mostrar TODAS las especialidades
+                    $especialidades = $especialidadWeb->verEspecialidades();
+                    require './views/especialidades.php';
+                    break;
+                case 'ver':
+                    // Otra forma opcional si deseas una URL tipo ?action=especialidad_index/ver&id=1
+                    $id ? $especialidadWeb->indexPersonal($id) : print "ID no proporcionado";
+                    break;
+                default:
+                    print "Ruta no válida para especialidades.";
+                    break;
+            }
         }
-    }
-    break;
+        break;
 
     case 'logros':
         switch ($accionSecundaria) {
@@ -891,7 +892,7 @@ switch ($accionPrincipal) {
                 break;
         }
         break;
-         case 'finanzas-public':
+    case 'finanzas-public':
         switch ($accionSecundaria) {
             case 'index':
                 $finanzasPublic->index();
@@ -907,75 +908,75 @@ switch ($accionPrincipal) {
                 break;
         }
         break;
-        case 'finanzas':
-    switch ($accionSecundaria) {
-        case 'index':
-            $finanzas->index();
-            break;
-        case 'agregar':
-            $finanzas->agregar();
-            break;
-        case 'ver':
-            $finanzas->ver();
-            break;
-        case 'editar':
-            $finanzas->editar();
-            break;
-        case 'update':
-            $finanzas->update();
-            break;
-        case 'eliminar':
-            $id ? $finanzas->eliminar($id) : print "ID no proporcionado";
-            break;
-        default:
-            $finanzas->index();
-            break;
-    }
-    break;
-// En la sección de rutas, verificar que esté así:
+    case 'finanzas':
+        switch ($accionSecundaria) {
+            case 'index':
+                $finanzas->index();
+                break;
+            case 'agregar':
+                $finanzas->agregar();
+                break;
+            case 'ver':
+                $finanzas->ver();
+                break;
+            case 'editar':
+                $finanzas->editar();
+                break;
+            case 'update':
+                $finanzas->update();
+                break;
+            case 'eliminar':
+                $id ? $finanzas->eliminar($id) : print "ID no proporcionado";
+                break;
+            default:
+                $finanzas->index();
+                break;
+        }
+        break;
+    // En la sección de rutas, verificar que esté así:
 
-case 'lista-noticias':
-    switch ($accionSecundaria) {
-        case 'index':
-            $noticias->listar(); // Método para mostrar la lista
-            break;
-        default:
-            $noticias->listar();
-            break;
-    }
-    break;
+    case 'lista-noticias':
+        switch ($accionSecundaria) {
+            case 'index':
+                $noticias->listar(); // Método para mostrar la lista
+                break;
+            default:
+                $noticias->listar();
+                break;
+        }
+        break;
 
-case 'noticias':
-    switch ($accionSecundaria) {
-        case 'index':
-            $noticias->index(); // Formulario de gestión
-            break;
-        case 'agregar':
-            $noticias->agregar();
-            break;
-        case 'store':
-            $noticias->store();
-            break;
-        case 'creada':
-            $noticias->creada();
-            break;
-        case 'detalle':
-            $noticias->detalle();
-            break;
-        case 'editar':
-            $id ? $noticias->editar($id) : print "ID no proporcionado";
-            break;
-        case 'update':
-            $noticias->update(); 
-            break;
-        case 'eliminar':
-            $id ? $noticias->eliminar($id) : print "ID no proporcionado";
-            break;
-        default:
-            $noticias->index();
-            break;
-    }
-    break;
+    case 'noticias':
+        switch ($accionSecundaria) {
+            case 'index':
+                $noticias->index(); // Formulario de gestión
+                break;
+            case 'agregar':
+                $noticias->agregar();
+                break;
+            case 'store':
+                $noticias->store();
+                break;
+            case 'creada':
+                $noticias->creada();
+                break;
+            case 'detalle':
+                $noticias->detalle();
+                break;
+            case 'editar':
+                $id ? $noticias->editar($id) : print "ID no proporcionado";
+                break;
+            case 'update':
+                $noticias->update();
+                break;
+            case 'eliminar':
+                $id ? $noticias->eliminar($id) : print "ID no proporcionado";
+                break;
+            default:
+                $noticias->index();
+                break;
+        }
+        break;
 
     case 'noticiasimg':
         switch ($accionSecundaria) {
