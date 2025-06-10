@@ -16,6 +16,17 @@ class MiembrosModel
         $query = "SELECT m.*, e.nombre as nombre_especialidad 
               FROM " . $this->nombreTabla . " m
               LEFT JOIN especialidades e ON m.especialidad_id = e.id
+              ";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function obtenerTodosWeb()
+    {
+        $query = "SELECT m.*, e.nombre as nombre_especialidad 
+              FROM " . $this->nombreTabla . " m
+              LEFT JOIN especialidades e ON m.especialidad_id = e.id
               WHERE m.estado_vivo = 1";
         $stmt = $this->db->prepare($query);
         $stmt->execute();

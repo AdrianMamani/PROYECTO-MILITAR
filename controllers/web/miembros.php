@@ -9,7 +9,7 @@ class MiembrosControllerWeb
 {
     public function index(){
         $miembrosModel = new MiembrosModel();
-        $miembros = $miembrosModel->obtenerTodos();
+        $miembros = $miembrosModel->obtenerTodosWeb();
         require './views/miembros.php';
         exit();
     }

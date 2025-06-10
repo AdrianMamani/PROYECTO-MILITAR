@@ -317,7 +317,7 @@
             <section class="content">
                 <div class="container-fluid">
                     <div class="card">
-                    <div class="card-header">
+                        <div class="card-header">
                             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal">
                                 <i class="fas fa-plus"></i> Agregar Nuevo Miembro
                             </button>
@@ -342,6 +342,7 @@
                                                 <th>ID</th>
                                                 <th>Nombre</th>
                                                 <th>Descripción</th>
+                                                <th>Estado</th>
                                                 <th>Especialidad</th>
                                                 <th>Imagen</th>
                                                 <th>Acciones</th>
@@ -614,6 +615,13 @@
                             data: 'descripcion'
                         },
                         {
+                            data: 'estado_vivo',
+                            render: function(data, type, row) {
+                                return data == 1 ? '<span class="badge badge-success">Vivo</span>' : '<span class="badge badge-danger">Fallecido</span>';
+                            }
+                        },
+
+                        {
                             data: 'nombre_especialidad'
                         },
                         {
@@ -859,61 +867,61 @@
                 });
 
                 $(document).on('click', '.edit-button3', function() {
-                        var id = $(this).data('id');
-                        var motivo = $(this).data('motivo');
-                        var fecha = $(this).data('fecha');
-                        $('#edit-id3').val(id);
-                        $('#motivo').val(motivo);
-                        $('#fecha').val(fecha);
-                    });
+                    var id = $(this).data('id');
+                    var motivo = $(this).data('motivo');
+                    var fecha = $(this).data('fecha');
+                    $('#edit-id3').val(id);
+                    $('#motivo').val(motivo);
+                    $('#fecha').val(fecha);
+                });
 
-                    $('#editForm3').on('submit', function(e) {
-                        e.preventDefault();
-                        const form = this;
-                        const formData = new FormData(form);
+                $('#editForm3').on('submit', function(e) {
+                    e.preventDefault();
+                    const form = this;
+                    const formData = new FormData(form);
 
-                        const id = $('#edit-id3').val();
-                        $.ajax({
-                            url: 'index.php?action=usuarios_fallecidos/editar&id=' + id,
-                            type: 'POST',
-                            data: formData,
-                            contentType: false,
-                            processData: false,
-                            success: function(res) {
-                                const respuesta = JSON.parse(res);
-                                if (respuesta.success) {
-                                    $('#editModal3').modal('hide');
-                                    alert(respuesta.mensaje);
-                                    $('#miembrosFTable').DataTable().ajax.reload(null, false);
-                                } else {
-                                    alert(respuesta.mensaje);
-                                }
-                            },
-                            error: function(xhr, status, error) {
-                                alert('Error en la actualización');
-                                console.error(error);
-                            }
-                        });
-                    });
-
-                    $(document).on('click', '.delete-button3', function() {
-                        const id = $(this).data('id');
-                        console.log(id)
-
-                        if (!confirm('¿Estás seguro de eliminar este miembro?')) return;
-
-                        $.ajax({
-                            url: 'index.php?action=usuarios_fallecidos/eliminar&id=' + id,
-                            type: 'POST',
-                            success: function(respuesta) {
+                    const id = $('#edit-id3').val();
+                    $.ajax({
+                        url: 'index.php?action=usuarios_fallecidos/editar&id=' + id,
+                        type: 'POST',
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        success: function(res) {
+                            const respuesta = JSON.parse(res);
+                            if (respuesta.success) {
+                                $('#editModal3').modal('hide');
+                                alert(respuesta.mensaje);
                                 $('#miembrosFTable').DataTable().ajax.reload(null, false);
-                            },
-                            error: function(xhr, status, error) {
-                                alert('Error al eliminar');
-                                console.error(error);
+                            } else {
+                                alert(respuesta.mensaje);
                             }
-                        });
+                        },
+                        error: function(xhr, status, error) {
+                            alert('Error en la actualización');
+                            console.error(error);
+                        }
                     });
+                });
+
+                $(document).on('click', '.delete-button3', function() {
+                    const id = $(this).data('id');
+                    console.log(id)
+
+                    if (!confirm('¿Estás seguro de eliminar este miembro?')) return;
+
+                    $.ajax({
+                        url: 'index.php?action=usuarios_fallecidos/eliminar&id=' + id,
+                        type: 'POST',
+                        success: function(respuesta) {
+                            $('#miembrosFTable').DataTable().ajax.reload(null, false);
+                        },
+                        error: function(xhr, status, error) {
+                            alert('Error al eliminar');
+                            console.error(error);
+                        }
+                    });
+                });
 
 
 
