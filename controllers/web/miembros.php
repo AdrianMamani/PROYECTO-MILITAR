@@ -45,7 +45,7 @@ class MiembrosControllerWeb
 
     public function indexF(){
         $miembrosModel = new MiembrosModel();
-        $miembros = $miembrosModel->obtenerTodosF();
+        $miembros = $miembrosModel->obtenerTodosM();
         require './views/miembros_fallecidos.php';
         exit();
     }
