@@ -619,7 +619,7 @@
                         {
                             data: 'imagen_usuario',
                             render: function(data, type, row) {
-                                return '<img src="/PROYECTO-MILITAR/views/assets/img/miembros/' + data + '" class="img-thumbnail" style="max-width: 120px;">';
+                                return '<img src="/PROYECTO-MILITAR/uploads/usuarios/' + data + '" class="img-thumbnail" style="max-width: 120px;">';
                             }
                         },
                         {
@@ -631,7 +631,7 @@
                                 data-nombre="${row.nombre}"
                                 data-descripcion="${row.descripcion}"
                                 data-especialidad-id="${row.especialidad_id}"
-                                data-imagen="/PROYECTO-MILITAR/views/assets/img/miembros/${row.imagen_usuario}"
+                                data-imagen="/PROYECTO-MILITAR/uploads/usuarios/${row.imagen_usuario}"
                                 data-toggle="modal"
                                 data-target="#editModal">
                                 <i class="fas fa-edit"></i> Editar

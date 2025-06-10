@@ -65,7 +65,7 @@ class MiembrosController
             $imagen        = $_FILES['imagen']['name'] ?? '';
 
             if ($nombre && $descripcion && $especialidad_id && $imagen) {
-                $rutaDestino = __DIR__ . '/../views/assets/img/miembros/' . $imagen;
+                $rutaDestino = __DIR__ . '/../uploads/usuarios/' . $imagen;
 
                 move_uploaded_file($_FILES['imagen']['tmp_name'], $rutaDestino);
 
@@ -106,13 +106,13 @@ class MiembrosController
 
             if (!empty($_FILES['imagen']['name'])) {
                 $nombreArchivo = basename($_FILES['imagen']['name']);
-                $rutaDestino = __DIR__ . '/../views/assets/img/miembros/' . $nombreArchivo;
+                $rutaDestino = __DIR__ . '/../uploads/usuarios/' . $nombreArchivo;
                 $tipoPermitido = ['image/jpeg', 'image/png', 'image/gif'];
 
                 if (in_array($_FILES['imagen']['type'], $tipoPermitido)) {
                     if (move_uploaded_file($_FILES['imagen']['tmp_name'], $rutaDestino)) {
                         if (!empty($imagen_actual) && $imagen_actual !== $nombreArchivo) {
-                            $rutaAnterior = __DIR__ . '/../views/assets/img/miembros/' . $imagen_actual;
+                            $rutaAnterior = __DIR__ . '/../uploads/usuarios/' . $imagen_actual;
                             if (file_exists($rutaAnterior)) unlink($rutaAnterior);
                         }
                         $imagen = $nombreArchivo;
@@ -196,7 +196,7 @@ class MiembrosController
             $miembro = $this->modelo->obtenerPorId($id);
 
             if ($miembro && !empty($miembro['imagen'])) {
-                $rutaImagen = __DIR__ . '/../views/assets/img/miembros/' . $miembro['imagen'];
+                $rutaImagen = __DIR__ . '/../upload/miembros/' . $miembro['imagen'];
 
                 if (file_exists($rutaImagen)) {
                     unlink($rutaImagen);
