@@ -31,7 +31,7 @@
     width="1200"
 />
      <div class="profile-pic-wrapper">
-      <img class="profile-pic" height="160" loading="lazy" src="<?= BASE_URL ?>uploads/usuarios/imagenes/<?= htmlspecialchars($miembros['imagen_usuario']) ?>" width="160" alt="Foto de <?= htmlspecialchars($miembros['nombre']) ?>">
+      <img class="profile-pic" height="160" loading="lazy" src="<?= BASE_URL ?>uploads/usuarios/<?= htmlspecialchars($miembros['imagen_usuario']) ?>" width="160" alt="Foto de <?= htmlspecialchars($miembros['nombre']) ?>">
      </div>
     </div>
     <div class="content">
